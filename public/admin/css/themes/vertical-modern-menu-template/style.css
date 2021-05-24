@@ -4333,7 +4333,7 @@ li.home:before
 }
 
 /*----------------------------------------
-  Grid 
+  Grid
 ------------------------------------------*/
 .section
 {
@@ -12031,4 +12031,9 @@ tr.group:hover
     z-index: 99;
     top: 40%;
     right: -2px;
+}
+
+.help-block{
+    color:red;
+    margin-left: 38px;
 }

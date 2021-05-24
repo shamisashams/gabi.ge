@@ -35,5 +35,11 @@
 </head>
 <body class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu preload-transitions 1-column login-bg   blank-page blank-page" data-open="click" data-menu="vertical-modern-menu" data-col="1-column">
 @yield('body')
+
+<script src="{{asset('../admin/js/vendors.min.js')}}"></script>
+<script src="{{asset('../admin/js/plugins.js')}}"></script>
+<script src="{{asset('../admin/js/search.js')}}"></script>
+<script src="{{asset('../admin/js/custom/custom-script.js')}}"></script>
+
 </body>
 </html>

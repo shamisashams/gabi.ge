@@ -15,22 +15,39 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+Route::group([
+    'prefix' => 'en',
+], function () {
 
-Route::prefix('admin')->group(function () {
-    Route::get('/', function () {
-        if (Auth::user() && Auth::user()->can('isAdmin')) {
-//            return redirect(\route('productIndex', app()->getLocale()));
-        } else {
-            if (Auth::user()) {
-                return view('welcome');
+    Route::prefix('admin')->group(function () {
+        Route::get('/', function () {
+            if (Auth::user() && Auth::user()->can('isAdmin')) {
+                return redirect(\route('productIndex'));
             } else {
-                return redirect()->route('login-view', app()->getLocale());
+                if (Auth::user()) {
+                    return view('welcome');
+                } else {
+                    return redirect()->route('login-view');
+                }
             }
-        }
-    })->name('adminHome');
+        })->name('adminHome');
 
-    Route::get('login', [AuthController::class, 'loginView'])->name('login-view');
+        Route::get('/', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('productIndex');
+
+        Route::get('login', [AuthController::class, 'loginView'])->name('login-view');
+
+        Route::post('login', [AuthController::class, 'login'])->name('login');
+
+        Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+//        Route::get('/', function () {
+//            return view('welcome');
+//        })->name('welcome');
+
+    });
+
 });
+
