@@ -32,9 +32,13 @@
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body class="with-content-panel menu-position-side menu-side-left full-screen" style="padding-bottom:0">
+
 <x-admin.navbar/>
 <x-admin.sidemenu/>
-@yield('body')
+<div id="main">
+    @yield('body')
+</div>
+<x-admin.footer/>
 
 <!-- BEGIN VENDOR JS-->
 <!-- BEGIN PAGE VENDOR JS-->

@@ -35,17 +35,16 @@ Route::group([
             }
         })->name('adminHome');
 
-        Route::get('/', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('productIndex');
 
         Route::get('login', [AuthController::class, 'loginView'])->name('login-view');
-
         Route::post('login', [AuthController::class, 'login'])->name('login');
 
-        Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-//        Route::get('/', function () {
-//            return view('welcome');
-//        })->name('welcome');
+        Route::middleware(['auth', 'can:isAdmin'])->group(function () {
+            Route::get('product', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('productIndex');
+            Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+        });
+
 
     });
 

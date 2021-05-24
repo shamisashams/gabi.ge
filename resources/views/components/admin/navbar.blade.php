@@ -24,7 +24,7 @@
                     </li>
                     <li><a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);"
                            data-target="profile-dropdown"><span class="avatar-status avatar-online"><img
-                                    src="../../../app-assets/images/avatar/avatar-7.png" alt="avatar"><i></i></span></a>
+                                    src="/admin/images/avatar/avatar-7.png" alt="avatar"><i></i></span></a>
                     </li>
                     <li><a class="waves-effect waves-block waves-light sidenav-trigger" href="#"
                            data-target="slide-out-right"><i class="material-icons">format_indent_increase</i></a>

@@ -33,10 +33,10 @@ class AuthController extends Controller
     {
 
         if (Auth::user() && Auth::user()->can('isAdmin')) {
-            return redirect(route('adminHome', app()->getLocale()));
+            return redirect()->route('adminHome');
         } else {
             if (Auth::user()) {
-                return redirect()->route('welcome', app()->getLocale());
+                return redirect()->route('login-view', app()->getLocale());
             } else {
                 return view('admin.auth.login');
             }
@@ -65,11 +65,11 @@ class AuthController extends Controller
 
         if (Auth::user()->status == 0) {
             Auth::logout();
-            return redirect()->route('welcome', app()->getLocale());
+            return redirect()->route('login-view');
         }
 
         if (Auth::user()->can('isAdmin')) {
-            return redirect(route('adminHome', app()->getLocale()));
+            return redirect()->route('adminHome');
         } else {
             return redirect()->back();
         }
