@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 
 class AuthController extends Controller
@@ -36,7 +37,7 @@ class AuthController extends Controller
             return redirect()->route('adminHome');
         } else {
             if (Auth::user()) {
-                return redirect()->route('login-view', app()->getLocale());
+                return redirect()->route('welcome');
             } else {
                 return view('admin.auth.login');
             }
@@ -135,11 +136,14 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function logout()
+    public function logout(Request $request)
     {
 
         if (Auth::user()) {
             Auth::logout();
+
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
         }
         return redirect()->route('login-view');
     }
