@@ -34,10 +34,10 @@ class AuthController extends Controller
     {
 
         if (Auth::user() && Auth::user()->can('isAdmin')) {
-            return redirect()->route('adminHome');
+            return redirect()->route('adminHome', app()->getLocale());
         } else {
             if (Auth::user()) {
-                return redirect()->route('welcome');
+                return redirect()->route('welcome', app()->getLocale());
             } else {
                 return view('admin.auth.login');
             }
@@ -66,11 +66,11 @@ class AuthController extends Controller
 
         if (Auth::user()->status == 0) {
             Auth::logout();
-            return redirect()->route('login-view');
+            return redirect()->route('login-view', app()->getLocale());
         }
 
         if (Auth::user()->can('isAdmin')) {
-            return redirect()->route('adminHome');
+            return redirect()->route('adminHome', app()->getLocale());
         } else {
             return redirect()->back();
         }
@@ -145,7 +145,7 @@ class AuthController extends Controller
             $request->session()->invalidate();
             $request->session()->regenerateToken();
         }
-        return redirect()->route('login-view');
+        return redirect()->route('login-view', app()->getLocale());
     }
 
     public function verify($locale, $token)
