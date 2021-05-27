@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -43,8 +44,8 @@ Route::prefix('{locale?}')
                 Route::get('product', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('productIndex');
                 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-                Route::resource('localizations', LocalizationController::class)
-                    ->name('index', 'localizationIndex')
+                Route::resource('localizations', LanguageController::class)
+                    ->name('index', 'languageIndex')
                     ->name('create', 'localizationCreateView')
                     ->name('store', 'localizationCreate')
                     ->name('edit', 'localizationEditView')

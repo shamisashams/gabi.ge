@@ -11,6 +11,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Mail\SignUpMail;
 use App\Mail\StatusChangeMail;
+use App\Models\Language;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Repositories\DepositRepositoryInterface;
@@ -32,7 +33,7 @@ class LanguageRepository extends BaseRepository implements LanguageRepositoryInt
      *
      * @param User $model
      */
-    public function __construct(User $model)
+    public function __construct(Language $model)
     {
         parent::__construct($model);
     }

@@ -35,9 +35,9 @@ class LanguageController extends AdminController
      *
      * @return Application|Factory|View|Response
      */
-    public function index(Request $request)
+    public function index(Request $request,$locale)
     {
-        return view('module.admin-verify.index', [
+        return view('admin.modules.language.index', [
             'verifications' => $this->languageRepository->getData($request)
         ]);
 

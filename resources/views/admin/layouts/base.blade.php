@@ -23,6 +23,10 @@
     <link href="{{asset('../admin/css/themes/vertical-modern-menu-template/materialize.css')}}" rel="stylesheet">
     <link href="{{asset('../admin/css/themes/vertical-modern-menu-template/style.css')}}" rel="stylesheet">
     <link href="{{asset('../admin/css/pages/dashboard-modern.css')}}" rel="stylesheet">
+    <link href="{{asset('../admin/vendors/data-tables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{asset('../admin/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{asset('../admin/vendors/data-tables/css/select.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{asset('../admin/css/pages/data-tables.css')}}" rel="stylesheet">
     <link href="{{asset('../admin/css/pages/intro.css')}}" rel="stylesheet">
     <!-- END: Page Level CSS-->
     <!-- BEGIN: Custom CSS-->
@@ -50,6 +54,10 @@
 <!-- END PAGE VENDOR JS-->
 <!-- BEGIN THEME  JS-->
 <script src="{{asset('../admin/js/plugins.js')}}"></script>
+<script src="{{asset('../admin/vendors/data-tables/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('../admin/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('../admin/vendors/data-tables/js/dataTables.select.min.js')}}"></script>
+<script src="{{asset('../admin/js/scripts/data-tables.js')}}"></script>
 <script src="{{asset('../admin/js/search.js')}}"></script>
 <script src="{{asset('../admin/js/custom/custom-script.js')}}"></script>
 <script src="{{asset('../admin/js/scripts/customizer.js')}}"></script>

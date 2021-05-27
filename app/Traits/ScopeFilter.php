@@ -98,7 +98,37 @@ trait ScopeFilter
 
     /**
      * @param $query
-     * @param $username
+     * @param $title
+     * @return mixed
+     */
+    public function scopeTitle($query, $title)
+    {
+        return $query->where('title', 'like', '%' . $title . '%');
+    }
+
+    /**
+     * @param $query
+     * @param $abbreviation
+     * @return mixed
+     */
+    public function scopeAbbreviation($query, $abbreviation)
+    {
+        return $query->where('abbreviation', 'like', '%' . $abbreviation . '%');
+    }
+
+    /**
+     * @param $query
+     * @param $native
+     * @return mixed
+     */
+    public function scopeNative($query,$native)
+    {
+        return $query->where('native', 'like', '%' . $native . '%');
+    }
+
+    /**
+     * @param $query
+     * @param $email
      * @return mixed
      */
     public function scopeEmail($query, $email)
@@ -126,6 +156,18 @@ trait ScopeFilter
     public function scopeAddress($query, $address)
     {
         return $query->where('address', $address);
+    }
+
+
+    /**
+     * @param $query
+     * @param $default
+     *
+     * @return mixed
+     */
+    public function scopeDefault($query, $default)
+    {
+        return $query->where('default', $default);
     }
 
     /**

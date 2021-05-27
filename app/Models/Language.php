@@ -10,13 +10,16 @@
 
 namespace App\Models;
 
+use App\Traits\HasRolesAndPermissions;
+use App\Traits\ScopeFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use function PHPUnit\Framework\throwException;
 
 class Language extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable, ScopeFilter, HasRolesAndPermissions;
 
     /**
      * The attributes that are mass assignable.
@@ -40,12 +43,43 @@ class Language extends Model
      * @return Language
      * @throws \Exception
      */
-    public static function getIdByName(string $lang) {
-        $localization = Language::where('abbreviation',$lang)->first();
+    public static function getIdByName(string $lang)
+    {
+        $localization = Language::where('abbreviation', $lang)->first();
         if ($localization == null) {
             throwException('Localization not exist.');
         }
         return $localization->id;
+    }
+
+    public function getFilterScopes(): array
+    {
+        return [
+            'id' => [
+                'hasParam' => true,
+                'scopeMethod' => 'id'
+            ],
+            'title' => [
+                'hasParam' => true,
+                'scopeMethod' => 'title'
+            ],
+            'abbreviation' => [
+                'hasParam' => true,
+                'scopeMethod' => 'abbreviation'
+            ],
+            'native' => [
+                'hasParam' => true,
+                'scopeMethod' => 'native'
+            ],
+            'status' => [
+                'hasParam' => true,
+                'scopeMethod' => 'status'
+            ],
+            'default' => [
+                'hasParam' => true,
+                'scopeMethod' => 'default'
+            ]
+        ];
     }
 
 //    public function dictionaryLanguages()
