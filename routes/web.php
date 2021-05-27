@@ -42,6 +42,16 @@ Route::prefix('{locale?}')
             Route::middleware(['auth', 'can:isAdmin'])->group(function () {
                 Route::get('product', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('productIndex');
                 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+                Route::resource('localizations', LocalizationController::class)
+                    ->name('index', 'localizationIndex')
+                    ->name('create', 'localizationCreateView')
+                    ->name('store', 'localizationCreate')
+                    ->name('edit', 'localizationEditView')
+                    ->name('update', 'localizationUpdate')
+                    ->name('destroy', 'localizationDestroy')
+                    ->name('show', 'localizationShow');
+
             });
 
 

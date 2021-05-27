@@ -45,7 +45,7 @@
         </li>
         <li class="navigation-header"><a class="navigation-header-text">Applications</a><i class="navigation-header-icon material-icons">more_horiz</i>
         </li>
-        <li class="bold"><a class="waves-effect waves-cyan " href="app-email.html"><i class="material-icons">mail_outline</i><span class="menu-title" data-i18n="Mail">Mail</span><span class="badge new badge pill pink accent-2 float-right mr-2">5</span></a>
+        <li class="bold"><a class="waves-effect waves-cyan " href=""><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Mail">Languages</span></a>
         </li>
 
     </ul>
