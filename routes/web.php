@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,15 @@ Route::prefix('{locale?}')
                     ->name('update', 'languageUpdate')
                     ->name('destroy', 'languageDestroy')
                     ->name('show', 'languageShow');
+
+                Route::resource('translations', TranslationController::class)
+                    ->name('index', 'translationIndex')
+                    ->name('store', 'translationStore')
+                    ->name('create', 'translationCreate')
+                    ->name('show', 'translationShow')
+                    ->name('edit', 'translationEdit')
+                    ->name('update', 'translationUpdate')
+                    ->name('destroy', 'translationDestroy');
 
             });
 

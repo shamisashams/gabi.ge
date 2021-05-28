@@ -15,7 +15,10 @@
 {{--                </ul>--}}
 {{--            </div>--}}
 {{--        </li>--}}
-        <li class="bold"><a class="waves-effect waves-cyan active " href="{{route('languageIndex',app()->getLocale())}}"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Mail">Languages</span></a>
+        <li class="bold"><a class="waves-effect waves-cyan active " href="{{route('languageIndex',app()->getLocale())}}"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Mail">{{trans('admin.languages')}}</span></a>
+        </li>
+
+        <li class="bold"><a class="waves-effect waves-cyan" href="{{route('translationIndex',app()->getLocale())}}"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Mail">{{trans('admin.translations')}}</span></a>
         </li>
 
     </ul>

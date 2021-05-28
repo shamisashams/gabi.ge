@@ -14,9 +14,11 @@ use App\Repositories\Eloquent\Base\BaseRepository;
 use App\Repositories\Eloquent\Base\EloquentRepositoryInterface;
 use App\Repositories\Eloquent\DepositRepository;
 use App\Repositories\Eloquent\LanguageRepository;
+use App\Repositories\Eloquent\TranslationRepository;
 use App\Repositories\Eloquent\UserRepository;
 use App\Repositories\Eloquent\VerificationRepository;
 use App\Repositories\LanguageRepositoryInterface;
+use App\Repositories\TranslationRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\VerificationRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
@@ -46,5 +48,6 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(EloquentRepositoryInterface::class, BaseRepository::class);
         $this->app->bind(LanguageRepositoryInterface::class, LanguageRepository::class);
+        $this->app->bind(TranslationRepositoryInterface::class, TranslationRepository::class);
     }
 }

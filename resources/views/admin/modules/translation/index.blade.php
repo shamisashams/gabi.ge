@@ -1,10 +1,10 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="section">
+        @include('admin.layouts.alert.alert')
         <div class="row">
             <div class="col s12">
                 <div class="card">
-                    @include('admin.layouts.alert.alert')
                     <div class="card-content">
                         <a href="{{route('languageCreateView',app()->getLocale())}}"
                            class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_language')}}</a>
@@ -13,12 +13,9 @@
                             <table class="striped">
                                 <thead>
                                 <tr>
-                                    <th>{{trans('admin.id')}}</th>
-                                    <th>{{trans('admin.title')}}</th>
-                                    <th>{{trans('admin.abbreviation')}}</th>
-                                    <th>{{trans('admin.native')}}</th>
-                                    <th>{{trans('admin.status')}}</th>
-                                    <th>{{trans('admin.action')}}</th>
+                                    <th>{{trans('admin.key')}}</th>
+                                    <th>{{trans('admin.group')}}</th>
+                                    <th>{{trans('admin.text')}}</th>
                                 </tr>
                                 <tr>
                                     <th style="padding:0">
@@ -45,49 +42,43 @@
                             </span>
                                         @endif
                                     </th>
-                                    <th>
-                                        {{ Form::text('native',Request::get('native'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('native'))
-                                            <span class="help-block">
-                            {{ $errors->first('native') }}
-                            </span>
-                                        @endif
-                                    </th>
-                                    <th>
-                                        {{ Form::select('status',['' => 'All','1' => 'Active','0' => 'Not Active'],Request::get('status'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('status'))
-                                            <span class="help-block">
-                            {{ $errors->first('status') }}
-                            </span>
-                                        @endif
-                                    </th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 {!! Form::close() !!}
 
                                 <tbody>
-                                @if($languages)
-                                    @foreach($languages as $language)
+                                @if($translations)
+                                    @foreach($translations as $translation)
                                         <tr>
-                                            <td>{{$language->id}}</td>
-                                            <td>{{$language->title}}</td>
-                                            <td>{{$language->abbreviation}}</td>
-                                            <td>{{$language->native}}</td>
+                                            <td>{{$translation->key}}</td>
+                                            <td>{{$translation->group}}</td>
                                             <td>
-                                                @if($language->status)
-                                                    <span
-                                                        class="chip lighten-5 green green-text">{{trans('admin.active')}}</span>
-                                                @else
-                                                    <span
-                                                        class="chip lighten-5 red red-text">{{trans('admin.not_active')}}</span>
+                                                @if($languages)
+                                                    <ul class="tabs mb-2 row">
+                                                        @foreach($languages as $key=>$language)
+                                                            <li class="tab">
+                                                                <a onclick="ch" class="display-flex align-items-center {{$key==0?'active':""}}"
+                                                                   id="account-tab"
+                                                                   href=""><span>{{$language->abbreviation}}</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="indicator" style="left: 0px; right: 752px;"></li>
+                                                        @endforeach
+                                                    </ul>
                                                 @endif
+                                                <div>
+                                                    opij
+                                                </div>
+                                                {{--                                            <td>{{$translation->text[app()->getLocale()]}}</td>--}}
+                                                {{--                                            <td>{!! $translation->text!!}</td>--}}
                                             </td>
                                             <td>
-                                                <a href="{{route('languageEditView',[app()->getLocale(),$language->id])}}"><i
+                                                <a href="{{route('translationEdit',[app()->getLocale(),$translation->id])}}"><i
                                                         class="material-icons">edit</i></a>
-                                                <a href="{{route('languageShow',[app()->getLocale(),$language->id])}}"><i class="material-icons">remove_red_eye</i></a>
-                                                {!! Form::open(['url' => route('languageDestroy',[app()->getLocale(),$language->id]),'method' =>'delete','style'=>'display:inline-block']) !!}
+                                                <a href="{{route('translationShow',[app()->getLocale(),$translation->id])}}"><i
+                                                        class="material-icons">remove_red_eye</i></a>
+                                                {!! Form::open(['url' => route('translationDestroy',[app()->getLocale(),$translation->id]),'method' =>'delete','style'=>'display:inline-block']) !!}
                                                 <a onclick="deleteAlert(this,'Are you sure, you want to delete this item?!');"
                                                    type="submit">
                                                     <i class="material-icons dp48">delete</i>

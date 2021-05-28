@@ -10,19 +10,10 @@
 namespace App\Repositories\Eloquent;
 
 use App\Http\Request\Admin\LanguageRequest;
-use App\Mail\SignUpMail;
-use App\Mail\StatusChangeMail;
 use App\Models\Language;
 use App\Models\User;
-use App\Models\Wallet;
-use App\Repositories\DepositRepositoryInterface;
 use App\Repositories\Eloquent\Base\BaseRepository;
 use App\Repositories\LanguageRepositoryInterface;
-use App\Repositories\UserRepositoryInterface;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Mail;
 
 /**
  * Class UserRepository
@@ -31,7 +22,7 @@ use Illuminate\Support\Facades\Mail;
 class LanguageRepository extends BaseRepository implements LanguageRepositoryInterface
 {
     /**
-     * UserRepository constructor.
+     * LanguageRepository constructor.
      *
      * @param User $model
      */
