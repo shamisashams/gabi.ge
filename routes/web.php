@@ -46,12 +46,12 @@ Route::prefix('{locale?}')
 
                 Route::resource('localizations', LanguageController::class)
                     ->name('index', 'languageIndex')
-                    ->name('create', 'localizationCreateView')
-                    ->name('store', 'localizationCreate')
-                    ->name('edit', 'localizationEditView')
-                    ->name('update', 'localizationUpdate')
-                    ->name('destroy', 'localizationDestroy')
-                    ->name('show', 'localizationShow');
+                    ->name('create', 'languageCreateView')
+                    ->name('store', 'languageCreate')
+                    ->name('edit', 'languageEditView')
+                    ->name('update', 'languageUpdate')
+                    ->name('destroy', 'languageDestroy')
+                    ->name('show', 'languageShow');
 
             });
 

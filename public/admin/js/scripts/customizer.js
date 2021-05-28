@@ -3,7 +3,6 @@
  */
 
 var menuBgDefault = false;
-
 $(document).ready(function() {
    // Trigger customizer options
    $(".theme-cutomizer").sidenav({
@@ -225,7 +224,7 @@ $(document).ready(function() {
       );
    }
     // for rtl
-  if($("html[data-textdirection='rtl']").length>0){   
+  if($("html[data-textdirection='rtl']").length>0){
       // Trigger customizer options
       $(".theme-cutomizer").sidenav({
          edge: "left"

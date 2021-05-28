@@ -71,6 +71,10 @@ class Language extends Model
                 'hasParam' => true,
                 'scopeMethod' => 'native'
             ],
+            'locale' => [
+                'hasParam' => true,
+                'scopeMethod' => 'locale'
+            ],
             'status' => [
                 'hasParam' => true,
                 'scopeMethod' => 'status'

@@ -172,6 +172,17 @@ trait ScopeFilter
 
     /**
      * @param $query
+     * @param $locale
+     *
+     * @return mixed
+     */
+    public function scopeLocale($query, $locale)
+    {
+        return $query->where('locale', $locale);
+    }
+
+    /**
+     * @param $query
      * @param $verify
      *
      * @return mixed

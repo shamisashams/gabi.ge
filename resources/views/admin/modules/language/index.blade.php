@@ -8,15 +8,15 @@
                         <h4>Languages</h4>
                         <div>
                             {!! Form::open(['url' => route('adminHome',app()->getLocale()),'method' =>'get']) !!}
-                            <table class="">
+                            <table class="striped">
                                 <thead>
                                 <tr>
-                                    <th>{{trans('client.id')}}</th>
-                                    <th>{{trans('client.title')}}</th>
-                                    <th>{{trans('client.abbreviation')}}</th>
-                                    <th>{{trans('client.native')}}</th>
-                                    <th>{{trans('client.status')}}</th>
-                                    <th>{{trans('client.action')}}</th>
+                                    <th>{{trans('admin.id')}}</th>
+                                    <th>{{trans('admin.title')}}</th>
+                                    <th>{{trans('admin.abbreviation')}}</th>
+                                    <th>{{trans('admin.native')}}</th>
+                                    <th>{{trans('admin.status')}}</th>
+                                    <th>{{trans('admin.action')}}</th>
                                 </tr>
                                 <tr>
                                     <th style="padding:0">
@@ -65,14 +65,26 @@
                                 {!! Form::close() !!}
 
                                 <tbody>
-                                <tr>
-                                    <td>Alvin</td>
-                                    <td>Eclair</td>
-                                    <td>$0.87</td>
-                                    <td>$0.87</td>
-                                    <td>$0.87</td>
-                                    <td><a href="page-users-edit.html"><i class="material-icons">edit</i></a></td>
-                                </tr>
+                                @if($languages)
+                                    @foreach($languages as $language)
+                                        <tr>
+                                            <td>{{$language->id}}</td>
+                                            <td>{{$language->title}}</td>
+                                            <td>{{$language->abbreviation}}</td>
+                                            <td>{{$language->native}}</td>
+                                            <td>
+                                                @if($language->status)
+                                                    <span class="text-green">Active</span>
+                                                @else
+                                                    <span class="text-red">Not Active</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{route('languageEditView',[app()->getLocale(),$language->id])}}"><i
+                                                        class="material-icons">edit</i></a></td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                                 </tbody>
                             </table>
                         </div>

@@ -38,7 +38,7 @@ class LanguageController extends AdminController
     public function index(Request $request,$locale)
     {
         return view('admin.modules.language.index', [
-            'verifications' => $this->languageRepository->getData($request)
+            'languages' => $this->languageRepository->getData($request)
         ]);
 
     }
@@ -101,8 +101,8 @@ class LanguageController extends AdminController
      */
     public function edit(string $locale, int $id)
     {
-        return view('admin.modules.localization.update', [
-            'localization' => $this->service->find($id)
+        return view('admin.modules.language.update', [
+            'language' => $this->languageRepository->find($id)
         ]);
 
     }

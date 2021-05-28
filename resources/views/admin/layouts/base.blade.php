@@ -24,10 +24,13 @@
     <link href="{{asset('../admin/css/themes/vertical-modern-menu-template/style.css')}}" rel="stylesheet">
     <link href="{{asset('../admin/css/pages/dashboard-modern.css')}}" rel="stylesheet">
     <link href="{{asset('../admin/vendors/data-tables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
-    <link href="{{asset('../admin/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{asset('../admin/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css')}}"
+          rel="stylesheet">
     <link href="{{asset('../admin/vendors/data-tables/css/select.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{asset('../admin/css/pages/data-tables.css')}}" rel="stylesheet">
+    <link href="{{asset('../admin/css/pages/page-users.css')}}" rel="stylesheet">
     <link href="{{asset('../admin/css/pages/intro.css')}}" rel="stylesheet">
+    <script src="jquery-3.5.1.min.js"></script>
     <!-- END: Page Level CSS-->
     <!-- BEGIN: Custom CSS-->
     <link href="{{asset('../admin/css/custom/custom.css')}}" rel="stylesheet">
@@ -37,12 +40,14 @@
 </head>
 <body class="with-content-panel menu-position-side menu-side-left full-screen" style="padding-bottom:0">
 
+{{--<x-admin.dashboard/>--}}
 <x-admin.navbar/>
 <x-admin.sidemenu/>
 <div id="main">
+    <x-admin.breadcrumb/>
     @yield('body')
 </div>
-<x-admin.footer/>
+
 
 <!-- BEGIN VENDOR JS-->
 <!-- BEGIN PAGE VENDOR JS-->
