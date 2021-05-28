@@ -1,13 +1,15 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="section">
+        @include('admin.layouts.alert.alert')
         <div class="row">
             <div class="col s12">
                 <div class="card">
                     <div class="card-content">
-                        <h4>Languages</h4>
+                        <a href="{{route('languageCreateView',app()->getLocale())}}"
+                           class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_language')}}</a>
                         <div>
-                            {!! Form::open(['url' => route('adminHome',app()->getLocale()),'method' =>'get']) !!}
+                            {!! Form::open(['url' => route('languageIndex',app()->getLocale()),'method' =>'get']) !!}
                             <table class="striped">
                                 <thead>
                                 <tr>
@@ -74,14 +76,24 @@
                                             <td>{{$language->native}}</td>
                                             <td>
                                                 @if($language->status)
-                                                    <span class="text-green">Active</span>
+                                                    <span
+                                                        class="chip lighten-5 green green-text">{{trans('admin.active')}}</span>
                                                 @else
-                                                    <span class="text-red">Not Active</span>
+                                                    <span
+                                                        class="chip lighten-5 red red-text">{{trans('admin.not_active')}}</span>
                                                 @endif
                                             </td>
                                             <td>
                                                 <a href="{{route('languageEditView',[app()->getLocale(),$language->id])}}"><i
-                                                        class="material-icons">edit</i></a></td>
+                                                        class="material-icons">edit</i></a>
+                                                <a href="{{route('languageShow',[app()->getLocale(),$language->id])}}"><i class="material-icons">remove_red_eye</i></a>
+                                                {!! Form::open(['url' => route('languageDestroy',[app()->getLocale(),$language->id]),'method' =>'delete','style'=>'display:inline-block']) !!}
+                                                <a onclick="deleteAlert(this,'Are you sure, you want to delete this item?!');"
+                                                   type="submit">
+                                                    <i class="material-icons dp48">delete</i>
+                                                </a>
+                                                {!! Form::close() !!}
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endif

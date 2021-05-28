@@ -44,7 +44,7 @@ Route::prefix('{locale?}')
                 Route::get('product', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('productIndex');
                 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-                Route::resource('localizations', LanguageController::class)
+                Route::resource('languages', LanguageController::class)
                     ->name('index', 'languageIndex')
                     ->name('create', 'languageCreateView')
                     ->name('store', 'languageCreate')

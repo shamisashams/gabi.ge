@@ -9985,3 +9985,7 @@ tr.group:hover {
 thead  th{
     padding:2px 5px;
 }
+
+.errorTxt{
+    color:red;
+}

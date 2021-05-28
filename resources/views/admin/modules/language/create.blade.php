@@ -10,12 +10,8 @@
                             <div class="card-content">
                                 <div class="row">
                                     <div class="col s12 active" id="account">
-                                        <!-- users edit media object ends -->
-                                        <!-- users edit account form start -->
                                         <form id="accountForm" novalidate="novalidate"
-                                              action="{{route('languageUpdate',[app()->getLocale(),$language->id])}}"
-                                              method="POST">
-                                            {{ method_field('PUT') }}
+                                              action="{{route('languageCreate',app()->getLocale())}}" method="POST">
                                             @csrf
                                             <div class="row">
                                                 <div class="col s12 m6">
@@ -23,7 +19,7 @@
                                                         <div class="col s12 input-field">
                                                             <input id="username" name="title" type="text"
                                                                    class="validate {{ $errors->has('title') ? 'invalid' : 'valid' }}"
-                                                                   value="{{$language->title}}"
+                                                                   value="{{old('title')}}"
                                                                    data-error=".errorTxt">
                                                             <label for="username"
                                                                    class="active">{{trans('admin.title')}}</label>
@@ -34,9 +30,9 @@
 
                                                         </div>
                                                         <div class="col s12 input-field">
-                                                            <input id="name" name="abbreviation" type="text"
+                                                            <input id="abbreviation" name="abbreviation" type="text"
                                                                    class="validate {{ $errors->has('abbreviation') ? 'invalid' : 'valid' }}"
-                                                                   value="{{$language->abbreviation}}"
+                                                                   value="{{old('abbreviation')}}"
                                                                    data-error=".errorTxt">
                                                             <label for="name"
                                                                    class="active">{{trans('admin.abbreviation')}}</label>
@@ -52,7 +48,7 @@
                                                         <div class="col s12 input-field">
                                                             <input id="email" name="native" type="text"
                                                                    class="validate {{ $errors->has('native') ? 'invalid' : 'valid' }}"
-                                                                   value="{{$language->native}}"
+                                                                   value="{{old('native')}}"
                                                                    data-error=".errorTxt">
                                                             <label for="email"
                                                                    class="active">{{trans('admin.native')}}</label>
@@ -64,7 +60,7 @@
                                                         <div class="col s12 input-field">
                                                             <input id="email" name="locale" type="text"
                                                                    class="validate {{ $errors->has('locale') ? 'invalid' : 'valid' }}"
-                                                                   value="{{$language->locale}}"
+                                                                   value="{{old('locale')}}"
                                                                    data-error=".errorTxt">
                                                             <label for="email"
                                                                    class="active">{{trans('admin.locale')}}</label>
@@ -78,12 +74,12 @@
                                                 <div class="col s12">
 
                                                     <label>
-                                                        <input type="checkbox" {{$language->status ? 'checked' : '' }} name="status">
+                                                        <input type="checkbox" name="status">
                                                         <span>{{trans('admin.status')}}</span>
                                                     </label>
                                                     <br>
                                                     <label>
-                                                        <input type="checkbox" name="default" {{$language->default ? 'checked' : '' }}>
+                                                        <input type="checkbox" name="default">
                                                         <span>{{trans('admin.default')}}</span>
                                                     </label>
                                                 </div>

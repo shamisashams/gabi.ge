@@ -9,6 +9,7 @@
  */
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Request\Admin\LanguageRequest;
 use App\Http\Request\Admin\LocalizationRequest;
 use App\Repositories\LanguageRepositoryInterface;
 use App\Services\LocalizationService;
@@ -50,7 +51,7 @@ class LanguageController extends AdminController
      */
     public function create()
     {
-        return view('admin.modules.localization.create');
+        return view('admin.modules.language.create');
     }
 
     /**
@@ -59,22 +60,14 @@ class LanguageController extends AdminController
      * @param \Illuminate\Http\Request $request
      * @return Application|RedirectResponse|Response|Redirector
      */
-    public function store(LocalizationRequest $request)
+    public function store(string $locale,LanguageRequest $request)
     {
-        $data = $request->only([
-            'title',
-            'abbreviation',
-            'native',
-            'locale',
-            'status',
-            'default'
-        ]);
 
-        if (!$this->service->store($data)) {
-            return redirect(route('localizationCreateView'))->with('danger', 'Localization does not create.');
+        if (!$this->languageRepository->store($request)) {
+            return redirect(route('languageEditView', $locale))->with('danger', 'Language does not created.');
         }
 
-        return redirect(route('localizationIndex', app()->getLocale()))->with('success', 'Localization create successfully.');
+        return redirect(route('languageIndex', $locale))->with('success', 'Language was successfully created.');
 
     }
 
@@ -87,8 +80,8 @@ class LanguageController extends AdminController
      */
     public function show(string $locale, int $id)
     {
-        return view('admin.modules.localization.show', [
-            'localization' => $this->service->find($id)
+        return view('admin.modules.language.view', [
+            'language' => $this->languageRepository->find($id)
         ]);
     }
 
@@ -110,28 +103,19 @@ class LanguageController extends AdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param LocalizationRequest $request
+     * @param LanguageRequest $request
      * @param string $locale
      * @param int $id
      * @return Application|RedirectResponse|Response|Redirector
      */
-    public function update(string $locale, LocalizationRequest $request, int $id)
+    public function update(string $locale, LanguageRequest $request, int $id)
     {
-        $data = $request->only([
-            'title',
-            'abbreviation',
-            'native',
-            'locale',
-            'status',
-            'default'
-        ]);
 
-
-        if (!$this->service->update($id, $data)) {
-            return redirect(route('localizationEditView', $locale))->with('danger', 'Localization does not update.');
+        if (!$this->languageRepository->update($id, $request)) {
+            return redirect(route('languageEditView', $locale))->with('danger', 'Language does not update.');
         }
 
-        return redirect(route('localizationIndex', $locale))->with('success', 'Localization update successfully.');
+        return redirect(route('languageIndex', $locale))->with('success', 'Language update successfully.');
 
     }
 
@@ -144,10 +128,10 @@ class LanguageController extends AdminController
      */
     public function destroy(string $locale, int $id)
     {
-        if (!$this->service->delete($id)) {
-            return redirect(route('localizationIndex', $locale))->with('danger', 'Localization is default.');
+        if (!$this->languageRepository->delete($id)) {
+            return redirect(route('languageIndex', $locale))->with('danger', 'Language is default.');
         }
-        return redirect(route('localizationIndex', $locale))->with('success', 'Localization delete successfully.');
+        return redirect(route('languageIndex', $locale))->with('success', 'Language delete successfully.');
 
     }
 }

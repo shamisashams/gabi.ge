@@ -48,7 +48,8 @@ class BaseRepository implements EloquentRepositoryInterface
      * @param $request
      * @return mixed
      */
-    public function getData($request) {
+    public function getData($request)
+    {
         $data = $this->model->filter($request);
 
         $perPage = 10;

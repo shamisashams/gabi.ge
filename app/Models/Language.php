@@ -14,12 +14,13 @@ use App\Traits\HasRolesAndPermissions;
 use App\Traits\ScopeFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use function PHPUnit\Framework\throwException;
 
 class Language extends Model
 {
-    use HasFactory, Notifiable, ScopeFilter, HasRolesAndPermissions;
+    use HasFactory, Notifiable, ScopeFilter, HasRolesAndPermissions, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

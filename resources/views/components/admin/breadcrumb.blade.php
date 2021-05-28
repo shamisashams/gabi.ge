@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col s10 m6 l6">
-                    <h5 class="breadcrumbs-title mt-0 mb-0"><span>Users edit</span></h5>
+                    <h5 class="breadcrumbs-title mt-0 mb-0"><span>{{is_numeric(request()->breadcrumbs()->segments()[2]->name()) ? request()->breadcrumbs()->segments()[2]->name() : __('admin.'.request()->breadcrumbs()->segments()[2]->name()) }}</span></h5>
                     <ol class="breadcrumbs mb-0">
                         @foreach(request()->breadcrumbs()->segments() as $key => $segment)
                             @if(!isset(request()->breadcrumbs()->segments()[$key+1]))

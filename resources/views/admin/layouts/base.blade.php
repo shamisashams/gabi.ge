@@ -66,6 +66,7 @@
 <script src="{{asset('../admin/js/search.js')}}"></script>
 <script src="{{asset('../admin/js/custom/custom-script.js')}}"></script>
 <script src="{{asset('../admin/js/scripts/customizer.js')}}"></script>
+<script src="{{asset('../admin/js/scripts/ui-alerts.js')}}"></script>
 <!-- END THEME  JS-->
 <!-- BEGIN PAGE LEVEL JS-->
 <script src="{{asset('../admin/js/scripts/dashboard-modern.js')}}"></script>
