@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,15 @@ Route::prefix('{locale?}')
                     ->name('edit', 'translationEdit')
                     ->name('update', 'translationUpdate')
                     ->name('destroy', 'translationDestroy');
+		
+		Route::resource('products', ProductController::class)
+                    ->name('index', 'productIndex')
+                    ->name('store', 'productStore')
+                    ->name('create', 'productCreate')
+                    ->name('show', 'productShow')
+                    ->name('edit', 'productEdit')
+                    ->name('update', 'productUpdate')
+                    ->name('destroy', 'productDestroy');
 
             });
 
