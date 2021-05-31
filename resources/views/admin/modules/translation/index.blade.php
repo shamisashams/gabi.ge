@@ -55,22 +55,23 @@
                                             <td>{{$translation->group}}</td>
                                             <td>
                                                 @if($languages)
-                                                    <ul class="tabs mb-2 row">
-                                                        @foreach($languages as $key=>$language)
-                                                            <li class="tab">
-                                                                <a onclick="ch"
-                                                                   class="display-flex align-items-center {{$key==0?'active':""}}"
-                                                                   id="account-tab"
-                                                                   href=""><span>{{$language->abbreviation}}</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="indicator" style="left: 0px; right: 752px;"></li>
-                                                        @endforeach
-                                                    </ul>
+                                                            <table class="bordered">
+                                                                <thead>
+                                                                <tr>
+                                                                    @foreach($languages as $key=>$language)
+                                                                    <th>{{$language->abbreviation}}</th>
+                                                                    @endforeach
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    @foreach($languages as $key=>$language)
+                                                                    <td>{{isset($translation->text[$language->abbreviation])?$translation->text[$language->abbreviation]:""}}</td>
+                                                                    @endforeach
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
                                                 @endif
-                                                <div>
-                                                    opij
-                                                </div>
                                                 {{--                                            <td>{{$translation->text[app()->getLocale()]}}</td>--}}
                                                 {{--                                            <td>{!! $translation->text!!}</td>--}}
                                             </td>
@@ -91,6 +92,8 @@
                                 @endif
                                 </tbody>
                             </table>
+                            {{ $translations->links('admin.vendor.pagination.custom') }}
+
                         </div>
                     </div>
                 </div>
