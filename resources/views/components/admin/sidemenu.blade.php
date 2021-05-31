@@ -21,10 +21,10 @@
         <li class="bold"><a class="waves-effect waves-cyan" href="{{route('translationIndex',app()->getLocale())}}"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Mail">{{trans('admin.translations')}}</span></a>
         </li>
 	
-	<li class="bold"><a class="waves-effect waves-cyan" href="{{route('translationIndex',app()->getLocale())}}"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Mail">{{trans('admin.categories')}}</span></a>
+	<li class="bold"><a class="waves-effect waves-cyan" href="{{route('categoryIndex',app()->getLocale())}}"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Mail">{{trans('admin.categories')}}</span></a>
         </li>
 	
-	<li class="bold"><a class="waves-effect waves-cyan" href="{{route('translationIndex',app()->getLocale())}}"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Mail">{{trans('admin.products')}}</span></a>
+	<li class="bold"><a class="waves-effect waves-cyan" href="{{route('productIndex',app()->getLocale())}}"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Mail">{{trans('admin.products')}}</span></a>
         </li>
 
     </ul>
