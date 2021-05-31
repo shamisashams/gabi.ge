@@ -31,7 +31,6 @@ class TranslationController extends AdminController
     public function __construct(TranslationRepositoryInterface $translationRepository, LanguageRepositoryInterface $languageRepository)
     {
         $this->translationRepository = $translationRepository;
-        $this->languageRepository = $languageRepository;
     }
 
 
@@ -44,7 +43,7 @@ class TranslationController extends AdminController
     {
         return view('admin.modules.translation.index', [
             'translations' => $this->translationRepository->getData($request),
-            'languages' => $this->languageRepository->getData($request)
+            'languages' => $this->translationRepository->getLanguages()
         ]);
     }
 
@@ -53,29 +52,29 @@ class TranslationController extends AdminController
      *
      * @return Application|Factory|View|Response
      */
-    public function create(Request $request)
-    {
-        return view('admin.modules.translation.create', [
-            'languages' => $this->languageRepository->getData($request)
-        ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return Application|RedirectResponse|Response|Redirector
-     */
-    public function store(string $locale, TranslationRequest $request)
-    {
-
-        if (!$this->translationRepository->store($request)) {
-            return redirect(route('translationIndex', $locale))->with('danger', trans('admin.translation_not_created'));
-        }
-
-        return redirect(route('translationIndex', $locale))->with('success', trans('admin.translation_success_create'));
-
-    }
+//    public function create(Request $request)
+//    {
+//        return view('admin.modules.translation.create', [
+//            'languages' => $this->languageRepository->getData($request)
+//        ]);
+//    }
+//
+//    /**
+//     * Store a newly created resource in storage.
+//     *
+//     * @param \Illuminate\Http\Request $request
+//     * @return Application|RedirectResponse|Response|Redirector
+//     */
+//    public function store(string $locale, TranslationRequest $request)
+//    {
+//
+//        if (!$this->translationRepository->store($request)) {
+//            return redirect(route('translationIndex', $locale))->with('danger', trans('admin.translation_not_created'));
+//        }
+//
+//        return redirect(route('translationIndex', $locale))->with('success', trans('admin.translation_success_create'));
+//
+//    }
 
     /**
      * Display the specified resource.
@@ -84,11 +83,11 @@ class TranslationController extends AdminController
      * @param string $locale
      * @return Application|Factory|View|Response
      */
-    public function show(string $locale, int $id,Request $request)
+    public function show(string $locale, int $id, Request $request)
     {
         return view('admin.modules.translation.view', [
             'translation' => $this->translationRepository->find($id),
-            'languages'=>$this->languageRepository->getData($request)
+            'languages' => $this->translationRepository->getLanguages()
         ]);
     }
 
@@ -103,7 +102,7 @@ class TranslationController extends AdminController
     {
         return view('admin.modules.translation.update', [
             'translation' => $this->translationRepository->find($id),
-            'languages' => $this->languageRepository->getData($request)
+            'languages' => $this->translationRepository->getLanguages()
         ]);
 
     }

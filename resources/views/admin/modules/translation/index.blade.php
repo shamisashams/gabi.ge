@@ -6,9 +6,9 @@
             <div class="col s12">
                 <div class="card">
                     <div class="card-content">
-                        <a href="{{route('translationCreate',app()->getLocale())}}"
-                           class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_language')}}</a>
-                        <div>
+                        {{--                        <a href="{{route('translationCreate',app()->getLocale())}}"--}}
+                        {{--                           class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_language')}}</a>--}}
+                        <div style="overflow: auto">
                             {!! Form::open(['url' => route('translationIndex',app()->getLocale()),'method' =>'get']) !!}
                             <table class="striped">
                                 <thead>
@@ -55,22 +55,22 @@
                                             <td>{{$translation->group}}</td>
                                             <td>
                                                 @if($languages)
-                                                            <table class="bordered">
-                                                                <thead>
-                                                                <tr>
-                                                                    @foreach($languages as $key=>$language)
-                                                                    <th>{{$language->abbreviation}}</th>
-                                                                    @endforeach
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                <tr>
-                                                                    @foreach($languages as $key=>$language)
-                                                                    <td>{{isset($translation->text[$language->abbreviation])?$translation->text[$language->abbreviation]:""}}</td>
-                                                                    @endforeach
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
+                                                    <table class="bordered">
+                                                        <thead>
+                                                        <tr>
+                                                            @foreach($languages as $key=>$language)
+                                                                <th>{{$language->abbreviation}}</th>
+                                                            @endforeach
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            @foreach($languages as $key=>$language)
+                                                                <td>{{isset($translation->text[$language->abbreviation])?$translation->text[$language->abbreviation]:""}}</td>
+                                                            @endforeach
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
                                                 @endif
                                                 {{--                                            <td>{{$translation->text[app()->getLocale()]}}</td>--}}
                                                 {{--                                            <td>{!! $translation->text!!}</td>--}}
