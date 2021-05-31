@@ -71,6 +71,6 @@ class BaseRepository implements EloquentRepositoryInterface
      */
     public function find(int $id, $columns = ['*'])
     {
-        return $this->model->find($id, $columns);
+        return $this->model->findOrFail($id, $columns);
     }
 }

@@ -85,7 +85,7 @@
                                                 </div>
                                                 <div class="col s12 display-flex justify-content-end mt-3">
                                                     <button type="submit" class="btn indigo">
-                                                        {{trans('admin.update')}}
+                                                        {{trans('admin.create')}}
                                                     </button>
                                                 </div>
                                             </div>

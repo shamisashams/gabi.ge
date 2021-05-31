@@ -11,6 +11,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Request\Admin\LanguageRequest;
+use App\Http\Request\Admin\TranslationRequest;
 use App\Repositories\Eloquent\LanguageRepository;
 use App\Repositories\LanguageRepositoryInterface;
 use App\Repositories\TranslationRepositoryInterface;
@@ -27,7 +28,7 @@ class TranslationController extends AdminController
     protected $translationRepository;
     protected $languageRepository;
 
-    public function __construct(TranslationRepositoryInterface $translationRepository,LanguageRepositoryInterface $languageRepository)
+    public function __construct(TranslationRepositoryInterface $translationRepository, LanguageRepositoryInterface $languageRepository)
     {
         $this->translationRepository = $translationRepository;
         $this->languageRepository = $languageRepository;
@@ -43,18 +44,20 @@ class TranslationController extends AdminController
     {
         return view('admin.modules.translation.index', [
             'translations' => $this->translationRepository->getData($request),
-            'languages'=>$this->languageRepository->getData($request)
+            'languages' => $this->languageRepository->getData($request)
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return Application|Factory|View|Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('admin.modules.language.create');
+        return view('admin.modules.translation.create', [
+            'languages' => $this->languageRepository->getData($request)
+        ]);
     }
 
     /**
@@ -63,14 +66,14 @@ class TranslationController extends AdminController
      * @param \Illuminate\Http\Request $request
      * @return Application|RedirectResponse|Response|Redirector
      */
-    public function store(string $locale, LanguageRequest $request)
+    public function store(string $locale, TranslationRequest $request)
     {
 
-        if (!$this->languageRepository->store($request)) {
-            return redirect(route('languageEditView', $locale))->with('danger', 'Language does not created.');
+        if (!$this->translationRepository->store($request)) {
+            return redirect(route('translationIndex', $locale))->with('danger', trans('admin.translation_not_created'));
         }
 
-        return redirect(route('languageIndex', $locale))->with('success', 'Language was successfully created.');
+        return redirect(route('translationIndex', $locale))->with('success', trans('admin.translation_success_create'));
 
     }
 
@@ -81,10 +84,11 @@ class TranslationController extends AdminController
      * @param string $locale
      * @return Application|Factory|View|Response
      */
-    public function show(string $locale, int $id)
+    public function show(string $locale, int $id,Request $request)
     {
-        return view('admin.modules.language.view', [
-            'language' => $this->languageRepository->find($id)
+        return view('admin.modules.translation.view', [
+            'translation' => $this->translationRepository->find($id),
+            'languages'=>$this->languageRepository->getData($request)
         ]);
     }
 
@@ -95,11 +99,11 @@ class TranslationController extends AdminController
      * @param string $locale
      * @return Application|Factory|View|Response
      */
-    public function edit(string $locale, int $id,Request $request)
+    public function edit(string $locale, int $id, Request $request)
     {
         return view('admin.modules.translation.update', [
             'translation' => $this->translationRepository->find($id),
-            'languages'=>$this->languageRepository->getData($request)
+            'languages' => $this->languageRepository->getData($request)
         ]);
 
     }
@@ -116,10 +120,10 @@ class TranslationController extends AdminController
     {
 
         if (!$this->translationRepository->update($id, $request)) {
-            return redirect(route('translationEdit', $locale))->with('danger', trans('admin.Translation does not update.'));
+            return redirect(route('translationEdit', [$locale, $id]))->with('danger', trans('admin.translation_not_update.'));
         }
 
-        return redirect(route('translationIndex', $locale))->with('success',trans('admin.translation_success_update') );
+        return redirect(route('translationIndex', $locale))->with('success', trans('admin.translation_success_update'));
 
     }
 
@@ -132,10 +136,10 @@ class TranslationController extends AdminController
      */
     public function destroy(string $locale, int $id)
     {
-        if (!$this->languageRepository->delete($id)) {
-            return redirect(route('languageIndex', $locale))->with('danger', 'Language is default.');
+        if (!$this->translationRepository->delete($id)) {
+            return redirect(route('translationIndex', $locale))->with('danger', trans('translation_not_delete'));
         }
-        return redirect(route('languageIndex', $locale))->with('success', 'Language delete successfully.');
+        return redirect(route('translationIndex', $locale))->with('success', trans('admin.translation_success_delete'));
 
     }
 }

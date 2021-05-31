@@ -24,7 +24,8 @@ class TranslationRequest extends FormRequest
     public function rules()
     {
         return [
-            'key' => 'required|string|max:255|unique:dictionaries',
+            'key' => 'required|string|max:255|unique:language_lines',
+            'group'=>'required|string|max:255'
         ];
     }
 }

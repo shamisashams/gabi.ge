@@ -10,82 +10,59 @@
                             <div class="card-content">
                                 <div class="row">
                                     <div class="col s12 active" id="account">
+                                        <!-- users edit media object ends -->
+                                        <!-- users edit account form start -->
                                         <form id="accountForm" novalidate="novalidate"
-                                              action="{{route('languageCreate',app()->getLocale())}}" method="POST">
+                                              action="{{route('translationStore',[app()->getLocale()])}}"
+                                              method="POST">
                                             @csrf
                                             <div class="row">
                                                 <div class="col s12 m6">
                                                     <div class="row">
                                                         <div class="col s12 input-field">
-                                                            <input id="username" name="title" type="text"
-                                                                   class="validate {{ $errors->has('title') ? 'invalid' : 'valid' }}"
-                                                                   value="{{old('title')}}"
-                                                                   data-error=".errorTxt">
-                                                            <label for="username"
-                                                                   class="active">{{trans('admin.title')}}</label>
-                                                            @if ($errors->has('title'))
-                                                                <small
-                                                                    class="errorTxt">{{ $errors->first('title') }}</small>
-                                                            @endif
-
-                                                        </div>
-                                                        <div class="col s12 input-field">
-                                                            <input id="abbreviation" name="abbreviation" type="text"
-                                                                   class="validate {{ $errors->has('abbreviation') ? 'invalid' : 'valid' }}"
-                                                                   value="{{old('abbreviation')}}"
+                                                            <input id="group" name="group" type="text"
+                                                                   class="validate {{ $errors->has('group') ? 'invalid' : 'valid' }}"
+                                                                   value="{{old('group')}}"
                                                                    data-error=".errorTxt">
                                                             <label for="name"
-                                                                   class="active">{{trans('admin.abbreviation')}}</label>
-                                                            @if ($errors->has('abbreviation'))
+                                                                   class="active">{{trans('admin.group')}}</label>
+                                                            @if ($errors->has('group'))
                                                                 <small
-                                                                    class="errorTxt">{{ $errors->first('abbreviation') }}</small>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12 m6">
-                                                    <div class="row">
-                                                        <div class="col s12 input-field">
-                                                            <input id="email" name="native" type="text"
-                                                                   class="validate {{ $errors->has('native') ? 'invalid' : 'valid' }}"
-                                                                   value="{{old('native')}}"
-                                                                   data-error=".errorTxt">
-                                                            <label for="email"
-                                                                   class="active">{{trans('admin.native')}}</label>
-                                                            @if ($errors->has('native'))
-                                                                <small
-                                                                    class="errorTxt">{{ $errors->first('native') }}</small>
+                                                                    class="errorTxt">{{ $errors->first('group') }}</small>
                                                             @endif
                                                         </div>
                                                         <div class="col s12 input-field">
-                                                            <input id="email" name="locale" type="text"
-                                                                   class="validate {{ $errors->has('locale') ? 'invalid' : 'valid' }}"
-                                                                   value="{{old('locale')}}"
+                                                            <input id="key" name="key" type="text"
+                                                                   class="validate {{ $errors->has('key') ? 'invalid' : 'valid' }}"
+                                                                   value="{{old('key')}}"
                                                                    data-error=".errorTxt">
-                                                            <label for="email"
-                                                                   class="active">{{trans('admin.locale')}}</label>
-                                                            @if ($errors->has('locale'))
+                                                            <label for="username"
+                                                                   class="active">{{trans('admin.key')}}</label>
+                                                            @if ($errors->has('key'))
                                                                 <small
-                                                                    class="errorTxt">{{ $errors->first('locale') }}</small>
+                                                                    class="errorTxt">{{ $errors->first('key') }}</small>
                                                             @endif
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col s12">
 
-                                                    <label>
-                                                        <input type="checkbox" name="status">
-                                                        <span>{{trans('admin.status')}}</span>
-                                                    </label>
-                                                    <br>
-                                                    <label>
-                                                        <input type="checkbox" name="default">
-                                                        <span>{{trans('admin.default')}}</span>
-                                                    </label>
+                                                        </div>
+                                                        @foreach($languages as $language)
+                                                            <div class="col s12 input-field">
+                                                                <input id="{{$language->abbreviation}}" name="language[{{$language->abbreviation}}]" type="text"
+                                                                       class="validate {{ $errors->has($language->abbreviation) ? 'invalid' : 'valid' }}"
+                                                                       data-error=".errorTxt">
+                                                                <label for="{{$language->abbreviation}}"
+                                                                       class="active">{{$language->abbreviation}}</label>
+                                                                @if ($errors->has($language->abbreviation))
+                                                                    <small
+                                                                        class="errorTxt">{{ $errors->first($language->abbreviation) }}</small>
+                                                                @endif
+                                                            </div>
+                                                        @endforeach
+
+                                                    </div>
                                                 </div>
                                                 <div class="col s12 display-flex justify-content-end mt-3">
                                                     <button type="submit" class="btn indigo">
-                                                        {{trans('admin.update')}}
+                                                        {{trans('admin.create')}}
                                                     </button>
                                                 </div>
                                             </div>

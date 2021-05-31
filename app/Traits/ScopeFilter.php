@@ -121,7 +121,7 @@ trait ScopeFilter
      * @param $native
      * @return mixed
      */
-    public function scopeNative($query,$native)
+    public function scopeNative($query, $native)
     {
         return $query->where('native', 'like', '%' . $native . '%');
     }
@@ -183,12 +183,45 @@ trait ScopeFilter
 
     /**
      * @param $query
+     * @param $key
+     *
+     * @return mixed
+     */
+    public function scopeKey($query, $key)
+    {
+        return $query->where('key', 'like', '%' . $key . '%');
+    }
+
+    /**
+     * @param $query
+     * @param $group
+     *
+     * @return mixed
+     */
+    public function scopeGroup($query, $group)
+    {
+        return $query->where('group', 'like', '%' . $group . '%');
+    }
+
+    /**
+     * @param $query
+     * @param $text
+     *
+     * @return mixed
+     */
+    public function scopeText($query, $text)
+    {
+        return $query->where('group',$text);
+    }
+
+    /**
+     * @param $query
      * @param $verify
      *
      * @return mixed
      */
     public function scopeVerify($query, $verify)
     {
-        return $query->where('verify',$verify);
+        return $query->where('verify', $verify);
     }
 }

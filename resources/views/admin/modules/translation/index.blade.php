@@ -6,10 +6,10 @@
             <div class="col s12">
                 <div class="card">
                     <div class="card-content">
-                        <a href="{{route('languageCreateView',app()->getLocale())}}"
+                        <a href="{{route('translationCreate',app()->getLocale())}}"
                            class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_language')}}</a>
                         <div>
-                            {!! Form::open(['url' => route('languageIndex',app()->getLocale()),'method' =>'get']) !!}
+                            {!! Form::open(['url' => route('translationIndex',app()->getLocale()),'method' =>'get']) !!}
                             <table class="striped">
                                 <thead>
                                 <tr>
@@ -19,26 +19,26 @@
                                 </tr>
                                 <tr>
                                     <th style="padding:0">
-                                        {{ Form::text('id',Request::get('id'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('id'))
+                                        {{ Form::text('key',Request::get('key'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
+                                        @if ($errors->has('key'))
                                             <span class="help-block">
-                            {{ $errors->first('id') }}
+                            {{ $errors->first('key') }}
                             </span>
                                         @endif
                                     </th>
                                     <th>
-                                        {{ Form::text('title',Request::get('title'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('title'))
+                                        {{ Form::text('group',Request::get('group'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
+                                        @if ($errors->has('group'))
                                             <span class="help-block">
-                            {{ $errors->first('title') }}
+                            {{ $errors->first('group') }}
                             </span>
                                         @endif
                                     </th>
                                     <th>
-                                        {{ Form::text('abbreviation',Request::get('abbreviation'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('abbreviation'))
+                                        {{ Form::text('text',Request::get('text'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
+                                        @if ($errors->has('text'))
                                             <span class="help-block">
-                            {{ $errors->first('abbreviation') }}
+                            {{ $errors->first('text') }}
                             </span>
                                         @endif
                                     </th>
@@ -58,7 +58,8 @@
                                                     <ul class="tabs mb-2 row">
                                                         @foreach($languages as $key=>$language)
                                                             <li class="tab">
-                                                                <a onclick="ch" class="display-flex align-items-center {{$key==0?'active':""}}"
+                                                                <a onclick="ch"
+                                                                   class="display-flex align-items-center {{$key==0?'active':""}}"
                                                                    id="account-tab"
                                                                    href=""><span>{{$language->abbreviation}}</span>
                                                                 </a>

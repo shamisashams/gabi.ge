@@ -11,6 +11,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Http\Request\Admin\LanguageRequest;
 
+use App\Http\Request\Admin\TranslationRequest;
 use App\Models\Language;
 use App\Models\User;
 use App\Repositories\Eloquent\Base\BaseRepository;
@@ -46,8 +47,7 @@ class TranslationRepository extends BaseRepository implements TranslationReposit
         $array = $data->text;
         if ($data) {
             foreach ($request['language'] as $key => $language) {
-                echo $language;
-                if (isset($data->text[$key])) {
+                if (array_key_exists($key, $data->text)) {
                     $array[$key] = $language;
                 }
             }
@@ -58,6 +58,26 @@ class TranslationRepository extends BaseRepository implements TranslationReposit
         }
         return false;
 
+    }
+
+    public function store(TranslationRequest $request)
+    {
+        $model = $this->model->create([
+            'group' => $request['group'],
+            'key' => $request['key'],
+            'text' => $request['language']
+        ]);
+
+        if ($model) {
+            return true;
+        }
+        return false;
+    }
+
+    public function delete($id)
+    {
+        $data = $this->find($id);
+        return $data ? $data->delete() : false;
     }
 
 

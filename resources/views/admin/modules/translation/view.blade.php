@@ -13,38 +13,19 @@
                                         <table class="striped">
                                             <tbody>
                                             <tr>
-                                                <td>{{trans('admin.title')}}:</td>
-                                                <td>{{$language->title}}</td>
+                                                <td>{{trans('admin.key')}}:</td>
+                                                <td>{{$translation->key}}</td>
                                             </tr>
                                             <tr>
-                                                <td>{{trans('admin.abbreviation')}}:</td>
-                                                <td class="users-view-latest-activity">{{$language->abbreviation}}</td>
+                                                <td>{{trans('admin.group')}}:</td>
+                                                <td class="users-view-latest-activity">{{$translation->group}}</td>
                                             </tr>
-                                            <tr>
-                                                <td>{{trans('admin.native')}}:</td>
-                                                <td class="users-view-verified">{{$language->native}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>{{trans('admin.locale')}}:</td>
-                                                <td class="users-view-role">{{$language->locale}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>{{trans('admin.status')}}:</td>
-                                                <td>
-                                                    @if($language->status)
-                                                        <span
-                                                            class="users-view-status chip green lighten-5 green-text">{{trans('admin.active')}}</span>
-                                                    @else
-                                                        <span
-                                                            class="users-view-status chip red lighten-5 red-text">{{trans('admin.not_active')}}</span>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                            <td>{{trans('admin.default')}}:</td>
-                                            <td class="users-view-role">{{$language->default?'True':'False'}}</td>
-                                            <tr>
-
-                                            </tr>
+                                            @foreach($languages as $language)
+                                                <tr>
+                                                    <td>{{$language->abbreviation}}:</td>
+                                                    <td>{{isset($translation->text[$language->abbreviation])?$translation->text[$language->abbreviation]:""}}</td>
+                                                </tr>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                     </div>

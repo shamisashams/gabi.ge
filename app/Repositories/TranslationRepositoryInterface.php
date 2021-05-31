@@ -10,6 +10,7 @@
 namespace App\Repositories;
 
 use App\Http\Request\Admin\LanguageRequest;
+use App\Http\Request\Admin\TranslationRequest;
 use Illuminate\Http\Request;
 
 /**
@@ -25,5 +26,7 @@ interface TranslationRepositoryInterface
     public function getData(Request $request);
 
     public function update($id,Request $request);
+
+    public function store(TranslationRequest $request);
 
 }

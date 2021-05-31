@@ -20,31 +20,6 @@
                                             <div class="row">
                                                 <div class="col s12 m6">
                                                     <div class="row">
-                                                        <div class="col s12 input-field">
-                                                            <input id="key" name="key" type="text"
-                                                                   class="validate {{ $errors->has('key') ? 'invalid' : 'valid' }}"
-                                                                   value="{{$translation->key}}"
-                                                                   data-error=".errorTxt">
-                                                            <label for="username"
-                                                                   class="active">{{trans('admin.key')}}</label>
-                                                            @if ($errors->has('key'))
-                                                                <small
-                                                                    class="errorTxt">{{ $errors->first('key') }}</small>
-                                                            @endif
-
-                                                        </div>
-                                                        <div class="col s12 input-field">
-                                                            <input id="group" name="group" type="text"
-                                                                   class="validate {{ $errors->has('group') ? 'invalid' : 'valid' }}"
-                                                                   value="{{$translation->group}}"
-                                                                   data-error=".errorTxt">
-                                                            <label for="name"
-                                                                   class="active">{{trans('admin.group')}}</label>
-                                                            @if ($errors->has('group'))
-                                                                <small
-                                                                    class="errorTxt">{{ $errors->first('group') }}</small>
-                                                            @endif
-                                                        </div>
                                                         @foreach($languages as $language)
                                                             <div class="col s12 input-field">
                                                                 <input id="{{$language->abbreviation}}" name="language[{{$language->abbreviation}}]" type="text"
