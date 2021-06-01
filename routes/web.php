@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Auth\AuthController;
@@ -82,6 +83,17 @@ Route::prefix('{locale?}')
                     ->name('edit', 'categoryEdit')
                     ->name('update', 'categoryUpdate')
                     ->name('destroy', 'categoryDestroy');
+
+                // Features
+                Route::resource('features', FeatureController::class)
+                    ->name('index', 'featureIndex')
+                    ->name('create', 'featureCreateView')
+                    ->name('store', 'featureCreate')
+                    ->name('edit', 'featureEditView')
+                    ->name('update', 'featureUpdate')
+                    ->name('destroy', 'featureDestroy')
+                    ->name('show', 'featureShow');
+
 
             });
 

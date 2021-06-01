@@ -26,7 +26,8 @@
         </li>
 
 	<li class="bold"><a class="waves-effect waves-cyan" {{str_contains(route('productIndex',app()->getLocale()),request()->path())?"active":""}}" href="{{route('productIndex',app()->getLocale())}}"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Mail">{{trans('admin.products')}}</span></a>
-        </li>
+        <li class="bold"><a class="waves-effect waves-cyan {{str_contains(route('featureIndex',app()->getLocale()),request()->path())?"active":""}}" href="{{route('featureIndex',app()->getLocale())}}"><i class="material-icons dp48">g_translate</i><span>{{trans('admin.features')}}</span></a>
+	</li>
 
     </ul>
     <div class="navigation-background"></div><a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only" href="#" data-target="slide-out"><i class="material-icons">menu</i></a>

@@ -1,11 +1,21 @@
 <?php
 
-namespace App\Models;
+ namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+ use Illuminate\Database\Eloquent\Factories\HasFactory;
+ use Illuminate\Database\Eloquent\Model;
 
-class CategoryLanguage extends Model
-{
-    use HasFactory;
-}
+ class CategoryLanguage extends Model
+ {
+
+     use HasFactory;
+
+     protected $fillable = [
+	 'category_id',
+	 'language_id',
+	 'title',
+	 'description',
+     ];
+
+ }
+ 
