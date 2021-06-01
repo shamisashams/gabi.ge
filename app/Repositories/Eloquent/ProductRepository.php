@@ -4,6 +4,7 @@
 
  use App\Repositories\ProductRepositoryInterface;
  use App\Repositories\Eloquent\Base\BaseRepository;
+ use Illuminate\Http\Request;
 
  class ProductRepository extends BaseRepository implements ProductRepositoryInterface
  {

@@ -11,6 +11,7 @@
  use App\Models\Category;
  use App\Repositories\Eloquent\Base\BaseRepository;
  use App\Repositories\CategoryRepositoryInterface;
+ use App\Http\Request\Admin\CategoryRequest;
 
  /**
   * Description of CategoryRepository
@@ -25,17 +26,12 @@
 	 parent::__construct($model);
      }
 
-     public function getData(Request $request)
+     public function update($id, CategoryRequest $request)
      {
 	 
      }
 
-     public function update($id, LanguageRequest $request)
-     {
-	 
-     }
-
-     public function store(LanguageRequest $request)
+     public function store(CategoryRequest $request)
      {
 	 
      }

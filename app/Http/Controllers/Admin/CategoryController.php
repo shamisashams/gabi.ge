@@ -23,8 +23,9 @@
       */
      public function index(Request $request, $locale)
      {
-	 var_dump($this->categoryRepository);
-	 die;
+	 $categories = $this->categoryRepository->getData($request);
+	 
+	 dd($categories);
 	 return view('admin.modules.category.index', [
 	     'categories' => [
 		 'category' => 'ASD'
