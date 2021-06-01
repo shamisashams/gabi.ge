@@ -21,15 +21,12 @@
       *
       * @return Application|Factory|View|Response
       */
-     public function index(Request $request, $locale)
+     public function index(Request $request)
      {
-	 $categories = $this->categoryRepository->getData($request);
-	 
-	 dd($categories);
+	 $categories = $this->categoryRepository->getData($request, 'availableLanguage');
+
 	 return view('admin.modules.category.index', [
-	     'categories' => [
-		 'category' => 'ASD'
-	     ]
+	     'categoriesLocal' => $categories
 	 ]);
      }
 

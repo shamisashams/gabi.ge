@@ -4,7 +4,12 @@
 
  use Illuminate\Database\Eloquent\Factories\HasFactory;
  use Illuminate\Database\Eloquent\Model;
-
+ use Illuminate\Notifications\Notifiable;
+ use App\Traits\ScopeFilter;
+ use App\Traits\HasRolesAndPermissions;
+ use Illuminate\Database\Eloquent\SoftDeletes;
+ use App\Models\Language;
+ 
  class Category extends Model
  {
 
@@ -50,7 +55,7 @@
 
      public function availableLanguage()
      {
-	 return $this->language()->where('language_id', '=', Localization::getIdByName(app()->getLocale()));
+	 return $this->language()->where('language_id', '=', Language::getIdByName(app()->getLocale()));
      }
 
      public function childCategories()
