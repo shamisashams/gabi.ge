@@ -45,13 +45,17 @@
                                                             <select name="type">
                                                                 <option value="" disabled selected>Choose your option
                                                                 </option>
-                                                                <option value="input">Input</option>
-                                                                <option value="textarea">Text Area</option>
-                                                                <option value="checkbox">Checkbox</option>
-                                                                <option value="radio">Radio</option>
-                                                                <option value="select">Select</option>
+                                                                <option {{old('type')=='input'?"selected":""}} value="input">Input</option>
+                                                                <option {{old('type')=="textarea"?"selected":""}} value="textarea">Text Area</option>
+                                                                <option {{old('type')=="checkbox"?"selected":""}} value="checkbox">Checkbox</option>
+                                                                <option {{old('type')=="radio"?"selected":""}} value="radio">Radio</option>
+                                                                <option {{old('type')=="select"?"selected":""}} value="select">Select</option>
                                                             </select>
                                                             <label for="type" class="">{{trans('admin.type')}}</label>
+                                                            @if ($errors->has('type'))
+                                                                <small
+                                                                    class="errorTxt">{{ $errors->first('type') }}</small>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>

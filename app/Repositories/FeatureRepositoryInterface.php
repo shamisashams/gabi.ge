@@ -30,6 +30,7 @@ interface FeatureRepositoryInterface
 
     public function update(string $lang,int $id,FeatureRequest $request);
 
+    public function delete(int $id);
 //    public function store(TranslationRequest $request);
 
 }
