@@ -4,9 +4,17 @@
 
  use App\Http\Controllers\Controller;
  use Illuminate\Http\Request;
+ use App\Repositories\CategoryRepositoryInterface;
 
  class CategoryController extends AdminController
  {
+
+     protected $categoryRepository;
+
+     public function __construct(CategoryRepositoryInterface $categoryRepository)
+     {
+	 $this->categoryRepository = $categoryRepository;
+     }
 
      /**
       * Display a listing of the resource.
@@ -15,6 +23,8 @@
       */
      public function index(Request $request, $locale)
      {
+	 var_dump($this->categoryRepository);
+	 die;
 	 return view('admin.modules.category.index', [
 	     'categories' => [
 		 'category' => 'ASD'
