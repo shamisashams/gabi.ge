@@ -2,9 +2,9 @@
 
  namespace App\Http\Controllers\Admin;
 
- use App\Http\Controllers\Controller;
  use Illuminate\Http\Request;
  use App\Repositories\CategoryRepositoryInterface;
+ use App\Http\Request\Admin\CategoryRequest;
 
  class CategoryController extends AdminController
  {
@@ -68,9 +68,12 @@
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-     public function edit($id)
+     public function edit(string $locale, int $id)
      {
-	 //
+	 var_dump($locale, $id);
+	 return view('admin.modules.category.update', [
+	     'categoryItem' => $this->categoryRepository->find($id)
+	 ]);
      }
 
      /**
@@ -80,9 +83,10 @@
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-     public function update(Request $request, $id)
+     public function update(CategoryRequest $request, $id)
      {
-	 //
+	 var_dump($id);
+	 dd($request);
      }
 
      /**

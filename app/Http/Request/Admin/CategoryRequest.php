@@ -36,7 +36,7 @@ class CategoryRequest extends FormRequest
             'title' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
             'position' => 'required',
-            'slug' => ['required', Rule::unique('brands', 'slug')->ignore($this->category)],
+            'slug' => ['required', Rule::unique('category_languages', 'slug')->ignore($this->category)],
         ];
     }
 }
