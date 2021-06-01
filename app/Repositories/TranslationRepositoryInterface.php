@@ -27,6 +27,8 @@ interface TranslationRepositoryInterface
 
     public function update($id,Request $request);
 
-    public function store(TranslationRequest $request);
+    public function getLanguages();
+
+//    public function store(TranslationRequest $request);
 
 }

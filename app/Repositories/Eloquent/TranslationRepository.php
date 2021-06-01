@@ -13,11 +13,11 @@ use App\Http\Request\Admin\LanguageRequest;
 
 use App\Http\Request\Admin\TranslationRequest;
 use App\Models\Language;
+use App\Models\Translation;
 use App\Models\User;
 use App\Repositories\Eloquent\Base\BaseRepository;
 use App\Repositories\TranslationRepositoryInterface;
 use Illuminate\Http\Request;
-use Spatie\TranslationLoader\LanguageLine;
 
 /**
  * Class UserRepository
@@ -30,7 +30,7 @@ class TranslationRepository extends BaseRepository implements TranslationReposit
      *
      * @param User $model
      */
-    public function __construct(LanguageLine $model)
+    public function __construct(Translation $model)
     {
         parent::__construct($model);
     }
@@ -60,19 +60,24 @@ class TranslationRepository extends BaseRepository implements TranslationReposit
 
     }
 
-    public function store(TranslationRequest $request)
+    public function getLanguages()
     {
-        $model = $this->model->create([
-            'group' => $request['group'],
-            'key' => $request['key'],
-            'text' => $request['language']
-        ]);
-
-        if ($model) {
-            return true;
-        }
-        return false;
+        return Language::where(['status' => 1])->get();
     }
+
+//    public function store(TranslationRequest $request)
+//    {
+//        $model = $this->model->create([
+//            'group' => $request['group'],
+//            'key' => $request['key'],
+//            'text' => $request['language']
+//        ]);
+//
+//        if ($model) {
+//            return true;
+//        }
+//        return false;
+//    }
 
     public function delete($id)
     {

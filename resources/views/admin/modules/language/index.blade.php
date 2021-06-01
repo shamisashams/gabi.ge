@@ -8,7 +8,7 @@
                     <div class="card-content">
                         <a href="{{route('languageCreateView',app()->getLocale())}}"
                            class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_language')}}</a>
-                        <div>
+                        <div style="overflow: auto">
                             {!! Form::open(['url' => route('languageIndex',app()->getLocale()),'method' =>'get']) !!}
                             <table class="striped">
                                 <thead>
@@ -99,6 +99,8 @@
                                 @endif
                                 </tbody>
                             </table>
+                            {{ $languages->links('admin.vendor.pagination.custom') }}
+
                         </div>
                     </div>
                 </div>
