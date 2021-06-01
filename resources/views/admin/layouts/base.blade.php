@@ -24,6 +24,9 @@
     <link href="{{asset('../admin/css/themes/vertical-modern-menu-template/style.css')}}" rel="stylesheet">
     <link href="{{asset('../admin/css/pages/dashboard-modern.css')}}" rel="stylesheet">
     <link href="{{asset('../admin/vendors/data-tables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{asset('../admin/css/pages/form-select2.css')}}" rel="stylesheet">
+    <link href="{{asset('../admin/vendors/select2/select2.min.css')}}" rel="stylesheet">
+    <link href="{{asset('../admin/vendors/select2/select2-materialize.css')}}" rel="stylesheet">
     <link href="{{asset('../admin/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css')}}"
           rel="stylesheet">
     <link href="{{asset('../admin/vendors/data-tables/css/select.dataTables.min.css')}}" rel="stylesheet">

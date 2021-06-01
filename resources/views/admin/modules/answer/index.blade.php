@@ -13,18 +13,25 @@
                             <table class="striped">
                                 <thead>
                                 <tr>
-                                    <th>{{trans('admin.id')}}</th>
+                                    <th>{{trans('admin.feature')}}</th>
                                     <th>{{trans('admin.title')}}</th>
-                                    <th>{{trans('admin.type')}}</th>
+                                    <th>{{trans('admin.position')}}</th>
                                     <th>{{trans('admin.status')}}</th>
                                     <th>{{trans('admin.action')}}</th>
                                 </tr>
                                 <tr>
-                                    <th style="padding:0">
-                                        {{ Form::text('id',Request::get('id'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('id'))
+                                    <th>
+                                        <select class="select2 browser-default">
+                                            <option value="square">Square</option>
+                                            <option value="rectangle">Rectangle</option>
+                                            <option value="rombo">Rombo</option>
+                                            <option value="romboid">Romboid</option>
+                                            <option value="trapeze">Trapeze</option>
+                                            <option value="traible">Triangle</option>
+                                            <option value="polygon">Polygon</option>
+                                        </select>                                    @if ($errors->has('feature'))
                                             <span class="help-block">
-                                                {{ $errors->first('id') }}
+                                                {{ $errors->first('feature') }}
                                             </span>
                                         @endif
                                     </th>
@@ -37,10 +44,10 @@
                                         @endif
                                     </th>
                                     <th>
-                                        {{ Form::select('type',['' => 'All','input' => 'Input','textarea' => 'Text Area','checkbox'=>'Checkbox','radio'=>'Radio','select'=>'Select'],Request::get('type'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('type'))
+                                        {{ Form::text('position',Request::get('position'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
+                                        @if ($errors->has('position'))
                                             <span class="help-block">
-                                                {{ $errors->first('type') }}
+                                                {{ $errors->first('position') }}
                                             </span>
                                         @endif
                                     </th>
@@ -57,14 +64,15 @@
                                 </thead>
                                 {!! Form::close() !!}
                                 <tbody>
-                                @if($features)
-                                    @foreach($features as $feature)
+
+                                @if($answers)
+                                    @foreach($answers as $answer)
                                         <tr>
-                                            <td>{{$feature->id}}</td>
-                                            <td>{{(count($feature->availableLanguage) > 0) ?  $feature->availableLanguage[0]->title : ''}}</td>
-                                            <td>{{$feature->type}}</td>
+                                            <td>{{$answer->feature?(count($answer->feature->availableLanguage)?$answer->feature->availableLanguage[0]->title:""):""}}</td>
+                                            <td>{{(count($answer->availableLanguage) > 0) ?  $answer->availableLanguage[0]->title : ''}}</td>
+                                            <td>{{$answer->position}}</td>
                                             <td>
-                                                @if($feature->status)
+                                                @if($answer->status)
                                                     <span
                                                         class="chip lighten-5 green green-text">{{trans('admin.active')}}</span>
                                                 @else
@@ -73,11 +81,11 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{route('featureEditView',[app()->getLocale(),$feature->id])}}"><i
+                                                <a href="{{route('answerEdit',[app()->getLocale(),$answer->id])}}"><i
                                                         class="material-icons">edit</i></a>
-                                                <a href="{{route('featureShow',[app()->getLocale(),$feature->id])}}"><i
+                                                <a href="{{route('answerShow',[app()->getLocale(),$answer->id])}}"><i
                                                         class="material-icons">remove_red_eye</i></a>
-                                                {!! Form::open(['url' => route('featureDestroy',[app()->getLocale(),$feature->id]),'method' =>'delete','style'=>'display:inline-block']) !!}
+                                                {!! Form::open(['url' => route('answerDestroy',[app()->getLocale(),$answer->id]),'method' =>'delete','style'=>'display:inline-block']) !!}
                                                 <a onclick="deleteAlert(this,'Are you sure, you want to delete this item?!');"
                                                    type="submit">
                                                     <i class="material-icons dp48">delete</i>
@@ -89,7 +97,7 @@
                                 @endif
                                 </tbody>
                             </table>
-                            {{ $features->links('admin.vendor.pagination.custom') }}
+                            {{ $answers->links('admin.vendor.pagination.custom') }}
 
                         </div>
                     </div>

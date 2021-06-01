@@ -214,6 +214,7 @@ trait ScopeFilter
         return $query->where('group',$text);
     }
 
+
     /**
      * @param $query
      * @param $verify
