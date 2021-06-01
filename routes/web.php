@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,15 @@ Route::prefix('{locale?}')
                     ->name('edit', 'productEdit')
                     ->name('update', 'productUpdate')
                     ->name('destroy', 'productDestroy');
+		
+		Route::resource('categories', CategoryController::class)
+                    ->name('index', 'categoryIndex')
+                    ->name('store', 'categoryStore')
+                    ->name('create', 'categoryCreate')
+                    ->name('show', 'categoryShow')
+                    ->name('edit', 'categoryEdit')
+                    ->name('update', 'categoryUpdate')
+                    ->name('destroy', 'categoryDestroy');
 
             });
 
