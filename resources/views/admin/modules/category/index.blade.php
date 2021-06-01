@@ -16,6 +16,7 @@
 				    <th>@lang('admin.id')</th>
 				    <th>@lang('admin.title')</th>
 				    <th>@lang('admin.slug')</th>
+				    <th>@lang('admin.description')</th>
 				    <th>@lang('admin.status')</th>
 				    <th>@lang('admin.actions')</th>
                                 </tr>
@@ -45,6 +46,14 @@
 					@endif
 				    </th>
 				    <th>
+					{{ Form::text('description',Request::get('description'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
+					@if ($errors->has('description'))
+					<span class="help-block">
+					    {{ $errors->first('description') }}
+					</span>
+					@endif
+				    </th>
+				    <th>
 					{{ Form::select('status',['' => 'All','1' => 'Active','0' => 'Not Active'],Request::get('status'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
 					@if ($errors->has('status'))
 					<span class="help-block">
@@ -64,6 +73,7 @@
 				    <td>{{$category->id}}</td>
 				    <td>{{(count($category->availableLanguage) > 0) ?  $category->availableLanguage[0]->title : ''}}</td>
 				    <td>{{(count($category->availableLanguage) > 0) ?  $category->availableLanguage[0]->slug : ''}}</td>
+				    <td>{{(count($category->availableLanguage) > 0) ?  $category->availableLanguage[0]->description : ''}}</td>
 				    <td>
 					@if($category->status)
 					<span
