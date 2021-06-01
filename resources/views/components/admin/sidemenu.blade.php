@@ -22,10 +22,10 @@
         <li class="bold"><a class="waves-effect waves-cyan {{str_contains(route('translationIndex',app()->getLocale()),request()->path())?"active":""}}" href="{{route('translationIndex',app()->getLocale())}}"><i class="material-icons dp48">g_translate</i><span>{{trans('admin.translations')}}</span></a>
         </li>
 
-	<li class="bold"><a class="waves-effect waves-cyan" href="{{str_contains(route('categoryIndex',app()->getLocale()),request()->path())?"active":""}}"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Mail">{{trans('admin.categories')}}</span></a>
+	<li class="bold"><a class="waves-effect waves-cyan" {{str_contains(route('categoryIndex',app()->getLocale()),request()->path())?"active":""}}" href="{{route('categoryIndex',app()->getLocale())}}"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Mail">{{trans('admin.categories')}}</span></a>
         </li>
 
-	<li class="bold"><a class="waves-effect waves-cyan" href="{{str_contains(route('productIndex',app()->getLocale()),request()->path())?"active":""}}"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Mail">{{trans('admin.products')}}</span></a>
+	<li class="bold"><a class="waves-effect waves-cyan" {{str_contains(route('productIndex',app()->getLocale()),request()->path())?"active":""}}" href="{{route('productIndex',app()->getLocale())}}"><i class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Mail">{{trans('admin.products')}}</span></a>
         </li>
 
     </ul>
