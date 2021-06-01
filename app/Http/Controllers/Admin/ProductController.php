@@ -8,7 +8,7 @@
  class ProductController extends Controller
  {
 
-     public function index()
+     public function index(Request $request,$locale)
      {
 	 return view('admin.modules.product.index');
      }
