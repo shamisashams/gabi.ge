@@ -1,42 +1,53 @@
 <?php
-/**
- *  app/Http/Request/Admin/PageRequest.php
- *
- * User:
- * Date-Time: 17.12.20
- * Time: 17:57
- * @author Vito Makhatadze <vitomaxatadze@gmail.com>
- */
 
-namespace App\Http\Request\Admin;
+ /**
+  *  app/Http/Request/Admin/PageRequest.php
+  *
+  * User:
+  * Date-Time: 17.12.20
+  * Time: 17:57
+  * @author Vito Makhatadze <vitomaxatadze@gmail.com>
+  */
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+ namespace App\Http\Request\Admin;
 
-class CategoryRequest extends FormRequest
-{
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return Auth()->user()->can('isAdmin');
-    }
+ use Illuminate\Foundation\Http\FormRequest;
+ use Illuminate\Validation\Rule;
+ use Illuminate\Support\Facades\Route;
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
-            'position' => 'required',
-            'slug' => ['required', Rule::unique('category_languages', 'slug')->ignore($this->category)],
-        ];
-    }
-}
+ class CategoryRequest extends FormRequest
+ {
+
+     /**
+      * Determine if the user is authorized to make this request.
+      *
+      * @return bool
+      */
+     public function authorize()
+     {
+	 return Auth()->user()->can('isAdmin');
+     }
+
+     /**
+      * Get the validation rules that apply to the request.
+      *
+      * @return array
+      */
+     public function rules()
+     {
+	 $rules = [
+	     'title' => 'required|string|max:255',
+	     'description' => 'nullable|string|max:255',
+	     'position' => 'required',
+	     'slug' => 'required'
+	 ];
+
+	 if (Route::currentRouteName() !== 'categoryUpdate') {
+	     $rules['slug'] = ['required', Rule::unique('category_languages', 'slug')->ignore($this->category)];
+	 }
+
+	 return $rules;
+     }
+
+ }
+ 

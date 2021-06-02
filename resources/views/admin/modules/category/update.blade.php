@@ -76,6 +76,19 @@
 							    class="errorTxt">{{ $errors->first('position') }}</small>
 							@endif
 						    </div>
+						    
+						    <div class="col s12 input-field">
+							<input id="parent_id" name="parent_id" type="number"
+							       class="validate {{ $errors->has('parent_id') ? 'invalid' : 'valid' }}"
+							       value="{{$categoryItem->parent_id}}"
+							       data-error=".errorTxt">
+							<label for="description"
+							       class="active">{{trans('admin.parent_id')}}</label>
+							@if ($errors->has('parent_id'))
+							<small
+							    class="errorTxt">{{ $errors->first('parent_id') }}</small>
+							@endif
+						    </div>
 						</div>
 					    </div>
 					    <div class="col s12">
