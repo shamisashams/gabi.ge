@@ -92,10 +92,10 @@
      {
 
 	 if (false === $this->categoryRepository->update($id, $request)) {
-	     return redirect(route('categoryEditView', $lang))->with('danger', __('admin.category_updated_succesfully'));
+	     return redirect(route('categoryEditView', $lang))->with('danger', __('admin.category_not_updated'));
 	 }
 
-	 return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_not_updated'));
+	 return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_updated_succesfully'));
      }
 
      /**
