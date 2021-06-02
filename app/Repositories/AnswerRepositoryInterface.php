@@ -9,6 +9,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Request\Admin\AnswerRequest;
 use Illuminate\Http\Request;
 
 /**
@@ -21,6 +22,8 @@ interface AnswerRepositoryInterface
      * @param Request $request
      */
 
-    public function getData(Request $request);
+    public function store(string $lang, AnswerRequest $request);
+
+    public function update(string $lang, int $id, AnswerRequest $request);
 
 }

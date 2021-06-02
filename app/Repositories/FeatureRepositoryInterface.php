@@ -24,11 +24,9 @@ interface FeatureRepositoryInterface
      * @param Request $request
      */
 
-    public function getData(Request $request,$relation);
+    public function store($lang, FeatureRequest $request);
 
-    public function store($lang,FeatureRequest $request);
-
-    public function update(string $lang,int $id,FeatureRequest $request);
+    public function update(string $lang, int $id, FeatureRequest $request);
 
     public function delete(int $id);
 //    public function store(TranslationRequest $request);

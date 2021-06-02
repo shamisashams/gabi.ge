@@ -115,7 +115,7 @@ class FeatureController extends AdminController
             return redirect(route('featureIndex', $locale))->with('danger', __('admin.feature_not_updated'));
         }
 
-        return redirect(route('featureIndex', $locale))->with('success', __('admin.feature.success.update'));
+        return redirect(route('featureIndex', $locale))->with('success', __('admin.feature_success_update'));
 
     }
 

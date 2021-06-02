@@ -6,10 +6,10 @@
                 <div class="card">
                     @include('admin.layouts.alert.alert')
                     <div class="card-content">
-                        <a href="{{route('featureCreateView',app()->getLocale())}}"
-                           class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_feature')}}</a>
-                        <div style="overflow: auto">
-                            {!! Form::open(['url' => route('featureIndex',app()->getLocale()),'method' =>'get']) !!}
+                        <a href="{{route('answerCreate',app()->getLocale())}}"
+                           class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_answer')}}</a>
+                        <div style="">
+                            {!! Form::open(['url' => route('answerIndex',app()->getLocale()),'method' =>'get']) !!}
                             <table class="striped">
                                 <thead>
                                 <tr>
@@ -21,15 +21,16 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        <select class="select2 browser-default">
-                                            <option value="square">Square</option>
-                                            <option value="rectangle">Rectangle</option>
-                                            <option value="rombo">Rombo</option>
-                                            <option value="romboid">Romboid</option>
-                                            <option value="trapeze">Trapeze</option>
-                                            <option value="traible">Triangle</option>
-                                            <option value="polygon">Polygon</option>
-                                        </select>                                    @if ($errors->has('feature'))
+                                        <div style="margin-bottom: 8px">
+                                            <select class="select2 browser-default" name="feature"
+                                                    onchange="this.form.submit()">
+                                                @foreach($features as $feature)
+                                                    <option
+                                                        value="{{$feature->id}}" {{(\Request::get('feature') == $feature->id) ? 'selected' : ''}}>{{count($feature->availableLanguage)>0 ? $feature->availableLanguage[0]->title:""}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @if ($errors->has('feature'))
                                             <span class="help-block">
                                                 {{ $errors->first('feature') }}
                                             </span>
@@ -68,7 +69,7 @@
                                 @if($answers)
                                     @foreach($answers as $answer)
                                         <tr>
-                                            <td>{{$answer->feature?(count($answer->feature->availableLanguage)?$answer->feature->availableLanguage[0]->title:""):""}}</td>
+                                            <td>{{$answer->feature?(count($answer->feature->feature->availableLanguage)>0?$answer->feature->feature->availableLanguage[0]->title:""):""}}</td>
                                             <td>{{(count($answer->availableLanguage) > 0) ?  $answer->availableLanguage[0]->title : ''}}</td>
                                             <td>{{$answer->position}}</td>
                                             <td>
@@ -105,6 +106,5 @@
             </div>
         </div>
     </div>
-
 
 @endsection

@@ -10,66 +10,76 @@
                             <div class="card-content">
                                 <div class="row">
                                     <div class="col s12 active" id="account">
-                                        <!-- users edit media object ends -->
-                                        <!-- users edit account form start -->
                                         <form id="accountForm" novalidate="novalidate"
-                                              action="{{route('featureUpdate',[app()->getLocale(),$feature->id])}}"
-                                              method="POST">
-                                            {{ method_field('PUT') }}
+                                              action="{{route('answerUpdate',[app()->getLocale(),$answer->id])}}"
+                                              method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="row">
                                                 <div class="col s12 m6">
                                                     <div class="row">
                                                         <div class="col s12 input-field">
-                                                            <input id="username" name="title" type="text"
-                                                                   class="validate {{ $errors->has('title') ? 'invalid' : 'valid' }}"
-                                                                   value="{{(count($feature->availableLanguage) > 0) ?  $feature->availableLanguage[0]->title : ''}}"
-                                                                   data-error=".errorTxt">
-                                                            <label for="username"
-                                                                   class="active">{{trans('admin.title')}}</label>
-                                                            @if ($errors->has('title'))
+                                                            <select class="select2 browser-default" name="feature">
+                                                                @foreach($features as $feature)
+                                                                    <option
+                                                                        value="{{$feature->id}}" {{($answer->feature->feature_id == $feature->id) ? 'selected' : ''}} >{{count($feature->availableLanguage)>0 ? $feature->availableLanguage[0]->title:""}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <label for="feature">{{trans('admin.feature')}}</label>
+                                                            @if ($errors->has('feature'))
                                                                 <small
-                                                                    class="errorTxt">{{ $errors->first('title') }}</small>
+                                                                    class="errorTxt">{{ $errors->first('feature') }}</small>
                                                             @endif
 
                                                         </div>
                                                         <div class="col s12 input-field">
-                                                            <input id="name" name="position" type="text"
+                                                            <input id="abbreviation" name="position" type="text"
                                                                    class="validate {{ $errors->has('position') ? 'invalid' : 'valid' }}"
-                                                                   value="{{$feature->position}}"
+                                                                   value="{{$answer->position}}"
                                                                    data-error=".errorTxt">
-                                                            <label for="name"
+                                                            <label for="position"
                                                                    class="active">{{trans('admin.position')}}</label>
                                                             @if ($errors->has('position'))
                                                                 <small
                                                                     class="errorTxt">{{ $errors->first('position') }}</small>
                                                             @endif
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m6">
+                                                    <div class="row">
                                                         <div class="col s12 input-field">
-                                                            <select name="type">
-                                                                <option value="" disabled selected>Choose your option
-                                                                </option>
-                                                                <option {{$feature->type=="input"?'selected':""}} value="input">Input</option>
-                                                                <option {{$feature->type=="textarea"?'selected':""}} value="textarea">Text Area</option>
-                                                                <option {{$feature->type=="checkbox"?'selected':""}} value="checkbox">Checkbox</option>
-                                                                <option {{$feature->type=="radio"?'selected':""}} value="radio">Radio</option>
-                                                                <option {{$feature->type=="select"?'selected':""}} value="select">Select</option>
-                                                            </select>
-                                                            <label for="type" class="">{{trans('admin.type')}}</label>
+                                                            <input id="abbreviation" name="title" type="text"
+                                                                   class="validate {{ $errors->has('title') ? 'invalid' : 'valid' }}"
+                                                                   value="{{count($answer->availableLanguage)>0?$answer->availableLanguage[0]->title:""}}"
+                                                                   data-error=".errorTxt">
+                                                            <label for="title"
+                                                                   class="acitve">{{trans('admin.title')}}</label>
+                                                            @if ($errors->has('title'))
+                                                                <small
+                                                                    class="errorTxt">{{ $errors->first('title') }}</small>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col s12">
 
                                                     <label>
-                                                        <input type="checkbox" {{$feature->status ? 'checked' : '' }} name="status">
+                                                        <input type="checkbox"
+                                                               {{($answer->status == 1) ? 'checked' : ''}} name="status">
                                                         <span>{{trans('admin.status')}}</span>
                                                     </label>
-                                                    <br>
                                                 </div>
-                                                <div class="col s12 display-flex justify-content-end mt-3">
-                                                    <button type="submit" class="btn indigo">
-                                                        {{trans('admin.update')}}
+                                                <div class="col s12 m6" style="margin-top:20px">
+                                                    <div class="input-images"></div>
+                                                    @if ($errors->has('images'))
+                                                        <span class="help-block">
+                                                         {{ $errors->first('images') }}
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                                <div class="input-field col s12">
+                                                    <button type="submit" class="btn indigo right">
+                                                        {{trans('admin.create')}}
                                                     </button>
                                                 </div>
                                             </div>
