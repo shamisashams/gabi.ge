@@ -9,7 +9,7 @@
 
      public function getData(CategoryRequest $request);
 
-     public function update($id, CategoryRequest $request);
+     public function update(string $lang, int $id, CategoryRequest $request);
 
      public function store(string $lang, CategoryRequest $request);
 

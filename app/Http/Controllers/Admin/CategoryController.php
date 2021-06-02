@@ -91,7 +91,7 @@
      public function update(string $lang, int $id, CategoryRequest $request)
      {
 
-	 if (false === $this->categoryRepository->update($id, $request)) {
+	 if (false === $this->categoryRepository->update($lang,$id, $request)) {
 	     return redirect(route('categoryEditView', $lang))->with('danger', __('admin.category_not_updated'));
 	 }
 

@@ -29,9 +29,57 @@
 	 parent::__construct($model);
      }
 
-     public function update($id, CategoryRequest $request)
+     public function update(string $lang, int $id, CategoryRequest $request)
      {
-	 
+	 $request['status'] = isset($request['status']) ? 1 : 0;
+
+	 try {
+	     DB::beginTransaction();
+
+	     $categoryItem = $this->find($id);
+
+	     if (!$categoryItem) {
+		 return false;
+	     }
+
+	     $categoryItem->update([
+		 'position' => $request['position'],
+		 'status' => $request['status'],
+		 'parent_id' => $request['parent_id']
+	     ]);
+
+	     $categoryId = $categoryItem->id;
+
+	     $currentLanguageId = Language::getIdByName($lang);
+
+	     $categoryLanguageItem = CategoryLanguage::where([
+			 'category_id' => $categoryId,
+			 'language_id' => $currentLanguageId
+		     ])->first();
+
+	     if (is_null($categoryLanguageItem)) {
+		 CategoryLanguage::create([
+		     'category_id' => $categoryId,
+		     'language_id' => $currentLanguageId,
+		     'title' => $request['title'],
+		     'description' => $request['description'],
+		     'slug' => $request['slug']
+		 ]);
+	     } else {
+		 $categoryLanguageItem->update([
+		     'title' => $request['title'],
+		     'description' => $request['description'],
+		     'slug' => $request['slug']
+		 ]);
+	     }
+
+
+	     DB::commit();
+	     return true;
+	 } catch (\Exception $queryException) {
+	     DB::rollBack();
+	     return false;
+	 }
      }
 
      public function store(string $lang, CategoryRequest $request)
