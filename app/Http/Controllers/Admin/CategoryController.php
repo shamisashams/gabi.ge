@@ -61,9 +61,11 @@
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-     public function show($id)
+     public function show(string $lang, int $id)
      {
-	 //
+	 return view('admin.modules.category.view', [
+	     'categoryItem' => $this->categoryRepository->find($id)
+	 ]);
      }
 
      /**
@@ -74,7 +76,6 @@
       */
      public function edit(string $lang, int $id)
      {
-	 var_dump($lamg, $id);
 	 return view('admin.modules.category.update', [
 	     'categoryItem' => $this->categoryRepository->find($id)
 	 ]);
