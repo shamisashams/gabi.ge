@@ -7,9 +7,40 @@
                     @include('admin.layouts.alert.alert')
                     <div class="card-content">
                         <a href="{{route('answerCreate',app()->getLocale())}}"
-                           class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_answer')}}</a>
+                           class="mb-2 btn waves-effect waves-light green darken-1">{{trans('admin.create_answer')}}</a>
                         <div style="">
                             {!! Form::open(['url' => route('answerIndex',app()->getLocale()),'method' =>'get']) !!}
+                            <div style="display: flex;flex-direction: column;margin-bottom:10px; ">
+                                <div>
+                                    @if ($errors->has('title'))
+                                        <span class="error-block">
+                                        {{ $errors->first('title') }}
+                                         </span>
+                                    @endif
+                                </div>
+                                <div>
+
+                                    @if ($errors->has('position'))
+                                        <span class="error-block">
+                                                {{ $errors->first('position') }}
+                                            </span>
+                                    @endif
+                                </div>
+                                <div>
+                                    @if ($errors->has('status'))
+                                        <span class="error-block">
+                                                {{ $errors->first('status') }}
+                                            </span>
+                                    @endif
+                                </div>
+                                <div>
+                                    @if ($errors->has('feature'))
+                                        <span class="error-block">
+                                                {{ $errors->first('feature') }}
+                                            </span>
+                                    @endif
+                                </div>
+                            </div>
                             <table class="striped">
                                 <thead>
                                 <tr>
@@ -21,44 +52,27 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        <div style="margin-bottom: 8px">
+                                        <div style="margin-bottom: 9px">
                                             <select class="select2 browser-default" name="feature"
                                                     onchange="this.form.submit()">
+                                                <option selected value="">All</option>
                                                 @foreach($features as $feature)
                                                     <option
                                                         value="{{$feature->id}}" {{(\Request::get('feature') == $feature->id) ? 'selected' : ''}}>{{count($feature->availableLanguage)>0 ? $feature->availableLanguage[0]->title:""}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        @if ($errors->has('feature'))
-                                            <span class="help-block">
-                                                {{ $errors->first('feature') }}
-                                            </span>
-                                        @endif
                                     </th>
                                     <th>
                                         {{ Form::text('title',Request::get('title'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('title'))
-                                            <span class="help-block">
-                                                {{ $errors->first('title') }}
-                                            </span>
-                                        @endif
+                                        <br>
                                     </th>
                                     <th>
                                         {{ Form::text('position',Request::get('position'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('position'))
-                                            <span class="help-block">
-                                                {{ $errors->first('position') }}
-                                            </span>
-                                        @endif
+
                                     </th>
                                     <th>
                                         {{ Form::select('status',['' => 'All','1' => 'Active','0' => 'Not Active'],Request::get('status'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('status'))
-                                            <span class="help-block">
-                                                {{ $errors->first('status') }}
-                                            </span>
-                                        @endif
                                     </th>
                                     <th></th>
                                 </tr>

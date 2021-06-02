@@ -32,6 +32,13 @@ class AnswerController extends AdminController
      */
     public function index($locale, Request $request)
     {
+        $request->validate([
+            'feature' => 'integer|nullable',
+            'position' => 'string|max:255|nullable',
+            'title' => 'string|max:255|nullable',
+            'status' => 'integer|nullable',
+        ]);
+
         return view('admin.modules.answer.index',
             [
                 'answers' => $this->answerRepository->getData($request, ['availableLanguage', 'feature.feature.availableLanguage']),
@@ -39,10 +46,11 @@ class AnswerController extends AdminController
             ]);
     }
 
-    public function show($locale)
+    public function show(string $locale, int $id)
     {
-        $localization = Localization::where('abbreviation', $locale)->first()->id;
-        return view('admin.modules.answer.show', ['localization' => $localization, 'locale' => $locale,]);
+        return view('admin.modules.answer.view', [
+            'answer' => $this->answerRepository->find($id)
+        ]);
     }
 
     public function create($locale)
@@ -98,12 +106,15 @@ class AnswerController extends AdminController
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Answer $answer
-     * @return \Illuminate\Http\Response
+     * @param string $locale
+     * @param int $id
+     * @return Application|RedirectResponse|Response|Redirector
      */
-    public function destroy($locale, $id)
+    public function destroy(string $locale, int $id)
     {
-        $this->service->delete($id);
-        return redirect()->back();
+        if (!$this->answerRepository->delete($id)) {
+            return redirect(route('answerIndex', $locale))->with('danger', __('admin.answer_not_deleted'));
+        }
+        return redirect(route('answerIndex', $locale))->with('success', __('admin.answer_success_delete'));
     }
 }

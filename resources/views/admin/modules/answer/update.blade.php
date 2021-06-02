@@ -10,15 +10,18 @@
                             <div class="card-content">
                                 <div class="row">
                                     <div class="col s12 active" id="account">
+                                        <input name="old-images[]" id="old_images" hidden disabled value="{{$answer->files}}">
                                         <form id="accountForm" novalidate="novalidate"
                                               action="{{route('answerUpdate',[app()->getLocale(),$answer->id])}}"
                                               method="POST" enctype="multipart/form-data">
                                             @csrf
+                                            {{ method_field('PUT') }}
+
                                             <div class="row">
                                                 <div class="col s12 m6">
                                                     <div class="row">
                                                         <div class="col s12 input-field">
-                                                            <select class="select2 browser-default" name="feature">
+                                                            <select class="select2 browser-default validate {{$errors->has('feature'?'invalid':'valid')}}" name="feature">
                                                                 @foreach($features as $feature)
                                                                     <option
                                                                         value="{{$feature->id}}" {{($answer->feature->feature_id == $feature->id) ? 'selected' : ''}} >{{count($feature->availableLanguage)>0 ? $feature->availableLanguage[0]->title:""}}</option>
@@ -79,7 +82,7 @@
                                                 </div>
                                                 <div class="input-field col s12">
                                                     <button type="submit" class="btn indigo right">
-                                                        {{trans('admin.create')}}
+                                                        {{trans('admin.update')}}
                                                     </button>
                                                 </div>
                                             </div>

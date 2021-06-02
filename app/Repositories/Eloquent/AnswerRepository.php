@@ -17,6 +17,7 @@ use App\Models\User;
 use App\Repositories\AnswerRepositoryInterface;
 use App\Repositories\Eloquent\Base\BaseRepository;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 
 /**
@@ -63,11 +64,11 @@ class AnswerRepository extends BaseRepository implements AnswerRepositoryInterfa
             ]);
 
             if ($answerLanguage) {
-                $featureModel = $model->feature()->create([
+                $model->feature()->create([
                     'feature_id' => $feature->id
                 ]);
 
-                if ($request->hasFile('images') && $featureModel) {
+                if ($request->hasFile('images')) {
                     foreach ($request->file('images') as $key => $file) {
                         $imagename = date('Ymhs') . $file->getClientOriginalName();
                         $destination = base_path() . '/storage/app/public/answer/' . $model->id;
@@ -78,8 +79,8 @@ class AnswerRepository extends BaseRepository implements AnswerRepositoryInterfa
                             'format' => $file->getClientOriginalExtension(),
                         ]);
                     }
-                    $success = true;
                 }
+                $success = true;
             }
         }
 
@@ -100,57 +101,63 @@ class AnswerRepository extends BaseRepository implements AnswerRepositoryInterfa
         $feature = Feature::findOrFail(intval($request['feature']));
         $model = Answer::findOrFail(intval($id));
         $localization = $this->getLocalization($lang);
-        $model->update([
-            'slug' => $request['slug'],
-            'position' => $request['position'],
-            'status' => intval($request['status']),
-        ]);
-
-        $language = $model->language()->where('language_id', $localization->id)->first();
-        if ($language) {
-            $language->title = $request['title'];
-            $language->save();
-        } else {
-            $model->language()->create([
-                'language_id' => $localization->id,
-                'title' => $request['title']
+        try {
+            DB::beginTransaction();
+            $model->update([
+                'position' => $request['position'],
+                'status' => isset($request['status']) ? 1 : 0
             ]);
-        }
-        if (count($model->files) > 0) {
-            foreach ($model->files as $file) {
-                if ($request['old_images'] == null) {
-                    $file->delete();
-                    continue;
-                }
-                if (!in_array($file->id, $request['old_images'])) {
-                    if (Storage::exists('public/answer/' . $model->id . '/' . $file->name)) {
-                        Storage::delete('public/answer/' . $model->id . '/' . $file->name);
-                    }
-                    $file->delete();
 
-                }
-            }
-        }
-
-
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $key => $file) {
-                $imagename = date('Ymhs') . $file->getClientOriginalName();
-                $destination = base_path() . '/storage/app/public/answer/' . $model->id;
-                $request->file('images')[$key]->move($destination, $imagename);
-                $model->files()->create([
-                    'name' => $imagename,
-                    'path' => '/storage/app/public/answer/' . $model->id,
-                    'format' => $file->getClientOriginalExtension(),
+            $language = $model->language()->where('language_id', $localization->id)->first();
+            if ($language) {
+                $language->title = $request['title'];
+                $language->save();
+            } else {
+                $model->language()->create([
+                    'language_id' => $localization->id,
+                    'title' => $request['title']
                 ]);
             }
+            if (count($model->files) > 0) {
+                foreach ($model->files as $file) {
+                    if ($request['old_images'] == null) {
+                        $file->delete();
+                        continue;
+                    }
+                    if (!in_array($file->id, $request['old_images'])) {
+                        if (Storage::exists('public/answer/' . $model->id . '/' . $file->name)) {
+                            Storage::delete('public/answer/' . $model->id . '/' . $file->name);
+                        }
+                        $file->delete();
+
+                    }
+                }
+            }
+
+
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $key => $file) {
+                    $imagename = date('Ymhs') . $file->getClientOriginalName();
+                    $destination = base_path() . '/storage/app/public/answer/' . $model->id;
+                    $request->file('images')[$key]->move($destination, $imagename);
+                    $model->files()->create([
+                        'name' => $imagename,
+                        'path' => '/storage/app/public/answer/' . $model->id,
+                        'format' => $file->getClientOriginalExtension(),
+                    ]);
+                }
+            }
+
+            $model->feature()->update([
+                'feature_id' => $feature->id
+            ]);
+
+            DB::commit();
+            return true;
+        } catch (\Exception $queryException) {
+            DB::rollBack();
+            return false;
         }
-
-
-        $model->feature()->update([
-            'feature_id' => $feature->id
-        ]);
-        return true;
     }
 
     /**
@@ -168,6 +175,12 @@ class AnswerRepository extends BaseRepository implements AnswerRepositoryInterfa
         }
 
         return $localization;
+    }
+
+    public function delete(int $id)
+    {
+        $data = $this->find($id);
+        return $data->delete();
     }
 
 

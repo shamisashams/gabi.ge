@@ -26,4 +26,6 @@ interface AnswerRepositoryInterface
 
     public function update(string $lang, int $id, AnswerRequest $request);
 
+    public function delete(int $id);
+
 }

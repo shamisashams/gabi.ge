@@ -7,6 +7,7 @@
  * Time: 11:06
  * @author Vito Makhatadze <vitomaxatadze@gmail.com>
  */
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Request\Admin\LanguageRequest;
@@ -36,8 +37,16 @@ class LanguageController extends AdminController
      *
      * @return Application|Factory|View|Response
      */
-    public function index(Request $request,$locale)
+    public function index(Request $request, $locale)
     {
+        $request->validate([
+            'id' => 'integer|nullable',
+            'title' => 'string|max:255|nullable',
+            'abbreviation' => 'string|max:255|nullable',
+            'native' => 'string|max:255|nullable',
+            'localization' => 'string|max:255|nullable',
+            'status' => 'boolean|nullable',
+        ]);
         return view('admin.modules.language.index', [
             'languages' => $this->languageRepository->getData($request)
         ]);
@@ -60,7 +69,7 @@ class LanguageController extends AdminController
      * @param \Illuminate\Http\Request $request
      * @return Application|RedirectResponse|Response|Redirector
      */
-    public function store(string $locale,LanguageRequest $request)
+    public function store(string $locale, LanguageRequest $request)
     {
 
         if (!$this->languageRepository->store($request)) {

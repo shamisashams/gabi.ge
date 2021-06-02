@@ -38,6 +38,13 @@ class FeatureController extends AdminController
      */
     public function index(string $lang, Request $request)
     {
+        $request->validate([
+            'id' => 'integer|nullable',
+            'title' => 'string|max:255|nullable',
+            'type' => 'string|max:255|nullable',
+            'status' => 'boolean|nullable',
+        ]);
+
         return view('admin.modules.feature.index', [
             'features' => $this->featureRepository->getData($request, ['availableLanguage']),
         ]);

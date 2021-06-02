@@ -7,9 +7,39 @@
                     @include('admin.layouts.alert.alert')
                     <div class="card-content">
                         <a href="{{route('featureCreateView',app()->getLocale())}}"
-                           class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_feature')}}</a>
+                           class="mb-2 btn waves-effect waves-light green darken-1">{{trans('admin.create_feature')}}</a>
                         <div style="overflow: auto">
                             {!! Form::open(['url' => route('featureIndex',app()->getLocale()),'method' =>'get']) !!}
+                            <ul>
+                                <li>
+                                    @if ($errors->has('id'))
+                                        <span class="error-block">
+                                                {{ $errors->first('id') }}
+                                            </span>
+                                    @endif
+                                </li>
+                                <li>
+                                    @if ($errors->has('title'))
+                                        <span class="error-block">
+                                                {{ $errors->first('title') }}
+                                            </span>
+                                    @endif
+                                </li>
+                                <li>
+                                    @if ($errors->has('type'))
+                                        <span class="error-block">
+                                                {{ $errors->first('type') }}
+                                            </span>
+                                    @endif
+                                </li>
+                                <li>
+                                    @if ($errors->has('status'))
+                                        <span class="error-block">
+                                                {{ $errors->first('status') }}
+                                            </span>
+                                    @endif
+                                </li>
+                            </ul>
                             <table class="striped">
                                 <thead>
                                 <tr>
@@ -22,35 +52,15 @@
                                 <tr>
                                     <th style="padding:0">
                                         {{ Form::text('id',Request::get('id'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('id'))
-                                            <span class="help-block">
-                                                {{ $errors->first('id') }}
-                                            </span>
-                                        @endif
                                     </th>
                                     <th>
                                         {{ Form::text('title',Request::get('title'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('title'))
-                                            <span class="help-block">
-                                                {{ $errors->first('title') }}
-                                            </span>
-                                        @endif
                                     </th>
                                     <th>
                                         {{ Form::select('type',['' => 'All','input' => 'Input','textarea' => 'Text Area','checkbox'=>'Checkbox','radio'=>'Radio','select'=>'Select'],Request::get('type'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('type'))
-                                            <span class="help-block">
-                                                {{ $errors->first('type') }}
-                                            </span>
-                                        @endif
                                     </th>
                                     <th>
                                         {{ Form::select('status',['' => 'All','1' => 'Active','0' => 'Not Active'],Request::get('status'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('status'))
-                                            <span class="help-block">
-                                                {{ $errors->first('status') }}
-                                            </span>
-                                        @endif
                                     </th>
                                     <th></th>
                                 </tr>

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasRolesAndPermissions;
+use App\Traits\ScopeAnswerFilter;
 use App\Traits\ScopeFeatureFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Answer extends Model
 {
-    use HasFactory, Notifiable, ScopeFeatureFilter, HasRolesAndPermissions, SoftDeletes;
+    use HasFactory, Notifiable, ScopeAnswerFilter, HasRolesAndPermissions, SoftDeletes;
 
 
     protected $fillable = [
@@ -65,13 +66,17 @@ class Answer extends Model
                 'hasParam' => true,
                 'scopeMethod' => 'title'
             ],
-            'type' => [
+            'position' => [
                 'hasParam' => true,
-                'scopeMethod' => 'type'
+                'scopeMethod' => 'position'
             ],
             'status' => [
                 'hasParam' => true,
                 'scopeMethod' => 'status'
+            ],
+            'feature' => [
+                'hasParam' => true,
+                'scopeMethod' => 'feature'
             ],
         ];
     }
