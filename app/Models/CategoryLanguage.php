@@ -15,6 +15,7 @@
 	 'language_id',
 	 'title',
 	 'description',
+	 'slug'
      ];
 
  }
