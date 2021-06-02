@@ -28,8 +28,9 @@ class AnswerRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'feature' => 'required|integer',
-            'status' => 'required|string|min:1|max:1',
-            'slug' => ['required', Rule::unique('answers', 'slug')->ignore($this->answer)],
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096'
+//            'status' => 'required|string|min:1|max:1',
+//            'slug' => ['required', Rule::unique('answers', 'slug')->ignore($this->answer)],
         ];
     }
 }

@@ -1842,6 +1842,64 @@ module.exports = {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+$(document).ready(function () {
+  var oldImages = $('#old_images').val();
+
+  if (oldImages) {
+    oldImages = JSON.parse(oldImages);
+  }
+
+  var imagedata = [];
+  var getUrl = window.location;
+  var baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[0];
+
+  if (oldImages && oldImages.length > 0) {
+    oldImages.forEach(function (el, key) {
+      var directory = '';
+
+      if (el.fileable_type === "App\\Models\\User") {
+        directory = 'user';
+      }
+
+      if (el.fileable_type === 'App\\Models\\Product') {
+        directory = 'product';
+      }
+
+      if (el.fileable_type === 'App\\Models\\Category') {
+        directory = 'category';
+      }
+
+      if (el.fileable_type === 'App\\Models\\Slider') {
+        directory = 'slider';
+      }
+
+      if (el.fileable_type === 'App\\Models\\Answer') {
+        directory = 'answer';
+      }
+
+      if (el.fileable_type === 'App\\Models\\Brand') {
+        directory = 'brand';
+      }
+
+      if (el.fileable_type === 'App\\Models\\Page') {
+        directory = 'page';
+      }
+
+      imagedata.push({
+        id: el.id,
+        src: "".concat(baseUrl, "storage/").concat(directory, "/").concat(el.fileable_id, "/").concat(el.name)
+      });
+    });
+    $('.input-images').imageUploader({
+      preloaded: imagedata,
+      imagesInputName: 'images',
+      preloadedInputName: 'old_images'
+    });
+  } else {
+    $('.input-images').imageUploader();
+  }
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

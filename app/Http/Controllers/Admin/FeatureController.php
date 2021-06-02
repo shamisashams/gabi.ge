@@ -38,6 +38,13 @@ class FeatureController extends AdminController
      */
     public function index(string $lang, Request $request)
     {
+        $request->validate([
+            'id' => 'integer|nullable',
+            'title' => 'string|max:255|nullable',
+            'type' => 'string|max:255|nullable',
+            'status' => 'boolean|nullable',
+        ]);
+
         return view('admin.modules.feature.index', [
             'features' => $this->featureRepository->getData($request, ['availableLanguage']),
         ]);
@@ -115,7 +122,7 @@ class FeatureController extends AdminController
             return redirect(route('featureIndex', $locale))->with('danger', __('admin.feature_not_updated'));
         }
 
-        return redirect(route('featureIndex', $locale))->with('success', __('admin.feature.success.update'));
+        return redirect(route('featureIndex', $locale))->with('success', __('admin.feature_success_update'));
 
     }
 

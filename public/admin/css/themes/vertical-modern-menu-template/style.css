@@ -9982,6 +9982,9 @@ tr.group:hover {
     color: red;
     margin-left: 38px;
 }
+.error-block{
+    color:red;
+}
 thead  th{
     padding:2px 5px;
 }

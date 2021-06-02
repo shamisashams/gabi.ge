@@ -7,9 +7,47 @@
                     @include('admin.layouts.alert.alert')
                     <div class="card-content">
                         <a href="{{route('languageCreateView',app()->getLocale())}}"
-                           class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_language')}}</a>
+                           class="mb-1 btn waves-effect waves-light green darken-1">{{trans('admin.create_language')}}</a>
                         <div style="overflow: auto">
                             {!! Form::open(['url' => route('languageIndex',app()->getLocale()),'method' =>'get']) !!}
+                            <ul>
+                                <li>
+                                    @if ($errors->has('id'))
+                                        <span class="error-block">
+                                          {{ $errors->first('id') }}
+                                         </span>
+                                    @endif
+                                </li>
+                                <li>
+                                    @if ($errors->has('title'))
+                                        <span class="error-block">
+                                          {{ $errors->first('title') }}
+                                         </span>
+                                    @endif
+                                </li>
+                                <li>
+                                    @if ($errors->has('abbreviation'))
+                                        <span class="error-block">
+                                         {{ $errors->first('abbreviation') }}
+                                        </span>
+                                    @endif
+                                </li>
+                                <li>
+                                    @if ($errors->has('native'))
+                                        <span class="error-block">
+                                         {{ $errors->first('native') }}
+                                         </span>
+                                    @endif
+                                </li>
+                                <li>
+                                    @if ($errors->has('status'))
+                                        <span class="error-block">
+                                            {{ $errors->first('status') }}
+                                        </span>
+                                    @endif
+
+                                </li>
+                            </ul>
                             <table class="striped">
                                 <thead>
                                 <tr>
@@ -23,43 +61,19 @@
                                 <tr>
                                     <th style="padding:0">
                                         {{ Form::text('id',Request::get('id'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('id'))
-                                            <span class="help-block">
-                            {{ $errors->first('id') }}
-                            </span>
-                                        @endif
                                     </th>
                                     <th>
                                         {{ Form::text('title',Request::get('title'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('title'))
-                                            <span class="help-block">
-                            {{ $errors->first('title') }}
-                            </span>
-                                        @endif
                                     </th>
                                     <th>
                                         {{ Form::text('abbreviation',Request::get('abbreviation'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('abbreviation'))
-                                            <span class="help-block">
-                            {{ $errors->first('abbreviation') }}
-                            </span>
-                                        @endif
+
                                     </th>
                                     <th>
                                         {{ Form::text('native',Request::get('native'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('native'))
-                                            <span class="help-block">
-                            {{ $errors->first('native') }}
-                            </span>
-                                        @endif
                                     </th>
                                     <th>
                                         {{ Form::select('status',['' => 'All','1' => 'Active','0' => 'Not Active'],Request::get('status'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('status'))
-                                            <span class="help-block">
-                            {{ $errors->first('status') }}
-                            </span>
-                                        @endif
                                     </th>
                                     <th></th>
                                 </tr>
@@ -86,7 +100,8 @@
                                             <td>
                                                 <a href="{{route('languageEditView',[app()->getLocale(),$language->id])}}"><i
                                                         class="material-icons">edit</i></a>
-                                                <a href="{{route('languageShow',[app()->getLocale(),$language->id])}}"><i class="material-icons">remove_red_eye</i></a>
+                                                <a href="{{route('languageShow',[app()->getLocale(),$language->id])}}"><i
+                                                        class="material-icons">remove_red_eye</i></a>
                                                 {!! Form::open(['url' => route('languageDestroy',[app()->getLocale(),$language->id]),'method' =>'delete','style'=>'display:inline-block']) !!}
                                                 <a onclick="deleteAlert(this,'Are you sure, you want to delete this item?!');"
                                                    type="submit">
