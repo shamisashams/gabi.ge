@@ -88,10 +88,14 @@
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-     public function update(CategoryRequest $request, $id)
+     public function update(string $lang, int $id, CategoryRequest $request)
      {
-	 var_dump($id);
-	 dd($request);
+
+	 if (false === $this->categoryRepository->update($id, $request)) {
+	     return redirect(route('categoryEditView', $lang))->with('danger', __('admin.category_updated_succesfully'));
+	 }
+
+	 return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_not_updated'));
      }
 
      /**
