@@ -99,9 +99,12 @@
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-     public function destroy($id)
+     public function destroy(string $lang, int $id)
      {
-	 //
+	 if (false === $this->categoryRepository->delete($id)) {
+	     return redirect(route('categoryIndex', $lang))->with('danger', __('admin.category_not_deleted'));
+	 }
+	 return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_deleted_succesfully'));
      }
 
  }
