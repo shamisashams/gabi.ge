@@ -7,7 +7,7 @@
 		@include('admin.layouts.alert.alert')
 		<div class="card-content">
 		    <a href="{{route('categoryCreateView',app()->getLocale())}}"
-		       class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_language')}}</a>
+		       class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_category')}}</a>
 		    <div style="overflow: auto">
 			{!! Form::open(['url' => route('categoryIndex',app()->getLocale()),'method' =>'get']) !!}
 			<table class="striped">
