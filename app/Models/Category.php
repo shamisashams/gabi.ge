@@ -9,7 +9,7 @@
  use App\Traits\HasRolesAndPermissions;
  use Illuminate\Database\Eloquent\SoftDeletes;
  use App\Models\Language;
- 
+
  class Category extends Model
  {
 
@@ -36,9 +36,9 @@
 		 'hasParam' => true,
 		 'scopeMethod' => 'status'
 	     ],
-	     'text' => [
+	     'parent_id' => [
 		 'status' => true,
-		 'scopeMethod' => 'status'
+		 'scopeMethod' => 'parent_id'
 	     ],
 	 ];
      }
