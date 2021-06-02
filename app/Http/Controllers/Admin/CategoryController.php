@@ -37,7 +37,7 @@
       */
      public function create()
      {
-	 //
+	 return view('admin.modules.category.create');
      }
 
      /**
@@ -46,9 +46,13 @@
       * @param  \Illuminate\Http\Request  $request
       * @return \Illuminate\Http\Response
       */
-     public function store(Request $request)
+     public function store(string $lang, CategoryRequest $request)
      {
-	 //
+	 if (false === $this->categoryRepository->store($lang, $request)) {
+	     return redirect(route('categoryCreateView', $lang))->with('danger', __('admin.category_not_created'));
+	 }
+
+	 return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_created_succesfully'));
      }
 
      /**
@@ -68,9 +72,9 @@
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-     public function edit(string $locale, int $id)
+     public function edit(string $lang, int $id)
      {
-	 var_dump($locale, $id);
+	 var_dump($lamg, $id);
 	 return view('admin.modules.category.update', [
 	     'categoryItem' => $this->categoryRepository->find($id)
 	 ]);
