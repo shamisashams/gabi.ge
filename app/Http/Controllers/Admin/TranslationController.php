@@ -41,6 +41,11 @@ class TranslationController extends AdminController
      */
     public function index(Request $request, $locale)
     {
+        $request->validate([
+            'key' => 'string|max:255|nullable',
+            'group' => 'string|max:255|nullable',
+            'text' => 'string|max:1024|nullable',
+        ]);
         return view('admin.modules.translation.index', [
             'translations' => $this->translationRepository->getData($request),
             'languages' => $this->translationRepository->getLanguages()

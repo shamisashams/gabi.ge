@@ -38,6 +38,13 @@ class FeatureController extends AdminController
      */
     public function index(string $lang, Request $request)
     {
+        $request->validate([
+            'id' => 'integer|nullable',
+            'title' => 'string|max:255|nullable',
+            'type' => 'string|max:255|nullable',
+            'status' => 'boolean|nullable',
+        ]);
+
         return view('admin.modules.feature.index', [
             'features' => $this->featureRepository->getData($request, ['availableLanguage']),
         ]);
@@ -80,7 +87,7 @@ class FeatureController extends AdminController
      */
     public function show(string $locale, int $id)
     {
-        return view('admin.modules.feature.show', [
+        return view('admin.modules.feature.view', [
             'feature' => $this->featureRepository->find($id)
         ]);
     }
@@ -115,7 +122,7 @@ class FeatureController extends AdminController
             return redirect(route('featureIndex', $locale))->with('danger', __('admin.feature_not_updated'));
         }
 
-        return redirect(route('featureIndex', $locale))->with('success', __('admin.feature.success.update'));
+        return redirect(route('featureIndex', $locale))->with('success', __('admin.feature_success_update'));
 
     }
 
@@ -128,10 +135,10 @@ class FeatureController extends AdminController
      */
     public function destroy(string $locale, int $id)
     {
-        if (!$this->service->delete($id)) {
-            return redirect(route('featureIndex', $locale))->with('danger', 'Feature does not delete.');
+        if (!$this->featureRepository->delete($id)) {
+            return redirect(route('featureIndex', $locale))->with('danger', __('admin.feature_not_deleted'));
         }
-        return redirect(route('featureIndex', $locale))->with('success', 'Feature delete successfully.');
+        return redirect(route('featureIndex', $locale))->with('success', __('admin.feature_success_delete'));
 
     }
 }

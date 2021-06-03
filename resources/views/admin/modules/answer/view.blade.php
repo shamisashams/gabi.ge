@@ -13,21 +13,21 @@
                                         <table class="striped">
                                             <tbody>
                                             <tr>
+                                                <td>{{trans('admin.feature')}}:</td>
+                                                <td>{{$answer->feature?(count($answer->feature->feature->availableLanguage)>0?$answer->feature->feature->availableLanguage[0]->title:""):""}}</td>
+                                            </tr>
+                                            <tr>
                                                 <td>{{trans('admin.title')}}:</td>
-                                                <td>{{(count($feature->availableLanguage) > 0) ?  $feature->availableLanguage[0]->title : ''}}</td>
+                                                <td class="users-view-latest-activity">{{(count($answer->availableLanguage) > 0) ?  $answer->availableLanguage[0]->title : ''}}</td>
                                             </tr>
                                             <tr>
                                                 <td>{{trans('admin.position')}}:</td>
-                                                <td class="users-view-latest-activity">{{$feature->position}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>{{trans('admin.type')}}:</td>
-                                                <td class="users-view-verified">{{$feature->type}}</td>
+                                                <td class="users-view-verified">{{$answer->position}}</td>
                                             </tr>
                                             <tr>
                                                 <td>{{trans('admin.status')}}:</td>
                                                 <td>
-                                                    @if($feature->status)
+                                                    @if($answer->status)
                                                         <span
                                                             class="users-view-status chip green lighten-5 green-text">{{trans('admin.active')}}</span>
                                                     @else

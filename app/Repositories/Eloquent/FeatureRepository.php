@@ -128,8 +128,12 @@ class FeatureRepository extends BaseRepository implements FeatureRepositoryInter
 
         $success ? DB::commit() : DB::rollBack();
         return (bool)$success;
+    }
 
-
+    public function delete(int $id)
+    {
+        $data = $this->find($id);
+        return $data->delete();
     }
 
 }

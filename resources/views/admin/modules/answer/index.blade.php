@@ -6,58 +6,70 @@
                 <div class="card">
                     @include('admin.layouts.alert.alert')
                     <div class="card-content">
-                        <a href="{{route('featureCreateView',app()->getLocale())}}"
-                           class="mb-2 btn waves-effect waves-light green darken-1">{{trans('admin.create_feature')}}</a>
-                        <div style="overflow: auto">
-                            {!! Form::open(['url' => route('featureIndex',app()->getLocale()),'method' =>'get']) !!}
-                            <ul>
-                                <li>
-                                    @if ($errors->has('id'))
-                                        <span class="error-block">
-                                                {{ $errors->first('id') }}
-                                            </span>
-                                    @endif
-                                </li>
-                                <li>
+                        <a href="{{route('answerCreate',app()->getLocale())}}"
+                           class="mb-2 btn waves-effect waves-light green darken-1">{{trans('admin.create_answer')}}</a>
+                        <div style="">
+                            {!! Form::open(['url' => route('answerIndex',app()->getLocale()),'method' =>'get']) !!}
+                            <div style="display: flex;flex-direction: column;margin-bottom:10px; ">
+                                <div>
                                     @if ($errors->has('title'))
                                         <span class="error-block">
-                                                {{ $errors->first('title') }}
-                                            </span>
+                                        {{ $errors->first('title') }}
+                                         </span>
                                     @endif
-                                </li>
-                                <li>
-                                    @if ($errors->has('type'))
+                                </div>
+                                <div>
+
+                                    @if ($errors->has('position'))
                                         <span class="error-block">
-                                                {{ $errors->first('type') }}
+                                                {{ $errors->first('position') }}
                                             </span>
                                     @endif
-                                </li>
-                                <li>
+                                </div>
+                                <div>
                                     @if ($errors->has('status'))
                                         <span class="error-block">
                                                 {{ $errors->first('status') }}
                                             </span>
                                     @endif
-                                </li>
-                            </ul>
+                                </div>
+                                <div>
+                                    @if ($errors->has('feature'))
+                                        <span class="error-block">
+                                                {{ $errors->first('feature') }}
+                                            </span>
+                                    @endif
+                                </div>
+                            </div>
                             <table class="striped">
                                 <thead>
                                 <tr>
-                                    <th>{{trans('admin.id')}}</th>
+                                    <th>{{trans('admin.feature')}}</th>
                                     <th>{{trans('admin.title')}}</th>
-                                    <th>{{trans('admin.type')}}</th>
+                                    <th>{{trans('admin.position')}}</th>
                                     <th>{{trans('admin.status')}}</th>
                                     <th>{{trans('admin.action')}}</th>
                                 </tr>
                                 <tr>
-                                    <th style="padding:0">
-                                        {{ Form::text('id',Request::get('id'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
+                                    <th>
+                                        <div style="margin-bottom: 9px">
+                                            <select class="select2 browser-default" name="feature"
+                                                    onchange="this.form.submit()">
+                                                <option selected value="">All</option>
+                                                @foreach($features as $feature)
+                                                    <option
+                                                        value="{{$feature->id}}" {{(\Request::get('feature') == $feature->id) ? 'selected' : ''}}>{{count($feature->availableLanguage)>0 ? $feature->availableLanguage[0]->title:""}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </th>
                                     <th>
                                         {{ Form::text('title',Request::get('title'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
+                                        <br>
                                     </th>
                                     <th>
-                                        {{ Form::select('type',['' => 'All','input' => 'Input','textarea' => 'Text Area','checkbox'=>'Checkbox','radio'=>'Radio','select'=>'Select'],Request::get('type'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
+                                        {{ Form::text('position',Request::get('position'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
+
                                     </th>
                                     <th>
                                         {{ Form::select('status',['' => 'All','1' => 'Active','0' => 'Not Active'],Request::get('status'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
@@ -67,14 +79,15 @@
                                 </thead>
                                 {!! Form::close() !!}
                                 <tbody>
-                                @if($features)
-                                    @foreach($features as $feature)
+
+                                @if($answers)
+                                    @foreach($answers as $answer)
                                         <tr>
-                                            <td>{{$feature->id}}</td>
-                                            <td>{{(count($feature->availableLanguage) > 0) ?  $feature->availableLanguage[0]->title : ''}}</td>
-                                            <td>{{$feature->type}}</td>
+                                            <td>{{$answer->feature?(count($answer->feature->feature->availableLanguage)>0?$answer->feature->feature->availableLanguage[0]->title:""):""}}</td>
+                                            <td>{{(count($answer->availableLanguage) > 0) ?  $answer->availableLanguage[0]->title : ''}}</td>
+                                            <td>{{$answer->position}}</td>
                                             <td>
-                                                @if($feature->status)
+                                                @if($answer->status)
                                                     <span
                                                         class="chip lighten-5 green green-text">{{trans('admin.active')}}</span>
                                                 @else
@@ -83,11 +96,11 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{route('featureEditView',[app()->getLocale(),$feature->id])}}"><i
+                                                <a href="{{route('answerEdit',[app()->getLocale(),$answer->id])}}"><i
                                                         class="material-icons">edit</i></a>
-                                                <a href="{{route('featureShow',[app()->getLocale(),$feature->id])}}"><i
+                                                <a href="{{route('answerShow',[app()->getLocale(),$answer->id])}}"><i
                                                         class="material-icons">remove_red_eye</i></a>
-                                                {!! Form::open(['url' => route('featureDestroy',[app()->getLocale(),$feature->id]),'method' =>'delete','style'=>'display:inline-block']) !!}
+                                                {!! Form::open(['url' => route('answerDestroy',[app()->getLocale(),$answer->id]),'method' =>'delete','style'=>'display:inline-block']) !!}
                                                 <a onclick="deleteAlert(this,'Are you sure, you want to delete this item?!');"
                                                    type="submit">
                                                     <i class="material-icons dp48">delete</i>
@@ -99,7 +112,7 @@
                                 @endif
                                 </tbody>
                             </table>
-                            {{ $features->links('admin.vendor.pagination.custom') }}
+                            {{ $answers->links('admin.vendor.pagination.custom') }}
 
                         </div>
                     </div>
@@ -107,6 +120,5 @@
             </div>
         </div>
     </div>
-
 
 @endsection

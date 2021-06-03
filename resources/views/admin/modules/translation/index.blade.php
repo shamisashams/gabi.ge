@@ -10,6 +10,29 @@
                         {{--                           class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_language')}}</a>--}}
                         <div style="overflow: auto">
                             {!! Form::open(['url' => route('translationIndex',app()->getLocale()),'method' =>'get']) !!}
+                            <ul>
+                                <li>
+                                    @if ($errors->has('key'))
+                                        <span class="error-block">
+                                           {{ $errors->first('key') }}
+                                        </span>
+                                    @endif
+                                </li>
+                                <li>
+                                    @if ($errors->has('group'))
+                                        <span class="error-block">
+                                          {{ $errors->first('group') }}
+                                        </span>
+                                    @endif
+                                </li>
+                                <li>
+                                    @if ($errors->has('text'))
+                                        <span class="error-block">
+                                          {{ $errors->first('text') }}
+                                        </span>
+                                    @endif
+                                </li>
+                            </ul>
                             <table class="striped">
                                 <thead>
                                 <tr>
@@ -20,27 +43,13 @@
                                 <tr>
                                     <th style="padding:0">
                                         {{ Form::text('key',Request::get('key'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('key'))
-                                            <span class="help-block">
-                            {{ $errors->first('key') }}
-                            </span>
-                                        @endif
                                     </th>
                                     <th>
                                         {{ Form::text('group',Request::get('group'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('group'))
-                                            <span class="help-block">
-                            {{ $errors->first('group') }}
-                            </span>
-                                        @endif
+
                                     </th>
                                     <th>
                                         {{ Form::text('text',Request::get('text'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-                                        @if ($errors->has('text'))
-                                            <span class="help-block">
-                            {{ $errors->first('text') }}
-                            </span>
-                                        @endif
                                     </th>
                                     <th></th>
                                 </tr>

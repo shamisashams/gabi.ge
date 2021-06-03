@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasRolesAndPermissions;
+use App\Traits\ScopeFeatureFilter;
 use App\Traits\ScopeFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Feature extends Model
 {
-    use HasFactory, Notifiable, ScopeFilter, HasRolesAndPermissions, SoftDeletes;
+    use HasFactory, Notifiable, ScopeFeatureFilter, HasRolesAndPermissions, SoftDeletes;
 
 
     protected $fillable = [
@@ -58,26 +59,14 @@ class Feature extends Model
                 'hasParam' => true,
                 'scopeMethod' => 'title'
             ],
-            'abbreviation' => [
+            'type' => [
                 'hasParam' => true,
-                'scopeMethod' => 'abbreviation'
-            ],
-            'native' => [
-                'hasParam' => true,
-                'scopeMethod' => 'native'
-            ],
-            'locale' => [
-                'hasParam' => true,
-                'scopeMethod' => 'locale'
+                'scopeMethod' => 'type'
             ],
             'status' => [
                 'hasParam' => true,
                 'scopeMethod' => 'status'
             ],
-            'default' => [
-                'hasParam' => true,
-                'scopeMethod' => 'default'
-            ]
         ];
     }
 }

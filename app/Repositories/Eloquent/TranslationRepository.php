@@ -47,9 +47,7 @@ class TranslationRepository extends BaseRepository implements TranslationReposit
         $array = $data->text;
         if ($data) {
             foreach ($request['language'] as $key => $language) {
-                if (array_key_exists($key, $data->text)) {
-                    $array[$key] = $language;
-                }
+                $array[$key] = $language;
             }
         }
         $data->text = $array;

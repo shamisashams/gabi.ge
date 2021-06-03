@@ -1,13 +1,14 @@
 <?php
 
+ use App\Http\Controllers\Admin\AnswerController;
  use App\Http\Controllers\Admin\FeatureController;
  use App\Http\Controllers\Admin\LanguageController;
  use App\Http\Controllers\Admin\TranslationController;
  use App\Http\Controllers\Auth\AuthController;
  use Illuminate\Support\Facades\Auth;
  use Illuminate\Support\Facades\Route;
- use App\Http\Controllers\Admin\ProductController;
  use App\Http\Controllers\Admin\CategoryController;
+ use App\Http\Controllers\Admin\ProductController;
 
 /*
    |--------------------------------------------------------------------------
@@ -20,9 +21,7 @@
    |
   */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+
  Route::prefix('{locale?}')
 	 ->middleware('setlocale')
 	 ->group(function () {
@@ -91,6 +90,16 @@
 		     ->name('update', 'featureUpdate')
 		     ->name('destroy', 'featureDestroy')
 		     ->name('show', 'featureShow');
+
+		     // Answers
+		     Route::resource('answers', AnswerController::class)
+		     ->name('index', 'answerIndex')
+		     ->name('store', 'answerStore')
+		     ->name('show', 'answerShow')
+		     ->name('create', 'answerCreate')
+		     ->name('edit', 'answerEdit')
+		     ->name('update', 'answerUpdate')
+		     ->name('destroy', 'answerDestroy');
 		 });
 	     });
 

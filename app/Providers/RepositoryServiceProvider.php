@@ -1,16 +1,10 @@
 <?php
 
- /**
-  *  app/Providers/RepositoryServiceProvider.php
-  *
-  * Date-Time: 19.05.21
-  * Time: 10:20
-  * @author Vito Makhatadze <vitomaxatadze@gmail.com>
-  */
-
  namespace App\Providers;
 
+ use App\Repositories\AnswerRepositoryInterface;
  use App\Repositories\DepositRepositoryInterface;
+ use App\Repositories\Eloquent\AnswerRepository;
  use App\Repositories\Eloquent\Base\BaseRepository;
  use App\Repositories\Eloquent\Base\EloquentRepositoryInterface;
  use App\Repositories\Eloquent\DepositRepository;
@@ -55,6 +49,7 @@
 	 $this->app->bind(LanguageRepositoryInterface::class, LanguageRepository::class);
 	 $this->app->bind(TranslationRepositoryInterface::class, TranslationRepository::class);
 	 $this->app->bind(FeatureRepositoryInterface::class, FeatureRepository::class);
+	 $this->app->bind(AnswerRepositoryInterface::class, AnswerRepository::class);
 	 $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
      }
 

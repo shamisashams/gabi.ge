@@ -9,26 +9,23 @@
 
 namespace App\Repositories;
 
-use App\Http\Request\Admin\FeatureRequest;
-use App\Http\Request\Admin\LanguageRequest;
-use App\Http\Request\Admin\TranslationRequest;
+use App\Http\Request\Admin\AnswerRequest;
 use Illuminate\Http\Request;
 
 /**
  * Interface UserRepositoryInterface
  * @package App\Repositories
  */
-interface FeatureRepositoryInterface
+interface AnswerRepositoryInterface
 {
     /**
      * @param Request $request
      */
 
-    public function store($lang, FeatureRequest $request);
+    public function store(string $lang, AnswerRequest $request);
 
-    public function update(string $lang, int $id, FeatureRequest $request);
+    public function update(string $lang, int $id, AnswerRequest $request);
 
     public function delete(int $id);
-//    public function store(TranslationRequest $request);
 
 }

@@ -11,21 +11,23 @@
                                 <div class="row">
                                     <div class="col s12 active" id="account">
                                         <form id="accountForm" novalidate="novalidate"
-                                              action="{{route('featureCreate',app()->getLocale())}}" method="POST">
+                                              action="{{route('answerStore',app()->getLocale())}}" method="POST"
+                                              enctype="multipart/form-data">
                                             @csrf
                                             <div class="row">
                                                 <div class="col s12 m6">
                                                     <div class="row">
                                                         <div class="col s12 input-field">
-                                                            <input id="username" name="title" type="text"
-                                                                   class="validate {{ $errors->has('title') ? 'invalid' : 'valid' }}"
-                                                                   value="{{old('title')}}"
-                                                                   data-error=".errorTxt">
-                                                            <label for="username"
-                                                                   class="active">{{trans('admin.title')}}</label>
-                                                            @if ($errors->has('title'))
+                                                            <select class="select2 browser-default" name="feature">
+                                                                @foreach($features as $feature)
+                                                                    <option
+                                                                        value="{{$feature->id}}" {{old('feature')==$feature->id?"selected":""}} >{{count($feature->availableLanguage)>0 ? $feature->availableLanguage[0]->title:""}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <label for="feature">{{trans('admin.feature')}}</label>
+                                                            @if ($errors->has('feature'))
                                                                 <small
-                                                                    class="errorTxt">{{ $errors->first('title') }}</small>
+                                                                    class="errorTxt">{{ $errors->first('feature') }}</small>
                                                             @endif
 
                                                         </div>
@@ -34,27 +36,26 @@
                                                                    class="validate {{ $errors->has('position') ? 'invalid' : 'valid' }}"
                                                                    value="{{old('position')}}"
                                                                    data-error=".errorTxt">
-                                                            <label for="name"
+                                                            <label for="position"
                                                                    class="active">{{trans('admin.position')}}</label>
                                                             @if ($errors->has('position'))
                                                                 <small
                                                                     class="errorTxt">{{ $errors->first('position') }}</small>
                                                             @endif
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 m6">
+                                                    <div class="row">
                                                         <div class="col s12 input-field">
-                                                            <select name="type">
-                                                                <option value="" disabled selected>Choose your option
-                                                                </option>
-                                                                <option {{old('type')=='input'?"selected":""}} value="input">Input</option>
-                                                                <option {{old('type')=="textarea"?"selected":""}} value="textarea">Text Area</option>
-                                                                <option {{old('type')=="checkbox"?"selected":""}} value="checkbox">Checkbox</option>
-                                                                <option {{old('type')=="radio"?"selected":""}} value="radio">Radio</option>
-                                                                <option {{old('type')=="select"?"selected":""}} value="select">Select</option>
-                                                            </select>
-                                                            <label for="type" class="">{{trans('admin.type')}}</label>
-                                                            @if ($errors->has('type'))
+                                                            <input id="abbreviation" name="title" type="text"
+                                                                   class="validate {{ $errors->has('title') ? 'invalid' : 'valid' }}"
+                                                                   value="{{old('title')}}"
+                                                                   data-error=".errorTxt">
+                                                            <label for="title" class="">{{trans('admin.title')}}</label>
+                                                            @if ($errors->has('title'))
                                                                 <small
-                                                                    class="errorTxt">{{ $errors->first('type') }}</small>
+                                                                    class="errorTxt">{{ $errors->first('title') }}</small>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -66,8 +67,16 @@
                                                         <span>{{trans('admin.status')}}</span>
                                                     </label>
                                                 </div>
-                                                <div class="col s12 display-flex justify-content-end mt-3">
-                                                    <button type="submit" class="btn indigo">
+                                                <div class="col s12 m6" style="margin-top:20px">
+                                                    <div class="input-images"></div>
+                                                    @if ($errors->has('images'))
+                                                        <span class="help-block">
+                                                         {{ $errors->first('images') }}
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                                <div class="input-field col s12">
+                                                    <button type="submit" class="btn indigo right">
                                                         {{trans('admin.create')}}
                                                     </button>
                                                 </div>
