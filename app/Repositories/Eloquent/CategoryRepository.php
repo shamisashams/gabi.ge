@@ -1,11 +1,5 @@
 <?php
 
- /*
-  * To change this license header, choose License Headers in Project Properties.
-  * To change this template file, choose Tools | Templates
-  * and open the template in the editor.
-  */
-
  namespace App\Repositories\Eloquent;
 
  use Illuminate\Support\Facades\DB;
@@ -15,6 +9,8 @@
  use App\Repositories\CategoryRepositoryInterface;
  use App\Http\Request\Admin\CategoryRequest;
  use App\Models\CategoryLanguage;
+ use Illuminate\Database\Eloquent\Builder;
+ use Illuminate\Http\Request;
 
  /**
   * Description of CategoryRepository
@@ -27,6 +23,24 @@
      public function __construct(Category $model)
      {
 	 parent::__construct($model);
+     }
+
+     public function getData($request, $relation = null)
+     {
+	 $categoryModelQuery = $this->model->query();
+
+	 $categoryModel = $this->setFiltersFromRequest($categoryModelQuery, $request);
+
+	 $perPage = 10;
+	 if ($request->filled('per_page')) {
+	     $perPage = $request['per_page'];
+	 }
+
+	 if ($relation) {
+	     return $categoryModel->with($relation)->paginate($perPage);
+	 }
+
+	 return $categoryModel->paginate($perPage);
      }
 
      public function update(string $lang, int $id, CategoryRequest $request)
@@ -135,6 +149,37 @@
      public function delete($id)
      {
 	 return $this->find($id)->delete();
+     }
+
+     protected function setFiltersFromRequest(Builder $modelQueryBuilder, Request $request)
+     {
+	 if ($request['id']) {
+	     $modelQueryBuilder->where('id', '=', (int) $request['id']);
+	 }
+
+	 if (false === is_null($request['status'])) {
+	     $modelQueryBuilder->where('status', '=', (int) $request['status']);
+	 }
+
+	 if ($request['title']) {
+	     $modelQueryBuilder->whereHas('availableLanguage', function ($query) use ($request) {
+		 $query->where('title', 'like', "%{$request['title']}%");
+	     });
+	 }
+
+	 if ($request['slug']) {
+	     $modelQueryBuilder->whereHas('availableLanguage', function ($query) use ($request) {
+		 $query->where('slug', 'like', "%{$request['slug']}%");
+	     });
+	 }
+
+	 if ($request['description']) {
+	     $modelQueryBuilder->whereHas('availableLanguage', function ($query) use ($request) {
+		 $query->where('description', 'like', "%{$request['description']}%");
+	     });
+	 }
+
+	 return $modelQueryBuilder;
      }
 
  }

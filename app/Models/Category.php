@@ -9,6 +9,7 @@
  use App\Traits\HasRolesAndPermissions;
  use Illuminate\Database\Eloquent\SoftDeletes;
  use App\Models\Language;
+ use App\Traits\ScopeCategoryFilter;
 
  class Category extends Model
  {
@@ -17,7 +18,8 @@
 	 Notifiable,
 	 ScopeFilter,
 	 HasRolesAndPermissions,
-	 SoftDeletes;
+	 SoftDeletes,
+	 ScopeCategoryFilter;
 
      protected $fillable = [
 	 'position',
