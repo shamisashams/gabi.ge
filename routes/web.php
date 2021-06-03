@@ -3,7 +3,8 @@
  use App\Http\Controllers\Admin\AnswerController;
  use App\Http\Controllers\Admin\FeatureController;
  use App\Http\Controllers\Admin\LanguageController;
- use App\Http\Controllers\Admin\TranslationController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\TranslationController;
  use App\Http\Controllers\Auth\AuthController;
  use Illuminate\Support\Facades\Auth;
  use Illuminate\Support\Facades\Route;
@@ -100,6 +101,15 @@
 		     ->name('edit', 'answerEdit')
 		     ->name('update', 'answerUpdate')
 		     ->name('destroy', 'answerDestroy');
+
+             // Settings
+             Route::resource('settings', SettingController::class)->except('destroy')
+                 ->name('index', 'settingIndex')
+                 ->name('create', 'settingCreateView')
+                 ->name('store', 'settingCreate')
+                 ->name('edit', 'settingEditView')
+                 ->name('update', 'settingUpdate')
+                 ->name('show', 'settingShow');
 		 });
 	     });
 
@@ -108,4 +118,3 @@
 	     })->name('welcome');
 	 });
 
- 
