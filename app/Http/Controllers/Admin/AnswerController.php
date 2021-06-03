@@ -97,7 +97,7 @@ class AnswerController extends AdminController
     public function update(AnswerRequest $request, $locale, $id)
     {
         if (!$this->answerRepository->update($locale, $id, $request)) {
-            return redirect(route('answerIndex', $locale))->with('danger', __('admin.answer_not_updated'));
+            return redirect(route('answerEdit', $locale,$id))->with('danger', __('admin.answer_not_updated'));
         }
 
         return redirect(route('answerIndex', $locale))->with('success', __('admin.answer_success_update'));

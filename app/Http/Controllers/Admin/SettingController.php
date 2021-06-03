@@ -108,7 +108,7 @@ class SettingController extends AdminController
     public function edit(string $locale, int $id)
     {
         return view('admin.modules.setting.update', [
-            'setting' => $this->service->find($id)
+            'setting' => $this->settingRepository->find($id)
         ]);
 
     }
@@ -129,11 +129,11 @@ class SettingController extends AdminController
         ]);
 
 
-        if (!$this->service->update($locale, $id, $data)) {
-            return redirect(route('settingEditView', $locale, $id))->with('danger', 'Setting does not update.');
+        if (!$this->settingRepository->update($locale, $request, $id)) {
+            return redirect(route('settingEditView', $locale, $id))->with('danger', __('admin.setting_not_updated'));
         }
 
-        return redirect(route('settingIndex', $locale))->with('success', 'Setting update successfully.');
+        return redirect(route('settingIndex', $locale))->with('success', __('admin.setting_success_update'));
 
     }
 }

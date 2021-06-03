@@ -6,10 +6,10 @@
                 <div class="card">
                     @include('admin.layouts.alert.alert')
                     <div class="card-content">
-                        <a href="{{route('featureCreateView',app()->getLocale())}}"
-                           class="mb-2 btn waves-effect waves-light green darken-1">{{trans('admin.create_feature')}}</a>
+{{--                        <a href="{{route('featureCreateView',app()->getLocale())}}"--}}
+{{--                           class="mb-2 btn waves-effect waves-light green darken-1">{{trans('admin.create_setting')}}</a>--}}
                         <div style="overflow: auto">
-                            {!! Form::open(['url' => route('featureIndex',app()->getLocale()),'method' =>'get']) !!}
+                            {!! Form::open(['url' => route('settingIndex',app()->getLocale()),'method' =>'get']) !!}
                             <ul>
                                 <li>
                                     @if ($errors->has('id'))
@@ -49,7 +49,7 @@
                                         {{ Form::text('key',Request::get('key'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
                                     </th>
                                     <th>
-                                        {{ Form::text('key',Request::get('value'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
+                                        {{ Form::text('value',Request::get('value'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
                                     </th>
                                     <th></th>
                                 </tr>
@@ -60,19 +60,13 @@
                                     @foreach($settings as $setting)
                                         <tr>
                                             <td>{{$setting->id}}</td>
-                                            <td>{{$feature->key}}</td>
+                                            <td>{{$setting->key}}</td>
                                             <td>{{(count($setting->availableLanguage) > 0) ?  $setting->availableLanguage[0]->value : ''}}</td>
                                             <td>
-                                                <a href="{{route('settingEditView',[app()->getLocale(),$feature->id])}}"><i
+                                                <a href="{{route('settingEditView',[app()->getLocale(),$setting->id])}}"><i
                                                         class="material-icons">edit</i></a>
-                                                <a href="{{route('settingShow',[app()->getLocale(),$feature->id])}}"><i
+                                                <a href="{{route('settingShow',[app()->getLocale(),$setting->id])}}"><i
                                                         class="material-icons">remove_red_eye</i></a>
-                                                {!! Form::open(['url' => route('settingDestroy',[app()->getLocale(),$feature->id]),'method' =>'delete','style'=>'display:inline-block']) !!}
-                                                <a onclick="deleteAlert(this,'Are you sure, you want to delete this item?!');"
-                                                   type="submit">
-                                                    <i class="material-icons dp48">delete</i>
-                                                </a>
-                                                {!! Form::close() !!}
                                             </td>
                                         </tr>
                                     @endforeach

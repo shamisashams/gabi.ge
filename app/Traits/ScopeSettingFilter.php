@@ -10,6 +10,7 @@
 namespace App\Traits;
 
 
+use App\Models\Language;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -107,7 +108,11 @@ trait ScopeSettingFilter
      */
     public function scopeValue($query, $value)
     {
-        return $query->where('value', 'like', '%' . $value . '%');
+        $localizationID = Language::getIdByName(app()->getLocale());
+
+        return $query->with('language')->whereHas('language', function ($query) use ($localizationID, $value) {
+            $query->where('value', 'like', "%{$value}%")->where('language_id', $localizationID);
+        });
     }
 
 }
