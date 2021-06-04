@@ -46,7 +46,7 @@ class Setting extends Model
             ],
             'value' => [
                 'hasParam' => true,
-                'scopeMethod' => 'value'
+                'scopeMethod' => 'settingValue'
             ],
         ];
     }

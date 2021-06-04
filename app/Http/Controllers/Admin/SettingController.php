@@ -52,37 +52,37 @@ class SettingController extends AdminController
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Application|Factory|View|Response
-     */
-    public function create()
-    {
-        return view('admin.modules.setting.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param string $lang
-     * @param FeatureRequest $request
-     * @return Application|RedirectResponse|Response|Redirector
-     */
-    public function store(string $locale, SettingRequest $request)
-    {
-        $data = $request->only([
-            'key',
-            'value'
-        ]);
-
-        if (!$this->service->store($locale, $data)) {
-            return redirect(route('settingCreateView', $locale))->with('danger', 'Setting does not create.');
-        }
-
-        return redirect(route('settingIndex', $locale))->with('success', 'Setting create successfully.');
-
-    }
+//    /**
+//     * Show the form for creating a new resource.
+//     *
+//     * @return Application|Factory|View|Response
+//     */
+//    public function create()
+//    {
+//        return view('admin.modules.setting.create');
+//    }
+//
+//    /**
+//     * Store a newly created resource in storage.
+//     *
+//     * @param string $lang
+//     * @param FeatureRequest $request
+//     * @return Application|RedirectResponse|Response|Redirector
+//     */
+//    public function store(string $locale, SettingRequest $request)
+//    {
+//        $data = $request->only([
+//            'key',
+//            'value'
+//        ]);
+//
+//        if (!$this->service->store($locale, $data)) {
+//            return redirect(route('settingCreateView', $locale))->with('danger', 'Setting does not create.');
+//        }
+//
+//        return redirect(route('settingIndex', $locale))->with('success', 'Setting create successfully.');
+//
+//    }
 
     /**
      * Display the specified resource.
@@ -93,8 +93,8 @@ class SettingController extends AdminController
      */
     public function show(string $locale, int $id)
     {
-        return view('admin.modules.setting.show', [
-            'setting' => $this->service->find($id)
+        return view('admin.modules.setting.view', [
+            'setting' => $this->settingRepository->find($id)
         ]);
     }
 

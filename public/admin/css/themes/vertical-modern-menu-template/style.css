@@ -9977,18 +9977,3 @@ tr.group:hover {
     top: 40%;
     right: -2px;
 }
-
-.help-block {
-    color: red;
-    margin-left: 38px;
-}
-.error-block{
-    color:red;
-}
-thead  th{
-    padding:2px 5px;
-}
-
-.errorTxt{
-    color:red;
-}

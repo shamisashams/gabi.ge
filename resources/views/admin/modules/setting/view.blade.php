@@ -13,28 +13,16 @@
                                         <table class="striped">
                                             <tbody>
                                             <tr>
-                                                <td>{{trans('admin.title')}}:</td>
-                                                <td>{{(count($feature->availableLanguage) > 0) ?  $feature->availableLanguage[0]->title : ''}}</td>
+                                                <td>{{trans('admin.id')}}:</td>
+                                                <td>{{$setting->id}}</td>
                                             </tr>
                                             <tr>
-                                                <td>{{trans('admin.position')}}:</td>
-                                                <td class="users-view-latest-activity">{{$feature->position}}</td>
+                                                <td>{{trans('admin.key')}}:</td>
+                                                <td class="users-view-latest-activity">{{$setting->key}}</td>
                                             </tr>
                                             <tr>
-                                                <td>{{trans('admin.type')}}:</td>
-                                                <td class="users-view-verified">{{$feature->type}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>{{trans('admin.status')}}:</td>
-                                                <td>
-                                                    @if($feature->status)
-                                                        <span
-                                                            class="users-view-status chip green lighten-5 green-text">{{trans('admin.active')}}</span>
-                                                    @else
-                                                        <span
-                                                            class="users-view-status chip red lighten-5 red-text">{{trans('admin.not_active')}}</span>
-                                                    @endif
-                                                </td>
+                                                <td>{{trans('admin.value')}}:</td>
+                                                <td class="users-view-verified">{{(count($setting->availableLanguage) > 0) ?  $setting->availableLanguage[0]->value : ''}}</td>
                                             </tr>
                                             </tbody>
                                         </table>

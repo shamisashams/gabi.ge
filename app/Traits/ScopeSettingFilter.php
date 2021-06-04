@@ -106,10 +106,9 @@ trait ScopeSettingFilter
      *
      * @return mixed
      */
-    public function scopeValue($query, $value)
+    public function scopeSettingValue($query, $value)
     {
         $localizationID = Language::getIdByName(app()->getLocale());
-
         return $query->with('language')->whereHas('language', function ($query) use ($localizationID, $value) {
             $query->where('value', 'like', "%{$value}%")->where('language_id', $localizationID);
         });
