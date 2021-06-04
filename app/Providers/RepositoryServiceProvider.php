@@ -21,6 +21,8 @@
  use Illuminate\Support\ServiceProvider;
  use App\Repositories\Eloquent\CategoryRepository;
  use App\Repositories\CategoryRepositoryInterface;
+ use App\Repositories\Eloquent\ProductRepository;
+ use App\Repositories\ProductRepositoryInterface;
 
  /**
   * Class RepositoryServiceProvider
@@ -51,6 +53,7 @@
 	 $this->app->bind(FeatureRepositoryInterface::class, FeatureRepository::class);
 	 $this->app->bind(AnswerRepositoryInterface::class, AnswerRepository::class);
 	 $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
+	 $this->app->bind(ProductRepositoryInterface::class,ProductRepository::class);
      }
 
  }

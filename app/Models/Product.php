@@ -4,23 +4,48 @@
 
  use Illuminate\Database\Eloquent\Factories\HasFactory;
  use Illuminate\Database\Eloquent\Model;
+ use Illuminate\Notifications\Notifiable;
+ use App\Traits\ScopeFilter;
+ use App\Traits\HasRolesAndPermissions;
+ use Illuminate\Database\Eloquent\SoftDeletes;
 
  class Product extends Model
  {
 
-     use HasFactory;
+     use HasFactory,
+	 Notifiable,
+	 ScopeFilter,
+	 HasRolesAndPermissions,
+	 SoftDeletes;
 
      protected $fillable = [
 	 'category_id',
 	 'position',
 	 'status',
-	 'slug',
-	 'price',
-	 'vip',
-	 'sale',
-	 'sale_price',
-	 'view'
+	 'price'
      ];
+
+     public function getFilterScopes(): array
+     {
+	 return [
+	     'category_id' => [
+		 'hasParam' => true,
+		 'scopeMethod' => 'category_id'
+	     ],
+	     'status' => [
+		 'hasParam' => true,
+		 'scopeMethod' => 'status'
+	     ],
+	     'position' => [
+		 'status' => true,
+		 'scopeMethod' => 'position'
+	     ],
+	     'price' => [
+		 'status' => true,
+		 'scopeMethod' => 'price'
+	     ]
+	 ];
+     }
 
      public function files()
      {
