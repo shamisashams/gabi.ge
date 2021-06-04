@@ -2,7 +2,7 @@
 /**
  *  app/Http/Request/Admin/PageRequest.php
  *
- * User: 
+ * User:
  * Date-Time: 17.12.20
  * Time: 17:57
  * @author Vito Makhatadze <vitomaxatadze@gmail.com>
@@ -35,7 +35,7 @@ class PageRequest extends FormRequest
             'title' => 'required|string|max:255',
             'meta_title' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
-            'content' => 'nullable|string',
+//            'content' => 'nullable|string',
             'slug' => ['required', Rule::unique('pages', 'slug')->ignore($this->page)],
         ];
     }

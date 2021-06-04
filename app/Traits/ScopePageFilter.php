@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Builder;
  * Trait ScopeFilter
  * @package App\Traits
  */
-trait ScopeSettingFilter
+trait ScopePageFilter
 {
 
     /**
@@ -91,27 +91,41 @@ trait ScopeSettingFilter
      *
      * /**
      * @param $query
-     * @param $key
+     * @param $title
      *
      * @return mixed
      */
-    public function scopeKey($query, $key)
+    public function scopeTitle($query, $title)
     {
-        return $query->where('key', 'like', '%' . $key . '%');
+        $localizationID = Language::getIdByName(app()->getLocale());
+        return $query->whereHas('language', function ($query) use ($localizationID, $title) {
+            $query->where('title', 'like', "%{$title}%")->where('language_id', $localizationID);
+        });
     }
 
     /**
      * @param $query
-     * @param $value
+     * @param $slug
      *
      * @return mixed
      */
-    public function scopeSettingValue($query, $value)
+    public function scopeSlug($query, $slug)
     {
         $localizationID = Language::getIdByName(app()->getLocale());
-        return $query->whereHas('language', function ($query) use ($localizationID, $value) {
-            $query->where('value', 'like', "%{$value}%")->where('language_id', $localizationID);
+        return $query->whereHas('language', function ($query) use ($localizationID, $slug) {
+            $query->where('slug', 'like', "%{$slug}%")->where('language_id', $localizationID);
         });
+    }
+
+    /**
+     * @param $query
+     * @param $status
+     *
+     * @return mixed
+     */
+    public function scopeStatus($query, $status)
+    {
+        return $query->where(['status' => $status]);
     }
 
 }

@@ -49,6 +49,12 @@
                     class="material-icons dp48">g_translate</i><span>{{trans('admin.settings')}}</span></a>
         </li>
 
+        <li class="bold"><a
+                class="waves-effect waves-cyan {{str_contains(route('pageIndex',app()->getLocale()),request()->path())?"active":""}}"
+                href="{{route('pageIndex',app()->getLocale())}}"><i
+                    class="material-icons dp48">g_translate</i><span>{{trans('admin.pages')}}</span></a>
+        </li>
+
     </ul>
     <div class="navigation-background"></div>
     <a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only"

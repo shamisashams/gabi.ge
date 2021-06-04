@@ -47,7 +47,7 @@ class SettingController extends AdminController
             'value' => 'string|max:255|nullable',
         ]);
         return view('admin.modules.setting.index', [
-            'settings' => $this->settingRepository->getData($request)
+            'settings' => $this->settingRepository->getData($request,['availableLanguage'])
         ]);
 
     }
