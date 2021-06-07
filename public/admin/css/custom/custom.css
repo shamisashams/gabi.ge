@@ -34,6 +34,10 @@ thead  th{
     width: 300px;
 }
 
+.tabs .tab a{
+    overflow: visible;
+}
+
 @media only screen and (max-width: 460px) {
    .page-image{
        width:100%;

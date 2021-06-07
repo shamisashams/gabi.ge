@@ -25,7 +25,7 @@
 
         <li class="bold"><a
                 class="waves-effect waves-cyan" {{str_contains(route('categoryIndex',app()->getLocale()),request()->path())?"active":""}}
-            " href="{{route('categoryIndex',app()->getLocale())}}"><i class="material-icons">import_contacts</i><span
+             href="{{route('categoryIndex',app()->getLocale())}}"><i class="material-icons dp48">format_list_bulleted</i><span
                 class="menu-title" data-i18n="Mail">{{trans('admin.categories')}}</span></a>
         </li>
 
@@ -35,24 +35,20 @@
         </li>
         <li class="bold"><a
                 class="waves-effect waves-cyan {{str_contains(route('featureIndex',app()->getLocale()),request()->path())?"active":""}}"
-                href="{{route('featureIndex',app()->getLocale())}}"><i
-                    class="material-icons dp48">g_translate</i><span>{{trans('admin.features')}}</span></a>
+                href="{{route('featureIndex',app()->getLocale())}}"><i class="material-icons dp48">star_border</i><span>{{trans('admin.features')}}</span></a>
 
         <li class="bold"><a
                 class="waves-effect waves-cyan {{str_contains(route('answerIndex',app()->getLocale()),request()->path())?"active":""}}"
-                href="{{route('answerIndex',app()->getLocale())}}"><i
-                    class="material-icons dp48">g_translate</i><span>{{trans('admin.answers')}}</span></a></li>
+                href="{{route('answerIndex',app()->getLocale())}}"><i class="material-icons dp48">question_answer</i><span>{{trans('admin.answers')}}</span></a></li>
 
         <li class="bold"><a
                 class="waves-effect waves-cyan {{str_contains(route('settingIndex',app()->getLocale()),request()->path())?"active":""}}"
-                href="{{route('settingIndex',app()->getLocale())}}"><i
-                    class="material-icons dp48">g_translate</i><span>{{trans('admin.settings')}}</span></a>
+                href="{{route('settingIndex',app()->getLocale())}}"><i class="material-icons dp48">settings</i><span>{{trans('admin.settings')}}</span></a>
         </li>
 
         <li class="bold"><a
                 class="waves-effect waves-cyan {{str_contains(route('pageIndex',app()->getLocale()),request()->path())?"active":""}}"
-                href="{{route('pageIndex',app()->getLocale())}}"><i
-                    class="material-icons dp48">g_translate</i><span>{{trans('admin.pages')}}</span></a>
+                href="{{route('pageIndex',app()->getLocale())}}"><i class="material-icons dp48">dashboard</i><span>{{trans('admin.pages')}}</span></a>
         </li>
 
     </ul>

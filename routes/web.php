@@ -44,7 +44,6 @@ use App\Http\Controllers\Admin\TranslationController;
 		 Route::post('login', [AuthController::class, 'login'])->name('login');
 
 		 Route::middleware(['auth', 'can:isAdmin'])->group(function () {
-		     Route::get('product', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('productIndex');
 		     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 		     Route::resource('languages', LanguageController::class)

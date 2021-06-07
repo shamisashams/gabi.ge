@@ -5,9 +5,8 @@
             <div class="col s12">
                 <div class="card">
                     @include('admin.layouts.alert.alert')
+                    @include('admin.modules.language-tab.tab')
                     <div class="card-content">
-                        {{--                        <a href="{{route('featureCreateView',app()->getLocale())}}"--}}
-                        {{--                           class="mb-2 btn waves-effect waves-light green darken-1">{{trans('admin.create_setting')}}</a>--}}
                         <div style="overflow: auto">
                             {!! Form::open(['url' => route('pageIndex',app()->getLocale()),'method' =>'get']) !!}
                             <ul>
