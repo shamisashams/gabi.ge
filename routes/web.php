@@ -67,10 +67,10 @@ use App\Http\Controllers\Admin\TranslationController;
 
 		     Route::resource('products', ProductController::class)
 		     ->name('index', 'productIndex')
-		     ->name('store', 'productStore')
-		     ->name('create', 'productCreate')
+		     ->name('store', 'productCreate')
+		     ->name('create', 'productCreateView')
 		     ->name('show', 'productShow')
-		     ->name('edit', 'productEdit')
+		     ->name('edit', 'productEditView')
 		     ->name('update', 'productUpdate')
 		     ->name('destroy', 'productDestroy');
 
