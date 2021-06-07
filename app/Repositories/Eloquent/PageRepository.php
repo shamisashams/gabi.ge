@@ -60,6 +60,9 @@ class PageRepository extends BaseRepository implements PageRepositoryInterface
             if (count($data->files) > 0) {
                 foreach ($data->files as $file) {
                     if ($request['old_images'] == null) {
+                        if (Storage::exists('public/page/' . $data->id . '/' . $file->name)) {
+                            Storage::delete('public/page/' . $data->id . '/' . $file->name);
+                        }
                         $file->delete();
                         continue;
                     }
