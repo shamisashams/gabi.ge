@@ -19,9 +19,8 @@
 
      public function index(Request $request, $locale)
      {
-	 $products = $this->productRepository->getData($request);
+	 $products = $this->productRepository->getData($request, 'availableLanguage');
 
-	// dd($products);
 	 return view('admin.modules.product.index', [
 	     'products' => $products
 	 ]);
