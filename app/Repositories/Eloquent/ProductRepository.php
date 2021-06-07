@@ -5,6 +5,7 @@
  use App\Repositories\ProductRepositoryInterface;
  use App\Repositories\Eloquent\Base\BaseRepository;
  use Illuminate\Http\Request;
+ use App\Models\Product;
 
  class ProductRepository extends BaseRepository implements ProductRepositoryInterface
  {
@@ -14,22 +15,12 @@
 	 parent::__construct($model);
      }
 
-     public function getData(Request $request)
-     {
-	 
-     }
-
      public function update($id, Request $request)
      {
 	 
      }
 
      public function store(Request $request)
-     {
-	 
-     }
-
-     public function delete($id)
      {
 	 
      }

@@ -4,13 +4,27 @@
 
  use App\Http\Controllers\Controller;
  use Illuminate\Http\Request;
+ use App\Models\Product;
+ use App\Repositories\ProductRepositoryInterface;
 
  class ProductController extends AdminController
  {
 
-     public function index(Request $request,$locale)
+     protected $productRepository;
+
+     public function __construct(ProductRepositoryInterface $productRepository)
      {
-	 return view('admin.modules.product.index');
+	 $this->productRepository = $productRepository;
+     }
+
+     public function index(Request $request, $locale)
+     {
+	 $products = $this->productRepository->getData($request);
+
+	// dd($products);
+	 return view('admin.modules.product.index', [
+	     'products' => $products
+	 ]);
      }
 
      public function store()
