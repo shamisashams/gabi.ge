@@ -22,7 +22,6 @@ class Page extends Model
     use HasFactory, Notifiable, ScopePageFilter, HasRolesAndPermissions, SoftDeletes;
 
     protected $fillable = [
-        'slug',
         'status'
     ];
 

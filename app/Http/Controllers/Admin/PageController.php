@@ -99,8 +99,8 @@ class PageController extends AdminController
      */
     public function show(string $locale, int $id)
     {
-        return view('admin.modules.page.show', [
-            'page' => $this->service->find($id)
+        return view('admin.modules.page.view', [
+            'page' => $this->pageRepository->find($id)
         ]);
     }
 

@@ -12,10 +12,11 @@
                                     <div class="col s12 active" id="account">
                                         <!-- users edit media object ends -->
                                         <!-- users edit account form start -->
-                                        <input name="old-images[]" id="old_images" hidden disabled value="{{$page->files}}">
+                                        <input name="old-images[]" id="old_images" hidden disabled
+                                               value="{{$page->files}}">
                                         <form id="accountForm" novalidate="novalidate"
                                               action="{{route('pageUpdate',[app()->getLocale(),$page->id])}}"
-                                              method="POST">
+                                              method="POST" enctype="multipart/form-data">
                                             {{ method_field('PUT') }}
                                             @csrf
                                             <div class="row">
@@ -36,7 +37,7 @@
                                                         <div class="col s12 input-field">
                                                             <input id="username" name="meta_title" type="text"
                                                                    class="validate {{ $errors->has('meta_title') ? 'invalid' : 'valid' }}"
-                                                                   value="{{(count($page->availableLanguage) > 0) ?  $page->availableLanguage[0]->title : ''}}"
+                                                                   value="{{(count($page->availableLanguage) > 0) ?  $page->availableLanguage[0]->meta_title : ''}}"
                                                                    data-error=".errorTxt">
                                                             <label for="username"
                                                                    class="active">{{trans('admin.meta_title')}}</label>
@@ -75,6 +76,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col s12">
+                                                    <label for="content">{{trans('admin.content')}}</label>
+                                                    <textarea id="content" class="ckeditor form-control"
+                                                              name="content">{{(count($page->availableLanguage) > 0) ?  $page->availableLanguage[0]->content : ''}}</textarea>
+                                                </div>
                                                 <div class="col s12 m6" style="margin-top:20px">
                                                     <div class="input-images"></div>
                                                     @if ($errors->has('images'))
@@ -82,6 +88,13 @@
                                                          {{ $errors->first('images') }}
                                                         </span>
                                                     @endif
+                                                </div>
+                                                <div class="col s12" style="margin-top:10px">
+                                                    <label>
+                                                        <input type="checkbox"
+                                                               {{$page->status ? 'checked' : '' }} name="status">
+                                                        <span>{{trans('admin.status')}}</span>
+                                                    </label>
                                                 </div>
                                                 <div class="input-field col s12">
                                                     <button type="submit" class="btn indigo">
@@ -102,4 +115,6 @@
             <div class="content-overlay"></div>
         </div>
     </div>
+
+    <script src="{{asset('../admin/ckeditor/ckeditor.js')}}"></script>
 @endsection

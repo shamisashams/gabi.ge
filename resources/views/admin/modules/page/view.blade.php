@@ -14,15 +14,31 @@
                                             <tbody>
                                             <tr>
                                                 <td>{{trans('admin.id')}}:</td>
-                                                <td>{{$setting->id}}</td>
+                                                <td>{{$page->id}}</td>
                                             </tr>
                                             <tr>
-                                                <td>{{trans('admin.key')}}:</td>
-                                                <td class="users-view-latest-activity">{{$setting->key}}</td>
+                                                <td>{{trans('admin.title')}}:</td>
+                                                <td class="users-view-latest-activity">{{count($page->availableLanguage)>0?$page->availableLanguage[0]->title:""}}</td>
                                             </tr>
                                             <tr>
-                                                <td>{{trans('admin.value')}}:</td>
-                                                <td class="users-view-verified">{{(count($setting->availableLanguage) > 0) ?  $setting->availableLanguage[0]->value : ''}}</td>
+                                                <td>{{trans('admin.description')}}:</td>
+                                                <td class="users-view-latest-activity">{{count($page->availableLanguage)>0?$page->availableLanguage[0]->description:""}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{trans('admin.slug')}}:</td>
+                                                <td class="users-view-verified">{{count($page->availableLanguage)>0?$page->availableLanguage[0]->slug:""}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{trans('admin.meta_title')}}:</td>
+                                                <td class="users-view-latest-activity">{{count($page->availableLanguage)>0?$page->availableLanguage[0]->meta_title:""}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{trans('admin.status')}}:</td>
+                                                <td class="users-view-verified">{{$page->status}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{trans('admin.content')}}:</td>
+                                                <td class="users-view-verified">{!!count($page->availableLanguage)>0?$page->availableLanguage[0]->content:""!!}</td>
                                             </tr>
                                             </tbody>
                                         </table>
