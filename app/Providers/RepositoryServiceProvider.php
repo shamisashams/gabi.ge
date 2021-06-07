@@ -10,11 +10,15 @@
  use App\Repositories\Eloquent\DepositRepository;
  use App\Repositories\Eloquent\FeatureRepository;
  use App\Repositories\Eloquent\LanguageRepository;
+ use App\Repositories\Eloquent\PageRepository;
+ use App\Repositories\Eloquent\SettingRepository;
  use App\Repositories\Eloquent\TranslationRepository;
  use App\Repositories\Eloquent\UserRepository;
  use App\Repositories\Eloquent\VerificationRepository;
  use App\Repositories\FeatureRepositoryInterface;
  use App\Repositories\LanguageRepositoryInterface;
+ use App\Repositories\PageRepositoryInterface;
+ use App\Repositories\SettingRepositoryInterface;
  use App\Repositories\TranslationRepositoryInterface;
  use App\Repositories\UserRepositoryInterface;
  use App\Repositories\VerificationRepositoryInterface;
@@ -54,7 +58,8 @@
 	 $this->app->bind(AnswerRepositoryInterface::class, AnswerRepository::class);
 	 $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
 	 $this->app->bind(ProductRepositoryInterface::class,ProductRepository::class);
+	 $this->app->bind(SettingRepositoryInterface::class, SettingRepository::class);
+	 $this->app->bind(PageRepositoryInterface::class, PageRepository::class);
      }
 
  }
- 
