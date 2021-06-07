@@ -36,9 +36,12 @@
 	 
      }
 
-     public function show()
+     public function show(string $lang, int $id)
      {
-	 
+
+	 return view('admin.modules.product.view', [
+	     'productItem' => $this->productRepository->find($id)
+	 ]);
      }
 
      public function edit()
