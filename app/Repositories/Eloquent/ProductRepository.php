@@ -24,9 +24,9 @@
 
      public function getData($request, $relation = null)
      {
-	 $categoryModelQuery = $this->model->query();
+	 $productModelQuery = $this->model->query();
 
-	 $categoryModel = $this->setFiltersFromRequest($categoryModelQuery, $request);
+	 $productModel = $this->setFiltersFromRequest($productModelQuery, $request);
 
 	 $perPage = 10;
 	 if ($request->filled('per_page')) {
@@ -34,21 +34,75 @@
 	 }
 
 	 if ($relation) {
-	     return $categoryModel->with($relation)->paginate($perPage);
+	     return $productModel->with($relation)->paginate($perPage);
 	 }
 
-	 return $categoryModel->paginate($perPage);
+	 return $productModel->paginate($perPage);
      }
 
-     public function update(int $id, ProductRequest $request)
+     public function update(string $lang, int $id, ProductRequest $request)
      {
-	 
+
+
+	 $request['status'] = isset($request['status']) ? 1 : 0;
+
+	 try {
+	     DB::beginTransaction();
+
+	     $productItem = $this->find($id);
+
+	     if (!$productItem) {
+		 return false;
+	     }
+
+	     $productItem->update([
+		 'position' => $request['position'],
+		 'status' => $request['status'],
+		 'category_id' => $request['category_id'],
+		 'price' => $request['price']
+	     ]);
+
+	     $productId = $productItem->id;
+
+	     $currentLanguageId = Language::getIdByName($lang);
+
+	     $productLanguageItem = ProductLanguage::where([
+			 'product_id' => $productId,
+			 'language_id' => $currentLanguageId
+		     ])->first();
+
+	     if (is_null($productLanguageItem)) {
+		 ProductLanguage::create([
+		     'product_id' => $productId,
+		     'language_id' => $currentLanguageId,
+		     'title' => $request['title'],
+		     'description' => $request['description'],
+		     'short_description' => $request['short_description'],
+		     'slug' => $request['slug']
+		 ]);
+	     } else {
+		 $productLanguageItem->update([
+		     'title' => $request['title'],
+		     'description' => $request['description'],
+		     'short_description' => $request['short_description'],
+		     'slug' => $request['slug']
+		 ]);
+	     }
+
+	     DB::commit();
+	     return true;
+	 } catch (\Exception $queryException) {
+
+	     dd($queryException);
+	     DB::rollBack();
+	     return false;
+	 }
      }
 
      public function store(string $lang, ProductRequest $request)
      {
 	 $fields = $request->only([
-	     'category_id',
+	     'product_id',
 	     'price',
 	     'title',
 	     'slug',
@@ -61,7 +115,7 @@
 	 //// Create new item
 
 	 try {
-	     //   DB::beginTransaction();
+	     DB::beginTransaction();
 
 	     $productItem = $this->model->create([
 		 'position' => $fields['position'],
@@ -92,7 +146,6 @@
 
 	     return true;
 	 } catch (\Exception $queryException) {
-
 	     DB::rollBack();
 	     return false;
 	 }

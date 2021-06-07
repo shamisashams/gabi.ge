@@ -2,9 +2,7 @@
 
  namespace App\Http\Controllers\Admin;
 
- use App\Http\Controllers\Controller;
  use Illuminate\Http\Request;
- use App\Models\Product;
  use App\Http\Request\Admin\ProductRequest;
  use App\Repositories\ProductRepositoryInterface;
 
@@ -49,9 +47,20 @@
 	 ]);
      }
 
-     public function edit()
+     public function edit(string $lang, int $id)
      {
-	 
+	 return view('admin.modules.product.update', [
+	     'productItem' => $this->productRepository->find($id)
+	 ]);
+     }
+
+     public function update(string $lang, int $id, ProductRequest $request)
+     {
+	 if (false === $this->productRepository->update($lang, $id, $request)) {
+	     return redirect(route('productEditView', $lang))->with('danger', __('admin.product_not_updated'));
+	 }
+
+	 return redirect(route('productIndex', $lang))->with('success', __('admin.product_updated_succesfully'));
      }
 
      public function destroy(string $lang, int $id)

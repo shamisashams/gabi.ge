@@ -1,18 +1,10 @@
 <?php
 
- /**
-  *  app/Http/Request/Admin/ProductRequest.php
-  *
-  * User:
-  * Date-Time: 15.12.20
-  * Time: 15:24
-  * @author Vito Makhatadze <vitomaxatadze@gmail.com>
-  */
-
  namespace App\Http\Request\Admin;
 
  use Illuminate\Foundation\Http\FormRequest;
  use Illuminate\Validation\Rule;
+ use Illuminate\Support\Facades\Route;
 
  class ProductRequest extends FormRequest
  {
@@ -34,16 +26,23 @@
       */
      public function rules()
      {
-	 return [
+
+	 $rules = [
 	     'title' => 'required|string|max:255',
 	     //'category' => 'required|integer',
 	     'position' => 'required|string|max:255',
 	     'price' => 'required|numeric',
 	     'description' => 'required|string',
 	     //     'sale_price' => 'nullable|numeric',
-	     'slug' => ['required', 'alpha_dash', Rule::unique('product_languages', 'slug')->ignore($this->product)],
 	     'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096'
 	 ];
+
+	 if (Route::currentRouteName() !== 'productUpdate') {
+	     // TODO : new logic
+	     $rules['slug'] = ['required', 'alpha_dash', Rule::unique('product_languages', 'slug')->ignore($this->product)];
+	 }
+
+	 return $rules;
      }
 
  }

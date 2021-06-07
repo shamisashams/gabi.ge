@@ -24,7 +24,7 @@ class AnswerController extends AdminController
     {
         $this->answerRepository = $answerRepository;
     }
-
+    
     /**
      * Display a listing of the resource.
      *
