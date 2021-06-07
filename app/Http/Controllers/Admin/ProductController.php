@@ -5,6 +5,7 @@
  use App\Http\Controllers\Controller;
  use Illuminate\Http\Request;
  use App\Models\Product;
+ use App\Http\Request\Admin\ProductRequest;
  use App\Repositories\ProductRepositoryInterface;
 
  class ProductController extends AdminController
@@ -26,14 +27,18 @@
 	 ]);
      }
 
-     public function store()
+     public function store(string $lang, ProductRequest $request)
      {
-	 
+	 if (false === $this->productRepository->store($lang, $request)) {
+	     return redirect(route('productCreateView', $lang))->with('danger', __('admin.product_not_created'));
+	 }
+
+	 return redirect(route('productIndex', $lang))->with('success', __('admin.product_created_succesfully'));
      }
 
      public function create()
      {
-	 
+	 return view('admin.modules.product.create');
      }
 
      public function show(string $lang, int $id)

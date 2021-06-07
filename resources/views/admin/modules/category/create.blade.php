@@ -69,8 +69,8 @@
 							    class="errorTxt">{{ $errors->first('position') }}</small>
 							@endif
 						    </div>
-						    
-						       <div class="col s12 input-field">
+
+						    <div class="col s12 input-field">
 							<input id="parent_id" name="parent_id" type="number"
 							       class="validate {{ $errors->has('parent_id') ? 'invalid' : 'valid' }}"
 							       value="{{old('parent_id')}}"
@@ -79,7 +79,7 @@
 							       class="active">{{trans('admin.parent_id')}}</label>
 							@if ($errors->has('parent_id'))
 							<small
-							    class="errorTxt">{{ $errors->first('position') }}</small>
+							    class="errorTxt">{{ $errors->first('parent_id') }}</small>
 							@endif
 						    </div>
 						</div>
