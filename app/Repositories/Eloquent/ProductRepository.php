@@ -78,7 +78,7 @@
 
 	     /// Save with correct language
 	     $languageId = Language::getIdByName($lang);
-	     
+
 	     ProductLanguage::create([
 		 'product_id' => $productId,
 		 'language_id' => $languageId,
@@ -96,6 +96,11 @@
 	     DB::rollBack();
 	     return false;
 	 }
+     }
+
+     public function delete(int $id)
+     {
+	 return $this->find($id)->delete();
      }
 
  }

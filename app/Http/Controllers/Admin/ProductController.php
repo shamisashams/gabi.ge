@@ -54,9 +54,12 @@
 	 
      }
 
-     public function destory()
+     public function destroy(string $lang, int $id)
      {
-	 
+	 if (false === $this->productRepository->delete($id)) {
+	     return redirect(route('productIndex', $lang))->with('danger', __('admin.product_not_deleted'));
+	 }
+	 return redirect(route('productIndex', $lang))->with('success', __('admin.product_deleted_succesfully'));
      }
 
  }
