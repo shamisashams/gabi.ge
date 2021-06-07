@@ -19,6 +19,13 @@
                                                 <td>{{trans('admin.title')}}:</td>
                                                 <td>{{(count($productItem->availableLanguage) > 0) ?  $productItem->availableLanguage[0]->title : ''}}</td>
                                             </tr>
+
+					    <tr>
+                                                <td>{{trans('admin.short_description')}}:</td>
+                                                <td class="users-view-latest-activity">{{(count($productItem->availableLanguage) > 0) ?  $productItem->availableLanguage[0]->short_description : ''}}</td>
+                                            </tr>
+
+
                                             <tr>
                                                 <td>{{trans('admin.description')}}:</td>
                                                 <td class="users-view-latest-activity">{{(count($productItem->availableLanguage) > 0) ?  $productItem->availableLanguage[0]->description : ''}}</td>

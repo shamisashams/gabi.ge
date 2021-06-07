@@ -9,8 +9,7 @@
  use App\Repositories\CategoryRepositoryInterface;
  use App\Http\Request\Admin\CategoryRequest;
  use App\Models\CategoryLanguage;
- use Illuminate\Database\Eloquent\Builder;
- use Illuminate\Http\Request;
+ use App\Traits\RequestFilter;
 
  /**
   * Description of CategoryRepository
@@ -19,6 +18,7 @@
   */
  class CategoryRepository extends BaseRepository implements CategoryRepositoryInterface
  {
+     use RequestFilter;
 
      public function __construct(Category $model)
      {
@@ -149,37 +149,6 @@
      public function delete($id)
      {
 	 return $this->find($id)->delete();
-     }
-
-     protected function setFiltersFromRequest(Builder $modelQueryBuilder, Request $request)
-     {
-	 if ($request['id']) {
-	     $modelQueryBuilder->where('id', '=', (int) $request['id']);
-	 }
-
-	 if (false === is_null($request['status'])) {
-	     $modelQueryBuilder->where('status', '=', (int) $request['status']);
-	 }
-
-	 if ($request['title']) {
-	     $modelQueryBuilder->whereHas('availableLanguage', function ($query) use ($request) {
-		 $query->where('title', 'like', "%{$request['title']}%");
-	     });
-	 }
-
-	 if ($request['slug']) {
-	     $modelQueryBuilder->whereHas('availableLanguage', function ($query) use ($request) {
-		 $query->where('slug', 'like', "%{$request['slug']}%");
-	     });
-	 }
-
-	 if ($request['description']) {
-	     $modelQueryBuilder->whereHas('availableLanguage', function ($query) use ($request) {
-		 $query->where('description', 'like', "%{$request['description']}%");
-	     });
-	 }
-
-	 return $modelQueryBuilder;
      }
 
  }
