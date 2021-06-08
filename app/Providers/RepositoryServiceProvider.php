@@ -27,6 +27,8 @@
  use App\Repositories\CategoryRepositoryInterface;
  use App\Repositories\Eloquent\ProductRepository;
  use App\Repositories\ProductRepositoryInterface;
+ use App\Repositories\Eloquent\SaleRepository;
+ use App\Repositories\SaleRepositoryInterface;
 
  /**
   * Class RepositoryServiceProvider
@@ -57,9 +59,11 @@
 	 $this->app->bind(FeatureRepositoryInterface::class, FeatureRepository::class);
 	 $this->app->bind(AnswerRepositoryInterface::class, AnswerRepository::class);
 	 $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
-	 $this->app->bind(ProductRepositoryInterface::class,ProductRepository::class);
+	 $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
 	 $this->app->bind(SettingRepositoryInterface::class, SettingRepository::class);
 	 $this->app->bind(PageRepositoryInterface::class, PageRepository::class);
+	 $this->app->bind(SaleRepositoryInterface::class, SaleRepository::class);
      }
 
  }
+ 

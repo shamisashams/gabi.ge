@@ -4,6 +4,7 @@
  use App\Http\Controllers\Admin\FeatureController;
  use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TranslationController;
  use App\Http\Controllers\Auth\AuthController;
@@ -118,6 +119,14 @@ use App\Http\Controllers\Admin\TranslationController;
                  ->name('edit', 'pageEditView')
                  ->name('update', 'pageUpdate')
                  ->name('show', 'pageShow');
+
+             Route::resource('sales', SaleController::class)->except('destroy')
+                 ->name('index', 'saleIndex')
+                 ->name('create', 'saleCreateView')
+                 ->name('store', 'saleCreate')
+                 ->name('edit', 'saleEditView')
+                 ->name('update', 'saleUpdate')
+                 ->name('show', 'saleShow');
 		 });
 	     });
 
