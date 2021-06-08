@@ -34,6 +34,12 @@
                                                 <td>{{trans('admin.slug')}}:</td>
                                                 <td class="users-view-verified">{{(count($productItem->availableLanguage) > 0) ?  $productItem->availableLanguage[0]->slug : ''}}</td>
                                             </tr>
+					    
+					     <tr>
+                                                <td>{{trans('admin.catgegory')}}:</td>
+                                                <td class="users-view-verified">{{(count($productItem->category->availableLanguage) > 0) ?  $productItem->category->availableLanguage[0]->title : ''}}</td>
+                                            </tr>
+					    
                                             <tr>
                                                 <td>{{trans('admin.status')}}:</td>
                                                 <td>
