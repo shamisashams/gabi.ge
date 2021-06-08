@@ -29,6 +29,7 @@
 	 $productModel = $this->setFiltersFromRequest($productModelQuery, $request);
 
 	 $perPage = 10;
+	 
 	 if ($request->filled('per_page')) {
 	     $perPage = $request['per_page'];
 	 }
@@ -92,8 +93,6 @@
 	     DB::commit();
 	     return true;
 	 } catch (\Exception $queryException) {
-
-	     dd($queryException);
 	     DB::rollBack();
 	     return false;
 	 }
