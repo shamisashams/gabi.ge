@@ -30,19 +30,23 @@
 
 						    </div>
 
+
 						    <div class="col s12 input-field">
-							<input id="category_id" name="category_id" type="number"
-							       class="validate {{ $errors->has('category_id') ? 'invalid' : 'valid' }}"
-							       value="{{old('category_id')}}"
-							       data-error=".errorTxt">
-							<label for="position"
-							       class="active">{{trans('admin.category_id')}}</label>
+
+							<select name="category_id" class="select2 browser-default">
+							    <option value="" disabled selected>Choose your option
+							    </option>
+							    @foreach($categories as $category):
+							    <option {{old('category_id') ==  $category->id   ?   "selected":""}} value="{{$category->id}}">{{(count($category->availableLanguage) > 0) ?  $category->availableLanguage[0]->title : ''}}</option>
+							    @endforeach
+
+							</select>
+							<label for="category_id" class="">{{trans('admin.category_id')}}</label>
 							@if ($errors->has('category_id'))
 							<small
 							    class="errorTxt">{{ $errors->first('category_id') }}</small>
 							@endif
 						    </div>
-
 
 						    <div class="col s12 input-field">
 							<input id="price" name="price" type="number"

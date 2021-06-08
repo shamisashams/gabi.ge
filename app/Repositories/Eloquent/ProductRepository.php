@@ -29,7 +29,7 @@
 	 $productModel = $this->setFiltersFromRequest($productModelQuery, $request);
 
 	 $perPage = 10;
-	 
+
 	 if ($request->filled('per_page')) {
 	     $perPage = $request['per_page'];
 	 }
@@ -108,14 +108,15 @@
 	     'description',
 	     'status',
 	     'position',
-	     'short_description'
+	     'short_description',
+	     'category_id'
 	 ]);
+
 	 $fields['status'] = isset($fields['status']) ? 1 : 0;
 	 //// Create new item
 
 	 try {
 	     DB::beginTransaction();
-
 	     $productItem = $this->model->create([
 		 'position' => $fields['position'],
 		 'status' => $fields['status'],

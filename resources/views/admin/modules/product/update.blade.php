@@ -92,16 +92,22 @@
 						    </div>
 
 						    <div class="col s12 input-field">
-							<input id="category_id" name="category_id" type="number"
-							       class="validate {{ $errors->has('category_id') ? 'invalid' : 'valid' }}"
-							       value="{{$productItem->category_id}}"
-							       data-error=".errorTxt">
-							<label for="description"
-							       class="active">{{trans('admin.category_id')}}</label>
+
+							<select name="category_id" class="select2 browser-default">
+							    <option value="" disabled selected>Choose your option
+							    </option>
+							    @foreach($categories as $category):
+
+							    <option {{ $productItem->category->id ==  $category->id   ?   "selected":""}} value="{{$category->id}}">{{(count($category->availableLanguage) > 0) ?  $category->availableLanguage[0]->title : ''}}</option>
+							    @endforeach
+
+							</select>
+							<label for="category_id" class="">{{trans('admin.category_id')}}</label>
 							@if ($errors->has('category_id'))
 							<small
 							    class="errorTxt">{{ $errors->first('category_id') }}</small>
 							@endif
+
 						    </div>
 
 
@@ -117,18 +123,6 @@
 							<small
 							    class="errorTxt">{{ $errors->first('short_description') }}</small>
 							@endif
-
-
-							<!--							<div
-														    class="form-group {{ $errors->has('content') ? ' has-error' : '' }}">
-														    {{ Form::label('content', __('admin.content'), []) }}
-														    {{ Form::textarea('content', '', ['class' => 'form-control', 'no','placeholder'=>__('admin.enter_content')]) }}
-														    @if ($errors->has('content'))
-														    <span class="help-block">
-															{{ $errors->first('content') }}
-														    </span>
-														    @endif
-														</div>-->
 						    </div>
 
 						</div>

@@ -5,6 +5,7 @@
  use Illuminate\Http\Request;
  use App\Http\Request\Admin\ProductRequest;
  use App\Repositories\ProductRepositoryInterface;
+ use App\Models\Category;
 
  class ProductController extends AdminController
  {
@@ -36,7 +37,9 @@
 
      public function create()
      {
-	 return view('admin.modules.product.create');
+	 return view('admin.modules.product.create', [
+	     'categories' => Category::with('availableLanguage')->where('status', '=', '1')->get()
+	 ]);
      }
 
      public function show(string $lang, int $id)
@@ -50,7 +53,8 @@
      public function edit(string $lang, int $id)
      {
 	 return view('admin.modules.product.update', [
-	     'productItem' => $this->productRepository->find($id)
+	     'productItem' => $this->productRepository->find($id),
+	     'categories' => Category::with('availableLanguage')->where('status', '=', '1')->get()
 	 ]);
      }
 

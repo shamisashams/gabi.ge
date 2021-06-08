@@ -8,10 +8,10 @@
 		@include('admin.layouts.alert.alert')
 		@include('admin.modules.language-tab.tab')
 		<div class="card-content">
-		    <a href="{{route('translationCreate',app()->getLocale())}}"
+		    <a href="{{route('productCreateView',app()->getLocale())}}"
 		       class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_product')}}</a>
 		    <div>
-			{!! Form::open(['url' => route('translationIndex',app()->getLocale()),'method' =>'get']) !!}
+			{!! Form::open(['url' => route('productIndex',app()->getLocale()),'method' =>'get']) !!}
 			<table class="striped">
 			    <thead>
                                 <tr>

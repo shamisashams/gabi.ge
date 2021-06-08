@@ -32,6 +32,7 @@
 	     //'category' => 'required|integer',
 	     'position' => 'required|string|max:255',
 	     'price' => 'required|numeric',
+	     'category_id' => 'required|numeric',
 	     'description' => 'required|string',
 	     //     'sale_price' => 'nullable|numeric',
 	     'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096'
