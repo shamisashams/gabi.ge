@@ -1,10 +1,12 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="section">
-        @include('admin.layouts.alert.alert')
+
         <div class="row">
             <div class="col s12">
                 <div class="card">
+                    @include('admin.layouts.alert.alert')
+                    @include('admin.modules.language-tab.tab')
                     <div class="card-content">
                         {{--                        <a href="{{route('translationCreate',app()->getLocale())}}"--}}
                         {{--                           class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_language')}}</a>--}}

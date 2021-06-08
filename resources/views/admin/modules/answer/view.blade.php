@@ -40,6 +40,15 @@
                                         </table>
                                     </div>
                                 </div>
+                                <div style="display: flex;flex-wrap:wrap;">
+                                    @if(count($answer->files)>0)
+                                        @foreach($answer->files as $file)
+                                            <div class="flex-image">
+                                                <img  src="/storage/answer/{{$file->fileable_id}}/{{$file->name}}" class="page-image"/>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
                             </div>
                         </div>
 

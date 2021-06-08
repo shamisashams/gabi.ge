@@ -121,6 +121,9 @@ class AnswerRepository extends BaseRepository implements AnswerRepositoryInterfa
             if (count($model->files) > 0) {
                 foreach ($model->files as $file) {
                     if ($request['old_images'] == null) {
+                        if (Storage::exists('public/answer/' . $model->id . '/' . $file->name)) {
+                            Storage::delete('public/answer/' . $model->id . '/' . $file->name);
+                        }
                         $file->delete();
                         continue;
                     }

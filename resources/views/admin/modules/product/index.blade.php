@@ -1,15 +1,17 @@
 @extends('admin.layouts.app')
 @section('content')
+
 <div class="section">
     <div class="row">
 	<div class="col s12">
 	    <div class="card">
 		@include('admin.layouts.alert.alert')
+		@include('admin.modules.language-tab.tab')
 		<div class="card-content">
-		    <a href="{{route('productCreateView',app()->getLocale())}}"
+		    <a href="{{route('translationCreate',app()->getLocale())}}"
 		       class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_product')}}</a>
-		    <div style="overflow: auto">
-			{!! Form::open(['url' => route('productIndex',app()->getLocale()),'method' =>'get']) !!}
+		    <div>
+			{!! Form::open(['url' => route('translationIndex',app()->getLocale()),'method' =>'get']) !!}
 			<table class="striped">
 			    <thead>
                                 <tr>

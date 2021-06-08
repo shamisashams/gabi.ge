@@ -25,3 +25,21 @@ thead  th{
 .errorTxt{
     color:red;
 }
+
+.flex-image{
+    margin:20px;
+}
+
+.page-image{
+    width: 300px;
+}
+
+.tabs .tab a{
+    overflow: visible;
+}
+
+@media only screen and (max-width: 460px) {
+   .page-image{
+       width:100%;
+   }
+}

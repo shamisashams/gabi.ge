@@ -5,6 +5,7 @@
             <div class="col s12">
                 <div class="card">
                     @include('admin.layouts.alert.alert')
+                    @include('admin.modules.language-tab.tab')
                     <div class="card-content">
                         <a href="{{route('languageCreateView',app()->getLocale())}}"
                            class="mb-1 btn waves-effect waves-light green darken-1">{{trans('admin.create_language')}}</a>
