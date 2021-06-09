@@ -48,7 +48,7 @@ class BaseRepository implements EloquentRepositoryInterface
      * @param $request
      * @return mixed
      */
-    public function getData($request, $relation = null)
+    public function getData($request, array $relation = [])
     {
         $data = $this->model->filter($request);
 

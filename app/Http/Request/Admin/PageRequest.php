@@ -7,8 +7,11 @@
  * Time: 17:57
  * @author Vito Makhatadze <vitomaxatadze@gmail.com>
  */
+
 namespace App\Http\Request\Admin;
 
+use App\Models\Language;
+use App\Models\PageLanguage;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -31,12 +34,18 @@ class PageRequest extends FormRequest
      */
     public function rules()
     {
+        $localizationID = Language::getIdByName(app()->getLocale());
+        $page = PageLanguage::where(['page_id' => $this->page, 'language_id' => $localizationID])->first();
         return [
             'title' => 'required|string|max:255',
             'meta_title' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
 //            'content' => 'nullable|string',
-//            'slug' => ['required', Rule::unique('pages', 'slug')->ignore($this->page)],
+            'slug' => [
+                'required',
+                $page ? Rule::unique('page_languages', 'slug')->ignore($page->id) :
+                    Rule::unique('page_languages', 'slug')
+            ],
         ];
     }
 }

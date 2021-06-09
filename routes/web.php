@@ -131,6 +131,9 @@
                      ->name('update', 'saleUpdate')
                      ->name('show', 'saleShow');
                  });
+
+                 Route::get('products/answers/{id}', [ProductController::class, 'getFeatureAnswers'])
+                 ->name('productFeatureAnswers');
              });
 
              Route::get('/', function () {

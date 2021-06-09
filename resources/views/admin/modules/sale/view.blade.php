@@ -14,44 +14,23 @@
                                             <tbody>
                                             <tr>
                                                 <td>{{trans('admin.id')}}:</td>
-                                                <td>{{$page->id}}</td>
+                                                <td>{{$sale->id}}</td>
                                             </tr>
                                             <tr>
                                                 <td>{{trans('admin.title')}}:</td>
-                                                <td class="users-view-latest-activity">{{count($page->availableLanguage)>0?$page->availableLanguage[0]->title:""}}</td>
+                                                <td class="users-view-latest-activity">{{count($sale->availableLanguage)>0?$sale->availableLanguage[0]->title:""}}</td>
                                             </tr>
                                             <tr>
-                                                <td>{{trans('admin.description')}}:</td>
-                                                <td class="users-view-latest-activity">{{count($page->availableLanguage)>0?$page->availableLanguage[0]->description:""}}</td>
+                                                <td>{{trans('admin.discount')}}:</td>
+                                                <td class="users-view-latest-activity">{{$sale->discount}}</td>
                                             </tr>
                                             <tr>
-                                                <td>{{trans('admin.slug')}}:</td>
-                                                <td class="users-view-verified">{{count($page->availableLanguage)>0?$page->availableLanguage[0]->slug:""}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>{{trans('admin.meta_title')}}:</td>
-                                                <td class="users-view-latest-activity">{{count($page->availableLanguage)>0?$page->availableLanguage[0]->meta_title:""}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>{{trans('admin.status')}}:</td>
-                                                <td class="users-view-verified">{{$page->status}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>{{trans('admin.content')}}:</td>
-                                                <td class="users-view-verified">{!!count($page->availableLanguage)>0?$page->availableLanguage[0]->content:""!!}</td>
+                                                <td>{{trans('admin.type')}}:</td>
+                                                <td class="users-view-verified">{{$sale->type}}</td>
                                             </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
-                                <div style="display: flex;flex-wrap:wrap;">
-                                    @if(count($page->files)>0)
-                                        @foreach($page->files as $file)
-                                            <div class="flex-image">
-                                                <img  src="/storage/page/{{$file->fileable_id}}/{{$file->name}}" class="page-image"/>
-                                            </div>
-                                        @endforeach
-                                    @endif
                                 </div>
                             </div>
                         </div>

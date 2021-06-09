@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddProductIdColumnInSalesTable extends Migration
+class RemoveProductIdColumnFromSalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddProductIdColumnInSalesTable extends Migration
     public function up()
     {
         Schema::table('sales', function (Blueprint $table) {
-            $table->foreignId('product_id')->nullable()->after('id')->constrained('products');
-            $table->string('type')->after('discount');
+            $table->dropConstrainedForeignId('product_id');
         });
     }
 
@@ -27,8 +26,7 @@ class AddProductIdColumnInSalesTable extends Migration
     public function down()
     {
         Schema::table('sales', function (Blueprint $table) {
-            $table->dropColumn('type');
-            $table->dropConstrainedForeignId('product_id');
+            $table->foreignId('product_id')->nullable()->after('id')->constrained('products');
         });
     }
 }

@@ -11,6 +11,7 @@
 namespace App\Models;
 
 use App\Traits\HasRolesAndPermissions;
+use App\Traits\ScopeSaleFilter;
 use App\Traits\ScopeSettingFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,25 +20,26 @@ use Illuminate\Notifications\Notifiable;
 
 class Sale extends Model
 {
-    use HasFactory, Notifiable, ScopeSettingFilter, HasRolesAndPermissions, SoftDeletes;
+    use HasFactory, Notifiable, ScopeSaleFilter, HasRolesAndPermissions, SoftDeletes;
 
-    protected $fillable = ['key'];
+    const TYPE_PERCENT = "percent";
+    const TYPE_FIXED = "fixed";
+
+    protected $fillable = [
+        'title',
+        'discount',
+        'type'
+    ];
 
     public function language()
     {
-        return $this->hasMany(SettingLanguage::class, 'setting_id');
+        return $this->hasMany(SaleLanguage::class, 'sale_id');
     }
 
     public function availableLanguage()
     {
         return $this->language()->where('language_id', '=', Language::getIdByName(app()->getLocale()));
     }
-
-    public function product()
-    {
-        return $this->hasOne(Product::class, 'product_id');
-    }
-
 
     public function getFilterScopes(): array
     {
@@ -46,13 +48,17 @@ class Sale extends Model
                 'hasParam' => true,
                 'scopeMethod' => 'id'
             ],
-            'key' => [
+            'title' => [
                 'hasParam' => true,
-                'scopeMethod' => 'key'
+                'scopeMethod' => 'title'
             ],
-            'value' => [
+            'discount' => [
                 'hasParam' => true,
-                'scopeMethod' => 'settingValue'
+                'scopeMethod' => 'discount'
+            ],
+            'type' => [
+                'hasParam' => true,
+                'scopeMethod' => 'type'
             ],
         ];
     }
