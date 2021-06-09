@@ -14,65 +14,65 @@
 
      public function __construct(ProductRepositoryInterface $productRepository)
      {
-	 $this->productRepository = $productRepository;
+         $this->productRepository = $productRepository;
      }
 
      public function index(Request $request, $locale)
      {
-	 $products = $this->productRepository->getData($request, 'availableLanguage');
+         $products = $this->productRepository->getData($request, 'availableLanguage');
 
-	 return view('admin.modules.product.index', [
-	     'products' => $products
-	 ]);
+         return view('admin.modules.product.index', [
+             'products' => $products
+         ]);
      }
 
      public function store(string $lang, ProductRequest $request)
      {
-	 if (false === $this->productRepository->store($lang, $request)) {
-	     return redirect(route('productCreateView', $lang))->with('danger', __('admin.product_not_created'));
-	 }
+         if (false === $this->productRepository->store($lang, $request)) {
+             return redirect(route('productCreateView', $lang))->with('danger', __('admin.product_not_created'));
+         }
 
-	 return redirect(route('productIndex', $lang))->with('success', __('admin.product_created_succesfully'));
+         return redirect(route('productIndex', $lang))->with('success', __('admin.product_created_succesfully'));
      }
 
      public function create()
      {
-	 return view('admin.modules.product.create', [
-	     'categories' => Category::with('availableLanguage')->where('status', '=', '1')->get()
-	 ]);
+         return view('admin.modules.product.create', [
+             'categories' => Category::with('availableLanguage')->where('status', '=', '1')->get()
+         ]);
      }
 
      public function show(string $lang, int $id)
      {
 
-	 return view('admin.modules.product.view', [
-	     'productItem' => $this->productRepository->find($id)
-	 ]);
+         return view('admin.modules.product.view', [
+             'productItem' => $this->productRepository->find($id)
+         ]);
      }
 
      public function edit(string $lang, int $id)
      {
-	 return view('admin.modules.product.update', [
-	     'productItem' => $this->productRepository->find($id),
-	     'categories' => Category::with('availableLanguage')->where('status', '=', '1')->get()
-	 ]);
+         return view('admin.modules.product.update', [
+             'productItem' => $this->productRepository->find($id),
+             'categories' => Category::with('availableLanguage')->where('status', '=', '1')->get()
+         ]);
      }
 
      public function update(string $lang, int $id, ProductRequest $request)
      {
-	 if (false === $this->productRepository->update($lang, $id, $request)) {
-	     return redirect(route('productEditView', $lang))->with('danger', __('admin.product_not_updated'));
-	 }
+         if (false === $this->productRepository->update($lang, $id, $request)) {
+             return redirect(route('productEditView', $lang))->with('danger', __('admin.product_not_updated'));
+         }
 
-	 return redirect(route('productIndex', $lang))->with('success', __('admin.product_updated_succesfully'));
+         return redirect(route('productIndex', $lang))->with('success', __('admin.product_updated_succesfully'));
      }
 
      public function destroy(string $lang, int $id)
      {
-	 if (false === $this->productRepository->delete($id)) {
-	     return redirect(route('productIndex', $lang))->with('danger', __('admin.product_not_deleted'));
-	 }
-	 return redirect(route('productIndex', $lang))->with('success', __('admin.product_deleted_succesfully'));
+         if (false === $this->productRepository->delete($id)) {
+             return redirect(route('productIndex', $lang))->with('danger', __('admin.product_not_deleted'));
+         }
+         return redirect(route('productIndex', $lang))->with('success', __('admin.product_deleted_succesfully'));
      }
 
  }

@@ -13,7 +13,7 @@
 
      public function __construct(CategoryRepositoryInterface $categoryRepository)
      {
-	 $this->categoryRepository = $categoryRepository;
+         $this->categoryRepository = $categoryRepository;
      }
 
      /**
@@ -23,11 +23,11 @@
       */
      public function index(Request $request)
      {
-	 $categories = $this->categoryRepository->getData($request, 'availableLanguage');
+         $categories = $this->categoryRepository->getData($request, 'availableLanguage');
 
-	 return view('admin.modules.category.index', [
-	     'categoriesLocal' => $categories
-	 ]);
+         return view('admin.modules.category.index', [
+             'categoriesLocal' => $categories
+         ]);
      }
 
      /**
@@ -37,7 +37,7 @@
       */
      public function create()
      {
-	 return view('admin.modules.category.create');
+         return view('admin.modules.category.create');
      }
 
      /**
@@ -48,11 +48,11 @@
       */
      public function store(string $lang, CategoryRequest $request)
      {
-	 if (false === $this->categoryRepository->store($lang, $request)) {
-	     return redirect(route('categoryCreateView', $lang))->with('danger', __('admin.category_not_created'));
-	 }
+         if (false === $this->categoryRepository->store($lang, $request)) {
+             return redirect(route('categoryCreateView', $lang))->with('danger', __('admin.category_not_created'));
+         }
 
-	 return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_created_succesfully'));
+         return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_created_succesfully'));
      }
 
      /**
@@ -63,9 +63,9 @@
       */
      public function show(string $lang, int $id)
      {
-	 return view('admin.modules.category.view', [
-	     'categoryItem' => $this->categoryRepository->find($id)
-	 ]);
+         return view('admin.modules.category.view', [
+             'categoryItem' => $this->categoryRepository->find($id)
+         ]);
      }
 
      /**
@@ -76,9 +76,9 @@
       */
      public function edit(string $lang, int $id)
      {
-	 return view('admin.modules.category.update', [
-	     'categoryItem' => $this->categoryRepository->find($id)
-	 ]);
+         return view('admin.modules.category.update', [
+             'categoryItem' => $this->categoryRepository->find($id)
+         ]);
      }
 
      /**
@@ -91,11 +91,11 @@
      public function update(string $lang, int $id, CategoryRequest $request)
      {
 
-	 if (false === $this->categoryRepository->update($lang,$id, $request)) {
-	     return redirect(route('categoryEditView', $lang))->with('danger', __('admin.category_not_updated'));
-	 }
+         if (false === $this->categoryRepository->update($lang, $id, $request)) {
+             return redirect(route('categoryEditView', $lang))->with('danger', __('admin.category_not_updated'));
+         }
 
-	 return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_updated_succesfully'));
+         return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_updated_succesfully'));
      }
 
      /**
@@ -106,10 +106,10 @@
       */
      public function destroy(string $lang, int $id)
      {
-	 if (false === $this->categoryRepository->delete($id)) {
-	     return redirect(route('categoryIndex', $lang))->with('danger', __('admin.category_not_deleted'));
-	 }
-	 return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_deleted_succesfully'));
+         if (false === $this->categoryRepository->delete($id)) {
+             return redirect(route('categoryIndex', $lang))->with('danger', __('admin.category_not_deleted'));
+         }
+         return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_deleted_succesfully'));
      }
 
  }
