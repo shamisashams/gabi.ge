@@ -14,9 +14,10 @@
 				<div class="col s12 active" id="account">
 				    <!-- users edit media object ends -->
 				    <!-- users edit account form start -->
+				    <input name="old-images[]" id="old_images" hidden disabled value="{{$productItem->files}}">
 				    <form id="accountForm" novalidate="novalidate"
 					  action="{{route('productUpdate',[app()->getLocale(),$productItem->id])}}"
-					  method="POST">
+					  method="POST" enctype="multipart/form-data">
 					{{ method_field('PUT') }}
 					@csrf
 					<div class="row">
@@ -134,6 +135,15 @@
 						    <span>{{trans('admin.status')}}</span>
 						</label>
 					    </div>
+					    <div class="col s12 m6" style="margin-top:20px">
+						<div class="input-images"></div>
+						@if ($errors->has('images'))
+						<span class="help-block">
+						    {{ $errors->first('images') }}
+						</span>
+						@endif
+					    </div>
+
 					    <div class="col s12 display-flex justify-content-end mt-3">
 						<button type="submit" class="btn indigo">
 						    {{trans('admin.update')}}

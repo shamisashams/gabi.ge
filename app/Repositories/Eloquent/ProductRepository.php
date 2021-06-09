@@ -11,6 +11,8 @@
  use Illuminate\Support\Facades\DB;
  use App\Models\ProductLanguage;
  use App\Models\Language;
+ use Illuminate\Support\Facades\Storage;
+ use App\Models\File;
 
  class ProductRepository extends BaseRepository implements ProductRepositoryInterface
  {
@@ -43,7 +45,6 @@
 
      public function update(string $lang, int $id, ProductRequest $request)
      {
-
 
 	 $request['status'] = isset($request['status']) ? 1 : 0;
 
@@ -89,6 +90,10 @@
 		     'slug' => $request['slug']
 		 ]);
 	     }
+
+
+	     $this->setOldImagesOfProduct($request, $productItem)
+		     ->addProductImageFromRequest($request, $productItem);
 
 	     DB::commit();
 	     return true;
@@ -143,27 +148,7 @@
 		 'short_description' => $fields['short_description']
 	     ]);
 
-	     if ($request->hasFile('images')) {
-
-		 $requestFiles = $request->file('images');
-
-		 foreach ($requestFiles as $key => $file) {
-
-		     $nameOfImage = date('Ymhs') . $file->getClientOriginalName();
-		     $imagePath = '/storage/app/public/product/' . $productId;
-		     $destination = base_path() . $imagePath;
-
-		     $requestFiles[$key]->move($destination, $nameOfImage);
-
-		     $productItem->files()->create([
-			 'name' => $nameOfImage,
-			 'path' => $imagePath,
-			 'format' => $file->getClientOriginalExtension(),
-		     ]);
-		 }
-	     }
-
-
+	     $this->addProductImageFromRequest($request, $productItem);
 
 	     DB::commit();
 
@@ -177,6 +162,65 @@
      public function delete(int $id)
      {
 	 return $this->find($id)->delete();
+     }
+
+     protected function setOldImagesOfProduct(ProductRequest $request, Product $product)
+     {
+	 if (!count($product->files)) {
+	     return $this;
+	 }
+
+	 foreach ($product->files as $productFileItem) {
+
+	     if (is_null($request['old_images'])) {
+		 $this->removeProductImage($productFileItem);
+		 continue;
+	     }
+
+	     if (in_array($productFileItem->id, $request['old_images'])) {
+		 continue;
+	     }
+
+	     $this->removeProductImage($productFileItem);
+	 }
+
+	 return $this;
+     }
+
+     protected function addProductImageFromRequest(ProductRequest $request, Product $product)
+     {
+	 if (!$request->hasFile('images')) {
+	     return;
+	 }
+
+	 $requestFiles = $request->file('images');
+
+	 foreach ($requestFiles as $key => $file) {
+
+	     $nameOfImage = date('Ymhs') . $file->getClientOriginalName();
+	     $imagePath = '/storage/app/public/product/' . $product->id;
+	     $destination = base_path() . $imagePath;
+
+	     $requestFiles[$key]->move($destination, $nameOfImage);
+
+	     $product->files()->create([
+		 'name' => $nameOfImage,
+		 'path' => $imagePath,
+		 'format' => $file->getClientOriginalExtension(),
+	     ]);
+	 }
+     }
+
+     protected function removeProductImage(File $productFileItem)
+     {
+
+	 $imagePath = 'public/product/' . $productFileItem->id . '/' . $productFileItem->name;
+
+	 if (Storage::exists($imagePath)) {
+	     Storage::delete($imagePath);
+	 }
+
+	 $productFileItem->delete();
      }
 
  }
