@@ -77,5 +77,27 @@
          return redirect(route('productIndex', $lang))->with('success', __('admin.product_deleted_succesfully'));
      }
 
+     public function getFeatureAnswers(string $locale, int $id)
+     {
+         $feature = Feature::with('answers')->find($id);
+
+         $answerStack = [];
+
+         foreach ($feature->answers as $answerItem) {
+             $answerData = $answerItem->answer->availableLanguage;
+
+             if (!count($answerData)) {
+                 continue;
+             }
+
+             $answerStack[] = [
+                 'answer_id' => $answerData[0]->id,
+                 'answer_title' => $answerData[0]->title
+             ];
+         }
+
+         return response()->json($answerStack);
+     }
+
  }
  

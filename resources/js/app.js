@@ -1,13 +1,13 @@
 require('./bootstrap');
 
-$( document ).ready(function() {
+$(document).ready(function () {
     let oldImages = $('#old_images').val();
     if (oldImages) {
         oldImages = JSON.parse(oldImages);
     }
     let imagedata = [];
     let getUrl = window.location;
-    let baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[0];
+    let baseUrl = getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[0];
     if (oldImages && oldImages.length > 0) {
         oldImages.forEach((el, key) => {
             let directory = '';
@@ -45,4 +45,51 @@ $( document ).ready(function() {
     } else {
         $('.input-images').imageUploader();
     }
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    $('.product_feature').on('select2:select', (e) => {
+        const featureId = e.target.value;
+
+        // Get feature Answers
+
+        const featureAnswersDropdownDiv = document.querySelector(".product_feature_answers");
+
+        fetch('answers/' + featureId).then((response) => {
+            return response.json();
+        }).then((jsonResponseAnswers) => {
+
+            if (jsonResponseAnswers.length === 0) {
+                featureAnswersDropdownDiv.innerHTML = "Feature Does not have answers.";
+                return;
+            }
+
+            let answerSelectHTML = `<select name="feature_answers" class="select2 browser-default">
+                                                            <option value="" disabled selected>Choose your option
+                                                            </option>`;
+
+            Object.keys(jsonResponseAnswers).forEach(key => {
+                let answerId = jsonResponseAnswers[key].answer_id;
+                let answerTitle = jsonResponseAnswers[key].answer_title;
+                answerSelectHTML += `<option {{old('answer_id') ==  ${answerId}  ?   "selected":""}} value="${answerId}">${answerTitle}</option>`;
+            });
+
+            answerSelectHTML += "</select>";
+
+            featureAnswersDropdownDiv.innerHTML = answerSelectHTML;
+        }).catch((err) => {
+            console.log(err);
+        });
+
+
+
+
+    });
+
+
+
+
+
 });

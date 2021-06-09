@@ -1899,6 +1899,32 @@ $(document).ready(function () {
     $('.input-images').imageUploader();
   }
 });
+document.addEventListener('DOMContentLoaded', function () {
+  $('.product_feature').on('select2:select', function (e) {
+    var featureId = e.target.value; // Get feature Answers
+
+    var featureAnswersDropdownDiv = document.querySelector(".product_feature_answers");
+    fetch('answers/' + featureId).then(function (response) {
+      return response.json();
+    }).then(function (jsonResponseAnswers) {
+      if (jsonResponseAnswers.length === 0) {
+        featureAnswersDropdownDiv.innerHTML = "Feature Does not have answers.";
+        return;
+      }
+
+      var answerSelectHTML = "<select name=\"feature_answers\" class=\"select2 browser-default\">\n                                                            <option value=\"\" disabled selected>Choose your option\n                                                            </option>";
+      Object.keys(jsonResponseAnswers).forEach(function (key) {
+        var answerId = jsonResponseAnswers[key].answer_id;
+        var answerTitle = jsonResponseAnswers[key].answer_title;
+        answerSelectHTML += "<option {{old('answer_id') ==  ".concat(answerId, "  ?   \"selected\":\"\"}} value=\"").concat(answerId, "\">").concat(answerTitle, "</option>");
+      });
+      answerSelectHTML += "</select>";
+      featureAnswersDropdownDiv.innerHTML = answerSelectHTML;
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  });
+});
 
 /***/ }),
 
