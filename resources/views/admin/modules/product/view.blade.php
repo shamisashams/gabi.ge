@@ -59,6 +59,18 @@
 				    </table>
 				</div>
 			    </div>
+			    
+			    <div style="display: flex;flex-wrap:wrap;">
+                                    @if(count($productItem->files)>0)
+                                        @foreach($productItem->files as $productFile)
+                                            <div class="flex-image">
+                                                <img  src="/storage/product/{{$productFile->fileable_id}}/{{$productFile->name}}" class="page-image"/>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+			    
+			    
 			</div>
 		    </div>
 
