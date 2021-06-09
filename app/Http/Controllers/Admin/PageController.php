@@ -50,45 +50,45 @@ class PageController extends AdminController
         ]);
 
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Application|Factory|View|Response
-     */
-    public function create(string $locale)
-    {
-        return redirect(route('pageIndex', $locale));
-        return view('admin.modules.page.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param string $lang
-     * @param FeatureRequest $request
-     * @return Application|RedirectResponse|Response|Redirector
-     */
-    public function store(string $locale, PageRequest $request)
-    {
-        $data = $request->only([
-            'title',
-            'meta_title',
-            'slug',
-            'description',
-            'content',
-            'content_2',
-            'content_3',
-            'content_4',
-            'status'
-        ]);
-        if (!$this->service->store($locale, $data)) {
-            return redirect(route('pageCreateView', $locale))->with('danger', 'Page does not create.');
-        }
-
-        return redirect(route('pageIndex', $locale))->with('success', 'Page create successfully.');
-
-    }
+//
+//    /**
+//     * Show the form for creating a new resource.
+//     *
+//     * @return Application|Factory|View|Response
+//     */
+//    public function create(string $locale)
+//    {
+//        return redirect(route('pageIndex', $locale));
+//        return view('admin.modules.page.create');
+//    }
+//
+//    /**
+//     * Store a newly created resource in storage.
+//     *
+//     * @param string $lang
+//     * @param FeatureRequest $request
+//     * @return Application|RedirectResponse|Response|Redirector
+//     */
+//    public function store(string $locale, PageRequest $request)
+//    {
+//        $data = $request->only([
+//            'title',
+//            'meta_title',
+//            'slug',
+//            'description',
+//            'content',
+//            'content_2',
+//            'content_3',
+//            'content_4',
+//            'status'
+//        ]);
+//        if (!$this->service->store($locale, $data)) {
+//            return redirect(route('pageCreateView', $locale))->with('danger', 'Page does not create.');
+//        }
+//
+//        return redirect(route('pageIndex', $locale))->with('success', 'Page create successfully.');
+//
+//    }
 
     /**
      * Display the specified resource.
@@ -129,9 +129,8 @@ class PageController extends AdminController
      */
     public function update(string $locale, PageRequest $request, int $id)
     {
-
         if (!$this->pageRepository->update($locale, $id, $request)) {
-            return redirect(route('pageEditView', $locale, $id))->with('danger', __('admin.page_not_update'));
+            return redirect(route('pageEditView', [$locale, $id]))->with('danger', __('admin.page_not_update'));
         }
 
         return redirect(route('pageIndex', $locale))->with('success', __('admin.page_success_update'));

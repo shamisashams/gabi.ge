@@ -103,7 +103,7 @@
                                 @endif
                                 </tbody>
                             </table>
-                            {{ $translations->links('admin.vendor.pagination.custom') }}
+                            {{ $translations->appends(request()->query())->links('admin.vendor.pagination.custom') }}
 
                         </div>
                     </div>

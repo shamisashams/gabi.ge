@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Request\Admin\FeatureRequest;
 use App\Http\Request\Admin\PageRequest;
+use App\Http\Request\Admin\SaleRequest;
 use App\Repositories\PageRepositoryInterface;
 use App\Repositories\SaleRepositoryInterface;
 use App\Services\PageService;
@@ -42,12 +43,12 @@ class SaleController extends AdminController
     {
         $request->validate([
             'id' => 'integer|nullable',
+            'discount' => 'string|max:255|nullable',
+            'type' => 'string|max:255|nullable',
             'title' => 'string|max:255|nullable',
-            'slug' => 'string|max:255|nullable',
-            'status' => 'boolean|nullable',
         ]);
         return view('admin.modules.sale.index', [
-            'sales' => $this->saleRepository->getData($request,['product.availableLanguage'])
+            'sales' => $this->saleRepository->getData($request, ['availableLanguage'])
         ]);
 
     }
@@ -70,24 +71,13 @@ class SaleController extends AdminController
      * @param FeatureRequest $request
      * @return Application|RedirectResponse|Response|Redirector
      */
-    public function store(string $locale, PageRequest $request)
+    public function store(string $locale, SaleRequest $request)
     {
-        $data = $request->only([
-            'title',
-            'meta_title',
-            'slug',
-            'description',
-            'content',
-            'content_2',
-            'content_3',
-            'content_4',
-            'status'
-        ]);
-        if (!$this->service->store($locale, $data)) {
-            return redirect(route('pageCreateView', $locale))->with('danger', 'Page does not create.');
+        if (!$this->saleRepository->store($locale, $request)) {
+            return redirect(route('saleIndex', $locale))->with('danger', trans('admin.sale_not_created'));
         }
 
-        return redirect(route('pageIndex', $locale))->with('success', 'Page create successfully.');
+        return redirect(route('saleIndex', $locale))->with('success', trans('admin.sale_success_create'));
 
     }
 
@@ -100,8 +90,8 @@ class SaleController extends AdminController
      */
     public function show(string $locale, int $id)
     {
-        return view('admin.modules.page.view', [
-            'page' => $this->pageRepository->find($id)
+        return view('admin.modules.sale.view', [
+            'sale' => $this->saleRepository->find($id)
         ]);
     }
 
@@ -114,8 +104,8 @@ class SaleController extends AdminController
      */
     public function edit(string $locale, int $id)
     {
-        return view('admin.modules.page.update', [
-            'page' => $this->pageRepository->find($id)
+        return view('admin.modules.sale.update', [
+            'sale' => $this->saleRepository->find($id)
         ]);
 
     }
@@ -128,14 +118,30 @@ class SaleController extends AdminController
      * @param int $id
      * @return Application|RedirectResponse|Response|Redirector
      */
-    public function update(string $locale, PageRequest $request, int $id)
+    public function update(string $locale, SaleRequest $request, int $id)
     {
 
-        if (!$this->pageRepository->update($locale, $id, $request)) {
-            return redirect(route('pageEditView', $locale, $id))->with('danger', __('admin.page_not_update'));
+        if (!$this->saleRepository->update($locale, $id, $request)) {
+            return redirect(route('saleEditView', [$locale, $id]))->with('danger', __('admin.sale_not_update'));
         }
 
-        return redirect(route('pageIndex', $locale))->with('success', __('admin.page_success_update'));
+        return redirect(route('saleIndex', $locale))->with('success', __('admin.sale.success_update'));
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param string $locale
+     * @param int $id
+     * @return Application|RedirectResponse|Response|Redirector
+     */
+    public function destroy(string $locale, int $id)
+    {
+        if (!$this->saleRepository->delete($id)) {
+            return redirect(route('saleIndex', $locale))->with('danger', trans('sale_not_delete'));
+        }
+        return redirect(route('saleIndex', $locale))->with('success', trans('admin.sale_success_delete'));
 
     }
 }

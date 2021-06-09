@@ -115,7 +115,7 @@
                                 @endif
                                 </tbody>
                             </table>
-                            {{ $languages->links('admin.vendor.pagination.custom') }}
+                            {{ $languages->appends(request()->query())->links('admin.vendor.pagination.custom') }}
 
                         </div>
                     </div>
