@@ -39,6 +39,7 @@ class SaleRequest extends FormRequest
                 'required',
                 'numeric',
                 'max:1000000',
+                'regex:/^[0-9]+(\.[0-9][0-9]?)?$/',
                 function ($attribute, $value, $fail) {
                     if ($this->type == Sale::TYPE_PERCENT && $value > 100) {
                         $fail('The ' . $attribute . ' should be less or equal to 100');
