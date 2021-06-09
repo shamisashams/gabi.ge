@@ -117,6 +117,7 @@
 
 	 try {
 	     DB::beginTransaction();
+
 	     $productItem = $this->model->create([
 		 'position' => $fields['position'],
 		 'status' => $fields['status'],
@@ -141,6 +142,28 @@
 		 'slug' => $fields['slug'],
 		 'short_description' => $fields['short_description']
 	     ]);
+
+	     if ($request->hasFile('images')) {
+
+		 $requestFiles = $request->file('images');
+
+		 foreach ($requestFiles as $key => $file) {
+
+		     $nameOfImage = date('Ymhs') . $file->getClientOriginalName();
+		     $imagePath = '/storage/app/public/product/' . $productId;
+		     $destination = base_path() . $imagePath;
+
+		     $requestFiles[$key]->move($destination, $nameOfImage);
+
+		     $productItem->files()->create([
+			 'name' => $nameOfImage,
+			 'path' => $imagePath,
+			 'format' => $file->getClientOriginalExtension(),
+		     ]);
+		 }
+	     }
+
+
 
 	     DB::commit();
 

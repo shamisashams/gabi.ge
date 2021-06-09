@@ -11,7 +11,7 @@
 			    <div class="row">
 				<div class="col s12 active" id="account">
 				    <form id="accountForm" novalidate="novalidate"
-					  action="{{route('productCreate',app()->getLocale())}}" method="POST">
+					  action="{{route('productCreate',app()->getLocale())}}" method="POST" enctype="multipart/form-data" >
 					@csrf
 					<div class="row">
 					    <div class="col s12 m6">
@@ -138,7 +138,18 @@
 						    <span>{{trans('admin.status')}}</span>
 						</label>
 
+
 					    </div>
+
+					    <div class="col s12 m6" style="margin-top:20px">
+						<div class="input-images"></div>
+						@if ($errors->has('images'))
+						<span class="help-block">
+						    {{ $errors->first('images') }}
+						</span>
+						@endif
+					    </div>
+
 					    <div class="col s12 display-flex justify-content-end mt-3">
 						<button type="submit" class="btn indigo">
 						    {{trans('admin.create')}}
