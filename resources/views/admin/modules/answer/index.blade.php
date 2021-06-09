@@ -113,7 +113,7 @@
                                 @endif
                                 </tbody>
                             </table>
-                            {{ $answers->links('admin.vendor.pagination.custom') }}
+                            {{ $answers->appends(request()->query())->links('admin.vendor.pagination.custom') }}
 
                         </div>
                     </div>

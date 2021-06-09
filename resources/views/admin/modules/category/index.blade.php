@@ -101,7 +101,7 @@
                                 @endif
                                 </tbody>
                             </table>
-                            {{ $categoriesLocal->links('admin.vendor.pagination.custom') }}
+                            {{ $categoriesLocal->appends(request()->query())->links('admin.vendor.pagination.custom') }}
 
                         </div>
                     </div>
