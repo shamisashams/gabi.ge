@@ -6,6 +6,7 @@
  use App\Http\Request\Admin\ProductRequest;
  use App\Repositories\ProductRepositoryInterface;
  use App\Models\Category;
+ use App\Models\Feature;
 
  class ProductController extends AdminController
  {
@@ -38,7 +39,8 @@
      public function create()
      {
          return view('admin.modules.product.create', [
-             'categories' => Category::with('availableLanguage')->where('status', '=', '1')->get()
+             'categories' => Category::with('availableLanguage')->where('status', '=', '1')->get(),
+             'features' => Feature::with('availableLanguage')->where('status', '=', '1')->get()
          ]);
      }
 
