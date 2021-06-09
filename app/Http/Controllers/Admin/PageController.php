@@ -46,7 +46,7 @@ class PageController extends AdminController
             'status' => 'boolean|nullable',
         ]);
         return view('admin.modules.page.index', [
-            'pages' => $this->pageRepository->getData($request)
+            'pages' => $this->pageRepository->getData($request, ['availableLanguage'])
         ]);
 
     }
