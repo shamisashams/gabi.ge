@@ -58,7 +58,7 @@
 
         <li class="bold"><a
                 class="waves-effect waves-cyan {{str_contains(route('sliderIndex',app()->getLocale()),request()->path())?"active":""}}"
-                href="{{route('sliderIndex',app()->getLocale())}}"><i class="material-icons dp48">dashboard</i><span>{{trans('admin.sliders')}}</span></a>
+                href="{{route('sliderIndex',app()->getLocale())}}"><i class="material-icons dp48">slideshow</i><span>{{trans('admin.sliders')}}</span></a>
         </li>
 
     </ul>
