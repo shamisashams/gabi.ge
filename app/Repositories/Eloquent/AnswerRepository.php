@@ -183,6 +183,9 @@ class AnswerRepository extends BaseRepository implements AnswerRepositoryInterfa
     public function delete(int $id)
     {
         $data = $this->find($id);
+        if ($data && count($data->files) > 0) {
+            $data->files()->delete();
+        }
         return $data->delete();
     }
 

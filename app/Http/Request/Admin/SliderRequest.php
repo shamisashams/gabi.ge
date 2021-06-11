@@ -35,7 +35,10 @@ class SliderRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
-            'position' => 'required',
+            'redirect_url' => 'nullable|string|max:2048',
+            'slug' => 'nullable|string|max:255',
+            'type' => 'required|string'
+
         ];
     }
 }

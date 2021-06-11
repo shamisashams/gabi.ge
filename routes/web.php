@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Auth;
@@ -128,6 +129,15 @@ Route::prefix('{locale?}')
                     ->name('update', 'saleUpdate')
                     ->name('show', 'saleShow')
                     ->name('destroy', 'saleDestroy');
+
+                Route::resource('slider', SliderController::class)
+                    ->name('index', 'sliderIndex')
+                    ->name('create', 'sliderCreateView')
+                    ->name('store', 'sliderCreate')
+                    ->name('edit', 'sliderEditView')
+                    ->name('update', 'sliderUpdate')
+                    ->name('destroy', 'sliderDestroy')
+                    ->name('show', 'sliderShow');
             });
         });
 
