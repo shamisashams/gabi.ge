@@ -13,6 +13,7 @@
  use App\Models\Language;
  use Illuminate\Support\Facades\Storage;
  use App\Models\File;
+ use App\Models\SaleProduct;
 
  class ProductRepository extends BaseRepository implements ProductRepositoryInterface
  {
@@ -123,7 +124,6 @@
          $fields['status'] = isset($fields['status']) ? 1 : 0;
          //// Create new item
 
-
          try {
              DB::beginTransaction();
 
@@ -156,6 +156,11 @@
              if (isset($fields['answers']) && is_array($fields['answers'])) {
                  foreach ($fields['answers'] as $answerInfo) {
                      $featureAndAnswerData = explode('-', $answerInfo);
+                     
+                     if (count($featureAndAnswerData) !== 2) {
+                         continue;
+                     }
+                     
                      $featureId = (int) $featureAndAnswerData[1];
                      $answerId = (int) $featureAndAnswerData[0];
 
@@ -170,8 +175,14 @@
                  }
              }
 
-             DB::commit();
+             if (isset($fields['sale'])) {
+                 SaleProduct::create([
+                     'product_id' => $productItem->id,
+                     'sale_id' => (int) $fields['sale']
+                 ]);
+             }
 
+             DB::commit();
              return true;
          } catch (\Exception $queryException) {
              DB::rollBack();
