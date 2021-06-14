@@ -56,9 +56,16 @@
 
      public function edit(string $lang, int $id)
      {
+         $product = $this->productRepository->findWithRelated(['features.feature.answers.answer.availableLanguage'], $id);
+         
+         if (!count($product)) {
+             return;
+         }
+
          return view('admin.modules.product.update', [
-             'productItem' => $this->productRepository->find($id),
-             'categories' => Category::with('availableLanguage')->where('status', '=', '1')->get()
+             'productItem' => $product[0],
+             'categories' => Category::with('availableLanguage')->where('status', '=', '1')->get(),
+             'features' => Feature::with(['availableLanguage', 'answers'])->where('status', '=', '1')->get()
          ]);
      }
 

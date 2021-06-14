@@ -156,11 +156,11 @@
              if (isset($fields['answers']) && is_array($fields['answers'])) {
                  foreach ($fields['answers'] as $answerInfo) {
                      $featureAndAnswerData = explode('-', $answerInfo);
-                     
+
                      if (count($featureAndAnswerData) !== 2) {
                          continue;
                      }
-                     
+
                      $featureId = (int) $featureAndAnswerData[1];
                      $answerId = (int) $featureAndAnswerData[0];
 
@@ -252,6 +252,11 @@
          }
 
          $productFileItem->delete();
+     }
+
+     public function findWithRelated(array $relations, int $id)
+     {
+         return $this->model->with($relations)->where('id', '=', $id)->get();
      }
 
  }
