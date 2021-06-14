@@ -16,7 +16,7 @@
       */
      public function authorize()
      {
-	 return Auth()->user()->can('isAdmin');
+         return Auth()->user()->can('isAdmin');
      }
 
      /**
@@ -27,23 +27,26 @@
      public function rules()
      {
 
-	 $rules = [
-	     'title' => 'required|string|max:255',
-	     //'category' => 'required|integer',
-	     'position' => 'required|string|max:255',
-	     'price' => 'required|numeric',
-	     'category_id' => 'required|numeric',
-	     'description' => 'required|string',
-	     //     'sale_price' => 'nullable|numeric',
-	     'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096'
-	 ];
+         $rules = [
+             'title' => 'required|string|max:255',
+             //'category' => 'required|integer',
+             'position' => 'required|string|max:255',
+             'price' => 'required|numeric',
+             'category_id' => 'required|numeric',
+             'sale' => 'numeric',
+             'feature.*' => 'numeric',
+             'answers.*' => 'string',
+             'description' => 'required|string',
+             //'sale_price' => 'nullable|numeric',
+             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096'
+         ];
 
-	 if (Route::currentRouteName() !== 'productUpdate') {
-	     // TODO : new logic
-	     $rules['slug'] = ['required', 'alpha_dash', Rule::unique('product_languages', 'slug')->ignore($this->product)];
-	 }
+         if (Route::currentRouteName() !== 'productUpdate') {
+             // TODO : new logic
+             $rules['slug'] = ['required', 'alpha_dash', Rule::unique('product_languages', 'slug')->ignore($this->product)];
+         }
 
-	 return $rules;
+         return $rules;
      }
 
  }

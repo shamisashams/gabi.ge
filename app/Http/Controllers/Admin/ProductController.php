@@ -7,6 +7,7 @@
  use App\Repositories\ProductRepositoryInterface;
  use App\Models\Category;
  use App\Models\Feature;
+ use App\Models\Sale;
 
  class ProductController extends AdminController
  {
@@ -40,7 +41,8 @@
      {
          return view('admin.modules.product.create', [
              'categories' => Category::with('availableLanguage')->where('status', '=', '1')->get(),
-             'features' => Feature::with('availableLanguage')->where('status', '=', '1')->get()
+             'features' => Feature::with('availableLanguage')->where('status', '=', '1')->get(),
+             'sales' => Sale::with('availableLanguage')->get()
          ]);
      }
 
@@ -81,6 +83,10 @@
      {
          $feature = Feature::with('answers')->find($id);
 
+         if (is_null($feature)) {
+             return response()->json([]);
+         }
+
          $answerStack = [];
 
          foreach ($feature->answers as $answerItem) {
@@ -95,7 +101,6 @@
                  'answer_title' => $answerData[0]->title
              ];
          }
-
          return response()->json($answerStack);
      }
 

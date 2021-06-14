@@ -76,6 +76,25 @@
                                                         @endif
                                                     </div>
                                                 </div>
+
+
+                                                <div class="col s12 input-field">
+
+                                                    <select name="sale" class="select2 browser-default">
+                                                        <option value="" disabled selected>Choose your option
+                                                        </option>
+                                                        @foreach($sales as $sale):
+                                                        <option {{old('sale') ==  $sale->id   ?   "selected":""}} value="{{$sale->id}}">{{(count($sale->availableLanguage) > 0) ?  $sale->availableLanguage[0]->title : ''}}</option>
+                                                        @endforeach
+
+                                                    </select>
+                                                    <label for="sale" class="">{{trans('admin.sale')}}</label>
+                                                    @if ($errors->has('sale'))
+                                                    <small
+                                                        class="errorTxt">{{ $errors->first('sale') }}</small>
+                                                    @endif
+                                                </div>
+
                                             </div>
                                             <div class="col s12 m6">
                                                 <div class="row">
@@ -134,7 +153,7 @@
 
                                                     <div class="col s12 input-field">
 
-                                                        <select name="feature" class="product_feature select2 browser-default">
+                                                        <select name="feature[]" class="product_feature select2 browser-default" multiple="multiple">
                                                             <option value="" disabled selected>Choose your option
                                                             </option>
                                                             @foreach($features as $feature):
@@ -151,7 +170,7 @@
 
 
                                                     <div class="col s12 input-field product_feature_answers">
-                                                        
+
                                                     </div>
 
 

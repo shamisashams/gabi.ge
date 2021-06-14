@@ -114,11 +114,15 @@
              'status',
              'position',
              'short_description',
-             'category_id'
+             'category_id',
+             'answers',
+             'feature',
+             'sale'
          ]);
 
          $fields['status'] = isset($fields['status']) ? 1 : 0;
          //// Create new item
+
 
          try {
              DB::beginTransaction();
@@ -135,7 +139,6 @@
              if (!$productId) {
                  return false;
              }
-
              /// Save with correct language
              $languageId = Language::getIdByName($lang);
 
@@ -149,6 +152,23 @@
              ]);
 
              $this->addProductImageFromRequest($request, $productItem);
+
+             if (isset($fields['answers']) && is_array($fields['answers'])) {
+                 foreach ($fields['answers'] as $answerInfo) {
+                     $featureAndAnswerData = explode('-', $answerInfo);
+                     $featureId = (int) $featureAndAnswerData[1];
+                     $answerId = (int) $featureAndAnswerData[0];
+
+                     $productItem->features()->create([
+                         'feature_id' => $featureId
+                     ]);
+
+                     $productItem->answers()->create([
+                         'feature_id' => $featureId,
+                         'answer_id' => $answerId
+                     ]);
+                 }
+             }
 
              DB::commit();
 

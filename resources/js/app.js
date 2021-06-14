@@ -51,45 +51,47 @@ $(document).ready(function () {
 document.addEventListener('DOMContentLoaded', () => {
 
     $('.product_feature').on('select2:select', (e) => {
-        const featureId = e.target.value;
+
+        const featureId = e.params.data.id;
 
         // Get feature Answers
-
         const featureAnswersDropdownDiv = document.querySelector(".product_feature_answers");
+
+        if (!featureId) {
+            return;
+        }
 
         fetch('answers/' + featureId).then((response) => {
             return response.json();
         }).then((jsonResponseAnswers) => {
 
             if (jsonResponseAnswers.length === 0) {
-                featureAnswersDropdownDiv.innerHTML = "Feature Does not have answers.";
+                // featureAnswersDropdownDiv.innerHTML = "Feature Does not have answers.";
                 return;
             }
 
-            let answerSelectHTML = `<select name="feature_answers" class="select2 browser-default">
+            let childDropDownElement = document.createElement('div');
+            childDropDownElement.className = 'answer-dropdown-div';
+            childDropDownElement.setAttribute('style', 'margin-top:15px;paddin:3px');
+
+
+            let answerSelectHTML = `<select name="answers[]" class="select2 browser-default" >
                                                             <option value="" disabled selected>Choose your option
                                                             </option>`;
 
             Object.keys(jsonResponseAnswers).forEach(key => {
                 let answerId = jsonResponseAnswers[key].answer_id;
                 let answerTitle = jsonResponseAnswers[key].answer_title;
-                answerSelectHTML += `<option {{old('answer_id') ==  ${answerId}  ?   "selected":""}} value="${answerId}">${answerTitle}</option>`;
+                answerSelectHTML += `<option {{old("answer_id") ==  ${answerId}  ?   "selected":""}} value="${answerId}-${featureId}">${answerTitle}</option>`;
             });
 
             answerSelectHTML += "</select>";
 
-            featureAnswersDropdownDiv.innerHTML = answerSelectHTML;
+            childDropDownElement.innerHTML = answerSelectHTML;
+
+            featureAnswersDropdownDiv.appendChild(childDropDownElement);
         }).catch((err) => {
             console.log(err);
-        });
-
-
-
-
+        }); 
     });
-
-
-
-
-
 });
