@@ -19,7 +19,4 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     public function getMainCategories(){
         return $this->model::with(['availableLanguage'])->byMain()->get();
     }
-
-
-
 }

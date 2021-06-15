@@ -10,6 +10,7 @@ use App\Models\Localization;
 use App\Repositories\AnswerRepositoryInterface;
 use App\Repositories\Frontend\CategoryRepositoryInterface;
 use App\Repositories\Frontend\ProductRepositoryInterface;
+use App\Repositories\Frontend\SliderRepositoryInterface;
 use App\Services\AnswerService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
@@ -22,11 +23,13 @@ class HomeController extends Controller
 {
     protected $productRepository;
     protected $categoryRepository;
+    protected $sliderRepository;
 
-    public function __construct(ProductRepositoryInterface $productRepository, CategoryRepositoryInterface $categoryRepository)
+    public function __construct(ProductRepositoryInterface $productRepository, CategoryRepositoryInterface $categoryRepository, SliderRepositoryInterface $sliderRepository)
     {
-        $this->productRepository= $productRepository;
+        $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->sliderRepository = $sliderRepository;
     }
 
     /**
@@ -41,7 +44,8 @@ class HomeController extends Controller
             'bestSellerProducts' => $this->productRepository->getBestSeller(),
             'discountedProducts' => $this->productRepository->getDiscountedProducts(),
             'newProducts' => $this->productRepository->getNewProducts(),
-            'categories' => $this->categoryRepository->getMainCategories()
+            'categories' => $this->categoryRepository->getMainCategories(),
+            'sliders' => $this->sliderRepository->getSliders()
         ]);
     }
 }

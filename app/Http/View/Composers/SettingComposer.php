@@ -13,11 +13,18 @@ namespace App\Http\View\Composers;
 use App\Models\Category;
 use App\Models\Localization;
 use App\Models\Setting;
+use App\Repositories\Frontend\CategoryRepositoryInterface;
 use App\Services\CategoryService;
 use Illuminate\View\View;
 
 class SettingComposer
 {
+    protected $categoryRepository;
+
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
 
     /**
      * Bind data to the view.
@@ -28,22 +35,20 @@ class SettingComposer
      */
     public function compose(View $view)
     {
-        $model = new CategoryService(new Category());
-        $categories = $model->getCategories(app()->getLocale())->take(6);
 
-        $view->with('address', $this->getValue('address'))
-            ->with('contact_email', $this->getValue('contact_email'))
-            ->with('categories', $categories)
-            ->with('phone', $this->getValue('phone'))
-            ->with('siteFacebook',$this->getValue('facebook'))
-            ->with('siteInstagram',$this->getValue('instagram'))
-            ->with('sitePayByCash',$this->getValue('pay_by_cash'))
-            ->with('siteTransfer',$this->getValue('transfer'))
-            ->with('sitePaymentByCard',$this->getValue('payment_by_card'))
-            ->with('siteBankInstallment',$this->getValue('bank_installment'))
-            ->with('siteInternalInstallment',$this->getValue('internal_installment'))
-            ->with('siteRequisiteOne',$this->getValue('requisite_1'))
-            ->with('siteRequisiteTwo',$this->getValue('requisite_2'))
+        $view->with('categories', $this->categoryRepository->getMainCategories());
+//            ->with('contact_email', $this->getValue('contact_email'))
+//            ->with('categories', $categories)
+//            ->with('phone', $this->getValue('phone'))
+//            ->with('siteFacebook',$this->getValue('facebook'))
+//            ->with('siteInstagram',$this->getValue('instagram'))
+//            ->with('sitePayByCash',$this->getValue('pay_by_cash'))
+//            ->with('siteTransfer',$this->getValue('transfer'))
+//            ->with('sitePaymentByCard',$this->getValue('payment_by_card'))
+//            ->with('siteBankInstallment',$this->getValue('bank_installment'))
+//            ->with('siteInternalInstallment',$this->getValue('internal_installment'))
+//            ->with('siteRequisiteOne',$this->getValue('requisite_1'))
+//            ->with('siteRequisiteTwo',$this->getValue('requisite_2'))
         ;
     }
 

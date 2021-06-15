@@ -68,6 +68,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SliderRepositoryInterface::class, SliderRepository::class);
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(\App\Repositories\Frontend\CategoryRepositoryInterface::class, \App\Repositories\Frontend\Eloquent\CategoryRepository::class);
+        $this->app->bind(\App\Repositories\Frontend\SliderRepositoryInterface::class, \App\Repositories\Frontend\Eloquent\SliderRepository::class);
     }
 
 }

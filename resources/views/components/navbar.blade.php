@@ -13,66 +13,32 @@
                     Categories
 
                     <div class="category_dropdown">
+
                         <div>
-                            <a href="products.html"
-                            ><div class="category_list active">Category 1</div>
-                            </a>
-                            <a href="products.html"
-                            ><div class="category_list">Category 2</div></a
-                            >
-                            <a href="products.html"
-                            ><div class="category_list">Category 3</div></a
-                            >
-                            <a href="products.html"
-                            ><div class="category_list">Category 4</div></a
-                            >
-                            <a href="products.html"
-                            ><div class="category_list">Category 5</div></a
-                            >
-                            <a href="products.html"
-                            ><div class="category_list">Category 6</div></a
-                            >
-                            <a href="products.html"
-                            ><div class="category_list">Category 7</div></a
-                            >
+                            @foreach($categories as $key=>$category)
+                                <a href="products.html">
+                                    <div
+                                        class="category_list {{$key==0?"active":""}}">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</div>
+                                </a>
+                            @endforeach
                         </div>
                         <div>
                             <div class="category_img_placeholder">
-                                <div class="category_img display">
-                                    <img class="main" src="img/products/12.png" alt="" />
-                                    <img src="img/products/frame.png" alt="" class="frame" />
-                                    <a class="cat_btn" href="products.html">Category 1</a>
-                                </div>
-                                <div class="category_img">
-                                    <img class="main" src="img/products/13.png" alt="" />
-                                    <img src="img/products/frame.png" alt="" class="frame" />
-                                    <a class="cat_btn" href="products.html">Category 2</a>
-                                </div>
-                                <div class="category_img">
-                                    <img class="main" src="img/products/14.png" alt="" />
-                                    <img src="img/products/frame.png" alt="" class="frame" />
-                                    <a class="cat_btn" href="products.html">Category 3</a>
-                                </div>
-                                <div class="category_img">
-                                    <img class="main" src="img/products/12.png" alt="" />
-                                    <img src="img/products/frame.png" alt="" class="frame" />
-                                    <a class="cat_btn" href="products.html">Category 4</a>
-                                </div>
-                                <div class="category_img">
-                                    <img class="main" src="img/products/13.png" alt="" />
-                                    <img src="img/products/frame.png" alt="" class="frame" />
-                                    <a class="cat_btn" href="products.html">Category 5</a>
-                                </div>
-                                <div class="category_img">
-                                    <img class="main" src="img/products/14.png" alt="" />
-                                    <img src="img/products/frame.png" alt="" class="frame" />
-                                    <a class="cat_btn" href="products.html">Category 6</a>
-                                </div>
-                                <div class="category_img">
-                                    <img class="main" src="img/products/12.png" alt="" />
-                                    <img src="img/products/frame.png" alt="" class="frame" />
-                                    <a class="cat_btn" href="#">Category 7</a>
-                                </div>
+                                @foreach($categories as $key=>$category)
+                                    <div class="category_img {{$key==0?"display":""}}">
+                                        @if(isset($category->files[0]))
+                                            <img class="main"
+                                                 src="/storage/category/{{$category->files[0]->fileable_id}}/{{$category->files[0]->name}}"
+                                                 alt=""/>
+                                        @else
+                                            <img src="noimage.png"/>
+                                        @endif
+                                        <img src="img/products/frame.png" alt="" class="frame"/>
+                                        <a class="cat_btn"
+                                           href="products.html">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}
+                                        </a>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -129,10 +95,10 @@
                             <div class="number">2 x $38.00</div>
                         </div>
                         <div class="picture">
-                            <img src="img/products/2.png" alt="" />
+                            <img src="img/products/2.png" alt=""/>
                         </div>
                         <button class="remove_item">
-                            <img src="img/icons/header/remove.png" alt="" />
+                            <img src="img/icons/header/remove.png" alt=""/>
                         </button>
                     </div>
                     <div class="item cart_item_header">
@@ -141,10 +107,10 @@
                             <div class="number">2 x $38.00</div>
                         </div>
                         <div class="picture">
-                            <img src="img/products/2.png" alt="" />
+                            <img src="img/products/2.png" alt=""/>
                         </div>
                         <button class="remove_item">
-                            <img src="img/icons/header/remove.png" alt="" />
+                            <img src="img/icons/header/remove.png" alt=""/>
                         </button>
                     </div>
                     <div class="checkout">
@@ -158,7 +124,7 @@
                         <a href="shopping-cart.html">
                             <button class="go">
                                 <div>Checkout</div>
-                                <img src="img/icons/header/right.png" alt="" />
+                                <img src="img/icons/header/right.png" alt=""/>
                             </button>
                         </a>
                     </div>
@@ -246,7 +212,7 @@
             </div>
         </div>
         <button class="close_menu">
-            <img src="img/else/close.svg" alt="" />
+            <img src="img/else/close.svg" alt=""/>
         </button>
     </div>
 

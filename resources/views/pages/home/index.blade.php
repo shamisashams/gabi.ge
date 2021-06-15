@@ -6,53 +6,28 @@
 @section('content')
     <section class="hero wrapper">
         <div class="hero_slideshow">
+            @foreach($sliders as $slider)
             <div class="slide slide1">
-                <img src="img/hero/slides/1.png" alt=""/>
+                @if(isset($slider->files[0]))
+                <img src="/storage/slider/{{$slider->files[0]->fileable_id}}/{{$slider->files[0]->name}}" alt=""/>
+                @else
+                    <img src="noimage.png"/>
+                @endif
                 <div class="overlay">
                     <div class="hero_box">
-                        <div class="new">New Collection</div>
+                        <div class="new">{{count($slider->availableLanguage)>0?$slider->availableLanguage[0]->title:""}}</div>
                         <div class="title">
-                            Trendy Summer Kid <br/>
-                            Collections
+                            <span>
+                            {{count($slider->availableLanguage)>0?$slider->availableLanguage[0]->description:""}}
+                            </span>
                         </div>
-                        <a href="#">
-                            <button class="hero_btn">See Collection</button>
+                        <a href="{{$slider->redirect_url}}" target="_self">
+                            <button class="hero_btn">{{__('client.see_collection')}}</button>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="slide slide2">
-                <img src="img/hero/slides/2.jpg" alt=""/>
-
-                <div class="overlay">
-                    <div class="hero_box">
-                        <div class="new">New Collection</div>
-                        <div class="title">
-                            Fashion Designing <br/>
-                            Whatever
-                        </div>
-                        <a href="#">
-                            <button class="hero_btn">See Collection</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="slide slide3">
-                <img src="img/hero/slides/3.jpg" alt=""/>
-
-                <div class="overlay">
-                    <div class="hero_box">
-                        <div class="new">New Collection</div>
-                        <div class="title">
-                            Celebs on The <br/>
-                            Red Carpet
-                        </div>
-                        <a href="#">
-                            <button class="hero_btn">See Collection</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
 
