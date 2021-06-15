@@ -110,7 +110,7 @@ class FeatureRepository extends BaseRepository implements FeatureRepositoryInter
         if ($feature) {
             if ($featureLanguage == null) {
                 $model = $data->language()->create([
-                    'feature_id' => $this->model->id,
+                    'feature_id' => $data->id,
                     'language_id' => $localizationID,
                     'title' => $request['title'],
                 ]);

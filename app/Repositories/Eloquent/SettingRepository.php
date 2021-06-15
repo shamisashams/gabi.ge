@@ -40,7 +40,7 @@ class SettingRepository extends BaseRepository implements SettingRepositoryInter
             DB::beginTransaction();
             if ($featureLanguage == null) {
                 $data->language()->create([
-                    'setting_id' => $this->model->id,
+                    'setting_id' => $data->id,
                     'language_id' => $localizationID,
                     'value' => $request['value']
                 ]);

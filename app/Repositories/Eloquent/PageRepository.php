@@ -39,7 +39,7 @@ class PageRepository extends BaseRepository implements PageRepositoryInterface
 
             if ($pageLanguage == null) {
                 $data->language()->create([
-                    'page_id' => $this->model->id,
+                    'page_id' => $data->id,
                     'language_id' => $localizationID,
                     'slug' => $request['slug'],
                     'title' => $request['title'],

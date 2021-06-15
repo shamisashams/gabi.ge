@@ -6,6 +6,7 @@
  use App\Http\Controllers\Admin\PageController;
  use App\Http\Controllers\Admin\SaleController;
  use App\Http\Controllers\Admin\SettingController;
+ use App\Http\Controllers\Admin\SliderController;
  use App\Http\Controllers\Admin\TranslationController;
  use App\Http\Controllers\Auth\AuthController;
  use Illuminate\Support\Facades\Auth;
@@ -13,19 +14,7 @@
  use App\Http\Controllers\Admin\CategoryController;
  use App\Http\Controllers\Admin\ProductController;
 
-/*
-   |--------------------------------------------------------------------------
-   | Web Routes
-   |--------------------------------------------------------------------------
-   |
-   | Here is where you can register web routes for your application. These
-   | routes are loaded by the RouteServiceProvider within a group which
-   | contains the "web" middleware group. Now create something great!
-   |
-  */
-
-
- Route::prefix('{locale?}')
+Route::prefix('{locale?}')
          ->middleware('setlocale')
          ->group(function () {
              Route::prefix('admin')->group(function () {
@@ -134,11 +123,19 @@
 
                  Route::get('products/answers/{id}', [ProductController::class, 'getFeatureAnswers'])
                  ->name('productFeatureAnswers');
+
+                 Route::resource('slider', SliderController::class)
+                 ->name('index', 'sliderIndex')
+                 ->name('create', 'sliderCreateView')
+                 ->name('store', 'sliderCreate')
+                 ->name('edit', 'sliderEditView')
+                 ->name('update', 'sliderUpdate')
+                 ->name('destroy', 'sliderDestroy')
+                 ->name('show', 'sliderShow');
              });
 
              Route::get('/', function () {
                  return view('welcome');
              })->name('welcome');
          });
-
  

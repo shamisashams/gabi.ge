@@ -56,6 +56,11 @@
                 href="{{route('saleIndex',app()->getLocale())}}"><i class="material-icons dp48">dashboard</i><span>{{trans('admin.sales')}}</span></a>
         </li>
 
+        <li class="bold"><a
+                class="waves-effect waves-cyan {{str_contains(route('sliderIndex',app()->getLocale()),request()->path())?"active":""}}"
+                href="{{route('sliderIndex',app()->getLocale())}}"><i class="material-icons dp48">slideshow</i><span>{{trans('admin.sliders')}}</span></a>
+        </li>
+
     </ul>
     <div class="navigation-background"></div>
     <a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only"
