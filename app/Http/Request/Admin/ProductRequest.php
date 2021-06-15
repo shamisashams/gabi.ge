@@ -1,44 +1,53 @@
 <?php
-/**
- *  app/Http/Request/Admin/ProductRequest.php
- *
- * User:
- * Date-Time: 15.12.20
- * Time: 15:24
- * @author Vito Makhatadze <vitomaxatadze@gmail.com>
- */
-namespace App\Http\Request\Admin;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+ namespace App\Http\Request\Admin;
 
-class ProductRequest extends FormRequest
-{
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return Auth()->user()->can('isAdmin');
-    }
+ use Illuminate\Foundation\Http\FormRequest;
+ use Illuminate\Validation\Rule;
+ use Illuminate\Support\Facades\Route;
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            'title' => 'required|string|max:255',
-            'category' => 'required|integer',
-            'position' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'sale_price' => 'nullable|numeric',
-            'slug' => ['required','alpha_dash', Rule::unique('products', 'slug')->ignore($this->product)],
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096'
-        ];
-    }
-}
+ class ProductRequest extends FormRequest
+ {
+
+     /**
+      * Determine if the user is authorized to make this request.
+      *
+      * @return bool
+      */
+     public function authorize()
+     {
+         return Auth()->user()->can('isAdmin');
+     }
+
+     /**
+      * Get the validation rules that apply to the request.
+      *
+      * @return array
+      */
+     public function rules()
+     {
+
+         $rules = [
+             'title' => 'required|string|max:255',
+             //'category' => 'required|integer',
+             'position' => 'required|string|max:255',
+             'price' => 'required|numeric',
+             'category_id' => 'required|numeric',
+             'sale' => 'numeric',
+             'feature.*' => 'numeric',
+             'answers.*' => 'string',
+             'description' => 'required|string',
+             //'sale_price' => 'nullable|numeric',
+             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096'
+         ];
+
+         if (Route::currentRouteName() !== 'productUpdate') {
+             // TODO : new logic
+             $rules['slug'] = ['required', 'alpha_dash', Rule::unique('product_languages', 'slug')->ignore($this->product)];
+         }
+
+         return $rules;
+     }
+
+ }
+ 
