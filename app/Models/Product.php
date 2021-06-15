@@ -44,7 +44,7 @@
 
      public function availableLanguage()
      {
-	 return $this->language()->where('language_id', '=', Localization::getIdByName(app()->getLocale()));
+	 return $this->language()->where('language_id', '=', Language::getIdByName(app()->getLocale()));
      }
 
      public function category()
@@ -55,16 +55,19 @@
      public function categoryLanguage()
      {
 	 return $this->hasMany(CategoryLanguage::class, 'category_id', 'category_id')
-			 ->where('language_id', '=', Localization::getIdByName(app()->getLocale()));
+			 ->where('language_id', '=', Language::getIdByName(app()->getLocale()));
+     }
+
+     public function saleProduct(){
+         return $this->hasOne(SaleProduct::class,'product_id','id');
      }
 
      public function scopeByLang($query)
      {
-	 $localizationID = Localization::getIdByName(app()->getLocale());
+	 $localizationID = Language::getIdByName(app()->getLocale());
 	 return $query->whereHas('language', function ($query) use ($localizationID) {
 		     $query->where('language_id', $localizationID);
 		 });
      }
 
  }
- 

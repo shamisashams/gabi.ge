@@ -28,4 +28,9 @@ class SaleProduct extends Model
         return $this->hasOne(Product::class, 'id');
     }
 
+    public function sale()
+    {
+        return $this->hasOne(Sale::class, 'id','sale_id');
+    }
+
 }

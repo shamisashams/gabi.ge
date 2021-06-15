@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
@@ -140,9 +141,8 @@ Route::prefix('{locale?}')
                     ->name('show', 'sliderShow');
             });
         });
-
-        Route::get('/', function () {
-            return view('welcome');
-        })->name('welcome');
+        Route::middleware(['active'])->group(function () {
+            Route::get('/', [HomeController::class, 'index'])->name('welcome');
+        });
     });
 
