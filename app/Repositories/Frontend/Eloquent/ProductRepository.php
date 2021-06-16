@@ -3,6 +3,8 @@
 namespace App\Repositories\Frontend\Eloquent;
 
 use App\Models\Product;
+use App\Models\ProductAnswers;
+use App\Models\ProductFeatures;
 use App\Repositories\Frontend\Eloquent\Base\BaseRepository;
 use App\Repositories\Frontend\ProductRepositoryInterface;
 use Illuminate\Http\Request;
@@ -39,5 +41,15 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             ->get();
     }
 
+    public function getProductFilters(int $id,Request $request,$products)
+    {
+        $productIdArrays=$products->pluck('id')->toArray();
+        $filterData  = ProductFeatures::with(['feature.availableLanguage','productAnswers'=>function($query){
+            $query->groupBy('answer_id')->with('answer.availableLanguage');
+        }])
+            ->groupBy('feature_id')
+            ->whereIn('product_id',$productIdArrays)->get();
+        return $filterData;
+    }
 
 }

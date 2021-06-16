@@ -40,7 +40,7 @@ class LanguageComposer
                 if ($localization->abbreviation == app()->getLocale()) {
 //                    $languages['abbreviations'][] = $localization->abbreviation;
                     $languages['current']= [
-                        'title' => $localization->native,
+                        'title' => $localization->title,
                         'url' => '',
                         'img' => $localization->abbreviation . '.png',
                         'abbreviation' => $localization->abbreviation
@@ -48,7 +48,7 @@ class LanguageComposer
                 }
                 $languages['abbreviations'][] = $localization->abbreviation;
                 $languages['data'][]= [
-                    'title' => $localization->native,
+                    'title' => $localization->title,
                     'url' => $this->getUrl($localization->abbreviation),
                     'img' => $localization->abbreviation . '.png',
                     'abbreviation' => $localization->abbreviation

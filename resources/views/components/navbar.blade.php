@@ -16,7 +16,7 @@
 
                         <div>
                             @foreach($categories as $key=>$category)
-                                <a href="products.html">
+                                <a href="{{route('catalogue',[app()->getLocale(),$category->id])}}">
                                     <div
                                         class="category_list {{$key==0?"active":""}}">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</div>
                                 </a>
@@ -204,15 +204,18 @@
                     </g>
                 </svg>
 
-                <div>ENG</div>
+                <div>{{$globalLanguages['current']['title']}}</div>
                 <div class="dropdown">
-                    <a href="#" class="lang">GEO</a>
-                    <a href="#" class="lang">RUS</a>
+                    @foreach($globalLanguages['data'] as $language)
+                        @if($language['title']!==$globalLanguages['current']['title'])
+                            <a href="{{$language['url']}}" class="lang">{{$language['title']}}</a>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
         <button class="close_menu">
-            <img src="img/else/close.svg" alt=""/>
+            <img src="/img/else/close.svg" alt=""/>
         </button>
     </div>
 

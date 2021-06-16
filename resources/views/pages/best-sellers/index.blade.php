@@ -43,17 +43,13 @@
                             class="sub roboto">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->description:""}}</div>
                     </div>
                     <div>
-                        @if($product->saleProduct && $product->saleProduct->sale && $product->saleProduct->sale->type=="fixed")
+                        @if($product->saleProduct && $product->saleProduct->sale)
                             <div class="title price">
-                                ${{round(($product->price/100)-$product->saleProduct->sale->discount,2)}}</div>
-                            <div class="discount">$ {{round($product->price/100,2)}}</div>
-                        @elseif($product->saleProduct && $product->saleProduct->sale && $product->saleProduct->sale->type=="percent")
-                            <div class="title price">
-                                ${{round(($product->price/100)-((($product->price/100)*$product->saleProduct->sale->discount)/100),2)}}</div>
-                            <div
-                                class="discount">$ {{round($product->price/100,2)}}</div>
+                                ${{\App\Models\Product::calculatePrice($product->price,$product->saleProduct->sale->discount,$product->saleProduct->sale->type)}}
+                            </div>
+                            <div class="discount">${{round($product->price/100,2)}}</div>
                         @else
-                            <div class="title price">$ {{round($product->price/100,2)}}  </div>
+                            <div class="title price">${{round($product->price/100,2)}}  </div>
                         @endif
                     </div>
                 </div>

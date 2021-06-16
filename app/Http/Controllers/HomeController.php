@@ -44,8 +44,9 @@ class HomeController extends Controller
             'bestSellerProducts' => $this->productRepository->getBestSeller(),
             'discountedProducts' => $this->productRepository->getDiscountedProducts(),
             'newProducts' => $this->productRepository->getNewProducts(),
-            'categories' => $this->categoryRepository->getMainCategories(),
-            'sliders' => $this->sliderRepository->getSliders()
+//            'categories' => $this->categoryRepository->getMainCategories(),
+            'sliders' => $this->sliderRepository->getSliders(),
+            'banner' => $this->sliderRepository->getBanner()
         ]);
     }
 }

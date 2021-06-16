@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CatalogueController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -143,6 +144,9 @@ Route::prefix('{locale?}')
         });
         Route::middleware(['active'])->group(function () {
             Route::get('/', [HomeController::class, 'index'])->name('welcome');
+
+            Route::get('/catalogue/{category}', [CatalogueController::class, 'catalogue'])->name('catalogue');
+
         });
     });
 

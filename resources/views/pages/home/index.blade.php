@@ -7,26 +7,28 @@
     <section class="hero wrapper">
         <div class="hero_slideshow">
             @foreach($sliders as $slider)
-            <div class="slide slide1">
-                @if(isset($slider->files[0]))
-                <img src="/storage/slider/{{$slider->files[0]->fileable_id}}/{{$slider->files[0]->name}}" alt=""/>
-                @else
-                    <img src="noimage.png"/>
-                @endif
-                <div class="overlay">
-                    <div class="hero_box">
-                        <div class="new">{{count($slider->availableLanguage)>0?$slider->availableLanguage[0]->title:""}}</div>
-                        <div class="title">
+                <div class="slide slide1">
+                    @if(isset($slider->files[0]))
+                        <img src="/storage/slider/{{$slider->files[0]->fileable_id}}/{{$slider->files[0]->name}}"
+                             alt=""/>
+                    @else
+                        <img src="noimage.png"/>
+                    @endif
+                    <div class="overlay">
+                        <div class="hero_box">
+                            <div
+                                class="new">{{count($slider->availableLanguage)>0?$slider->availableLanguage[0]->title:""}}</div>
+                            <div class="title">
                             <span>
                             {{count($slider->availableLanguage)>0?$slider->availableLanguage[0]->description:""}}
                             </span>
+                            </div>
+                            <a href="{{$slider->redirect_url}}" target="_self">
+                                <button class="hero_btn">{{__('client.see_collection')}}</button>
+                            </a>
                         </div>
-                        <a href="{{$slider->redirect_url}}" target="_self">
-                            <button class="hero_btn">{{__('client.see_collection')}}</button>
-                        </a>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
     </section>
@@ -44,8 +46,9 @@
                         <img class="product" src="noimage.png"/>
                     @endif
                     <img class="frame" src="img/products/frame.png" alt=""/>
-                    <a class="category_name"
-                       href="#"> {{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}} </a>
+                    <a class="category_name" href="#" style="overflow-wrap: anywhere">
+                        {{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}
+                    </a>
                     <div class="overlay"></div>
                 </div>
             @endforeach
@@ -59,15 +62,24 @@
     </section>
 
     <section class="summer_discount flex wrapper">
-        <div class="left_bg">
-            <img src="img/else/1.png" alt=""/>
-            <img class="frame" src="img/else/frame2.png" alt=""/>
-            <div class="overlay">
-                <a href="#">
-                    <button class="discount">{{__('client.discount')}}</button>
-                </a>
+        @if($banner)
+            <div class="left_bg">
+                @if(isset($banner->files[0]))
+                    <img src="/storage/slider/{{$banner->files[0]->fileable_id}}/{{$banner->files[0]->name}}" alt=""/>
+                @else
+                    <img src="noimage.png"/>
+                @endif
+                <img class="frame" src="img/else/frame2.png" alt=""/>
+                <div class="overlay">
+                    <a href="#">
+                        <button
+                            class="discount">
+                            {{count($banner->availableLanguage)>0?$banner->availableLanguage[0]->title:""}}
+                        </button>
+                    </a>
+                </div>
             </div>
-        </div>
+        @endif
         <section class="products_viewport">
             <div class="products_head flex">
                 <div class="title">{{__('client.summer_discount')}}</div>
@@ -101,22 +113,21 @@
                         <div class="detail flex">
                             <div>
                                 <div
-                                    class="title">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}</div>
+                                    class="title"><span style="overflow-wrap: break-word">
+                                    {{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}
+                                    </span>
+                                </div>
                                 <div
                                     class="sub roboto">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->description:""}}</div>
                             </div>
                             <div>
-                                @if($product->saleProduct && $product->saleProduct->sale && $product->saleProduct->sale->type=="fixed")
+                                @if($product->saleProduct && $product->saleProduct->sale)
                                     <div class="title price">
-                                        ${{round(($product->price/100)-$product->saleProduct->sale->discount,2)}}</div>
-                                    <div class="discount">$ {{round($product->price/100,2)}}</div>
-                                @elseif($product->saleProduct && $product->saleProduct->sale && $product->saleProduct->sale->type=="percent")
-                                    <div class="title price">
-                                        ${{round(($product->price/100)-((($product->price/100)*$product->saleProduct->sale->discount)/100),2)}}</div>
-                                    <div
-                                        class="discount">$ {{round($product->price/100,2)}}</div>
+                                        ${{\App\Models\Product::calculatePrice($product->price,$product->saleProduct->sale->discount,$product->saleProduct->sale->type)}}
+                                    </div>
+                                    <div class="discount">${{round($product->price/100,2)}}</div>
                                 @else
-                                    <div class="title price">$ {{round($product->price/100,2)}}  </div>
+                                    <div class="title price">${{round($product->price/100,2)}}  </div>
                                 @endif
                             </div>
                         </div>
@@ -171,17 +182,13 @@
                                 class="sub roboto">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->description:""}}</div>
                         </div>
                         <div>
-                            @if($product->saleProduct && $product->saleProduct->sale && $product->saleProduct->sale->type=="fixed")
+                            @if($product->saleProduct && $product->saleProduct->sale)
                                 <div class="title price">
-                                    ${{round(($product->price/100)-$product->saleProduct->sale->discount,2)}}</div>
-                                <div class="discount">$ {{round($product->price/100,2)}}</div>
-                            @elseif($product->saleProduct && $product->saleProduct->sale && $product->saleProduct->sale->type=="percent")
-                                <div class="title price">
-                                    ${{round(($product->price/100)-((($product->price/100)*$product->saleProduct->sale->discount)/100),2)}}</div>
-                                <div
-                                    class="discount">$ {{round($product->price/100,2)}}</div>
+                                    ${{\App\Models\Product::calculatePrice($product->price,$product->saleProduct->sale->discount,$product->saleProduct->sale->type)}}
+                                </div>
+                                <div class="discount">${{round($product->price/100,2)}}</div>
                             @else
-                                <div class="title price">$ {{round($product->price/100,2)}}  </div>
+                                <div class="title price">${{round($product->price/100,2)}}  </div>
                             @endif
                         </div>
                     </div>
