@@ -123,18 +123,18 @@ $(".category_slide").slick({
   ],
 });
 
-$(".pagination_slides").slick({
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  arrows: true,
-  nextArrow: ".next_page",
-  prevArrow: ".prev_page",
-  dots: false,
-  draggable: false,
-  infinite: false,
-  autoplay: false,
-  speed: 100,
-});
+// $(".pagination_slides").slick({
+//   slidesToShow: 4,
+//   slidesToScroll: 1,
+//   arrows: true,
+//   nextArrow: ".next_page",
+//   prevArrow: ".prev_page",
+//   dots: false,
+//   draggable: false,
+//   infinite: false,
+//   autoplay: false,
+//   speed: 100,
+// });
 
 $(".vertical_slider_view").slick({
   slidesToShow: 5,

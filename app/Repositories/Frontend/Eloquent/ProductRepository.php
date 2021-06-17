@@ -41,15 +41,24 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             ->get();
     }
 
-    public function getProductFilters(int $id,Request $request,$products)
+    public function getProductFilters(int $id, Request $request, $products)
     {
-        $productIdArrays=$products->pluck('id')->toArray();
-        $filterData  = ProductFeatures::with(['feature.availableLanguage','productAnswers'=>function($query){
-            $query->groupBy('answer_id')->with('answer.availableLanguage');
-        }])
+        $productIdArrays = $products->pluck('id')->toArray();
+        $filterData = ProductAnswers::with(['feature.availableLanguage', 'feature.answer.availableLanguage'])->whereIn('product_id', $productIdArrays);
+        $productFeatures = $filterData
             ->groupBy('feature_id')
-            ->whereIn('product_id',$productIdArrays)->get();
-        return $filterData;
+            ->get()
+            ->sortBy(function ($query) {
+                return $query->feature->position;
+            });
+
+
+        $productAnswers = $filterData->groupBy('answer_id')->get()->pluck('answer_id')->toArray();
+
+        return [
+            'productFeatures' => $productFeatures,
+            'productAnswers' => $productAnswers
+        ];
     }
 
 }

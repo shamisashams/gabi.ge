@@ -33,7 +33,7 @@
                                         @else
                                             <img src="noimage.png"/>
                                         @endif
-                                        <img src="img/products/frame.png" alt="" class="frame"/>
+                                        <img src="/img/products/frame.png" alt="" class="frame"/>
                                         <a class="cat_btn"
                                            href="products.html">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}
                                         </a>

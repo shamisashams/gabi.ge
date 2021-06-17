@@ -115,6 +115,10 @@ class Product extends Model
                 'hasParam' => true,
                 'scopeMethod' => 'sorted'
             ],
+            'feature'=>[
+                'hasParam' => true,
+                'scopeMethod' => 'feature'
+            ]
         ];
     }
 }

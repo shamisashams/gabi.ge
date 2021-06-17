@@ -62,7 +62,7 @@
 
         /* Style the checkmark/indicator */
         .container .checkmark:after {
-            left:7px;
+            left: 7px;
             top: 4px;
             width: 5px;
             height: 8px;
@@ -73,420 +73,115 @@
             transform: rotate(45deg);
         }
     </style>
+    <section class="path">
+        <div class="path_content wrapper">
+            <div class="path_took"><a href="{{route('welcome',app()->getLocale())}}">Home</a>
+                / {{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</div>
+            <div
+                class="current">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</div>
+        </div>
+    </section>
     <section class="product_content_section wrapper flex">
-        <div class="sidebar_filters">
-            <form>
+        <form action="{{route('catalogue',[app()->getLocale(),$category->id])}}" style="display: contents">
+            <div class="sidebar_filters">
                 <div class="section">
-                    <div class="titles">Price Filter</div>
+                    <div class="titles">{{__('client.price_filter')}}</div>
                     <p>
-                        Price: <label for="min">$130</label> — <label for="max">$550</label>
+                        {{__('client.price')}}: <label for="min">${{Request::get('min_price')}}</label> — <label
+                            for="max">${{Request::get('max_price')}}</label>
                     </p>
                     <div class="price_control">
-                        <input id="min" type="text" value="$130 "/>
-                        <input id="max" type="text" value="$550 "/>
+                        <input id="min" name="min_price" type="text" value="{{Request::get('min_price')}}"/>
+                        <input id="max" name="max_price" type="text" value="{{Request::get('max_price')}}"/>
                         <button class="ok">Ok</button>
                     </div>
                 </div>
-                @foreach($productFeatures as $productFeature)
+                @foreach($productFeatures as $productAnswer)
                     <div class="section">
                         <div
-                            class="titles">{{count($productFeature->feature->availableLanguage)>0?$productFeature->feature->availableLanguage[0]->title:""}}</div>
-                        @foreach($productFeature->productAnswers as $productAnswer)
-                            <div>
-                                <label class="container">
-                                    {{count($productAnswer->answer->availableLanguage)>0?$productAnswer->answer->availableLanguage[0]->title:""}}
-                                    <input type="checkbox" name="feature[{{$productAnswer->feature->id}}][]"
-                                           onchange="this.form.submit()"
-                                           value="{{$productAnswer->answer->id}}">
-                                    <span class="checkmark"></span>
-                                </label>
-{{--                            <input type="checkbox" style="display: inline-block" class="option chosen" id="" name="{{$productAnswer->answer->availableLanguage[0]->title}}"/>--}}
-{{--                            <label class="option" for="checkbox1" style="display: inline-block ">--}}
-{{--                                {{count($productAnswer->answer->availableLanguage)>0?$productAnswer->answer->availableLanguage[0]->title:""}}--}}
-{{--                            </label>--}}
-{{--                            </div>--}}
-                            </div>
+                            class="titles">{{count($productAnswer->feature->availableLanguage)>0?$productAnswer->feature->availableLanguage[0]->title:""}}</div>
+                        @foreach($productAnswer->feature->answer as $answer)
+                            @if($answer->status && (in_array($answer->id,$productAnswers)))
+                                <div>
+                                    <label class="container">
+                                        {{count($answer->availableLanguage)>0?$answer->availableLanguage[0]->title:""}}
+                                        <input type="checkbox" name="feature[{{$productAnswer->feature->id}}][]"
+                                               onchange="this.form.submit()"
+                                               value="{{$answer->id}}" @if(isset(Request::get('feature')[$productAnswer->feature->id]))
+                                            {{in_array($answer->id,Request::get('feature')[$productAnswer->feature->id]) ? 'checked' : ''}}
+                                            @endif>
+                                        <span class="checkmark"></span>
+
+                                    </label>
+                                    {{--                            <input type="checkbox" style="display: inline-block" class="option chosen" id="" name="{{$productAnswer->answer->availableLanguage[0]->title}}"/>--}}
+                                    {{--                            <label class="option" for="checkbox1" style="display: inline-block ">--}}
+                                    {{--                                {{count($productAnswer->answer->availableLanguage)>0?$productAnswer->answer->availableLanguage[0]->title:""}}--}}
+                                    {{--                            </label>--}}
+                                    {{--                            </div>--}}
+                                </div>
+                            @endif
                         @endforeach
                     </div>
                 @endforeach
-{{--                <div class="section">--}}
-{{--                    <div class="titles">Age</div>--}}
-{{--                    <input type="radio" class="option"/>0 - 3 months--}}
-{{--                    <button class="option chosen">3 - 6 months</button>--}}
-{{--                    <button class="option">6 - 9 months</button>--}}
-{{--                    <button class="option">9 - 12 months</button>--}}
-{{--                    <div class="extras extra_age">--}}
-{{--                        <button class="option">1 - 2 years</button>--}}
-{{--                        <button class="option chosen">3 - 4 years</button>--}}
-{{--                        <button class="option">5 - 6 years</button>--}}
-{{--                        <button class="option">7 - 9 years</button>--}}
-{{--                    </div>--}}
-{{--                    <button class="show_more" id="show_more_age">Show more</button>--}}
-{{--                </div>--}}
-{{--                <div class="section">--}}
-{{--                    <div class="titles">Size</div>--}}
-{{--                    <button class="option">52 CM</button>--}}
-{{--                    <button class="option">52 CM</button>--}}
-{{--                    <button class="option">52 CM</button>--}}
-{{--                    <div class="extras extra_size">--}}
-{{--                        <button class="option">52 CM</button>--}}
-{{--                        <button class="option">52 CM</button>--}}
-{{--                        <button class="option">52 CM</button>--}}
-{{--                    </div>--}}
-{{--                    <button class="show_more" id="show_more_size">Show more</button>--}}
-{{--                </div>--}}
-{{--                <div class="section">--}}
-{{--                    <div class="titles">Color</div>--}}
-{{--                    <button class="color" style="background-color: #5e5e5e"></button>--}}
-{{--                    <button class="color" style="background-color: #ffe0a2"></button>--}}
-{{--                    <button class="color" style="background-color: #095e00"></button>--}}
-{{--                    <button class="color" style="background-color: #60a8fb"></button>--}}
-{{--                    <button class="color" style="background-color: #fb9e60"></button>--}}
-{{--                    <button class="color" style="background-color: #ec3490"></button>--}}
-{{--                    <button class="color" style="background-color: #6a3b00"></button>--}}
-{{--                    <button class="color" style="background-color: #959595"></button>--}}
-{{--                    <button class="color" style="background-color: #ffe6c7"></button>--}}
-{{--                    <button class="color" style="background-color: #00a441"></button>--}}
-{{--                    <button class="color" style="background-color: #ffeed9"></button>--}}
-{{--                    <button class="color" style="background-color: #182caf"></button>--}}
-{{--                </div>--}}
-            </form>
-        </div>
-        <section class="products_viewport">
-            <div class="products_head flex">
-                <div class="title">Category Name</div>
-                <a href="#" class="see_more">See More</a>
             </div>
-            <div class="product_grid">
-                <div class="main_product_view">
-                    <div class="pic">
-                        <div class="label off">-20%</div>
-                        <img class="p_img" src="img/products/1.png" alt=""/>
-                        <button class="add_to_cart">
-                            <img src="img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">Add to Cart</div>
-                        </button>
-                    </div>
-                    <div class="detail flex">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="sub roboto">JACADI</div>
+            <section class="products_viewport">
+                <div class="product_grid">
+                    @foreach($products as $product)
+                        <div class="main_product_view">
+                            <div class="pic">
+                                @if($product->saleProduct && $product->saleProduct->sale)
+                                    <div class="label off">
+                                        @if($product->saleProduct->sale->type=="percent")
+                                            -{{$product->saleProduct->sale->discount}}%
+                                        @else
+                                            -{{round(($product->saleProduct->sale->discount*100)/($product->price/100))}}
+                                            %
+                                        @endif
+                                    </div>
+                                @endif
+
+                                @if(isset($product->files[0]))
+                                    <img class="p_img"
+                                         src="/storage/product/{{$product->files[0]->fileable_id}}/{{$product->files[0]->name}}"
+                                         alt=""/>
+                                @else
+                                    <img src="noimage.png"/>
+                                @endif
+
+                                <button class="add_to_cart">
+                                    <img src="img/icons/header/cart.png" alt=""/>
+                                    <div class="roboto">{{__('client.add_to_cart')}}</div>
+                                </button>
+                            </div>
+                            <div class="detail flex">
+                                <div>
+                                    <div
+                                        class="title">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}</div>
+                                    <div
+                                        class="sub roboto">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->description:""}}</div>
+                                </div>
+                                <div>
+                                    @if($product->saleProduct && $product->saleProduct->sale)
+                                        <div class="title price">
+                                            ${{\App\Models\Product::calculatePrice($product->price,$product->saleProduct->sale->discount,$product->saleProduct->sale->type)}}
+                                        </div>
+                                        <div class="discount">${{round($product->price/100,2)}}</div>
+                                    @else
+                                        <div class="title price">${{round($product->price/100,2)}}  </div>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="title price">$80.00</div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
-                <div class="main_product_view">
-                    <div class="pic">
-                        <div class="label off">-20%</div>
-                        <img class="p_img" src="img/products/2.png" alt=""/>
-                        <button class="add_to_cart">
-                            <img src="img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">Add to Cart</div>
-                        </button>
-                    </div>
-                    <div class="detail flex">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="sub roboto">JACADI</div>
-                        </div>
-                        <div>
-                            <div class="title price">$80.00</div>
-                            <div class="discount">$100.00</div>
-                        </div>
-                    </div>
+
+                {{ $products->appends(request()->query())->links('vendor.pagination.custom') }}
+                <div class="page_input">
+                    <input type="number" name="page" placeholder="Enter Page"/>
+                    <button class="ok">Ok</button>
                 </div>
-                <div class="main_product_view">
-                    <div class="pic">
-                        <div class="label off">-20%</div>
-                        <img class="p_img" src="img/products/3.png" alt=""/>
-                        <button class="add_to_cart">
-                            <img src="img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">Add to Cart</div>
-                        </button>
-                    </div>
-                    <div class="detail flex">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="sub roboto">JACADI</div>
-                        </div>
-                        <div>
-                            <div class="title price">$80.00</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="main_product_view">
-                    <div class="pic">
-                        <div class="label off">-20%</div>
-                        <img class="p_img" src="img/products/4.png" alt=""/>
-                        <button class="add_to_cart">
-                            <img src="img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">Add to Cart</div>
-                        </button>
-                    </div>
-                    <div class="detail flex">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="sub roboto">JACADI</div>
-                        </div>
-                        <div>
-                            <div class="title price">$80.00</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="main_product_view">
-                    <div class="pic">
-                        <div class="label off">-20%</div>
-                        <img class="p_img" src="img/products/1.png" alt=""/>
-                        <button class="add_to_cart">
-                            <img src="img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">Add to Cart</div>
-                        </button>
-                    </div>
-                    <div class="detail flex">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="sub roboto">JACADI</div>
-                        </div>
-                        <div>
-                            <div class="title price">$80.00</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="main_product_view">
-                    <div class="pic">
-                        <div class="label off">-20%</div>
-                        <img class="p_img" src="img/products/2.png" alt=""/>
-                        <button class="add_to_cart">
-                            <img src="img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">Add to Cart</div>
-                        </button>
-                    </div>
-                    <div class="detail flex">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="sub roboto">JACADI</div>
-                        </div>
-                        <div>
-                            <div class="title price">$80.00</div>
-                            <div class="discount">$100.00</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="main_product_view">
-                    <div class="pic">
-                        <div class="label off">-20%</div>
-                        <img class="p_img" src="img/products/3.png" alt=""/>
-                        <button class="add_to_cart">
-                            <img src="img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">Add to Cart</div>
-                        </button>
-                    </div>
-                    <div class="detail flex">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="sub roboto">JACADI</div>
-                        </div>
-                        <div>
-                            <div class="title price">$80.00</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="main_product_view">
-                    <div class="pic">
-                        <div class="label off">-20%</div>
-                        <img class="p_img" src="img/products/4.png" alt=""/>
-                        <button class="add_to_cart">
-                            <img src="img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">Add to Cart</div>
-                        </button>
-                    </div>
-                    <div class="detail flex">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="sub roboto">JACADI</div>
-                        </div>
-                        <div>
-                            <div class="title price">$80.00</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="main_product_view">
-                    <div class="pic">
-                        <div class="label off">-20%</div>
-                        <img class="p_img" src="img/products/1.png" alt=""/>
-                        <button class="add_to_cart">
-                            <img src="img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">Add to Cart</div>
-                        </button>
-                    </div>
-                    <div class="detail flex">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="sub roboto">JACADI</div>
-                        </div>
-                        <div>
-                            <div class="title price">$80.00</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="main_product_view">
-                    <div class="pic">
-                        <div class="label off">-20%</div>
-                        <img class="p_img" src="img/products/2.png" alt=""/>
-                        <button class="add_to_cart">
-                            <img src="img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">Add to Cart</div>
-                        </button>
-                    </div>
-                    <div class="detail flex">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="sub roboto">JACADI</div>
-                        </div>
-                        <div>
-                            <div class="title price">$80.00</div>
-                            <div class="discount">$100.00</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="main_product_view">
-                    <div class="pic">
-                        <div class="label off">-20%</div>
-                        <img class="p_img" src="img/products/3.png" alt=""/>
-                        <button class="add_to_cart">
-                            <img src="img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">Add to Cart</div>
-                        </button>
-                    </div>
-                    <div class="detail flex">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="sub roboto">JACADI</div>
-                        </div>
-                        <div>
-                            <div class="title price">$80.00</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="main_product_view">
-                    <div class="pic">
-                        <div class="label off">-20%</div>
-                        <img class="p_img" src="img/products/4.png" alt=""/>
-                        <button class="add_to_cart">
-                            <img src="img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">Add to Cart</div>
-                        </button>
-                    </div>
-                    <div class="detail flex">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="sub roboto">JACADI</div>
-                        </div>
-                        <div>
-                            <div class="title price">$80.00</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="main_product_view">
-                    <div class="pic">
-                        <div class="label off">-20%</div>
-                        <img class="p_img" src="img/products/1.png" alt=""/>
-                        <button class="add_to_cart">
-                            <img src="img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">Add to Cart</div>
-                        </button>
-                    </div>
-                    <div class="detail flex">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="sub roboto">JACADI</div>
-                        </div>
-                        <div>
-                            <div class="title price">$80.00</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="main_product_view">
-                    <div class="pic">
-                        <div class="label off">-20%</div>
-                        <img class="p_img" src="img/products/2.png" alt=""/>
-                        <button class="add_to_cart">
-                            <img src="img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">Add to Cart</div>
-                        </button>
-                    </div>
-                    <div class="detail flex">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="sub roboto">JACADI</div>
-                        </div>
-                        <div>
-                            <div class="title price">$80.00</div>
-                            <div class="discount">$100.00</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="main_product_view">
-                    <div class="pic">
-                        <div class="label off">-20%</div>
-                        <img class="p_img" src="img/products/3.png" alt=""/>
-                        <button class="add_to_cart">
-                            <img src="img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">Add to Cart</div>
-                        </button>
-                    </div>
-                    <div class="detail flex">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="sub roboto">JACADI</div>
-                        </div>
-                        <div>
-                            <div class="title price">$80.00</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="main_product_view">
-                    <div class="pic">
-                        <div class="label off">-20%</div>
-                        <img class="p_img" src="img/products/4.png" alt=""/>
-                        <button class="add_to_cart">
-                            <img src="img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">Add to Cart</div>
-                        </button>
-                    </div>
-                    <div class="detail flex">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="sub roboto">JACADI</div>
-                        </div>
-                        <div>
-                            <div class="title price">$80.00</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="pagination">
-                <button class="prev_page">Previous</button>
-                <div class="pagination_slides">
-                    <button class="page_number">1</button>
-                    <button class="page_number active">2</button>
-                    <button class="page_number">3</button>
-                    <button class="page_number">4</button>
-                    <button class="page_number">5</button>
-                    <button class="page_number">6</button>
-                    <button class="page_number">7</button>
-                    <button class="page_number">8</button>
-                    <button class="page_number">9</button>
-                </div>
-                <button class="next_page">Next</button>
-            </div>
-            <div class="page_input">
-                <input type="text" placeholder="Enter Page"/>
-                <button class="ok">Ok</button>
-            </div>
-        </section>
+            </section>
+        </form>
     </section>
 
 @endsection

@@ -48,7 +48,7 @@ class BaseRepository implements EloquentRepositoryInterface
      * @param $request
      * @return mixed
      */
-    public function getData($request, array $relation = [])
+    public function getData($request, array $relation = [], $paginate = true)
     {
         $data = $this->model->filter($request);
 
@@ -58,11 +58,10 @@ class BaseRepository implements EloquentRepositoryInterface
             $perPage = $request['per_page'];
         }
 
-        if ($relation) {
-            return $data->with($relation)->paginate($perPage);
+        if (!$paginate) {
+            return $data->with($relation);
         }
-
-        return $data->paginate($perPage);
+        return $data->with($relation)->paginate($perPage);
     }
 
     /**

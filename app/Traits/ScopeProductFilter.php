@@ -11,6 +11,7 @@ namespace App\Traits;
 
 
 use App\Models\Language;
+use App\Models\ProductAnswers;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -96,7 +97,8 @@ trait ScopeProductFilter
      */
     public function scopeMinPrice($query, $price)
     {
-        return $query->where(['price' => $price]);
+        $query->where('price', '>=', intval($price * 100));
+
     }
 
     /**
@@ -107,7 +109,8 @@ trait ScopeProductFilter
      */
     public function scopeMaxPrice($query, $price)
     {
-        return $query->where(['price' => $price]);
+        return $query->where('price', '<=', intval($price * 100));
+
     }
 
 
@@ -120,5 +123,37 @@ trait ScopeProductFilter
     public function scopeCategoryId($query, $id)
     {
         return $query->where(['category_id' => $id]);
+    }
+
+
+    /**
+     * @param $query
+     * @param $features
+     *
+     * @return mixed
+     */
+    public function scopeFeature($query, $features)
+    {
+        $data = [];
+        foreach ($features as $feature) {
+            if (gettype($feature) === 'array') {
+                $feature = array_map('intval', $feature);
+                $data[] = ProductAnswers::orWhereIn('answer_id', $feature)->groupBy('product_id')->get()->pluck('product_id')->toArray();
+            } else {
+                $data[] = ProductAnswers::orWhere('answer_id', $feature)->groupBy('product_id')->get()->pluck('product_id')->toArray();
+            }
+        }
+        $idsArray = [];
+
+
+        foreach ($data as $key => $item) {
+            if ($key === 0) {
+                $idsArray = $item;
+                continue;
+            }
+            $idsArray = array_intersect($idsArray, $item);
+        }
+        return $query->whereIn('id', $idsArray);
+
     }
 }

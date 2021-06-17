@@ -37,11 +37,19 @@ class CatalogueController extends Controller
             'category' => $category->id,
             'sortParams' => ['sort' => 'position', 'order' => 'DESC']
         ]);
+        $products = $this->productRepository->getData($request, ['saleProduct.sale', 'availableLanguage', 'files'], false);
+        $filterArrays = $this->productRepository->getProductFilters($category->id, $request, $products);
 
-        $products = $this->productRepository->getData($request);
+        $staticFilterData = ['category'];
+
+        $data = $products->orderBy('created_at', 'DESC')->paginate(1);
+
         return view('pages.product.catalogue', [
-            'products' => $products,
-            'productFeatures' => $this->productRepository->getProductFilters($category->id, $request, $products)
+            'products' => $data,
+            'productFeatures' => $filterArrays['productFeatures'],
+            'productAnswers' => $filterArrays['productAnswers'],
+            'staticFilterData' =>$staticFilterData,
+            'category' => $category
         ]);
     }
 

@@ -1109,7 +1109,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 120px;
+    /*width: 120px;*/
     margin: 0 20px;
 }
 
@@ -1121,6 +1121,7 @@ img {
     font-size: 14px;
     color: #808080;
     font-weight: normal;
+    margin-right: 15px;
 }
 
 .product_content_section
@@ -1131,6 +1132,7 @@ img {
     color: #2d2d2d;
     transform: scale(1.1);
     font-weight: 500;
+    margin-right: 15px;
 }
 
 .product_content_section
