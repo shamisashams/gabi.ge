@@ -113,11 +113,6 @@
                                         <span class="checkmark"></span>
 
                                     </label>
-                                    {{--                            <input type="checkbox" style="display: inline-block" class="option chosen" id="" name="{{$productAnswer->answer->availableLanguage[0]->title}}"/>--}}
-                                    {{--                            <label class="option" for="checkbox1" style="display: inline-block ">--}}
-                                    {{--                                {{count($productAnswer->answer->availableLanguage)>0?$productAnswer->answer->availableLanguage[0]->title:""}}--}}
-                                    {{--                            </label>--}}
-                                    {{--                            </div>--}}
                                 </div>
                             @endif
                         @endforeach
@@ -127,6 +122,7 @@
             <section class="products_viewport">
                 <div class="product_grid">
                     @foreach($products as $product)
+                        <a href="{{route('productDetails',[app()->getLocale(),$category->id,$product->id])}}">
                         <div class="main_product_view">
                             <div class="pic">
                                 @if($product->saleProduct && $product->saleProduct->sale)
@@ -172,6 +168,7 @@
                                 </div>
                             </div>
                         </div>
+                        </a>
                     @endforeach
                 </div>
 

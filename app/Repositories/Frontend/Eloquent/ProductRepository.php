@@ -61,4 +61,9 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         ];
     }
 
+    public function getProductById(int $id)
+    {
+        return $this->model::where(['id' => $id])->with(['availableLanguage', 'files', 'saleProduct.sale'])->first();
+    }
+
 }

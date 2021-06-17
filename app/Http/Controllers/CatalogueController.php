@@ -42,13 +42,13 @@ class CatalogueController extends Controller
 
         $staticFilterData = ['category'];
 
-        $data = $products->orderBy('created_at', 'DESC')->paginate(1);
+        $data = $products->orderBy('created_at', 'DESC')->paginate(16);
 
         return view('pages.product.catalogue', [
             'products' => $data,
             'productFeatures' => $filterArrays['productFeatures'],
             'productAnswers' => $filterArrays['productAnswers'],
-            'staticFilterData' =>$staticFilterData,
+            'staticFilterData' => $staticFilterData,
             'category' => $category
         ]);
     }
@@ -62,30 +62,13 @@ class CatalogueController extends Controller
      *
      * @return Application|Factory|View|Response
      */
-    public function show(string $locale, Category $category, Product $product)
+    public function show(string $locale, Category $category, int $id)
     {
-        if (0 === $product->status) {
-            abort(404);
-        }
-        $newProductsCategory = [];
-        $model = new ProductService(new Product());
-        $newProducts = $model->getLastProducts();
 
-        foreach ($newProducts as $prod) {
-            foreach ($prod->answers as $answer) {
-                if ($answer->answer->feature->feature->slug == "category") {
-                    if (count($answer->answer->availableLanguage) > 0) {
-                        $newProductsCategory[] = $answer->answer->availableLanguage[0];
-                    }
-                }
-            }
-        }
-        $newProductsCategory = array_unique(array_column($newProductsCategory, 'title', 'id'));
         return view('pages.product.details', [
-            'product' => $product,
+            'product' => $this->productRepository->getProductById($id),
             'category' => $category,
-            'newProducts' => $newProducts,
-            'newProductsCategory' => $newProductsCategory
+            'bestSellerProducts' => $this->productRepository->getNewProducts(),
         ]);
     }
 

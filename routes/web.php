@@ -146,6 +146,7 @@ Route::prefix('{locale?}')
             Route::get('/', [HomeController::class, 'index'])->name('welcome');
 
             Route::get('/catalogue/{category}', [CatalogueController::class, 'catalogue'])->name('catalogue');
+            Route::get('/catalogue/{category}/details/{product}', [CatalogueController::class, 'show'])->name('productDetails');
 
         });
     });

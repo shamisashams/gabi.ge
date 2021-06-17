@@ -1665,6 +1665,7 @@ img {
     color: #2d2d2d;
     border: #dcdcdc 1px solid;
     transition: 0.2s;
+
 }
 
 .product_full_view .customize .options .box_grid .box:active {
@@ -3233,4 +3234,37 @@ img {
     .profile_section .profile_tabs_content .update {
         width: 216px;
     }
+}
+
+
+.product_full_view .customize .options .box_grid .box {
+    display: inline-block;
+    width: 147px;
+    height: 34px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    font-size: 12px;
+    color: #2d2d2d;
+    border: #dcdcdc 1px solid;
+    transition: 0.2s;
+    position: relative;
+}
+
+.product_full_view .customize .options .box_grid label.box {
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.product_full_view .customize .options .box_grid input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.product_full_view .customize .options .box_grid input:checked + label {
+    background-color: #f5e5d696;
 }
