@@ -15,4 +15,6 @@ interface ProductRepositoryInterface
     public function getProductFilters(int $id, Request $request, $products);
 
     public function getProductById(int $id);
+
+    public function getSingleProductFeatures(int $id);
 }

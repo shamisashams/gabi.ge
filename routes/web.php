@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatalogueController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
@@ -147,6 +148,11 @@ Route::prefix('{locale?}')
 
             Route::get('/catalogue/{category}', [CatalogueController::class, 'catalogue'])->name('catalogue');
             Route::get('/catalogue/{category}/details/{product}', [CatalogueController::class, 'show'])->name('productDetails');
+
+            Route::get('/addcartcount/{id}/{type}', [CartController::class, 'addCartCount'])->name('addCartCount');
+            Route::get('/removefromcart', [CartController::class, 'removeFromCart'])->name('removeFromCart');
+            Route::get('/addtocart/{id}', [CartController::class, 'addToCart'])->name('addToCart');
+            Route::get('/getcartcount', [CartController::class, 'getCartCount'])->name('getCartCount');
 
         });
     });

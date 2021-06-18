@@ -87,7 +87,7 @@
                         transform="translate(16 18)"
                     />
                 </svg>
-                <div>0 / $0.00</div>
+                <div id="cart-count">0 / $0.00</div>
                 <div class="cart_dropdown">
                     <div class="item cart_item_header">
                         <div>

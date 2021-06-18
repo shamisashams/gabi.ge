@@ -98,104 +98,43 @@
                     <div class="main">$ {{round($product->price/100,2)}}</div>
                 @endif
             </div>
-            <div class="colors">
-                <div class="title">Color</div>
-                <button
-                    class="color picked"
-                    style="background-color: #faeadb"
-                ></button>
-                <button class="color" style="background-color: #fbfebd"></button>
-                <button class="color" style="background-color: #dbfafa"></button>
-                <button class="color" style="background-color: #fadbe7"></button>
-            </div>
+            {{--            <div class="colors">--}}
+            {{--                <div class="title">Color</div>--}}
+            {{--                <button--}}
+            {{--                    class="color picked"--}}
+            {{--                    style="background-color: #faeadb"--}}
+            {{--                ></button>--}}
+            {{--                <button class="color" style="background-color: #fbfebd"></button>--}}
+            {{--                <button class="color" style="background-color: #dbfafa"></button>--}}
+            {{--                <button class="color" style="background-color: #fadbe7"></button>--}}
+            {{--            </div>--}}
+            {{--            --}}
 
-            @foreach($product->answers as $key => $answer)
-                <li>
-                    @if(count($answer->feature->availableLanguage) > 0)
-                        @if($key > 0)
-                            @if(count($product->answers[$key-1]->feature->availableLanguage) > 0)
-                                @if($product->answers[$key-1]->feature->availableLanguage[0]->title === $answer->feature->availableLanguage[0]->title)
-                                    <span></span>
-                                @else
-                                    <span>{{$answer->feature->availableLanguage[0]->title}}:</span>
-                                @endif
-                            @else
-                                <span>{{$answer->feature->availableLanguage[0]->title}}:</span>
-                            @endif
-                        @else
-                            <span>{{$answer->feature->availableLanguage[0]->title}}:</span>
-                        @endif
-                    @endif
-                    @if(count($answer->answer->availableLanguage) > 0)
-                        <span>{{$answer->answer->availableLanguage[0]->title}}</span>
-                    @endif
-                </li>
-            @endforeach
-
-            @foreach($product->answers as $key => $answer)
+            <?php $isFeature = false ?>
+            @foreach($productFeatures as $productAnswer)
+                @if($productAnswer->feature->type !== 'input')
+                    @continue
+                @endif
                 <div class="options">
-                    @if(count($answer->feature->availableLanguage) > 0)
-                        @if($key > 0)
-                            @if(count($product->answers[$key-1]->feature->availableLanguage) > 0)
-                                @if($product->answers[$key-1]->feature->availableLanguage[0]->title === $answer->feature->availableLanguage[0]->title)
-                                    <span></span>
-                                @else
-
-                                    <div class="title">{{$answer->feature->availableLanguage[0]->title}}</div>
-                                @endif
-                            @else
-                                <div class="title">{{$answer->feature->availableLanguage[0]->title}}</div>
-                            @endif
-                        @else
-                            <div class="title">{{$answer->feature->availableLanguage[0]->title}}</div>
-                        @endif
-                    @endif
-                    @if(count($answer->answer->availableLanguage) > 0)
-                        <span>{{$answer->answer->availableLanguage[0]->title}}</span>
-                    @endif
-
-
+                    <div
+                        class="title">{{(count($productAnswer->feature->availableLanguage) > 0) ?  $productAnswer->feature->availableLanguage[0]->title : ''}}</div>
                     <div class="box_grid">
-                        <div class="box">
-                            <input type="radio" name="size" id="size1"/>
-                            <label for="size1" class="box">52 CM</label>
-                        </div>
-                        <div class="box">
-                            <input type="radio" name="size" id="size2"/>
-                            <label for="size2" class="box">52 CM</label>
-                        </div>
-                        <div class="box">
-                            <input type="radio" name="size" id="size3"/>
-                            <label for="size3" class="box">52 CM</label>
-                        </div>
-                        <div class="box">
-                            <input type="radio" name="size" id="size4"/>
-                            <label for="size4" class="box">52 CM</label>
-                        </div>
+                        @foreach($productAnswer->feature->answer as $answer)
+                            @if($answer->status && (in_array($answer->id,$productAnswers)))
+                                <div class="box">
+                                    <input type="radio" name="feature[{{$productAnswer->feature->id}}][]"
+                                           data-feature="{{$productAnswer->feature->id}}" id="{{$answer->id}}"
+                                           value="{{$answer->id}}"/>
+                                    <label for="{{$answer->id}}"
+                                           class="box">{{count($answer->availableLanguage)>0?$answer->availableLanguage[0]->title:""}}</label>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
+
+
             @endforeach
-            <div class="options">
-                <div class="title">Age</div>
-                <div class="box_grid">
-                    <div class="box">
-                        <input type="radio" name="age" id="age1"/>
-                        <label for="age1" class="box">3 - 6 Months</label>
-                    </div>
-                    <div class="box">
-                        <input type="radio" name="age" id="age2"/>
-                        <label for="age2" class="box">3 - 6 Months</label>
-                    </div>
-                    <div class="box">
-                        <input type="radio" name="age" id="age3"/>
-                        <label for="age3" class="box">3 - 6 Months</label>
-                    </div>
-                    <div class="box">
-                        <input type="radio" name="age" id="age4"/>
-                        <label for="age4" class="box">3 - 6 Months</label>
-                    </div>
-                </div>
-            </div>
             <div class="btns flex">
                 <div class="number_input">
                     <button class="decrease" onclick="decreaseValue()">-</button>
@@ -203,9 +142,9 @@
                     <button class="increase" onclick="increaseValue()">+</button>
                 </div>
                 <a href="#">
-                    <button class="add_to_cart">
+                    <button onclick="addToCart(this, '{{$product->id}}')" class="add_to_cart">
                         <img src="img/icons/header/cart.png" alt=""/>
-                        <div>Add To Card</div>
+                        <div>{{__('client.add_to_cart')}}</div>
                     </button>
                 </a>
             </div>
@@ -222,26 +161,6 @@
             <p class="para">
                 {{(count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->short_description : ''}}
             </p>
-            {{--            <ul>--}}
-            {{--                <li class="para">--}}
-            {{--                    • Nunc Nec Porttitor Turpis. In Eu Risus Enim. In Vitae Mollis Elit.--}}
-            {{--                </li>--}}
-            {{--                <li class="para">--}}
-            {{--                    • Nunc Nec Porttitor Turpis. In Eu Risus Enim. In Vitae Mollis Elit.--}}
-            {{--                </li>--}}
-            {{--                <li class="para">--}}
-            {{--                    • Nunc Nec Porttitor Turpis. In Eu Risus Enim. In Vitae Mollis Elit.--}}
-            {{--                </li>--}}
-            {{--            </ul>--}}
-            {{--            <div class="para">--}}
-            {{--                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio.--}}
-            {{--                Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.--}}
-            {{--                Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec--}}
-            {{--                nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit--}}
-            {{--                amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices--}}
-            {{--                nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate--}}
-            {{--                sem tristique cursus.--}}
-            {{--            </div>--}}
         </div>
         <div class="information_content wrapper">
             {{--            <div class="title">Additional Information</div>--}}
