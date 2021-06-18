@@ -242,26 +242,47 @@ function getCartCount() {
         method: 'GET',
         success: function (data) {
             if (data.status == true) {
-                $('#cart-count').text(data.count + " / $" + data.total);
-                let cart=document.querySelectorAll('.cart_item_header');
-                let cartDropDown=document.querySelector('.cart_dropdown');
-                console.log(cartDropDown);
-                data.products.forEach(item=>{
-                    let element=`
+                $('#cart-count').text(data.count + " / $" + Math.round(data.total * 100) / 100);
+                let cart = document.querySelectorAll('.cart_item_header');
+                let cartDropDown = document.querySelector('.cart_dropdown');
+                cartDropDown.innerHTML = "";
+                data.products.forEach(item => {
+                    let element = `
+                   <a href="/${locale}/catalogue/${item.category_id}/details/${item.id}"">
                         <div class="item cart_item_header">
                         <div>
                             <div class="title">${item.title}</div>
-                            <div class="number">${item.quantity} x ${item.sale??item.price}</div>
+                            <div class="number">${item.quantity} x $${item.sale ? item.sale : item.price}</div>
                         </div>
                         <div class="picture">
-                            <img src="img/products/2.png" alt=""/>
+                            <img src="/storage/product/${item.id}/${item.file}" alt=""/>
                         </div>
                         <button class="remove_item">
-                            <img src="img/icons/header/remove.png" alt=""/>
+                            <img src="/img/icons/header/remove.png" alt=""/>
                         </button>
-                    </div>`
-                    cartDropDown.appendChild(element);
+                    </div>
+                   </a>`
+                    $(cartDropDown).append(element);
+
+                    // cartDropDown.insertBefore('<div></div>', checkoutTotal);
                 })
+                let checkout = `
+                                    <div class="checkout" id="checkout-total">
+                        <div class="total">total</div>
+                        <div class="price">$ ${Math.round(data.total * 100) / 100}</div>
+                    </div>
+                    <div class="checkout">
+                        <a href="shopping-cart.html">
+                            <button class="view_cart">View Cart</button>
+                        </a>
+                        <a href="shopping-cart.html">
+                            <button class="go">
+                                <div>Checkout</div>
+                                <img src="img/icons/header/right.png" alt=""/>
+                            </button>
+                        </a>
+                    </div>`
+                $(cartDropDown).append(checkout);
 
 
                 // $('#cart_count').text(data.count);

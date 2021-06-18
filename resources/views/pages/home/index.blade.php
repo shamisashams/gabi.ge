@@ -87,6 +87,7 @@
             </div>
             <div class="product_grid">
                 @foreach($discountedProducts as $product)
+                    <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
                     <div class="main_product_view">
                         <div class="pic">
                             @if($product->saleProduct && $product->saleProduct->sale)
@@ -132,6 +133,7 @@
                             </div>
                         </div>
                     </div>
+                    </a>
                 @endforeach
             </div>
         </section>
@@ -149,7 +151,7 @@
         </div>
         <div class="flex new_products_slide">
             @foreach($newProducts as $product)
-                <div class="main_product_view">
+                <div onclick="window.location.href='{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}'" class="main_product_view">
                     <div class="pic">
                         @if($product->saleProduct && $product->saleProduct->sale)
                             <div class="label off">

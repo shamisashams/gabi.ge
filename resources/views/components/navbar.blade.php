@@ -89,45 +89,7 @@
                 </svg>
                 <div id="cart-count">0 / $0.00</div>
                 <div class="cart_dropdown">
-                    <div class="item cart_item_header">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="number">2 x $38.00</div>
-                        </div>
-                        <div class="picture">
-                            <img src="img/products/2.png" alt=""/>
-                        </div>
-                        <button class="remove_item">
-                            <img src="img/icons/header/remove.png" alt=""/>
-                        </button>
-                    </div>
-                    <div class="item cart_item_header">
-                        <div>
-                            <div class="title">Floral Print Dress Blue</div>
-                            <div class="number">2 x $38.00</div>
-                        </div>
-                        <div class="picture">
-                            <img src="img/products/2.png" alt=""/>
-                        </div>
-                        <button class="remove_item">
-                            <img src="img/icons/header/remove.png" alt=""/>
-                        </button>
-                    </div>
-                    <div class="checkout">
-                        <div class="total">total</div>
-                        <div class="price">$124.00</div>
-                    </div>
-                    <div class="checkout">
-                        <a href="shopping-cart.html">
-                            <button class="view_cart">View Cart</button>
-                        </a>
-                        <a href="shopping-cart.html">
-                            <button class="go">
-                                <div>Checkout</div>
-                                <img src="img/icons/header/right.png" alt=""/>
-                            </button>
-                        </a>
-                    </div>
+
                 </div>
             </div>
             <a href="login.html" class="links">

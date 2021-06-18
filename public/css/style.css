@@ -134,7 +134,7 @@ img {
     top: 100%;
     width: 328px;
     padding: 20px;
-    z-index: 20;
+    z-index: 21;
     background-color: #fff;
     box-shadow: -2px 0 17px rgba(172, 172, 172, 0.16);
     display: none;
@@ -651,6 +651,11 @@ img {
 
 .main_product_view {
     margin: 0 17.5px;
+
+}
+
+.main_product_view:hover {
+    cursor: pointer;
 }
 
 .main_product_view .pic {

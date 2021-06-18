@@ -109,7 +109,9 @@ class CartController extends Controller
                 $product = Product::where(['id' => $item->product_id])->first();
                 if ($product) {
                     $products[] = [
-                        'price' => $product->price,
+                        'id' => $product->id,
+                        'category_id' => $product->category_id,
+                        'price' => $product->price / 100,
                         'sale' => $product->saleProduct && $product->saleProduct->sale ?
                             Product::calculatePrice($product->price, $product->saleProduct->sale->discount, $product->saleProduct->sale->type) : '',
                         'title' => $product->language()->where('language_id', $localization)->first()->title ?? '',
@@ -138,8 +140,10 @@ class CartController extends Controller
 //                return $item;
 //            });
             foreach ($cart as $item) {
+
                 $total += intval($item->quantity) * intval($item->price) / 100;
             }
+//            dd(2);
 
         }
         return response()->json(array('status' => true, 'count' => count($cart), 'products' => $products, 'total' => $total));
