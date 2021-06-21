@@ -154,6 +154,17 @@ Route::prefix('{locale?}')
             Route::get('/addtocart/{id}', [CartController::class, 'addToCart'])->name('addToCart');
             Route::get('/getcartcount', [CartController::class, 'getCartCount'])->name('getCartCount');
 
+            //Login
+
+
+            Route::get('/login-view',[\App\Http\Controllers\Auth\AuthFrontendController::class,'loginView'])->name('loginViewFront');
+            Route::post('/register',[\App\Http\Controllers\Auth\AuthFrontendController::class,'register'])->name('register');
+            Route::post('login', [\App\Http\Controllers\Auth\AuthFrontendController::class, 'login'])->name('loginFront');
+
+            Route::middleware(['active'])->group(function () {
+                Route::get('logout', [\App\Http\Controllers\Auth\AuthFrontendController::class, 'logout'])->name('logoutFront');
+            });
+
         });
     });
 

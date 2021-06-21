@@ -3273,3 +3273,13 @@ img {
 .product_full_view .customize .options .box_grid input:checked + label {
     background-color: #f5e5d696;
 }
+
+.error-block{
+    margin-top:-25px;
+    margin-bottom:20px;
+    color:red;
+}
+
+.invalid{
+    border:1px solid red !important;
+}

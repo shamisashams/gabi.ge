@@ -19,6 +19,8 @@ use App\Repositories\Eloquent\TranslationRepository;
 use App\Repositories\Eloquent\UserRepository;
 use App\Repositories\Eloquent\VerificationRepository;
 use App\Repositories\FeatureRepositoryInterface;
+use App\Repositories\Frontend\AuthRepositoryInterface;
+use App\Repositories\Frontend\Eloquent\AuthRepository;
 use App\Repositories\Frontend\Eloquent\ProductRepository;
 use App\Repositories\Frontend\ProductRepositoryInterface;
 use App\Repositories\LanguageRepositoryInterface;
@@ -69,6 +71,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(\App\Repositories\Frontend\CategoryRepositoryInterface::class, \App\Repositories\Frontend\Eloquent\CategoryRepository::class);
         $this->app->bind(\App\Repositories\Frontend\SliderRepositoryInterface::class, \App\Repositories\Frontend\Eloquent\SliderRepository::class);
+        $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
     }
 
 }

@@ -8,9 +8,9 @@
             ><img src="img/logo/obaby.png" alt=""
                 /></a>
             <div class="navbar">
-                <a href="index.html" class="nav_link active">Home</a>
+                <a href="{{route('welcome')}}" class="nav_link active">{{__('client.home')}}</a>
                 <div class="nav_link">
-                    Categories
+                    {{__('client.categories')}}
 
                     <div class="category_dropdown">
 
@@ -43,9 +43,9 @@
                         </div>
                     </div>
                 </div>
-                <a href="contact.html" class="nav_link">Contact Us</a>
-                <a href="about.html" class="nav_link">About Us</a>
-                <a href="helps.html" class="nav_link">Helps</a>
+                <a href="contact.html" class="nav_link">{{__('client.contact_us')}}</a>
+                <a href="about.html" class="nav_link">{{__('client.about_us')}}</a>
+                <a href="helps.html" class="nav_link">{{__('client.helps')}}</a>
             </div>
         </div>
         <div class="flex columns">
@@ -92,6 +92,7 @@
 
                 </div>
             </div>
+            @guest
             <a href="login.html" class="links">
                 <svg
                     id="person"
@@ -119,8 +120,12 @@
                     />
                 </svg>
 
-                <div>Login / Sign Up</div>
+                <a href="{{route('loginViewFront')}}"><div>{{__('client.login')}} / {{__('client.sign_up')}}</div></a>
             </a>
+            @else
+                <a class="links" style="margin-right: -10px;">{{auth()->user()->name}}</a>
+                <a href="{{route('logoutFront',app()->getLocale())}}" class="links">Log Out</a>
+            @endguest
             <div class="links languages">
                 <svg
                     id="shopping-cart"

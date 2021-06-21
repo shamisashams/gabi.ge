@@ -41,4 +41,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class, 'user_id');
+    }
+
+    public function language()
+    {
+        return $this->hasMany('App\Models\UserLanguage', 'user_id');
+    }
+
+    public function tokens()
+    {
+        return $this->hasMany('App\Models\VerifyUser', 'user_id');
+    }
 }
