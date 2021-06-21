@@ -203,6 +203,7 @@ function addToCart(el, $id) {
     let object = {};
     let box = document.querySelector('.customize');
     if (box) {
+        let quantity = document.querySelector('#product_number').value;
         let options = box.querySelectorAll('input[type="radio"]:checked');
         let allOptions = box.querySelectorAll('.title');
         options.forEach(item => {
@@ -212,20 +213,20 @@ function addToCart(el, $id) {
         })
 
         if (allOptions.length === options.length) {
-            addToCartAjax($id, object);
+            addToCartAjax($id, object, quantity);
         }
     }
 
 };
 
-function addToCartAjax($id, options) {
+function addToCartAjax($id, options, quantity) {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     $.ajax({
-        url: `/${locale}/addtocart/` + $id + `?options=${JSON.stringify(options)}`,
+        url: `/${locale}/addtocart/` + $id + `?options=${JSON.stringify(options)}&quantity=${quantity}`,
         method: 'GET',
         success: function (data) {
             if (data.status == true) {
@@ -248,8 +249,9 @@ function getCartCount() {
                 cartDropDown.innerHTML = "";
                 data.products.forEach(item => {
                     let element = `
-                   <a href="/${locale}/catalogue/${item.category_id}/details/${item.id}"">
+
                         <div class="item cart_item_header">
+                          <a style="display: contents" href="/${locale}/catalogue/${item.category_id}/details/${item.id}"">
                         <div>
                             <div class="title">${item.title}</div>
                             <div class="number">${item.quantity} x $${item.sale ? item.sale : item.price}</div>
@@ -257,11 +259,14 @@ function getCartCount() {
                         <div class="picture">
                             <img src="/storage/product/${item.id}/${item.file}" alt=""/>
                         </div>
-                        <button class="remove_item">
+                          </a>
+
+                        <button type="button" class="remove_item" onclick="removefromcart(this,${item.id})">
+                            <p hidden>${item.options}</p>
                             <img src="/img/icons/header/remove.png" alt=""/>
                         </button>
                     </div>
-                   </a>`
+                 `
                     $(cartDropDown).append(element);
 
                     // cartDropDown.insertBefore('<div></div>', checkoutTotal);
@@ -340,12 +345,10 @@ function addcartcount($id, $type) {
     });
 }
 
-function removefromcart() {
-    let items = [];
-    $("input[name='product-select']:checked").each(function () {
-        items.push(parseInt($(this).val()))
-    })
-    if (items.length > 0) {
+function removefromcart(el, id) {
+    let options = JSON.parse(el.firstElementChild.textContent);
+
+    if (options) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -355,16 +358,17 @@ function removefromcart() {
             url: `/${locale}/removefromcart`,
             method: 'GET',
             data: {
-                items
+                id,
+                options
             },
             success: function (data) {
                 if (data.status === true) {
-                    items.forEach((el) => {
-                        $(`#cart-container`).children(`#cart-${el}`).eq(0).remove();
-                    })
-                    if ($('.cart__card').length < 1) {
-                        $('.cart-empty').removeClass('hidden');
-                    }
+                    // items.forEach((el) => {
+                    //     $(`#cart-container`).children(`#cart-${el}`).eq(0).remove();
+                    // })
+                    // if ($('.cart__card').length < 1) {
+                    //     $('.cart-empty').removeClass('hidden');
+                    // }
                     getCartCount();
                 }
             }

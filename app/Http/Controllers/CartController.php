@@ -56,7 +56,7 @@ class CartController extends Controller
     public function addToCart(Request $request, $locale, $id)
     {
         $products = session('products') ?? array();
-
+        
         $options = (array)json_decode($request['options']);
 
         $bool = true;
@@ -65,7 +65,7 @@ class CartController extends Controller
 
         foreach ($products as $item) {
             if ($item->product_id == $id) {
-                if ($options === (array)$item->options) {
+                if ($options === $item->options) {
                     $bool = false;
                     break;
                 }
@@ -85,7 +85,7 @@ class CartController extends Controller
             if ($bool) {
                 $products[] = (object)[
                     'product_id' => $product->id,
-                    'quantity' => 1,
+                    'quantity' => $request['quantity'],
                     'sale' => ($product->saleProduct && $product->saleProduct->sale) ? Product::calculatePrice($product->price, $product->saleProduct->sale->discount, $product->saleProduct->sale->type) : $product->price,
                     'price' => $product->price,
                     'options' => $options
@@ -117,7 +117,8 @@ class CartController extends Controller
                         'title' => $product->language()->where('language_id', $localization)->first()->title ?? '',
                         'description' => $product->language()->where('language_id', $localization)->first()->description ?? '',
                         'file' => $product->files[0]->name ?? '',
-                        'quantity' => $item->quantity
+                        'quantity' => $item->quantity,
+                        'options' => json_encode($item->options)
                     ];
                 }
             }
@@ -143,7 +144,6 @@ class CartController extends Controller
 
                 $total += intval($item->quantity) * intval($item->price) / 100;
             }
-//            dd(2);
 
         }
         return response()->json(array('status' => true, 'count' => count($cart), 'products' => $products, 'total' => $total));
@@ -169,12 +169,14 @@ class CartController extends Controller
 
     public function removeFromCart($locale, Request $request)
     {
-        $data = $request->get('items');
+
+        $id = $request['id'];
+        $options = $request['options'];
 
         $cart = session('products') ?? array();
         if ($cart !== null) {
             foreach ($cart as $key => $item) {
-                if (in_array($item->product_id, $data)) {
+                if ($item->product_id == $id && $item->options === $options) {
                     unset($cart[$key]);
                 }
             }
