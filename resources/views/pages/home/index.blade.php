@@ -46,7 +46,7 @@
                         <img class="product" src="noimage.png"/>
                     @endif
                     <img class="frame" src="img/products/frame.png" alt=""/>
-                    <a class="category_name" href="#" style="overflow-wrap: anywhere">
+                    <a class="category_name" href="{{route('catalogue',[app()->getLocale(),$category->id])}}" style="overflow-wrap: anywhere">
                         {{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}
                     </a>
                     <div class="overlay"></div>

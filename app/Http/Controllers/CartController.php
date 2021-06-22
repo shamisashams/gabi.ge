@@ -154,7 +154,7 @@ class CartController extends Controller
         if ($cart !== null) {
             foreach ($cart as $key => $item) {
                 if ($item->product_id == intval($id) && $item->options === $options) {
-                    ($type == 1) ? $cart[$key]->quantity++ : $cart[$key]->quantity--;
+                    ($type == 1) ? $cart[$key]->quantity++ : ($type == 0 ? "" : $cart[$key]->quantity--);
                 }
                 if ($item->quantity <= 0) {
                     unset($cart[$key]);

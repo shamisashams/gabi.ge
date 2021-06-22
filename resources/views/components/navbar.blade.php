@@ -35,7 +35,7 @@
                                         @endif
                                         <img src="/img/products/frame.png" alt="" class="frame"/>
                                         <a class="cat_btn"
-                                           href="products.html">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}
+                                           href="{{route('catalogue',[app()->getLocale(),$category->id])}}">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}
                                         </a>
                                     </div>
                                 @endforeach
@@ -93,37 +93,66 @@
                 </div>
             </div>
             @guest
-            <a href="login.html" class="links">
-                <svg
-                    id="person"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                >
-                    <rect
-                        id="Rectangle_74"
-                        data-name="Rectangle 74"
+                <a href="{{route('loginViewFront')}}" class="links">
+                    <svg
+                        id="person"
+                        xmlns="http://www.w3.org/2000/svg"
                         width="24"
                         height="24"
-                        opacity="0"
-                    />
-                    <path
-                        id="Path_15"
-                        data-name="Path 15"
-                        d="M12,11A4,4,0,1,0,8,7,4,4,0,0,0,12,11Zm0-6a2,2,0,1,1-2,2A2,2,0,0,1,12,5Z"
-                    />
-                    <path
-                        id="Path_16"
-                        data-name="Path 16"
-                        d="M12,13a7,7,0,0,0-7,7,1,1,0,0,0,2,0,5,5,0,0,1,10,0,1,1,0,0,0,2,0,7,7,0,0,0-7-7Z"
-                    />
-                </svg>
+                        viewBox="0 0 24 24"
+                    >
+                        <rect
+                            id="Rectangle_74"
+                            data-name="Rectangle 74"
+                            width="24"
+                            height="24"
+                            opacity="0"
+                        />
+                        <path
+                            id="Path_15"
+                            data-name="Path 15"
+                            d="M12,11A4,4,0,1,0,8,7,4,4,0,0,0,12,11Zm0-6a2,2,0,1,1-2,2A2,2,0,0,1,12,5Z"
+                        />
+                        <path
+                            id="Path_16"
+                            data-name="Path 16"
+                            d="M12,13a7,7,0,0,0-7,7,1,1,0,0,0,2,0,5,5,0,0,1,10,0,1,1,0,0,0,2,0,7,7,0,0,0-7-7Z"
+                        />
+                    </svg>
 
-                <a href="{{route('loginViewFront')}}"><div>{{__('client.login')}} / {{__('client.sign_up')}}</div></a>
-            </a>
+                    <a href="{{route('loginViewFront')}}">
+                        <div>{{__('client.login')}} / {{__('client.sign_up')}}</div>
+                    </a>
+                </a>
             @else
-                <a class="links" style="margin-right: -10px;">{{auth()->user()->name}}</a>
+                <a class="links" style="margin-right: -10px;">
+                    <svg
+                        id="person"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                    >
+                        <rect
+                            id="Rectangle_74"
+                            data-name="Rectangle 74"
+                            width="24"
+                            height="24"
+                            opacity="0"
+                        />
+                        <path
+                            id="Path_15"
+                            data-name="Path 15"
+                            d="M12,11A4,4,0,1,0,8,7,4,4,0,0,0,12,11Zm0-6a2,2,0,1,1-2,2A2,2,0,0,1,12,5Z"
+                        />
+                        <path
+                            id="Path_16"
+                            data-name="Path 16"
+                            d="M12,13a7,7,0,0,0-7,7,1,1,0,0,0,2,0,5,5,0,0,1,10,0,1,1,0,0,0,2,0,7,7,0,0,0-7-7Z"
+                        />
+                    </svg>
+                    {{auth()->user()->name}}
+                </a>
                 <a href="{{route('logoutFront',app()->getLocale())}}" class="links">Log Out</a>
             @endguest
             <div class="links languages">

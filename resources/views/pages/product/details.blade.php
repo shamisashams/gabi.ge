@@ -138,7 +138,7 @@
             <div class="btns flex">
                 <div class="number_input">
                     <button class="decrease" onclick="decreaseValue()">-</button>
-                    <input id="product_number" type="text" class="number" value="1"/>
+                    <input disabled id="product_number" type="text" class="number" value="1"/>
                     <button class="increase" onclick="increaseValue()">+</button>
                 </div>
                 <a href="#">

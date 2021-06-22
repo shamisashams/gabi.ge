@@ -166,8 +166,8 @@ function increaseValue() {
 function decreaseValue() {
     let value = parseInt(document.getElementById("product_number").value, 10);
     value = isNaN(value) ? 0 : value;
-    value < 1 ? (value = 1) : "";
     value--;
+    value < 1 ? (value = 1) : "";
     document.getElementById("product_number").value = value;
 }
 
@@ -185,10 +185,12 @@ function increase(id, options) {
 function decrease(id, options) {
     let value = parseInt(document.getElementById(`product_number-${id}-${JSON.stringify(options)}`).value, 10);
 
-    addcartcount(id, options, -1)
     value = isNaN(value) ? 0 : value;
-    value < 1 ? (value = 1) : "";
     value--;
+    let type = value < 1 ? 0 : -1;
+    value < 1 ? (value = 1) : "";
+    addcartcount(id, options, type)
+
     document.getElementById(`product_number-${id}-${JSON.stringify(options)}`).value = value;
 }
 

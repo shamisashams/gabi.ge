@@ -344,6 +344,7 @@ img {
 .header .category_dropdown .category_img.display .main {
     transform: scale(1);
     transition: 0.3s;
+    object-fit: contain;
 }
 
 .header .category_dropdown .category_img .frame {
@@ -780,6 +781,7 @@ img {
     height: 100%;
     top: 0;
     left: 0;
+    object-fit: contain;
 }
 
 .category_slide .frame {
@@ -822,6 +824,7 @@ img {
     z-index: 10;
     font-weight: bold;
     transition: 0.2s;
+    outline: none;
 }
 
 .category_slide .category_name:hover {
@@ -3261,3 +3264,18 @@ img {
         width: 216px;
     }
 }
+
+.error-block{
+    margin-top:-25px;
+    margin-bottom:20px;
+    color:red;
+}
+
+.invalid{
+    border:1px solid red !important;
+}
+.main_product_view:hover {
+    cursor: pointer;
+}
+
+.slick-slide {outline: none;}
