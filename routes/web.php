@@ -160,6 +160,7 @@ Route::prefix('{locale?}')
             Route::get('/login-view',[\App\Http\Controllers\Auth\AuthFrontendController::class,'loginView'])->name('loginViewFront');
             Route::post('/register',[\App\Http\Controllers\Auth\AuthFrontendController::class,'register'])->name('register');
             Route::post('login', [\App\Http\Controllers\Auth\AuthFrontendController::class, 'login'])->name('loginFront');
+            Route::get('cart', [CartController::class, 'index'])->name('cart');
 
             Route::middleware(['active'])->group(function () {
                 Route::get('logout', [\App\Http\Controllers\Auth\AuthFrontendController::class, 'logout'])->name('logoutFront');

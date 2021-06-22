@@ -112,7 +112,7 @@
 
             <?php $isFeature = false ?>
             @foreach($productFeatures as $productAnswer)
-                @if($productAnswer->feature->type !== 'input')
+                @if($productAnswer->feature->type !== 'input' || count($productAnswer->feature->englishLanguage)>0?$productAnswer->feature->englishLanguage[0]->title=="category":"")
                     @continue
                 @endif
                 <div class="options">
@@ -138,7 +138,7 @@
             <div class="btns flex">
                 <div class="number_input">
                     <button class="decrease" onclick="decreaseValue()">-</button>
-                    <input id="product_number"  type="text" class="number" value="1"/>
+                    <input id="product_number" type="text" class="number" value="1"/>
                     <button class="increase" onclick="increaseValue()">+</button>
                 </div>
                 <a href="#">

@@ -19,44 +19,41 @@ class CartController extends Controller
         $cart = session('products') ?? array();
 
         $total = 0;
+        $localization = Language::where('abbreviation', app()->getLocale())->first()->id ?? 1;
         if ($cart !== null) {
             foreach ($cart as $item) {
-                $products[] = $item->product_id;
-            }
-            $localization = Localization::where('abbreviation', app()->getLocale())->first()->id ?? 1;
-            $products = Product::whereIn('id', array_map('intval', $products))->get()->map(function ($prod) use ($localization, $total, $cart) {
-                $item = [
-                    'id' => $prod->id,
-                    'price' => $prod->price,
-                    'sale' => ($prod->sale == 1) ? $prod->sale_price : '',
-                    'title' => $prod->language()->where('language_id', $localization)->first()->title ?? '',
-                    'description' => $prod->language()->where('language_id', $localization)->first()->description ?? '',
-                    'file' => $prod->files[0]->name ?? ''
-                ];
-                foreach ($cart as $key => $value) {
-                    if ($prod->id == $value->product_id) {
-                        $item['quantity'] = $value->quantity;
-                    }
+                $product = Product::where(['id' => $item->product_id])->first();
+                if ($product) {
+                    $arr = array_values($item->options);
+                    $answers = Answer::whereIn('id', $arr)->with('availableLanguage')->get();
+                    $products[] = [
+                        'id' => $product->id,
+                        'category_id' => $product->category_id,
+                        'price' => $product->price / 100,
+                        'sale' => $product->saleProduct && $product->saleProduct->sale ?
+                            Product::calculatePrice($product->price, $product->saleProduct->sale->discount, $product->saleProduct->sale->type) : '',
+                        'title' => $product->language()->where('language_id', $localization)->first()->title ?? '',
+                        'description' => $product->language()->where('language_id', $localization)->first()->description ?? '',
+                        'file' => $product->files[0]->name ?? '',
+                        'quantity' => intval($item->quantity),
+                        'options' => $answers,
+                        'features' => json_encode($item->options)
+                    ];
                 }
-
-                return $item;
-            });
+            }
             foreach ($cart as $item) {
+
                 $total += intval($item->quantity) * intval($item->price) / 100;
             }
 
         }
-
-        $paymentTypes = PaymentType::where(['status' => true])->get();
-
-        return view('pages.cart.cart', compact('products', 'total', 'paymentTypes'));
-
+        return view('pages.cart.index', compact('products', 'total'));
     }
 
     public function addToCart(Request $request, $locale, $id)
     {
         $products = session('products') ?? array();
-        
+
         $options = (array)json_decode($request['options']);
 
         $bool = true;
@@ -95,6 +92,7 @@ class CartController extends Controller
             }
         }
         return response()->json(array('status' => false));
+
     }
 
     public function getCartCount()
@@ -149,12 +147,13 @@ class CartController extends Controller
         return response()->json(array('status' => true, 'count' => count($cart), 'products' => $products, 'total' => $total));
     }
 
-    public function addCartCount($locale, $id, $type)
+    public function addCartCount(Request $request, $locale, $id, $type)
     {
+        $options = (array)json_decode($request['options']);
         $cart = session('products') ?? array();
         if ($cart !== null) {
             foreach ($cart as $key => $item) {
-                if ($item->product_id == intval($id)) {
+                if ($item->product_id == intval($id) && $item->options === $options) {
                     ($type == 1) ? $cart[$key]->quantity++ : $cart[$key]->quantity--;
                 }
                 if ($item->quantity <= 0) {
@@ -171,7 +170,8 @@ class CartController extends Controller
     {
 
         $id = $request['id'];
-        $options = $request['options'];
+        $options = (array)json_decode($request['features']);
+
 
         $cart = session('products') ?? array();
         if ($cart !== null) {
@@ -181,7 +181,7 @@ class CartController extends Controller
                 }
             }
             session(['products' => $cart]);
-            return response()->json(array('status' => true));
+            return response()->json(array('status' => true,));
         }
         return response()->json(array('status' => false));
     }

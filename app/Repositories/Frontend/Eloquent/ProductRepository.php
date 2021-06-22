@@ -63,7 +63,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
     public function getSingleProductFeatures($id)
     {
-        $filterData = ProductAnswers::with(['feature.availableLanguage', 'feature.answer.availableLanguage'])->where('product_id', $id);
+        $filterData = ProductAnswers::with(['feature.availableLanguage', 'feature.answer.availableLanguage','feature.englishLanguage'])->where('product_id', $id);
         $productFeatures = $filterData
             ->groupBy('feature_id')
             ->get()

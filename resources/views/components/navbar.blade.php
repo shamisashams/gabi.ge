@@ -50,7 +50,7 @@
         </div>
         <div class="flex columns">
             <div class="links" id="cart_header">
-                <a class="abs_link" href="shopping-cart.html">|0 / $0.00|</a>
+                <a class="abs_link" href="{{route('cart',app()->getLocale())}}">|0 / $0.00|</a>
                 <svg
                     id="shopping-cart"
                     xmlns="http://www.w3.org/2000/svg"

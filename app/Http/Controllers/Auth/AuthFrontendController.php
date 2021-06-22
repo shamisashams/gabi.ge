@@ -113,9 +113,6 @@ class AuthFrontendController extends Controller
 
         if (Auth::user()) {
             Auth::logout();
-//
-//            $request->session()->invalidate();
-//            $request->session()->regenerateToken();
         }
         return redirect()->route('loginViewFront', app()->getLocale());
     }

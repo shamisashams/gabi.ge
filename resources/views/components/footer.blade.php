@@ -2,7 +2,7 @@
     <div class="footer_content wrapper flex">
         <div>
             <a class="logo" href="#">
-                <img src="img/logo/obaby.png" alt="" />
+                <img src="/img/logo/obaby.png" alt="" />
             </a>
             <p class="para">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -12,10 +12,10 @@
             </p>
             <div class="social_media">
                 <a href="#" class="sm">
-                    <img src="img/icons/footer/fb.png" alt="" />
+                    <img src="/img/icons/footer/fb.png" alt="" />
                 </a>
                 <a href="#" class="sm">
-                    <img src="img/icons/footer/ig.png" alt="" />
+                    <img src="/img/icons/footer/ig.png" alt="" />
                 </a>
             </div>
         </div>
@@ -55,10 +55,10 @@
             <div class="design">Design By Insite Internation</div>
             <div class="banks">
                 <a href="#">
-                    <img src="img/banks/1.png" alt="" />
+                    <img src="/img/banks/1.png" alt="" />
                 </a>
                 <a href="#">
-                    <img src="img/banks/2.png" alt="" />
+                    <img src="/img/banks/2.png" alt="" />
                 </a>
             </div>
         </div>

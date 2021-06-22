@@ -171,6 +171,27 @@ function decreaseValue() {
     document.getElementById("product_number").value = value;
 }
 
+
+function increase(id, options) {
+
+    let value = parseInt(document.getElementById(`product_number-${id}-${JSON.stringify(options)}`).value, 10);
+
+    addcartcount(id, options, +1)
+    value = isNaN(value) ? 0 : value;
+    value++;
+    document.getElementById(`product_number-${id}-${JSON.stringify(options)}`).value = value;
+}
+
+function decrease(id, options) {
+    let value = parseInt(document.getElementById(`product_number-${id}-${JSON.stringify(options)}`).value, 10);
+
+    addcartcount(id, options, -1)
+    value = isNaN(value) ? 0 : value;
+    value < 1 ? (value = 1) : "";
+    value--;
+    document.getElementById(`product_number-${id}-${JSON.stringify(options)}`).value = value;
+}
+
 // profile tab content
 
 profileTabName.forEach((el, i) => {
@@ -243,7 +264,7 @@ function getCartCount() {
         method: 'GET',
         success: function (data) {
             if (data.status == true) {
-                $('#cart-count').text(data.count + " / $" + Math.round(data.total * 100) / 100);
+                $('#cart-count').text(data.count + " / $" + (data.total.toFixed(2) * 100) / 100);
                 let cart = document.querySelectorAll('.cart_item_header');
                 let cartDropDown = document.querySelector('.cart_dropdown');
                 cartDropDown.innerHTML = "";
@@ -277,65 +298,63 @@ function getCartCount() {
                         <div class="price">$ ${Math.round(data.total * 100) / 100}</div>
                     </div>
                     <div class="checkout">
-                        <a href="shopping-cart.html">
+                        <a href="/${locale}/cart">
                             <button class="view_cart">View Cart</button>
                         </a>
                         <a href="shopping-cart.html">
                             <button class="go">
                                 <div>Checkout</div>
-                                <img src="img/icons/header/right.png" alt=""/>
+                                <img src="/img/icons/header/right.png" alt=""/>
                             </button>
                         </a>
                     </div>`
                 $(cartDropDown).append(checkout);
 
+                $('#sub-total').text(`$${data.total.toFixed(2)}`);
+
 
                 // $('#cart_count').text(data.count);
                 // $('#cart_price').text(`${data.total}₾`)
 
-                $('#step_product_price').text(`${data.total}₾`)
-                $('#step_product_total').text(`${data.total}₾`)
-
-                $('#step_2_product_price').text(`${data.total}₾`)
-                $('#step_2_product_total').text(`${data.total}₾`)
-
-                $('#step_3_product_price').text(`${data.total}₾`)
-                $('#step_3_product_total').text(`${data.total}₾`)
+                // $('#step_product_price').text(`${data.total}₾`)
+                // $('#step_product_total').text(`${data.total}₾`)
+                //
+                // $('#step_2_product_price').text(`${data.total}₾`)
+                // $('#step_2_product_total').text(`${data.total}₾`)
+                //
+                // $('#step_3_product_price').text(`${data.total}₾`)
+                // $('#step_3_product_total').text(`${data.total}₾`)
 
                 $('#cart_total').text(`${data.total}₾`)
-                data.products.forEach((el) => {
-                    $(`#step-product-count-${el.id}`).val(el.quantity)
-                    $(`#step-2-product-count-${el.id}`).val(el.quantity)
-                    $(`#step-3-product-count-${el.id}`).val(el.quantity)
 
-                    $(`#product-count-${el.id}`).val(el.quantity)
-                    if (el.sale !== '') {
-                        $(`#cart_product_price-${el.id}`).text(`${(el.sale) / 100}₾`)
-                        $(`#cart_product_total-${el.id}`).text(`${(el.sale / 100) * el.quantity}₾`)
-                        $(`#cart_product_total-step-${el.id}`).text(`${(el.sale / 100) * el.quantity}₾`)
-                        $(`#cart_2_product_total-step-${el.id}`).text(`${(el.sale / 100) * el.quantity}₾`)
-                        $(`#cart_3_product_total-step-${el.id}`).text(`${(el.sale / 100) * el.quantity}₾`)
+
+                data.products.forEach((el) => {
+
+                    let element = document.getElementById(`cart_product_total-${el.id}-${el.options}`);
+
+                    if (el.sale) {
+                        $(element).text(`$ ${(el.sale * el.quantity).toFixed(2)}`)
+                        // $(`#cart_product_total-step-${el.id}`).text(`${(el.sale / 100) * el.quantity}₾`)
+                        //  $(`#cart_2_product_total-step-${el.id}`).text(`${(el.sale / 100) * el.quantity}₾`)
+                        //  $(`#cart_3_product_total-step-${el.id}`).text(`${(el.sale / 100) * el.quantity}₾`)
                     } else {
-                        $(`#cart_product_price-${el.id}`).text(`${(el.price) / 100}₾`)
-                        $(`#cart_product_total-${el.id}`).text(`${(el.price / 100) * el.quantity}₾`)
-                        $(`#cart_product_total-step-${el.id}`).text(`${(el.price / 100) * el.quantity}₾`)
-                        $(`#cart_2_product_total-step-${el.id}`).text(`${(el.price / 100) * el.quantity}₾`)
-                        $(`#cart_3_product_total-step-${el.id}`).text(`${(el.price / 100) * el.quantity}₾`)
+                        $(element).text(`$ ${(el.price * el.quantity).toFixed(2)}`)
                     }
+
                 })
             }
         }
     });
 }
 
-function addcartcount($id, $type) {
+function addcartcount(id, options, type) {
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     $.ajax({
-        url: `/${locale}/addcartcount/` + $id + "/" + $type,
+        url: `/${locale}/addcartcount/` + id + "/" + type + "?options=" + JSON.stringify(options),
         method: 'GET',
         success: function (data) {
             if (data.status == true) {
@@ -345,10 +364,12 @@ function addcartcount($id, $type) {
     });
 }
 
-function removefromcart(el, id) {
-    let options = JSON.parse(el.firstElementChild.textContent);
+function removefromcart(el = null, id, options = null) {
 
-    if (options) {
+    let features = el ? JSON.parse(el.firstElementChild.textContent) : (options ? options : "")
+
+
+    if (features) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -359,16 +380,16 @@ function removefromcart(el, id) {
             method: 'GET',
             data: {
                 id,
-                options
+                features: JSON.stringify(features)
             },
             success: function (data) {
                 if (data.status === true) {
-                    // items.forEach((el) => {
-                    //     $(`#cart-container`).children(`#cart-${el}`).eq(0).remove();
-                    // })
-                    // if ($('.cart__card').length < 1) {
-                    //     $('.cart-empty').removeClass('hidden');
-                    // }
+                    let productItem = document.getElementById(`product_item-${id}-${JSON.stringify(features)}`);
+                    console.log(productItem);
+                    if (productItem) {
+                        productItem.remove();
+                    }
+
                     getCartCount();
                 }
             }
