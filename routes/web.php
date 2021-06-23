@@ -167,6 +167,7 @@ Route::prefix('{locale?}')
                 Route::get('logout', [\App\Http\Controllers\Auth\AuthFrontendController::class, 'logout'])->name('logoutFront');
                 Route::get('profile', [UserController::class, 'index'])->name('profile');
                 Route::post('profile-update', [UserController::class, 'update'])->name('profileUpdate');
+                Route::post('change-password', [UserController::class, 'changePassword'])->name('changePassword');
             });
 
         });

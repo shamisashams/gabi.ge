@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Frontend\Eloquent;
 
+use App\Http\Request\PasswordChangeRequest;
 use App\Http\Request\UserRequest;
 use App\Models\Slider;
 use App\Models\User;
@@ -10,6 +11,7 @@ use App\Repositories\Frontend\Eloquent\Base\BaseRepository;
 use App\Repositories\Frontend\SliderRepositoryInterface;
 use App\Repositories\Frontend\UserRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
@@ -37,6 +39,18 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         }
         return false;
 
+    }
+
+    public function changePassword(PasswordChangeRequest $request)
+    {
+        $user = $this->model::find(auth()->user()->id);
+
+        $user->password = Hash::make($request['password']);
+
+        if ($user->save()) {
+            return true;
+        }
+        return false;
     }
 
 

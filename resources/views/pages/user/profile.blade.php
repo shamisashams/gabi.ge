@@ -6,8 +6,8 @@
 @section('content')
     <section class="path">
         <div class="path_content wrapper">
-            <div class="path_took">Home / shop / shopping cart</div>
-            <div class="current">shopping cart</div>
+            <div class="path_took"><a href="{{route('welcome',app()->getLocale())}}">{{__('client.home')}} </a> / {{__('client.profile')}}</div>
+            <div class="current">{{__('client.profile')}}</div>
         </div>
     </section>
 
@@ -15,23 +15,25 @@
         <div class="profile_tabs">
             <div class="row flex head">
                 <div class="title roboto">
-                    Welcome To <br/>
-                    <span class="bold roboto">Khaladze</span>
+                    {{__('client.welcome_to')}} <br/>
+                    <span class="bold roboto">{{$user->name}}</span>
                 </div>
                 <div class="icn">
                     <img src="img/icons/profile/user.png" alt=""/>
                 </div>
             </div>
             <div class="row middle">
-                <div class="link profile_tab_name clicked">{{__('client.my_profiles')}}</div>
-                <div class="link profile_tab_name">{{__('client.order_history')}}</div>
-                <div class="link profile_tab_name">{{__('client.change_password')}}</div>
+                <div id="tab-profile" class="link profile_tab_name clicked"
+                     onclick="changeType('profile')">{{__('client.my_profiles')}}</div>
+                <div id="tab-order" class="link profile_tab_name" onclick="changeType('order')">{{__('client.order_history')}}</div>
+                <div id="tab-password" class="link profile_tab_name"
+                     onclick="changeType('password')">{{__('client.change_password')}}</div>
             </div>
             <div class="row last">
                 <a href="helps.html" class="link">{{__('client.helps')}}</a>
                 <a href="contact.html" class="link">{{__('client.contact_us')}}</a>
             </div>
-            <button class="log_out">Log Out</button>
+            <button onclick="window.location.href='{{route('logoutFront',app()->getLocale())}}'" class="log_out">{{__('client.log_out')}}</button>
         </div>
         <div class="profile_tabs_content clicked">
             @include('layouts.alert.alert')
@@ -41,7 +43,9 @@
                 <div class="input_grid">
                     <div class="input">
                         <label for="">{{__('client.first_name')}}</label>
-                        <input value="{{$user->profile->first_name}}" class="{{$errors->has('first_name')?'invalid':""}}" name="first_name" type="text " placeholder="Enter your name"/>
+                        <input value="{{$user->profile->first_name}}"
+                               class="{{$errors->has('first_name')?'invalid':""}}" name="first_name" type="text "
+                               placeholder="Enter your name"/>
                         @if ($errors->has('first_name'))
                             <p class="profile-error-block">{{ $errors->first('first_name') }}</p>
                         @endif
@@ -49,32 +53,37 @@
                     </div>
                     <div class="input">
                         <label for="">{{__('client.last_name')}}</label>
-                        <input value="{{$user->profile->last_name}}" class="{{$errors->has('last_name')?'invalid':""}}" name="last_name" type="text " placeholder="Enter your last name"/>
+                        <input value="{{$user->profile->last_name}}" class="{{$errors->has('last_name')?'invalid':""}}"
+                               name="last_name" type="text " placeholder="Enter your last name"/>
                         @if ($errors->has('last_name'))
                             <p class="profile-error-block">{{ $errors->first('last_name') }}</p>
                         @endif
                     </div>
                     <div class="input">
                         <label for="">{{__('client.email_address')}}</label>
-                        <input disabled value="{{$user->email}}" name="email" type="text" placeholder="example@email.com"/>
+                        <input disabled value="{{$user->email}}" name="email" type="text"
+                               placeholder="example@email.com"/>
                     </div>
                     <div class="input">
                         <label for="">{{__('client.phone')}}</label>
-                        <input value="{{$user->profile->phone}}"  class="{{$errors->has('phone')?'invalid':""}}" name="phone" type="tel" placeholder="+995 595 555 999 999"/>
+                        <input value="{{$user->profile->phone}}" class="{{$errors->has('phone')?'invalid':""}}"
+                               name="phone" type="tel" placeholder="+995 595 555 999 999"/>
                         @if ($errors->has('phone'))
                             <p class="profile-error-block">{{ $errors->first('phone') }}</p>
                         @endif
                     </div>
                     <div class="input">
                         <label for="">{{__('client.choose_country')}}</label>
-                        <input value="{{$user->profile->country}}" class="{{$errors->has('country')?'invalid':""}}" name="country" type="text" placeholder="Georgia"/>
+                        <input value="{{$user->profile->country}}" class="{{$errors->has('country')?'invalid':""}}"
+                               name="country" type="text" placeholder="Georgia"/>
                         @if ($errors->has('country'))
                             <p class="profile-error-block">{{ $errors->first('country') }}</p>
                         @endif
                     </div>
                     <div class="input">
                         <label for="">{{__('client.choose_city')}}</label>
-                        <input value="{{$user->profile->city}}" class="{{$errors->has('city')?'invalid':""}}"  name="city" type="text" placeholder="Tbilisi"/>
+                        <input value="{{$user->profile->city}}" class="{{$errors->has('city')?'invalid':""}}"
+                               name="city" type="text" placeholder="Tbilisi"/>
                         @if ($errors->has('city'))
                             <p class="profile-error-block">{{ $errors->first('city') }}</p>
                         @endif
@@ -112,7 +121,7 @@
                 </div>
             </div>
         </div>
-        <div class="profile_tabs_content">
+        <div id="tabs_content_order" class="profile_tabs_content">
             <div class="title">{{__('client.order_history')}}</div>
             <div class="order_table">
                 <div class="head flex">
@@ -194,23 +203,39 @@
             </div>
         </div>
         <div class="profile_tabs_content">
-            <div class="title">Change Your Password</div>
-            <div class="input_grid">
-                <div class="input">
-                    <label for="">Old Password</label>
-                    <input type="password " placeholder="•••••••••••••"/>
+            <div class="title">{{__('client.change_your_password')}}</div>
+            <form method="post" action="{{route('changePassword',app()->getLocale())}}">
+                @csrf
+                <div class="input_grid">
+                    <div class="input">
+                        <label for="">{{__('client.old_password')}}</label>
+                        <input value="{{old('old_password')}}" class="{{$errors->has('old_password')?"invalid":""}}"
+                               name="old_password" type="password" placeholder="•••••••••••••"/>
+                        @if ($errors->has('old_password'))
+                            <p class="profile-error-block">{{ $errors->first('old_password') }}</p>
+                        @endif
+                    </div>
+                    <div></div>
+                    <div class="input">
+                        <label for="">{{__('client.new_password')}}</label>
+                        <input value="{{old('password')}}" class="{{$errors->has('password')?"invalid":""}}"
+                               name="password" type="password" placeholder="•••••••••••••"/>
+                        @if ($errors->has('password'))
+                            <p class="profile-error-block">{{ $errors->first('password') }}</p>
+                        @endif
+                    </div>
+                    <div class="input">
+                        <label for="">{{__('client.repeat_password')}}</label>
+                        <input value="{{old('password_repeat')}}"
+                               class="{{$errors->has('password_repeat')?"invalid":""}}" name="password_repeat"
+                               type="password" placeholder="•••••••••••••"/>
+                        @if ($errors->has('password_repeat'))
+                            <p class="profile-error-block">{{ $errors->first('password_repeat') }}</p>
+                        @endif
+                    </div>
                 </div>
-                <div></div>
-                <div class="input">
-                    <label for="">New Password</label>
-                    <input type="password " placeholder="•••••••••••••"/>
-                </div>
-                <div class="input">
-                    <label for="">Repeat password</label>
-                    <input type="password " placeholder="•••••••••••••"/>
-                </div>
-            </div>
-            <button class="update">Update</button>
+                <button class="update">{{__('client.update')}}</button>
+            </form>
         </div>
     </section>
 

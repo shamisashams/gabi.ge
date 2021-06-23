@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Request\Admin\AnswerRequest;
+use App\Http\Request\PasswordChangeRequest;
 use App\Http\Request\UserRequest;
 use App\Models\Answer;
 use App\Models\Feature;
@@ -52,5 +53,16 @@ class UserController extends Controller
         }
 
         return redirect(route('profile', $locale))->with('success', __('admin.your_information_updated'));
+    }
+
+    public function changePassword(string $locale, PasswordChangeRequest $request)
+    {
+
+        if (!$this->userRepository->changePassword($request)) {
+            return redirect(route('profile', $locale))->with('danger', __('client.password_not_updated'));
+        }
+
+        return redirect(route('profile', $locale))->with('success', __('admin.password_updated'));
+
     }
 }

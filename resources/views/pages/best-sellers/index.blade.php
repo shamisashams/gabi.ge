@@ -11,7 +11,7 @@
     <div class="flex best_seller_slide">
         @foreach($bestSellerProducts as $product)
 
-            <div onclick="window.location.href='{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}'" class="main_product_view">
+            <div  class="main_product_view">
                 <div class="pic">
                     @if($product->saleProduct && $product->saleProduct->sale)
                         <div class="label off">
@@ -29,12 +29,12 @@
                     @else
                         <img src="noimage.png"/>
                     @endif
-                    <a href="fullview.html">
+
                         <button class="add_to_cart">
                             <img src="/img/icons/header/cart.png" alt=""/>
                             <div class="roboto">{{__('client.add_to_cart')}}</div>
                         </button>
-                    </a>
+
                 </div>
                 <div class="detail flex">
                     <div>
@@ -59,3 +59,4 @@
         @endforeach
     </div>
 </section>
+
