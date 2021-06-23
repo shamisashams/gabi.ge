@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\VerifyUser', 'user_id');
     }
+
+    public function availableLanguage()
+    {
+        return $this->language()->where('language_id', '=', Language::getIdByName(app()->getLocale()));
+    }
 }

@@ -87,7 +87,7 @@ class AuthRepository extends BaseRepository implements AuthRepositoryInterface
             ]);
 
             $localization = $this->getLocalization($lang);
-            $model->language()->create([
+            $model->profile()->create([
                 'language_id' => $localization->id,
                 'first_name' => $request['first_name'],
                 'last_name' => $request['last_name'],

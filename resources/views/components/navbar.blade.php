@@ -125,7 +125,7 @@
                     </a>
                 </a>
             @else
-                <a class="links" style="margin-right: -10px;">
+                <a href="{{route('profile',app()->getLocale())}}" class="links" style="margin-right: -10px;">
                     <svg
                         id="person"
                         xmlns="http://www.w3.org/2000/svg"

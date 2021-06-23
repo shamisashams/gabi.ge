@@ -19,9 +19,12 @@ class UserProfile extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'user_id',
+        'first_name',
+        'last_name',
+        'address',
+        'city',
+        'country'
     ];
 
 }

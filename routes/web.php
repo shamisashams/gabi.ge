@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatalogueController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
@@ -157,13 +158,15 @@ Route::prefix('{locale?}')
             //Login
 
 
-            Route::get('/login-view',[\App\Http\Controllers\Auth\AuthFrontendController::class,'loginView'])->name('loginViewFront');
-            Route::post('/register',[\App\Http\Controllers\Auth\AuthFrontendController::class,'register'])->name('register');
+            Route::get('/login-view', [\App\Http\Controllers\Auth\AuthFrontendController::class, 'loginView'])->name('loginViewFront');
+            Route::post('/register', [\App\Http\Controllers\Auth\AuthFrontendController::class, 'register'])->name('register');
             Route::post('login', [\App\Http\Controllers\Auth\AuthFrontendController::class, 'login'])->name('loginFront');
             Route::get('cart', [CartController::class, 'index'])->name('cart');
 
-            Route::middleware(['active'])->group(function () {
+            Route::middleware(['authFront'])->group(function () {
                 Route::get('logout', [\App\Http\Controllers\Auth\AuthFrontendController::class, 'logout'])->name('logoutFront');
+                Route::get('profile', [UserController::class, 'index'])->name('profile');
+                Route::post('profile-update', [UserController::class, 'update'])->name('profileUpdate');
             });
 
         });
