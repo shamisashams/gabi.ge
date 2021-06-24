@@ -180,6 +180,7 @@ mainProductView.forEach((el) => {
 // close popup
 
 if (closePopup) {
+
     closePopup.addEventListener("click", () => {
         popUpBg.classList.remove("open");
     });
@@ -458,5 +459,161 @@ if (params === 'order') {
 if (params === 'password') {
     password.click();
 
+}
+
+function addToModal(product) {
+
+    let popupContainer = document.querySelector('#popup_bg');
+    let images = '';
+    let price = '';
+    let features = '';
+    if (product.files) {
+        product.files.forEach(item => {
+            images = images.concat(`
+       <div class="small_img_popup flex center">
+                            <img src="/storage/product/${item.fileable_id}/${item.name}" alt="" />
+              </div>
+`)
+        })
+    }
+
+    if (product.sale_product && product.sale_product.sale) {
+        let sale = product.sale_product.sale;
+        price = `
+               <div class="main">
+                  ${sale.type == 'fixed' ? ((product.prcie / 100) - sale.discount).toFixed(2) :
+            ((product.price / 100) - (((product.price / 100) * sale.discount) / 100)).toFixed(2)
+        }
+               </div>
+               <div class="last">$${(product.price / 100).toFixed(2)}</div>
+               <div class="off">
+                  -${sale.type == "percent" ? sale.discount :
+            ((sale.discount * 100) / (product.price / 100)).toFixed(2)}%
+               </div>
+        `
+    } else {
+        price = `
+            <div class="main">$${(product.price / 100).toFixed(2)}</div>
+`
+    }
+
+    getProductFeatures(product.id, function (productAnswers, productFeatures) {
+
+        for (const key in productFeatures) {
+            if (productFeatures.hasOwnProperty(key)) {
+
+                let productAnswer = productFeatures[key];
+                let options = '';
+                if (productAnswer.feature.type !== 'input' || productAnswer.feature.english_language.length > 0 ? productAnswer.feature.english_language[0].title == "category" : "") {
+                    continue;
+                }
+                productAnswer.feature.answer.forEach(answer => {
+                    if (answer.status && productAnswers.includes(answer.id)) {
+                        options = options.concat(`
+                     <div class="box">
+                                <input type="radio" name="feature[${productAnswer.feature.id}][]"
+                                       data-feature="${productAnswer.feature.id}" id="${answer.id}"
+                                           value="${answer.id}"
+                                 />
+                                <label for="${answer.id}" class="box">
+                                ${answer.available_language.length > 0 ? answer.available_language[0].title : ""}
+                              </label>
+                            </div>
+                `);
+                    }
+                })
+
+
+                features = features.concat(`
+                   <div class="options">
+                        <div class="title">${productAnswer.feature.available_language.length > 0 ? productAnswer.feature.available_language[0].title : ''}</div>
+                        <div class="box_grid">
+                        ${options}
+                        </div>
+                    </div>
+    `);
+            }
+        }
+
+
+        let content = `
+            <div class="product_popup">
+            <div class="head flex">
+                <div>${product.available_language.length > 0 ? product.available_language[0].title : ""}</div>
+                <button onclick="popUpBg.classList.remove('open')" class="close_popup">
+                    <img src="/img/icons/popup/close.png" alt="" />
+                </button>
+            </div>
+            <div class="flex content">
+                <div class="imges">
+                    <div class="main flex center">
+                     ${product.files ? `<img class="main_img_popup" src="/storage/product/${product.files[0].fileable_id}/${product.files[0].name}" alt="" />` :
+            `<img src="/noimage.png" alt="" />`}
+
+                    </div>
+                    <div class="flex small0nes">
+                        ${images}
+                    </div>
+                </div>
+                <div class="customize">
+                    <div class="prices flex">
+                      ${price}
+                    </div>
+                    <p><span>ID:</span> ${product.id}</p>
+                    <p><span>Category:</span> ${product.category.available_language.length > 0 ? product.category.available_language[0].title : ""}</p>
+                    <div class="btns flex">
+                        <div class="number_input">
+                            <button class="decrease" onclick="decreaseValue()">-</button>
+                            <input
+                                id="product_number"
+                                type="text"
+                                class="number"
+                                value="1"
+                            />
+                            <button class="increase" onclick="increaseValue()">+</button>
+                        </div>
+                    </div>
+                    ${features}
+                </div>
+            </div>
+            <div class="flex center btm_btns">
+                <a href="#">
+                    <button class="details">Detiles</button>
+                </a>
+                <a href="#">
+                    <button class="add_to_cart flex center popup_add_to_cart">
+                        <img src="img/icons/header/cart.png" alt="" />
+                        <div>Add To Card</div>
+                    </button>
+                </a>
+            </div>
+            <div class="success flex center popup_success">
+                <img src="/img/icons/popup/success.png" alt="">
+                <div>Lorem Ipsum</div>
+            </div>
+        </div>`
+        popupContainer.innerHTML = '';
+        $(popupContainer).append(content);
+    });
+
+
+}
+
+
+function getProductFeatures(id, callback) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: `/${locale}/getFeatures/` + id,
+        method: 'GET',
+        success: function (data) {
+            if (data.status) {
+                callback(data.productAnswers, data.productFeatures);
+            }
+        }
+    });
 }
 

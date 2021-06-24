@@ -9,9 +9,9 @@
         </button>
     </div>
     <div class="flex best_seller_slide">
-        @foreach($bestSellerProducts as $product)
 
-            <div  class="main_product_view">
+        @foreach($bestSellerProducts as $product)
+            <div onclick="addToModal({{$product}})" class="main_product_view">
                 <div class="pic">
                     @if($product->saleProduct && $product->saleProduct->sale)
                         <div class="label off">

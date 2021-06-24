@@ -49,4 +49,12 @@ class HomeController extends Controller
             'banner' => $this->sliderRepository->getBanner()
         ]);
     }
+
+    public function getSingleProductFeaturesApi(string $locale, $id)
+    {
+
+        $productFeatures = $this->productRepository->getSingleProductFeatures($id)['productFeatures'];
+        $productAnswers = $this->productRepository->getSingleProductFeatures($id)['productAnswers'];
+        return response()->json(['status' => true,'productFeatures'=>$productFeatures, 'productAnswers'=>$productAnswers]);
+    }
 }

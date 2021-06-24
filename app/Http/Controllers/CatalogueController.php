@@ -43,8 +43,8 @@ class CatalogueController extends Controller
 
         return view('pages.product.catalogue', [
             'products' => $products->orderBy('created_at', 'DESC')->paginate(16),
-            'productFeatures' => $this->productRepository->getProductFilters($category->id, $request, $products)['productFeatures'],
-            'productAnswers' => $this->productRepository->getProductFilters($category->id, $request, $products)['productAnswers'],
+            'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
+            'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
 //            'staticFilterData' => $staticFilterData,
             'category' => $category
         ]);

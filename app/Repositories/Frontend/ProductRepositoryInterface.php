@@ -12,7 +12,7 @@ interface ProductRepositoryInterface
 
     public function getNewProducts();
 
-    public function getProductFilters(int $id, Request $request, $products);
+    public function getProductFilters(Request $request, $products);
 
     public function getProductById(int $id);
 

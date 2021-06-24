@@ -20,14 +20,14 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     public function getBestSeller()
     {
         return $this->model::inRandomOrder()
-            ->with(['saleProduct.sale', 'availableLanguage', 'files'])
+            ->with(['saleProduct.sale', 'availableLanguage', 'files','category.availableLanguage'])
             ->take(10)
             ->get();
     }
 
     public function getDiscountedProducts()
     {
-        return $this->model::with(['saleProduct.sale', 'availableLanguage', 'files'])
+        return $this->model::with(['saleProduct.sale', 'availableLanguage', 'files','category.availableLanguage'])
             ->has('saleProduct.sale')
             ->take(6)
             ->get();
@@ -35,13 +35,13 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
     public function getNewProducts()
     {
-        return $this->model::with(['saleProduct.sale', 'availableLanguage', 'files'])
+        return $this->model::with(['saleProduct.sale', 'availableLanguage', 'files','category.availableLanguage'])
             ->orderBy('created_at', 'desc')
             ->take(10)
             ->get();
     }
 
-    public function getProductFilters(int $id, Request $request, $products)
+    public function getProductFilters(Request $request, $products)
     {
         $productIdArrays = $products->pluck('id')->toArray();
         $filterData = ProductAnswers::with(['feature.availableLanguage', 'feature.answer.availableLanguage'])->whereIn('product_id', $productIdArrays);
