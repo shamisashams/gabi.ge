@@ -26,10 +26,12 @@ const color = document.querySelectorAll(".color");
 const menuBtn = document.querySelector(".menu_btn");
 const closeMenu = document.querySelector(".close_menu");
 const addCart = document.querySelector(".popup_add_to_cart");
-const success = document.querySelector(".popup_success");
+
 const popUpBg = document.querySelector(".popup_bg");
 const closePopup = document.querySelector(".close_popup");
 const mainProductView = document.querySelectorAll(".main_product_view");
+
+let timeout;
 
 
 const locale = $('meta[name="language"]').attr('content');
@@ -163,11 +165,12 @@ if (qAndA) {
 
 // popup success
 
-if (addCart) {
-    addCart.addEventListener("click", () => {
-        success.classList.add("done");
-    });
-}
+// if (addCart) {
+//     addCart.addEventListener("click", () => {
+//         success.classList.add("done");
+//     });
+// }
+
 
 // open popup
 
@@ -255,6 +258,7 @@ $(document).ready(function () {
     getCartCount();
 });
 
+
 function addToCart(el, $id) {
     let object = {};
     let box = document.querySelector('.customize');
@@ -270,6 +274,7 @@ function addToCart(el, $id) {
 
         if (allOptions.length === options.length) {
             addToCartAjax($id, object, quantity);
+
         }
     }
 
@@ -286,6 +291,15 @@ function addToCartAjax($id, options, quantity) {
         method: 'GET',
         success: function (data) {
             if (data.status == true) {
+                let success = document.querySelector(".popup_success");
+                let closePopupBg = document.querySelector(".close_popup_bg");
+                if (success) {
+                    success.classList.add("done");
+                    timeout = setTimeout(function () {
+                        closePopupBg.click();
+                    }, 2000);
+                }
+
                 getCartCount();
             }
         }
@@ -420,7 +434,6 @@ function removefromcart(el = null, id, options = null) {
             success: function (data) {
                 if (data.status === true) {
                     let productItem = document.getElementById(`product_item-${id}-${JSON.stringify(features)}`);
-                    console.log(productItem);
                     if (productItem) {
                         productItem.remove();
                     }
@@ -461,19 +474,40 @@ if (params === 'password') {
 
 }
 
-function addToModal(product) {
+function checkSelection() {
+    let box = document.querySelector('.customize');
+    let buttons = document.querySelector('.btm_btns')
+    let answers = box.querySelectorAll('input[type="radio"]');
+    let allOptions = box.querySelectorAll('.title');
+    answers.forEach(item => {
+        item.onchange = function () {
+            let options = box.querySelectorAll('input[type="radio"]:checked');
+            if (allOptions.length === options.length) {
+                buttons.querySelector('.add_to_cart').disabled = false;
+            }
+        }
+    })
+}
 
+function addToModal(product) {
     let popupContainer = document.querySelector('#popup_bg');
     let images = '';
+    let mainImages = '';
     let price = '';
     let features = '';
     if (product.files) {
         product.files.forEach(item => {
             images = images.concat(`
-       <div class="small_img_popup flex center">
-                            <img src="/storage/product/${item.fileable_id}/${item.name}" alt="" />
+              <div class="small_img_popup flex center">
+                 <img src="/storage/product/${item.fileable_id}/${item.name}" alt="" />
               </div>
-`)
+        `)
+        })
+
+        product.files.forEach((item, i) => {
+            mainImages = mainImages.concat(`
+                <img class="main_img_popup ${i === 0 ? 'display' : ""}" src="/storage/product/${item.fileable_id}/${item.name}" alt="" />
+            `)
         })
     }
 
@@ -481,11 +515,11 @@ function addToModal(product) {
         let sale = product.sale_product.sale;
         price = `
                <div class="main">
-                  ${sale.type == 'fixed' ? ((product.prcie / 100) - sale.discount).toFixed(2) :
+                 $ ${sale.type == 'fixed' ? ((product.prcie / 100) - sale.discount).toFixed(2) :
             ((product.price / 100) - (((product.price / 100) * sale.discount) / 100)).toFixed(2)
         }
                </div>
-               <div class="last">$${(product.price / 100).toFixed(2)}</div>
+               <div class="last">$ ${(product.price / 100).toFixed(2)}</div>
                <div class="off">
                   -${sale.type == "percent" ? sale.discount :
             ((sale.discount * 100) / (product.price / 100)).toFixed(2)}%
@@ -493,7 +527,7 @@ function addToModal(product) {
         `
     } else {
         price = `
-            <div class="main">$${(product.price / 100).toFixed(2)}</div>
+            <div class="main">$ ${(product.price / 100).toFixed(2)}</div>
 `
     }
 
@@ -535,8 +569,10 @@ function addToModal(product) {
             }
         }
 
+        let disabled = productAnswers.length > 0;
 
         let content = `
+        <div class="close_popup_bg"></div>
             <div class="product_popup">
             <div class="head flex">
                 <div>${product.available_language.length > 0 ? product.available_language[0].title : ""}</div>
@@ -547,8 +583,7 @@ function addToModal(product) {
             <div class="flex content">
                 <div class="imges">
                     <div class="main flex center">
-                     ${product.files ? `<img class="main_img_popup" src="/storage/product/${product.files[0].fileable_id}/${product.files[0].name}" alt="" />` :
-            `<img src="/noimage.png" alt="" />`}
+                     ${mainImages}
 
                     </div>
                     <div class="flex small0nes">
@@ -565,6 +600,7 @@ function addToModal(product) {
                         <div class="number_input">
                             <button class="decrease" onclick="decreaseValue()">-</button>
                             <input
+                            disabled
                                 id="product_number"
                                 type="text"
                                 class="number"
@@ -577,23 +613,30 @@ function addToModal(product) {
                 </div>
             </div>
             <div class="flex center btm_btns">
-                <a href="#">
+                <a href="/${locale}/catalogue/${product.category_id}/details/${product.id}">
                     <button class="details">Detiles</button>
                 </a>
-                <a href="#">
-                    <button class="add_to_cart flex center popup_add_to_cart">
+
+                    <button id="add_to_cart" ${disabled ? 'disabled' : ""} onclick="addToCart(this, ${product.id})" class="add_to_cart flex center popup_add_to_cart">
                         <img src="img/icons/header/cart.png" alt="" />
                         <div>Add To Card</div>
                     </button>
-                </a>
             </div>
+
             <div class="success flex center popup_success">
+
                 <img src="/img/icons/popup/success.png" alt="">
                 <div>Lorem Ipsum</div>
+
+
             </div>
         </div>`
+
         popupContainer.innerHTML = '';
         $(popupContainer).append(content);
+        checkSelection();
+        closeModal();
+
     });
 
 
@@ -614,6 +657,30 @@ function getProductFeatures(id, callback) {
                 callback(data.productAnswers, data.productFeatures);
             }
         }
+    });
+}
+
+function closeModal() {
+    const closePopupBg = document.querySelector(".close_popup_bg");
+    const mainImgPopup = document.querySelectorAll(".main_img_popup");
+    const smallImgPopup = document.querySelectorAll(".small_img_popup");
+
+    if (closePopupBg) {
+        closePopupBg.addEventListener("click", () => {
+            popUpBg.classList.remove("open");
+            clearTimeout(timeout);
+        });
+    }
+
+    smallImgPopup.forEach((el, i) => {
+        el.addEventListener("mouseenter", () => {
+            mainImgPopup.forEach((el) => {
+                el.classList.remove("display");
+            });
+
+            // show one
+            mainImgPopup[i].classList.add("display");
+        });
     });
 }
 

@@ -201,5 +201,6 @@
     </section>
 
     <div id="popup_bg" class="popup_bg flex center">
+
     </div>
 @endsection

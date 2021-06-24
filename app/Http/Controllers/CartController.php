@@ -63,11 +63,13 @@ class CartController extends Controller
         foreach ($products as $item) {
             if ($item->product_id == $id) {
                 if ($options === $item->options) {
+                    $item->quantity += $request['quantity'];
                     $bool = false;
                     break;
                 }
             }
         }
+
 
         foreach ($options as $key => $option) {
             $featureIdArray[] = $key;
@@ -91,7 +93,7 @@ class CartController extends Controller
                 return response()->json(array('status' => true));
             }
         }
-        return response()->json(array('status' => false));
+        return response()->json(array('status' => true));
 
     }
 
@@ -99,7 +101,6 @@ class CartController extends Controller
     {
         $products = array();
         $cart = session('products') ?? array();
-
         $total = 0;
         $localization = Language::where('abbreviation', app()->getLocale())->first()->id ?? 1;
         if ($cart !== null) {
