@@ -385,6 +385,8 @@ function getCartCount() {
                 $(cartDropDown).append(checkout);
 
                 $('#sub-total').text(`$${data.total.toFixed(2)}`);
+                $('#total-price').text(`$${data.total.toFixed(2)}`);
+                $('#total-price').attr('data-price',data.total.toFixed(2));
 
 
                 // $('#cart_count').text(data.count);

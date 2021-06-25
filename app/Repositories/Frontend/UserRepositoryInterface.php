@@ -14,4 +14,6 @@ interface UserRepositoryInterface
 
     public function changePassword(PasswordChangeRequest $request);
 
+    public function userOrders();
+
 }

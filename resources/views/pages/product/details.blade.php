@@ -123,9 +123,9 @@
                             @if($answer->status && (in_array($answer->id,$productAnswers)))
                                 <div class="box">
                                     <input type="radio" name="popup-feature[{{$productAnswer->feature->id}}][]"
-                                           data-feature="{{$productAnswer->feature->id}}" id="{{$answer->id}}"
+                                           data-feature="{{$productAnswer->feature->id}}" id="details-{{$answer->id}}"
                                            value="{{$answer->id}}"/>
-                                    <label for="{{$answer->id}}"
+                                    <label for="details-{{$answer->id}}"
                                            class="box">{{count($answer->availableLanguage)>0?$answer->availableLanguage[0]->title:""}}</label>
                                 </div>
                             @endif
@@ -142,8 +142,9 @@
                     <button class="increase" onclick="increaseValue('details')">+</button>
                 </div>
 
-                <button {{count($productAnswers)>0?"disabled":""}} onclick="addToCartProductDetails(this, '{{$product->id}}')"
-                        class="add_to_cart">
+                <button
+                    {{count($productAnswers)>0?"disabled":""}} onclick="addToCartProductDetails(this, '{{$product->id}}')"
+                    class="add_to_cart">
                     <img src="/img/icons/header/cart.png" alt=""/>
                     <div>{{__('client.add_to_cart')}}</div>
                 </button>

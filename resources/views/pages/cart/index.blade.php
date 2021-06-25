@@ -22,7 +22,8 @@
                     <div class="c2">{{__('client.total')}}</div>
                 </div>
                 @foreach($products as $product)
-                    <div class="item row flex cart_item_shoppingcart" id="product_item-{{$product['id']}}-{{$product['features']}}">
+                    <div class="item row flex cart_item_shoppingcart"
+                         id="product_item-{{$product['id']}}-{{$product['features']}}">
                         <div class="c1 flex">
                             <div class="img">
                                 @if($product['file'])
@@ -35,7 +36,8 @@
                             </div>
                             <div>{{$product['title']}}</div>
                         </div>
-                        <div class="c2" id="car_product_price-{{$product['id']}}">$ {{$product['sale']?:$product['price']}}</div>
+                        <div class="c2" id="car_product_price-{{$product['id']}}">
+                            $ {{$product['sale']?:$product['price']}}</div>
                         <div class="c2">
                             @foreach($product['options'] as $key=>$option)
                                 {{count($option->availableLanguage)>0?$option->availableLanguage[0]->title:""}}{{$key<count($product['options'])-1?',':""}}
@@ -43,7 +45,9 @@
                         </div>
                         <div class="c2 quantity">
                             <div class="number_input">
-                                <button onclick="decrease('{{$product['id']}}',{{$product['features']}})" class="decrease">-</button>
+                                <button onclick="decrease('{{$product['id']}}',{{$product['features']}})"
+                                        class="decrease">-
+                                </button>
                                 <input
                                     class="product_number"
                                     type="text"
@@ -51,12 +55,16 @@
                                     id="product_number-{{$product['id']}}-{{$product['features']}}"
                                     value="{{$product['quantity']}}"
                                 />
-                                <button class="increase" onclick="increase('{{$product['id']}}',{{$product['features']}})">+</button>
+                                <button class="increase"
+                                        onclick="increase('{{$product['id']}}',{{$product['features']}})">+
+                                </button>
                             </div>
                         </div>
-                        <div class="c2" id="cart_product_total-{{$product['id']}}-{{$product['features']}}">${{($product['sale']?:$product['price'])*$product['quantity']}}</div>
+                        <div class="c2" id="cart_product_total-{{$product['id']}}-{{$product['features']}}">
+                            ${{($product['sale']?:$product['price'])*$product['quantity']}}</div>
                         <p hidden>{{$product['features']}}</p>
-                        <button class="remove_item_cart" onclick="removefromcart(null,{{$product['id']}},{{$product['features']}})">
+                        <button class="remove_item_cart"
+                                onclick="removefromcart(null,{{$product['id']}},{{$product['features']}})">
                             <img src="/img/icons/header/remove.png" alt=""/>
                         </button>
                     </div>
@@ -68,65 +76,49 @@
             </div>
         </div>
         <div class="cart_total_fee">
-            <div class="head row">Cart Total</div>
+            <div class="head row">{{__('client.cart_total')}}</div>
             <div class="row flex">
                 <div>{{__('client.sub_total')}}:</div>
                 <div id="sub-total">${{round($total,2)}}</div>
             </div>
-            <div class="row">
-                <div>{{__('client.shipping')}}:</div>
-                <br/>
-                <div class="flex inputs">
-                    <div>
-                        <input type="radio" name="shipping" id="ship_1"/><label
-                            for="ship_1"
-                        >Free Shipping</label
-                        >
+            <form method="post" action="{{route('saveOrder',app()->getLocale())}}">
+                @csrf
+                <div class="row">
+                    <div>{{__('client.shipping')}}:</div>
+                    <br/>
+                    <div class="flex inputs">
+                        <div>
+                            <input onchange="changeTotalPrice(this)" type="radio" name="shipping" id="ship_1"
+                                   value="from_office" data-price="0.00"/>
+                            <label for="ship_1">{{__('client.from_office')}}</label>
+                        </div>
+                        <div>$00.00</div>
                     </div>
-                    <div>$00.00</div>
+                    @if ($errors->has('shipping'))
+                        <p class="profile-error-block">{{ $errors->first('shipping') }}</p>
+                    @endif
                 </div>
-                <div class="flex inputs">
-                    <div>
-                        <input type="radio" name="shipping" id="ship_2"/><label
-                            for="ship_2"
-                        >Standard Shipping</label
-                        >
+                <div class="row">
+                    <div>Address:</div>
+                    <br/>
+                    <input hidden name="address" value="{{auth()->user()->profile->address}}"/>
+                    <div class="inputs">
+                        {{auth()->user()->profile->address}}
+                        @if ($errors->has('address'))
+                            <p class="profile-error-block">{{ __('client.please_set_address') }}</p>
+                        @endif
                     </div>
-                    <div>$10.00</div>
+                    <a href="{{route('profile',app()->getLocale())}}" class="address">
+                        {{auth()->user()->profile->address?__('client.change_address'):__('client.set_address')}}
+                    </a>
                 </div>
-                <div class="flex inputs">
-                    <div>
-                        <input type="radio" name="shipping" id="ship_3"/><label
-                            for="ship_3"
-                        >Express Shipping</label
-                        >
-                    </div>
-                    <div>$20.00</div>
+                <div class="flex total">
+                    <div>Total</div>
+                    <div id="total-price" data-price="">$ {{round($total,2)}}</div>
                 </div>
-            </div>
-            <div class="row">
-                <div>Address:</div>
-                <br/>
-                <div class="inputs">
-                    <input type="radio" name="address" id="adrs_1"/><label for="adrs_1"
-                    >Georgia, Tbilisi - Vazha-Pshavela IV Turn</label
-                    >
-                </div>
-                <div class="inputs">
-                    <input type="radio" name="address" id="adrs_2"/><label for="adrs_2"
-                    >Georgia, Tbilisi - Didi Dighomi III Micro-District</label
-                    >
-                </div>
-                <br/>
-                <a href="#" class="address">Change address</a>
-            </div>
-            <div class="flex total">
-                <div>Total</div>
-                <div>$313.00</div>
-            </div>
-            <a href="#">
-                <button class="proceed">Proceed To Checkout</button>
-            </a>
+                <button type="submit" class="proceed">Proceed To Checkout</button>
+
+            </form>
         </div>
     </section>
 

@@ -49,6 +49,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="{{asset('../js/slide.js')}}"></script>
 <script src="{{asset('../js/general.js')}}"></script>
+<script src="{{asset('../js/main.js')}}"></script>
 
 </body>
 

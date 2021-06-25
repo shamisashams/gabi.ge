@@ -42,7 +42,8 @@ class UserController extends Controller
     {
 
         return view('pages.user.profile', [
-            'user' => auth()->user()
+            'user' => auth()->user(),
+            'orders' => $this->userRepository->userOrders()
         ]);
     }
 
@@ -63,6 +64,7 @@ class UserController extends Controller
         }
 
         return redirect(route('profile', $locale))->with('success', __('admin.password_updated'));
-
     }
+
+
 }

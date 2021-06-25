@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable,HasRolesAndPermissions;
+    use HasFactory, Notifiable, HasRolesAndPermissions;
 
     /**
      * The attributes that are mass assignable.
@@ -51,6 +51,11 @@ class User extends Authenticatable
     public function language()
     {
         return $this->hasMany('App\Models\UserLanguage', 'user_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order', 'user_id');
     }
 
     public function tokens()

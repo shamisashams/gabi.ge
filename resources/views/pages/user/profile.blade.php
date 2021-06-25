@@ -121,85 +121,28 @@
                 </div>
             </div>
         </div>
-        <div id="tabs_content_order" class="profile_tabs_content">
-            <div class="title">{{__('client.order_history')}}</div>
+        <div  id="tabs_content_order" class="profile_tabs_content">
+            <div class="title">Order History</div>
             <div class="order_table">
                 <div class="head flex">
-                    <div class="c1">Products</div>
+                    <div class="c2">Order ID</div>
+                    <div class="c2">Date</div>
                     <div class="c2">Price</div>
                     <div class="c2">Status</div>
-                    <div class="c2">Downloads PDF</div>
+                    <div class="c2">View order</div>
                 </div>
+                @foreach($orders as $order)
                 <div class="ordered_item flex">
-                    <div class="c1">
-                        <div style="color: #808080">1 x</div>
-                        <div class="img">
-                            <img src="img/products/10.png" alt=""/>
-                        </div>
-                        <div>Floral Print Dress Blue</div>
-                    </div>
-                    <div class="c2">$65.00</div>
-                    <div class="c2 green">Delivery</div>
-                    <button class="c2" class="dl">
-                        <img src="img/icons/profile/download.png" alt=""/>
+                    <div class="c2">{{$order->id}}</div>
+                    <div class="c2">{{$order->created_at}}</div>
+                    <div class="c2">${{round($order->total_price/100,2)}}</div>
+                    <div class="c2 green">{{$order->status}}</div>
+                    <button class="c2 dl view_order_detail">
+                        View
                     </button>
                 </div>
-                <div class="ordered_item flex">
-                    <div class="c1">
-                        <div style="color: #808080">1 x</div>
-                        <div class="img">
-                            <img src="img/products/10.png" alt=""/>
-                        </div>
-                        <div>Floral Print Dress Blue</div>
-                    </div>
-                    <div class="c2">$65.00</div>
-                    <div class="c2 green">Delivery</div>
-                    <button class="c2" class="dl">
-                        <img src="img/icons/profile/download.png" alt=""/>
-                    </button>
-                </div>
-                <div class="ordered_item flex">
-                    <div class="c1">
-                        <div style="color: #808080">1 x</div>
-                        <div class="img">
-                            <img src="img/products/10.png" alt=""/>
-                        </div>
-                        <div>Floral Print Dress Blue</div>
-                    </div>
-                    <div class="c2">$65.00</div>
-                    <div class="c2 red">Canceled</div>
-                    <button class="c2" class="dl">
-                        <img src="img/icons/profile/download.png" alt=""/>
-                    </button>
-                </div>
-                <div class="ordered_item flex">
-                    <div class="c1">
-                        <div style="color: #808080">1 x</div>
-                        <div class="img">
-                            <img src="img/products/10.png" alt=""/>
-                        </div>
-                        <div>Floral Print Dress Blue</div>
-                    </div>
-                    <div class="c2">$65.00</div>
-                    <div class="c2 red">Canceled</div>
-                    <button class="c2" class="dl">
-                        <img src="img/icons/profile/download.png" alt=""/>
-                    </button>
-                </div>
-                <div class="ordered_item flex">
-                    <div class="c1">
-                        <div style="color: #808080">1 x</div>
-                        <div class="img">
-                            <img src="img/products/10.png" alt=""/>
-                        </div>
-                        <div>Floral Print Dress Blue</div>
-                    </div>
-                    <div class="c2">$65.00</div>
-                    <div class="c2 yellow">Processing</div>
-                    <button class="c2" class="dl">
-                        <img src="img/icons/profile/download.png" alt=""/>
-                    </button>
-                </div>
+                @endforeach
+
             </div>
         </div>
         <div class="profile_tabs_content">

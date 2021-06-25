@@ -22,7 +22,9 @@ use App\Repositories\FeatureRepositoryInterface;
 use App\Repositories\Frontend\AuthRepositoryInterface;
 use App\Repositories\Frontend\Eloquent\AuthRepository;
 use App\Repositories\Frontend\Eloquent\ProductRepository;
+use App\Repositories\Frontend\Eloquent\PurchaseRepository;
 use App\Repositories\Frontend\ProductRepositoryInterface;
+use App\Repositories\Frontend\PurchaseRepositoryInterface;
 use App\Repositories\LanguageRepositoryInterface;
 use App\Repositories\PageRepositoryInterface;
 use App\Repositories\SaleRepositoryInterface;
@@ -73,6 +75,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\Frontend\SliderRepositoryInterface::class, \App\Repositories\Frontend\Eloquent\SliderRepository::class);
         $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
         $this->app->bind(\App\Repositories\Frontend\UserRepositoryInterface::class, \App\Repositories\Frontend\Eloquent\UserRepository::class);
+        $this->app->bind(PurchaseRepositoryInterface::class, PurchaseRepository::class);
     }
 
 }

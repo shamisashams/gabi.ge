@@ -4,6 +4,7 @@ namespace App\Repositories\Frontend\Eloquent;
 
 use App\Http\Request\PasswordChangeRequest;
 use App\Http\Request\UserRequest;
+use App\Models\Order;
 use App\Models\Slider;
 use App\Models\User;
 use App\Repositories\Frontend\Eloquent\Base\BaseRepository;
@@ -53,5 +54,10 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return false;
     }
 
+    public function userOrders()
+    {
+        return Order::where(['user_id' => auth()->user()->id])->with('products')->orderBy('created_at', 'desc')->get();
+
+    }
 
 }
