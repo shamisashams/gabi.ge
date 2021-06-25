@@ -75,7 +75,7 @@
                 </div>
             @endif
         </div>
-        <div class="customize">
+        <div class="customize" id="customize-details">
             <div
                 class="product_name roboto">{{(count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->title : ''}}</div>
             <p><span>ID:</span> {{$product->id}}</p>
@@ -122,7 +122,7 @@
                         @foreach($productAnswer->feature->answer as $answer)
                             @if($answer->status && (in_array($answer->id,$productAnswers)))
                                 <div class="box">
-                                    <input type="radio" name="feature[{{$productAnswer->feature->id}}][]"
+                                    <input type="radio" name="popup-feature[{{$productAnswer->feature->id}}][]"
                                            data-feature="{{$productAnswer->feature->id}}" id="{{$answer->id}}"
                                            value="{{$answer->id}}"/>
                                     <label for="{{$answer->id}}"
@@ -137,16 +137,16 @@
             @endforeach
             <div class="btns flex">
                 <div class="number_input">
-                    <button class="decrease" onclick="decreaseValue()">-</button>
-                    <input disabled id="product_number" type="text" class="number" value="1"/>
-                    <button class="increase" onclick="increaseValue()">+</button>
+                    <button class="decrease" onclick="decreaseValue('details')">-</button>
+                    <input disabled id="product_numb" type="text" class="number" value="1"/>
+                    <button class="increase" onclick="increaseValue('details')">+</button>
                 </div>
-                <a href="#">
-                    <button onclick="addToCart(this, '{{$product->id}}')" class="add_to_cart">
-                        <img src="img/icons/header/cart.png" alt=""/>
-                        <div>{{__('client.add_to_cart')}}</div>
-                    </button>
-                </a>
+
+                <button {{count($productAnswers)>0?"disabled":""}} onclick="addToCartProductDetails(this, '{{$product->id}}')"
+                        class="add_to_cart">
+                    <img src="/img/icons/header/cart.png" alt=""/>
+                    <div>{{__('client.add_to_cart')}}</div>
+                </button>
             </div>
         </div>
     </section>

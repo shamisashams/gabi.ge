@@ -192,19 +192,24 @@ if (closePopup) {
 
 //  product amount
 
-function increaseValue() {
-    let value = parseInt(document.getElementById("product_number").value, 10);
+function increaseValue(type = null) {
+    let value = type === "details" ? parseInt(document.getElementById("product_numb").value, 10) :
+        parseInt(document.getElementById("product_number").value, 10);
     value = isNaN(value) ? 0 : value;
     value++;
-    document.getElementById("product_number").value = value;
+    type === "details" ? document.getElementById("product_numb").value = value :
+        document.getElementById("product_number").value = value
 }
 
-function decreaseValue() {
-    let value = parseInt(document.getElementById("product_number").value, 10);
+function decreaseValue(type = null) {
+    let value = type === "details" ? parseInt(document.getElementById("product_numb").value, 10) :
+        parseInt(document.getElementById("product_number").value, 10);
+
     value = isNaN(value) ? 0 : value;
     value--;
     value < 1 ? (value = 1) : "";
-    document.getElementById("product_number").value = value;
+    type === "details" ? document.getElementById("product_numb").value = value :
+        document.getElementById("product_number").value = value;
 }
 
 
@@ -261,7 +266,7 @@ $(document).ready(function () {
 
 function addToCart(el, $id) {
     let object = {};
-    let box = document.querySelector('.customize');
+    let box = document.querySelector('#customize');
     if (box) {
         let quantity = document.querySelector('#product_number').value;
         let options = box.querySelectorAll('input[type="radio"]:checked');
@@ -279,6 +284,26 @@ function addToCart(el, $id) {
     }
 
 };
+
+function addToCartProductDetails(el, $id) {
+    let object = {};
+    let box = document.querySelector('#customize-details');
+    if (box) {
+        let quantity = document.querySelector('#product_numb').value;
+        let options = box.querySelectorAll('input[type="radio"]:checked');
+        let allOptions = box.querySelectorAll('.title');
+        options.forEach(item => {
+            if (item.getAttribute('data-feature')) {
+                object[item.getAttribute('data-feature')] = item.value;
+            }
+        })
+
+        if (allOptions.length === options.length) {
+            addToCartAjax($id, object, quantity);
+
+        }
+    }
+}
 
 function addToCartAjax($id, options, quantity) {
     $.ajaxSetup({
@@ -473,20 +498,41 @@ if (params === 'password') {
     password.click();
 
 }
+checkProductDetailsSelection();
+
+function checkProductDetailsSelection() {
+    let box = document.querySelector('#customize-details');
+    let buttons = document.querySelector('.btns');
+    if (box) {
+        let answers = box.querySelectorAll('input[type="radio"]');
+        let allOptions = box.querySelectorAll('.title');
+        answers.forEach(item => {
+            item.onchange = function () {
+                let options = box.querySelectorAll('input[type="radio"]:checked');
+                if (allOptions.length === options.length) {
+                    buttons.querySelector('.add_to_cart').disabled = false;
+                }
+            }
+        })
+    }
+}
+
 
 function checkSelection() {
-    let box = document.querySelector('.customize');
-    let buttons = document.querySelector('.btm_btns')
-    let answers = box.querySelectorAll('input[type="radio"]');
-    let allOptions = box.querySelectorAll('.title');
-    answers.forEach(item => {
-        item.onchange = function () {
-            let options = box.querySelectorAll('input[type="radio"]:checked');
-            if (allOptions.length === options.length) {
-                buttons.querySelector('.add_to_cart').disabled = false;
+    let box = document.querySelector('#customize');
+    let buttons = document.querySelector('.btm_btns');
+    if (box) {
+        let answers = box.querySelectorAll('input[type="radio"]');
+        let allOptions = box.querySelectorAll('.title');
+        answers.forEach(item => {
+            item.onchange = function () {
+                let options = box.querySelectorAll('input[type="radio"]:checked');
+                if (allOptions.length === options.length) {
+                    buttons.querySelector('.add_to_cart').disabled = false;
+                }
             }
-        }
-    })
+        })
+    }
 }
 
 function addToModal(product) {
@@ -524,7 +570,7 @@ function addToModal(product) {
                   -${sale.type == "percent" ? sale.discount :
             ((sale.discount * 100) / (product.price / 100)).toFixed(2)}%
                </div>
-        `
+               `
     } else {
         price = `
             <div class="main">$ ${(product.price / 100).toFixed(2)}</div>
@@ -544,7 +590,7 @@ function addToModal(product) {
                 productAnswer.feature.answer.forEach(answer => {
                     if (answer.status && productAnswers.includes(answer.id)) {
                         options = options.concat(`
-                     <div class="box">
+                            <div class="box">
                                 <input type="radio" name="feature[${productAnswer.feature.id}][]"
                                        data-feature="${productAnswer.feature.id}" id="${answer.id}"
                                            value="${answer.id}"
@@ -553,7 +599,7 @@ function addToModal(product) {
                                 ${answer.available_language.length > 0 ? answer.available_language[0].title : ""}
                               </label>
                             </div>
-                `);
+                         `);
                     }
                 })
 
@@ -590,7 +636,7 @@ function addToModal(product) {
                         ${images}
                     </div>
                 </div>
-                <div class="customize">
+                <div class="customize" id="customize">
                     <div class="prices flex">
                       ${price}
                     </div>
@@ -618,7 +664,7 @@ function addToModal(product) {
                 </a>
 
                     <button id="add_to_cart" ${disabled ? 'disabled' : ""} onclick="addToCart(this, ${product.id})" class="add_to_cart flex center popup_add_to_cart">
-                        <img src="img/icons/header/cart.png" alt="" />
+                        <img src="/img/icons/header/cart.png" alt="" />
                         <div>Add To Card</div>
                     </button>
             </div>

@@ -29,11 +29,18 @@
                     @else
                         <img src="noimage.png"/>
                     @endif
-
-                        <button class="add_to_cart">
-                            <img src="/img/icons/header/cart.png" alt=""/>
-                            <div class="roboto">{{__('client.add_to_cart')}}</div>
-                        </button>
+                        <div class="on_hover_btns">
+                            <button class="add_to_cart view">
+                                <img src="img/icons/profile/view.svg" alt="" />
+                                <div class="roboto">{{__('client.view')}}</div>
+                            </button>
+                            <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
+                                <button class="add_to_cart details">
+                                    <img src="img/icons/profile/magnifying-glass.svg" alt="" />
+                                    <div class="roboto">{{__('client.details')}}</div>
+                                </button>
+                            </a>
+                        </div>
 
                 </div>
                 <div class="detail flex">

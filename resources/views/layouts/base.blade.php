@@ -12,16 +12,16 @@
     <meta name="author" content="">
     <meta name="author" content="insite.international">
     <link href="/favicon.ico" rel="shortcut icon">
-{{--    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">--}}
+    {{--    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">--}}
 
     <link
         rel="stylesheet"
         type="text/css"
         href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
     />
-{{--    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">--}}
+    {{--    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">--}}
 
-{{--    <link rel="stylesheet" href="style.css"/>--}}
+    {{--    <link rel="stylesheet" href="style.css"/>--}}
     <link href="{{asset('../css/style.css')}}" rel="stylesheet">
 
     {{--    <link rel="stylesheet" href="/css/slick.css">--}}
@@ -39,6 +39,7 @@
 {{--<x-cart/>--}}
 @yield('content')
 <x-footer/>
+<div id="popup_bg" class="popup_bg flex center"></div>
 
 
 <!-- regular js-->

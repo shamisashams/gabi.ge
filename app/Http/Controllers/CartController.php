@@ -85,7 +85,7 @@ class CartController extends Controller
                 $products[] = (object)[
                     'product_id' => $product->id,
                     'quantity' => $request['quantity'],
-                    'sale' => ($product->saleProduct && $product->saleProduct->sale) ? Product::calculatePrice($product->price, $product->saleProduct->sale->discount, $product->saleProduct->sale->type) : $product->price,
+                    'sale' => ($product->saleProduct && $product->saleProduct->sale) ? Product::calculatePrice($product->price, $product->saleProduct->sale->discount, $product->saleProduct->sale->type) : "",
                     'price' => $product->price,
                     'options' => $options
                 ];
@@ -121,27 +121,12 @@ class CartController extends Controller
                     ];
                 }
             }
-//            $products = Product::whereIn('id', array_map('intval', $products))->get()->map(function ($prod) use ($localization, $total, $cart) {
-//                $item = [
-//                    'id' => $prod->id,
-//                    'price' => $prod->price,
-//                    'sale' => ($prod->saleProduct && $prod->saleProduct->sale) ?
-//                        Product::calculatePrice($prod->price, $prod->saleProduct->sale->discount, $prod->saleProduct->sale->type) : '',
-//                    'title' => $prod->language()->where('language_id', $localization)->first()->title ?? '',
-//                    'description' => $prod->language()->where('language_id', $localization)->first()->description ?? '',
-//                    'file' => $prod->files[0]->name ?? ''
-//                ];
-//                foreach ($cart as $key => $value) {
-//                    if ($prod->id == $value->product_id) {
-//                        $item['quantity'] = $value->quantity;
-//                    }
-//                }
-//
-//                return $item;
-//            });
             foreach ($cart as $item) {
-
-                $total += intval($item->quantity) * intval($item->price) / 100;
+                if ($item->sale) {
+                    $total += intval($item->quantity) * intval($item->sale);
+                } else {
+                    $total += intval($item->quantity) * intval($item->price) / 100;
+                }
             }
 
         }
