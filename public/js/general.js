@@ -29,7 +29,8 @@ const addCart = document.querySelector(".popup_add_to_cart");
 
 const popUpBg = document.querySelector(".popup_bg");
 const closePopup = document.querySelector(".close_popup");
-const mainProductView = document.querySelectorAll(".main_product_view");
+const mainProductView = document.querySelectorAll(".view_popup_product");
+
 
 let timeout;
 

@@ -19,16 +19,11 @@
         type="text/css"
         href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
     />
-    {{--    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">--}}
-
-    {{--    <link rel="stylesheet" href="style.css"/>--}}
     <link href="{{asset('../css/style.css')}}" rel="stylesheet">
 
-    {{--    <link rel="stylesheet" href="/css/slick.css">--}}
-    {{--    <link rel="stylesheet" href="/css/style.css?v=26">--}}
     @yield('head')
 
-    {{--    <title> volta - Home </title>--}}
+        <title> shop - Home </title>
 </head>
 
 <body>

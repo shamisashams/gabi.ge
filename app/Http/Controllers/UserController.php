@@ -66,5 +66,12 @@ class UserController extends Controller
         return redirect(route('profile', $locale))->with('success', __('admin.password_updated'));
     }
 
+    public function orderDetails(string $locale, int $id)
+    {
+        return view('pages.user.order-details', [
+            'orderProducts' => $this->userRepository->orderProducts($id)
+        ]);
+    }
+
 
 }

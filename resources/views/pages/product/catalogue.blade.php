@@ -124,38 +124,43 @@
                     @foreach($products as $product)
                         {{--                        <a href="{{route('productDetails',[app()->getLocale(),$category->id,$product->id])}}">--}}
                         <div onclick="addToModal({{$product}})" class="main_product_view">
-                            <div class="pic">
-                                @if($product->saleProduct && $product->saleProduct->sale)
-                                    <div class="label off">
-                                        @if($product->saleProduct->sale->type=="percent")
-                                            -{{$product->saleProduct->sale->discount}}%
-                                        @else
-                                            -{{round(($product->saleProduct->sale->discount*100)/($product->price/100))}}
-                                            %
-                                        @endif
-                                    </div>
-                                @endif
+                            <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
+                                <div class="pic">
+                                    @if($product->saleProduct && $product->saleProduct->sale)
+                                        <div class="label off">
+                                            @if($product->saleProduct->sale->type=="percent")
+                                                -{{$product->saleProduct->sale->discount}}%
+                                            @else
+                                                -{{round(($product->saleProduct->sale->discount*100)/($product->price/100))}}
+                                                %
+                                            @endif
+                                        </div>
+                                    @endif
 
-                                @if(isset($product->files[0]))
-                                    <img class="p_img"
-                                         src="/storage/product/{{$product->files[0]->fileable_id}}/{{$product->files[0]->name}}"
-                                         alt=""/>
-                                @else
-                                    <img src="noimage.png"/>
-                                @endif
-                                <div class="on_hover_btns">
-                                    <button type="button" class="add_to_cart view">
-                                        <img src="/img/icons/profile/view.svg" alt=""/>
-                                        <div class="roboto">View</div>
-                                    </button>
-                                    <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
-                                        <button type="button" class="add_to_cart details">
-                                            <img src="/img/icons/profile/magnifying-glass.svg" alt=""/>
-                                            <div class="roboto">Details</div>
-                                        </button>
-                                    </a>
+                                    @if(isset($product->files[0]))
+                                        <img class="p_img"
+                                             src="/storage/product/{{$product->files[0]->fileable_id}}/{{$product->files[0]->name}}"
+                                             alt=""/>
+                                    @else
+                                        <img src="noimage.png"/>
+                                    @endif
+                                    <div class="on_hover_btns">
+                                        <a class="view_popup_product">
+                                            <button type="button" class="add_to_cart view">
+                                                <img src="/img/icons/profile/view.svg" alt=""/>
+                                                <div class="roboto">View</div>
+                                            </button>
+                                        </a>
+                                        <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
+                                            <button type="button" class="add_to_cart details">
+                                                <img src="/img/icons/profile/magnifying-glass.svg" alt=""/>
+                                                <div class="roboto">Details</div>
+                                            </button>
+                                        </a>
+                                    </div>
+
                                 </div>
-                            </div>
+                            </a>
                             <div class="detail flex">
                                 <div>
                                     <div

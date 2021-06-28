@@ -171,6 +171,7 @@ Route::prefix('{locale?}')
                 Route::post('profile-update', [UserController::class, 'update'])->name('profileUpdate');
                 Route::post('change-password', [UserController::class, 'changePassword'])->name('changePassword');
                 Route::post('save-order', [PurchaseController::class, 'saveOrder'])->name('saveOrder');
+                Route::get('order-details/{id}', [UserController::class, 'orderDetails'])->name('orderDetails');
             });
 
         });

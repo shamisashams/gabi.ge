@@ -6,7 +6,8 @@
 @section('content')
     <section class="path">
         <div class="path_content wrapper">
-            <div class="path_took"><a href="{{route('welcome',app()->getLocale())}}">{{__('client.home')}} </a> / {{__('client.profile')}}</div>
+            <div class="path_took"><a href="{{route('welcome',app()->getLocale())}}">{{__('client.home')}} </a>
+                / {{__('client.profile')}}</div>
             <div class="current">{{__('client.profile')}}</div>
         </div>
     </section>
@@ -25,7 +26,8 @@
             <div class="row middle">
                 <div id="tab-profile" class="link profile_tab_name clicked"
                      onclick="changeType('profile')">{{__('client.my_profiles')}}</div>
-                <div id="tab-order" class="link profile_tab_name" onclick="changeType('order')">{{__('client.order_history')}}</div>
+                <div id="tab-order" class="link profile_tab_name"
+                     onclick="changeType('order')">{{__('client.order_history')}}</div>
                 <div id="tab-password" class="link profile_tab_name"
                      onclick="changeType('password')">{{__('client.change_password')}}</div>
             </div>
@@ -33,7 +35,8 @@
                 <a href="helps.html" class="link">{{__('client.helps')}}</a>
                 <a href="contact.html" class="link">{{__('client.contact_us')}}</a>
             </div>
-            <button onclick="window.location.href='{{route('logoutFront',app()->getLocale())}}'" class="log_out">{{__('client.log_out')}}</button>
+            <button onclick="window.location.href='{{route('logoutFront',app()->getLocale())}}'"
+                    class="log_out">{{__('client.log_out')}}</button>
         </div>
         <div class="profile_tabs_content clicked">
             @include('layouts.alert.alert')
@@ -121,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <div  id="tabs_content_order" class="profile_tabs_content">
+        <div id="tabs_content_order" class="profile_tabs_content">
             <div class="title">Order History</div>
             <div class="order_table">
                 <div class="head flex">
@@ -132,16 +135,29 @@
                     <div class="c2">View order</div>
                 </div>
                 @foreach($orders as $order)
-                <div class="ordered_item flex">
-                    <div class="c2">{{$order->id}}</div>
-                    <div class="c2">{{$order->created_at}}</div>
-                    <div class="c2">${{round($order->total_price/100,2)}}</div>
-                    <div class="c2 green">{{$order->status}}</div>
-                    <button class="c2 dl view_order_detail">
-                        View
-                    </button>
-                </div>
+                    <div class="ordered_item flex">
+                        <div class="c2">{{$order->id}}</div>
+                        <div class="c2">{{$order->created_at}}</div>
+                        <div class="c2">${{round($order->total_price/100,2)}}</div>
+                        <div class="c2 green">{{$order->status}}</div>
+                        <a
+                            href="{{route('orderDetails',[app()->getLocale(),$order->id])}}"
+                            class="c2 dl view_order_detail"
+                        >
+                            <img src="/img/icons/profile/view.svg" alt=""/>
+                        </a>
+                    </div>
                 @endforeach
+                <div class="pagination">
+                    <button class="prev_page">Previous</button>
+                    <div class="pagination_slides">
+                        <button class="page_number">1</button>
+                        <button class="page_number active">2</button>
+                        <button class="page_number">3</button>
+                        <button class="page_number">4</button>
+                    </div>
+                    <button class="next_page">Next</button>
+                </div>
 
             </div>
         </div>

@@ -12,6 +12,7 @@
 
         @foreach($bestSellerProducts as $product)
             <div onclick="addToModal({{$product}})" class="main_product_view">
+                <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
                 <div class="pic">
                     @if($product->saleProduct && $product->saleProduct->sale)
                         <div class="label off">
@@ -30,19 +31,22 @@
                         <img src="noimage.png"/>
                     @endif
                         <div class="on_hover_btns">
-                            <button class="add_to_cart view">
-                                <img src="img/icons/profile/view.svg" alt="" />
-                                <div class="roboto">{{__('client.view')}}</div>
-                            </button>
+                            <a class="view_popup_product">
+                                <button class="add_to_cart view">
+                                    <img src="/img/icons/profile/view.svg" alt="" />
+                                    <div class="roboto">View</div>
+                                </button>
+                            </a>
                             <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
                                 <button class="add_to_cart details">
-                                    <img src="img/icons/profile/magnifying-glass.svg" alt="" />
-                                    <div class="roboto">{{__('client.details')}}</div>
+                                    <img src="/img/icons/profile/magnifying-glass.svg" alt="" />
+                                    <div class="roboto">Details</div>
                                 </button>
                             </a>
                         </div>
 
                 </div>
+                </a>
                 <div class="detail flex">
                     <div>
                         <div

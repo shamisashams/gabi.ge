@@ -25,7 +25,7 @@ class PurchaseRepository extends BaseRepository implements PurchaseRepositoryInt
     {
         $cart = session('products') ?? null;
 
-        if ($cart !== null) {
+        if ($cart !== null && count($cart) > 0) {
             $total = 0;
             $shipmentPrice = 0;
             // validate and get total
@@ -87,5 +87,6 @@ class PurchaseRepository extends BaseRepository implements PurchaseRepositoryInt
                 return false;
             }
         }
+        return false;
     }
 }
