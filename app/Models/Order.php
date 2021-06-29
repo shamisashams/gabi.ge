@@ -10,6 +10,10 @@ class Order extends Model
 {
     use HasFactory;
 
+    const STATUS_PENDING = 3;
+    const STATUS_SUCCESS = 1;
+    const STATUS_FAIL = 2;
+
     protected $fillable = [
         'bank_id',
         'user_id',
@@ -23,7 +27,9 @@ class Order extends Model
         'last_name',
         'email',
         'phone',
-        'address'
+        'address',
+        'city',
+        'country'
     ];
 
     public function products()

@@ -2536,7 +2536,7 @@ img {
     margin: 35px -40px;
     padding: 48px 40px;
 }
-.final_details_content .box .flex:nth-child(2) {
+.final_details_content .box .flex {
     padding-bottom: 20px;
     border-bottom: #dcdcdc 1px solid;
     margin-bottom: 20px;

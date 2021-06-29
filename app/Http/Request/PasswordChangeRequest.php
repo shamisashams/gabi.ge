@@ -30,7 +30,7 @@ class PasswordChangeRequest extends FormRequest
                 'required',
                 function ($attribute, $value, $fail) {
                     if (!Hash::check($value, auth()->user()->password)) {
-                        $fail(__('client.The old password is incorrect'));
+                        $fail(__('client.old_password_incorrect'));
                     }
                 },
                 'max:100'

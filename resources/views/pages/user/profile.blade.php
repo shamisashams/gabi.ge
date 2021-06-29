@@ -32,8 +32,8 @@
                      onclick="changeType('password')">{{__('client.change_password')}}</div>
             </div>
             <div class="row last">
-                <a href="helps.html" class="link">{{__('client.helps')}}</a>
-                <a href="contact.html" class="link">{{__('client.contact_us')}}</a>
+                <a href="{{route('helps')}}" class="link">{{__('client.helps')}}</a>
+                <a href="{{route('contactUs')}}" class="link">{{__('client.contact_us')}}</a>
             </div>
             <button onclick="window.location.href='{{route('logoutFront',app()->getLocale())}}'"
                     class="log_out">{{__('client.log_out')}}</button>
@@ -139,7 +139,14 @@
                         <div class="c2">{{$order->id}}</div>
                         <div class="c2">{{$order->created_at}}</div>
                         <div class="c2">${{round($order->total_price/100,2)}}</div>
-                        <div class="c2 green">{{$order->status}}</div>
+                        @if($order->status==\App\Models\Order::STATUS_PENDING)
+                            <div class="c2 green">{{__('client.pending')}}</div>
+                        @elseif($order->status==\App\Models\Order::STATUS_FAIL)
+                            <div class="c2 red">{{__('client.fail')}}</div>
+                        @else
+                            <div class="c2 green">{{__('client.success')}}</div>
+
+                        @endif
                         <a
                             href="{{route('orderDetails',[app()->getLocale(),$order->id])}}"
                             class="c2 dl view_order_detail"

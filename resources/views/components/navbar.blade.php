@@ -8,7 +8,7 @@
             ><img src="img/logo/obaby.png" alt=""
                 /></a>
             <div class="navbar">
-                <a href="{{route('welcome')}}" class="nav_link active">{{__('client.home')}}</a>
+                <a href="{{route('welcome')}}" class="nav_link {{str_contains(substr(parse_url(route('welcome',app()->getLocale()), PHP_URL_PATH), 1),request()->path())?"active":""}}">{{__('client.home')}}</a>
                 <div class="nav_link">
                     {{__('client.categories')}}
 
@@ -43,9 +43,13 @@
                         </div>
                     </div>
                 </div>
-                <a href="contact.html" class="nav_link">{{__('client.contact_us')}}</a>
-                <a href="about.html" class="nav_link">{{__('client.about_us')}}</a>
-                <a href="helps.html" class="nav_link">{{__('client.helps')}}</a>
+
+                <a href="{{route('contactUs',app()->getLocale())}}"
+                   class="nav_link {{str_contains(request()->path(),substr(parse_url(route('contactUs',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.contact_us')}}</a>
+                <a href="{{route('aboutUs',app()->getLocale())}}"
+                   class="nav_link {{str_contains(request()->path(),substr(parse_url(route('aboutUs',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.about_us')}}</a>
+                <a href="{{route('helps',app()->getLocale())}}"
+                   class="nav_link {{str_contains(request()->path(),substr(parse_url(route('helps',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.helps')}}</a>
             </div>
         </div>
         <div class="flex columns">

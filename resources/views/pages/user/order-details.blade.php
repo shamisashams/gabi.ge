@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="one">
-                    <div class="d2 bot25">Shipping address:</div>
+                    <div class="d2 bot25">{{__('client.shipping_address')}}:</div>
                     <div class="para">
                         {{$order->address}} <br/>
                     </div>
@@ -33,10 +33,10 @@
                 </div>
                 <div class="two box">
                     <div class="d2 bot25 flex">
-                        <div>{{__('order_items')}}:</div>
+                        <div><strong>{{__('client.products')}}</strong></div>
                         <div class="flex flex_end">
-                            <div><strong>Quantity</strong></div>
-                            <div class="last"><strong>Price</strong></div>
+                            <div><strong>{{__('client.quantity')}}</strong></div>
+                            <div class="last"><strong>{{__('client.price')}}</strong></div>
                         </div>
                     </div>
                     @foreach($orderProducts as $orderProduct)
@@ -97,7 +97,8 @@
                     </div>
                 </div>
             </div>
-            <a href="#">
+
+            <a href="{{route('downloadPdf',[app()->getLocale(),$order->id])}}" download="">
                 <button class="dl_pdf">{{__('client.download_pdf')}}</button>
             </a>
         </div>

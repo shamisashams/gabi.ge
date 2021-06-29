@@ -55,6 +55,7 @@ class PurchaseRepository extends BaseRepository implements PurchaseRepositoryInt
                     'user_id' => auth()->user()->id,
                     'payment_type_id' => 1,
                     'transaction_id' => uniqid(),
+                    'shipment_price' => $shipmentPrice,
                     'total_price' => $total,
                     'status' => 3,
                     'first_name' => auth()->user()->profile->first_name,
@@ -62,6 +63,8 @@ class PurchaseRepository extends BaseRepository implements PurchaseRepositoryInt
                     'email' => auth()->user()->email,
                     'phone' => auth()->user()->profile->phone,
                     'address' => auth()->user()->profile->address,
+                    'city' => auth()->user()->profile->city,
+                    'country' => auth()->user()->profile->country
                 ]);
 
                 $products = array();

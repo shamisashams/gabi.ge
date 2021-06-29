@@ -36,10 +36,10 @@ class SettingComposer
     public function compose(View $view)
     {
 
-        $view->with('categories', $this->categoryRepository->getMainCategories());
-//            ->with('contact_email', $this->getValue('contact_email'))
-//            ->with('categories', $categories)
-//            ->with('phone', $this->getValue('phone'))
+        $view->with('categories', $this->categoryRepository->getMainCategories())
+            ->with('contact_email', $this->getValue('contact_email'))
+            ->with('phone', $this->getValue('phone'))
+            ->with('address', $this->getValue('address'))
 //            ->with('siteFacebook',$this->getValue('facebook'))
 //            ->with('siteInstagram',$this->getValue('instagram'))
 //            ->with('sitePayByCash',$this->getValue('pay_by_cash'))

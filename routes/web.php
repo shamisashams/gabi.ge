@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatalogueController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\UserController;
@@ -164,6 +165,11 @@ Route::prefix('{locale?}')
             Route::post('/register', [\App\Http\Controllers\Auth\AuthFrontendController::class, 'register'])->name('register');
             Route::post('login', [\App\Http\Controllers\Auth\AuthFrontendController::class, 'login'])->name('loginFront');
             Route::get('cart', [CartController::class, 'index'])->name('cart');
+            Route::match(['get', 'post'], 'contact-us', [ContactController::class, 'index'])->name('contactUs');
+            Route::get( 'about-us', [\App\Http\Controllers\AboutController::class, 'index'])->name('aboutUs');
+            Route::get( 'helps', function(){
+                return view('pages.helps.index');
+            })->name('helps');
 
             Route::middleware(['authFront'])->group(function () {
                 Route::get('logout', [\App\Http\Controllers\Auth\AuthFrontendController::class, 'logout'])->name('logoutFront');
@@ -172,6 +178,7 @@ Route::prefix('{locale?}')
                 Route::post('change-password', [UserController::class, 'changePassword'])->name('changePassword');
                 Route::post('save-order', [PurchaseController::class, 'saveOrder'])->name('saveOrder');
                 Route::get('order-details/{id}', [UserController::class, 'orderDetails'])->name('orderDetails');
+                Route::get('download-pdf/{id}', [UserController::class, 'downloadPdf'])->name('downloadPdf');
             });
 
         });

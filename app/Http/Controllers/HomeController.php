@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Request\Admin\AnswerRequest;
+use App\Mail\ContactEmail;
 use App\Models\Answer;
 use App\Models\Feature;
 use App\Models\Language;
 use App\Models\Localization;
+use App\Models\Setting;
 use App\Repositories\AnswerRepositoryInterface;
 use App\Repositories\Frontend\CategoryRepositoryInterface;
 use App\Repositories\Frontend\ProductRepositoryInterface;
@@ -18,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -55,6 +58,7 @@ class HomeController extends Controller
 
         $productFeatures = $this->productRepository->getSingleProductFeatures($id)['productFeatures'];
         $productAnswers = $this->productRepository->getSingleProductFeatures($id)['productAnswers'];
-        return response()->json(['status' => true,'productFeatures'=>$productFeatures, 'productAnswers'=>$productAnswers]);
+        return response()->json(['status' => true, 'productFeatures' => $productFeatures, 'productAnswers' => $productAnswers]);
     }
+
 }
