@@ -16,7 +16,10 @@ interface UserRepositoryInterface
 
     public function userOrders();
 
+    public function userOrder(int $id);
+
     public function orderProducts(int $id);
+
 
 
 

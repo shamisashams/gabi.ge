@@ -3641,3 +3641,56 @@ img {
 .profile-error-block {
     color: red;
 }
+
+
+.final_details_content .two .price {
+    white-space: nowrap;
+    text-align: center;
+}
+.final_details_content .box .flex.flex_end {
+    padding-bottom: 0;
+    border-bottom: none;
+    margin-bottom: 0;
+    text-align: center;
+}
+.final_details_content .box .flex.flex_end div {
+    width: 80px;
+    text-align: center;
+}
+
+.final_details_content .box .flex .last {
+    margin-left: 40px;
+}
+
+@media screen and (max-width: 1000px) {
+    .final_details_content .content {
+        font-size: 13px;
+    }
+    .final_details_content {
+        padding-bottom: 100px;
+    }
+    .final_details_content .dl_pdf {
+        bottom: 22px;
+    }
+    .final_details_content .box {
+        margin: 35px 0;
+        padding: 20px;
+    }
+    .final_details_content .box .flex.flex_end div {
+        width: 55px;
+    }
+    .final_details_content .box .flex .last {
+        margin-left: 25px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .final_details_content .bot25 {
+        margin-bottom: 16px;
+    }
+    .final_details_content .box .flex .last {
+        margin-left: 19px;
+    }
+    .final_details_content .box .flex.flex_end div {
+        width: 48px;
+    }
+}

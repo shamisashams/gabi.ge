@@ -8,81 +8,97 @@
                     <img src="/img/icons/popup/close.png" alt=""/>
                 </button>
                 <div class="head flex center column">
-                    <div class="title d2">Final details for order #1102-0030022</div>
+                    <div class="title d2">{{('client.final_details_for_order')}} #{{$order->id}}</div>
                     <button class="print_this_page flex center column">
                         <img src="/img/icons/profile/print.png" alt=""/>
                         <div class="dc">Print this page</div>
                     </button>
                     <div class="h_i">
-                        Order placed: <span class="dc"> march 21, 2021 </span>
+                        {{__('client.order_placed')}}: <span
+                            class="dc"> {{date('d-m-Y', strtotime($order->created_at))}}</span>
                     </div>
                     <div class="h_i">
-                        Order number:
-                        <span class="dc"> march 21, 202111001-011074-011 </span>
+                        {{__('client.order_number')}}:
+                        <span class="dc">{{$order->id}}</span>
                     </div>
-                    <div class="h_i">Total order: <span class="dc"> 61.68$ </span></div>
+                    <div class="h_i">{{__('total_price')}}: <span class="dc"> {{$order->total_price/100}} $ </span>
+                    </div>
                 </div>
                 <div class="one">
                     <div class="d2 bot25">Shipping address:</div>
                     <div class="para">
-                        Lorem ipsum dolor sit amet, consectetur <br/>
-                        adipiscing elit, sed do eiusmod tempor
+                        {{$order->address}} <br/>
                     </div>
-                    <div class="dc">Tbilisi, Georgia</div>
+                    <div class="dc">{{$order->city}}, {{$order->country}}</div>
                 </div>
                 <div class="two box">
                     <div class="d2 bot25 flex">
-                        <div>Items orderd:</div>
-                        <div><strong>Price</strong></div>
-                    </div>
-                    <div class="para flex">
-                        <div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna
+                        <div>{{__('order_items')}}:</div>
+                        <div class="flex flex_end">
+                            <div><strong>Quantity</strong></div>
+                            <div class="last"><strong>Price</strong></div>
                         </div>
-                        <div class="price">61.68 $</div>
                     </div>
-                    <div class="para flex">
-                        <div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna
+                    @foreach($orderProducts as $orderProduct)
+                        <div class="para flex">
+                            <div>
+                                {{count($orderProduct->availableLanguage)>0?$orderProduct->availableLanguage[0]->title:""}}
+
+                            </div>
+                            @if($orderProduct->product->saleProduct &&$orderProduct->product->saleProduct->sale)
+
+                                <div class="flex flex_end">
+                                    <div class="price">{{$orderProduct->quantity}}</div>
+                                    <div class="price last">
+                                        {{\App\Models\Product::calculatePrice($orderProduct->product->price,$orderProduct->product->saleProduct->sale->discount,$orderProduct->product->saleProduct->sale->type)}}
+                                        $
+                                    </div>
+                                </div>
+                            @else
+                                <div class="flex flex_end">
+                                    <div class="price">{{$orderProduct->quantity}}</div>
+                                    <div class="price last">
+                                        {{$orderProduct->product->price/100}} $
+                                    </div>
+                                </div>
+                            @endif
                         </div>
-                        <div class="price">61.68 $</div>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="three">
-                    <div class="d2 bot25">payment information:</div>
+                    <div class="d2 bot25">{{__('client.payment_information')}}:</div>
                     <div class="flex bot25">
                         <div>
-                            <div class="d2" style="margin-bottom: 5px">payment method:</div>
+                            <div class="d2" style="margin-bottom: 5px">{{__('client.payment_method')}}:</div>
                             <div class="dc">Visa / last digits: 5135</div>
                         </div>
                         <div style="text-align: end">
-                            <div class="d2">Items subtotal: 61.68 $</div>
-                            <div class="d2">Shipping & handling: 7.31 $</div>
+                            <div class="d2">{{__('client.items_subtotal')}}
+                                : {{($order->total_price/100)-$order->shipment_price}} $
+                            </div>
+                            <div class="d2">{{__('client.shipping_handling')}}: {{$order->shipment_price}} $</div>
                             <div class="d2">Free shipping: - 7.31 $</div>
                         </div>
                     </div>
-                    <div class="d2" style="margin-bottom: 16px">Billing address:</div>
+                    {{--                    <div class="d2" style="margin-bottom: 16px">Billing address:</div>--}}
                     <div class="flex start">
                         <div class="dc">
-                            Lorem ipsum dolor sit amet, consectetur <br/>
-                            adipiscing elit, sed do eiusmod tempor
+
                         </div>
                         <div class="right flex column">
                             <div class="d2" style="white-space: nowrap; margin-left: 5px">
-                                <strong>Grand total: 61.68 $</strong>
+                                <strong>{{__('grand_total')}}: {{$order->total_price/100}} $</strong>
                             </div>
                             <button class="print_this_page flex column">
-                                <img src="img/icons/profile/print.png" alt=""/>
-                                <div class="dc">Print this page</div>
+                                <img src="/img/icons/profile/print.png" alt=""/>
+                                <div class="dc">{{__('client.print_this_page')}}</div>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
             <a href="#">
-                <button class="dl_pdf">Download Pdf</button>
+                <button class="dl_pdf">{{__('client.download_pdf')}}</button>
             </a>
         </div>
     </section>

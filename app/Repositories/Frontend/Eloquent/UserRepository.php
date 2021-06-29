@@ -61,9 +61,19 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     }
 
+    public function userOrder(int $id)
+    {
+        return Order::where(['user_id' => auth()->user()->id, 'id' => $id])->first();
+
+    }
+
     public function orderProducts(int $id)
     {
-        return OrderProduct::where(['order_id'=>$id])->join('orders', 'orders.id', '=', 'order_products.order_id')->where('orders.user_id','=',auth()->user()->id)->get();
+        return OrderProduct::where(['order_id' => $id])
+            ->join('orders', 'orders.id', '=', 'order_products.order_id')
+            ->where('orders.user_id', '=', auth()->user()->id)
+            ->with(['product.availableLanguage','product.saleProduct.sale'])
+            ->get();
 
     }
 

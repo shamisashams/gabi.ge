@@ -101,16 +101,18 @@
                 <div class="row">
                     <div>Address:</div>
                     <br/>
-                    <input hidden name="address" value="{{auth()->user()->profile->address}}"/>
-                    <div class="inputs">
-                        {{auth()->user()->profile->address}}
-                        @if ($errors->has('address'))
-                            <p class="profile-error-block">{{ __('client.please_set_address') }}</p>
-                        @endif
-                    </div>
-                    <a href="{{route('profile',app()->getLocale())}}" class="address">
-                        {{auth()->user()->profile->address?__('client.change_address'):__('client.set_address')}}
-                    </a>
+                    @if(auth()->user())
+                        <input hidden name="address" value="{{auth()->user()->profile->address}}"/>
+                        <div class="inputs">
+                            {{auth()->user()->profile->address}}
+                            @if ($errors->has('address'))
+                                <p class="profile-error-block">{{ __('client.please_set_address') }}</p>
+                            @endif
+                        </div>
+                        <a href="{{route('profile',app()->getLocale())}}" class="address">
+                            {{auth()->user()->profile->address?__('client.change_address'):__('client.set_address')}}
+                        </a>
+                    @endif
                 </div>
                 <div class="flex total">
                     <div>Total</div>

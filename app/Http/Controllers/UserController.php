@@ -69,7 +69,8 @@ class UserController extends Controller
     public function orderDetails(string $locale, int $id)
     {
         return view('pages.user.order-details', [
-            'orderProducts' => $this->userRepository->orderProducts($id)
+            'orderProducts' => $this->userRepository->orderProducts($id),
+            'order' => $this->userRepository->userOrder($id)
         ]);
     }
 
