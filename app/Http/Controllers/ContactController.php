@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Mail\ContactEmail;
+use App\Models\Language;
 use App\Models\Page;
 use App\Models\Setting;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-    public function index(Request $request)
+    public function index(string $lang, Request $request)
     {
         if ($request->method() == 'POST') {
             $request->validate([
@@ -41,13 +42,13 @@ class ContactController extends Controller
 
         }
 
-        $page = Page::join('page_languages', 'page_languages.page_id', '=', 'pages.id')
-            ->where(['status' => true, 'page_languages.slug' => 'contact-us'])->first();
+
+        $page = Page::where(['status' => true, 'type' => 'contact-us'])->with('availableLanguage')->first();
         if (!$page) {
             return abort('404');
         }
-        return view('pages.contact-us.index',[
-            'page'=>$page
+        return view('pages.contact-us.index', [
+            'page' => $page
         ]);
     }
 

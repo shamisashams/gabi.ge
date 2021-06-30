@@ -14,15 +14,15 @@
     <section class="about_us_section wrapper flex">
         <div class="left">
             <div>
-                {!!$page->content?:""!!}
+                {!!count($page->availableLanguage)>0?$page->availableLanguage[0]->content:""!!}
             </div>
             <br>
             <div>
-                {!!$page->content_2?:""!!}
+                {!!count($page->availableLanguage)>0?$page->availableLanguage[0]->content_2:""!!}
             </div>
         </div>
         <div class="who_we_are">
-            {!!$page->content_3?:""!!}
+            {!!count($page->availableLanguage)>0?$page->availableLanguage[0]->content_3:""!!}
         </div>
     </section>
 

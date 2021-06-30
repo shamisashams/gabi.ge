@@ -25,8 +25,8 @@ class AboutController extends Controller
      */
     public function index(string $lang, Request $request)
     {
-        $page = Page::join('page_languages', 'page_languages.page_id', '=', 'pages.id')
-            ->where(['status' => true, 'page_languages.slug' => 'about-us'])->first();
+        $page = Page::where(['status' => true, 'type' => 'about-us'])->with('availableLanguage')->first();
+
         if (!$page) {
             return abort('404');
         }

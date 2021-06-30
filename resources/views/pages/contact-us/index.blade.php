@@ -12,9 +12,9 @@
 
     <section class="contact_section wrapper flex">
         <div class="contact_info">
-            <div class="title">{{$page->title?:""}}</div>
+            <div class="title">{{count($page->availableLanguage)>0?$page->availableLanguage[0]->title:""}}</div>
             <p>
-                {{$page->description?:""}}
+                {{count($page->availableLanguage)>0?$page->availableLanguage[0]->description:""}}
             </p>
             <div class="addresses">
                 <div class="title">{{__('client.the_office')}}</div>

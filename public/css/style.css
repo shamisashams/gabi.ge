@@ -3694,3 +3694,16 @@ img {
         width: 48px;
     }
 }
+
+.cart_total_fee .row.last {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.cart_total_fee .row.last .flex {
+    margin: 0 -5px;
+}
+
+.cart_total_fee .row.last a {
+    margin: 0 5px;
+}

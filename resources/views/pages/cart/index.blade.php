@@ -114,6 +114,23 @@
                         </a>
                     @endif
                 </div>
+                <div class="row last">
+                    <div>Payemnt Method:</div>
+                    <br/>
+                    <div class="flex">
+                        <a href="#">
+
+                            <img src="/img/banks/3.png" alt=""/>
+                        </a>
+                        <a href="#">
+
+                            <img src="/img/banks/4.png" alt=""/>
+                        </a>
+                        <a href="#">
+                            <img src="/img/banks/5.png" alt=""/>
+                        </a>
+                    </div>
+                </div>
                 <div class="flex total">
                     <div>Total</div>
                     <div id="total-price" data-price="">$ {{round($total,2)}}</div>

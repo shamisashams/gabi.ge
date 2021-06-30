@@ -72,9 +72,8 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return OrderProduct::where(['order_id' => $id])
             ->join('orders', 'orders.id', '=', 'order_products.order_id')
             ->where('orders.user_id', '=', auth()->user()->id)
-            ->with(['product.availableLanguage','product.saleProduct.sale'])
+            ->with(['product.availableLanguage', 'product.saleProduct.sale'])
             ->get();
-
     }
 
 }
