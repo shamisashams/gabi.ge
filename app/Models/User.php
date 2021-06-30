@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable,HasRolesAndPermissions;
+    use HasFactory, Notifiable, HasRolesAndPermissions;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status'
     ];
 
     /**
@@ -41,4 +42,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class, 'user_id');
+    }
+
+    public function language()
+    {
+        return $this->hasMany('App\Models\UserLanguage', 'user_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order', 'user_id');
+    }
+
+    public function tokens()
+    {
+        return $this->hasMany('App\Models\VerifyUser', 'user_id');
+    }
+
+    public function availableLanguage()
+    {
+        return $this->language()->where('language_id', '=', Language::getIdByName(app()->getLocale()));
+    }
 }

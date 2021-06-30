@@ -47,6 +47,11 @@ class Feature extends Model
         return $this->language()->where('language_id', '=', Language::getIdByName(app()->getLocale()));
     }
 
+    public function englishLanguage()
+    {
+        return $this->language()->where('language_id', '=', Language::getIdByName('en'));
+    }
+
 
     public function getFilterScopes(): array
     {

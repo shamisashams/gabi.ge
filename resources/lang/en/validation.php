@@ -151,6 +151,17 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'first_name'=>'first name',
+        'last_name'=>'last_name',
+        'email'=>'email',
+        'phone'=>'phone',
+        'country'=>'country',
+        'city'=>'city',
+        'address'=>'address',
+        'old_password'=>'old password',
+        'password'=>'password',
+        'password_repeat'=>'password repeat'
+    ],
 
 ];

@@ -1,0 +1,170 @@
+@extends('layouts.base')
+@section('head')
+    <title>{{__('app.title_home')}}</title>
+@endsection
+
+@section('content')
+    <section class="path">
+        <div class="path_content wrapper">
+            <div class="path_took"><a href="{{route('welcome')}}">Home</a> / {{__('client.shopping_cart')}}</div>
+            <div class="current">{{__('client.shopping_cart')}}</div>
+        </div>
+    </section>
+
+    <section class="shopping_cart_body wrapper flex">
+        <div class="shopping_table">
+            <div>
+                <div class="heads row flex">
+                    <div class="c1">{{__('client.products')}}</div>
+                    <div class="c2">{{__('client.price')}}</div>
+                    <div class="c2">{{__('client.features')}}</div>
+                    <div class="c2">{{__('client.quantity')}}</div>
+                    <div class="c2">{{__('client.total')}}</div>
+                </div>
+                @foreach($products as $product)
+                    <div class="item row flex cart_item_shoppingcart"
+                         id="product_item-{{$product['id']}}-{{$product['features']}}">
+                        <div class="c1 flex">
+                            <div class="img">
+                                @if($product['file'])
+                                    <img
+                                        src="/storage/product/{{$product['id']}}/{{$product['file']}}"
+                                        alt=""/>
+                                @else
+                                    <img src="/noimage.png"/>
+                                @endif
+                            </div>
+                            <div>{{$product['title']}}</div>
+                        </div>
+                        <div class="c2" id="car_product_price-{{$product['id']}}">
+                            $ {{$product['sale']?:$product['price']}}</div>
+                        <div class="c2">
+                            @foreach($product['options'] as $key=>$option)
+                                {{count($option->availableLanguage)>0?$option->availableLanguage[0]->title:""}}{{$key<count($product['options'])-1?',':""}}
+                            @endforeach
+                        </div>
+                        <div class="c2 quantity">
+                            <div class="number_input">
+                                <button onclick="decrease('{{$product['id']}}',{{$product['features']}})"
+                                        class="decrease">-
+                                </button>
+                                <input
+                                    class="product_number"
+                                    type="text"
+                                    disabled
+                                    id="product_number-{{$product['id']}}-{{$product['features']}}"
+                                    value="{{$product['quantity']}}"
+                                />
+                                <button class="increase"
+                                        onclick="increase('{{$product['id']}}',{{$product['features']}})">+
+                                </button>
+                            </div>
+                        </div>
+                        <div class="c2" id="cart_product_total-{{$product['id']}}-{{$product['features']}}">
+                            ${{($product['sale']?:$product['price'])*$product['quantity']}}</div>
+                        <p hidden>{{$product['features']}}</p>
+                        <button class="remove_item_cart"
+                                onclick="removefromcart(null,{{$product['id']}},{{$product['features']}})">
+                            <img src="/img/icons/header/remove.png" alt=""/>
+                        </button>
+                    </div>
+                @endforeach
+                <div class="flex coupon">
+                    <input type="text" placeholder="Coupon Code"/>
+                    <button class="ok">Ok</button>
+                </div>
+            </div>
+        </div>
+        <div class="cart_total_fee">
+            <div class="head row">{{__('client.cart_total')}}</div>
+            <div class="row flex">
+                <div>{{__('client.sub_total')}}:</div>
+                <div id="sub-total">${{round($total,2)}}</div>
+            </div>
+            <form method="post" action="{{route('saveOrder',app()->getLocale())}}">
+                @csrf
+                <div class="row">
+                    <div>{{__('client.shipping')}}:</div>
+                    <br/>
+                    <div class="flex inputs">
+                        <div>
+                            <input onchange="changeTotalPrice(this)" type="radio" name="shipping" id="ship_1"
+                                   value="from_office" data-price="0.00"/>
+                            <label for="ship_1">{{__('client.from_office')}}</label>
+                        </div>
+                        <div>$00.00</div>
+                    </div>
+                    @if ($errors->has('shipping'))
+                        <p class="profile-error-block">{{ $errors->first('shipping') }}</p>
+                    @endif
+                </div>
+                <div class="row">
+                    <div>{{__('client.address')}}:</div>
+                    <br/>
+                    @if(auth()->user())
+                        <input hidden name="address" value="{{auth()->user()->profile->address}}"/>
+                        <div class="inputs">
+                            {{auth()->user()->profile->address}}
+                            @if ($errors->has('address'))
+                                <p class="profile-error-block">{{ __('client.please_set_address') }}</p>
+                            @endif
+                        </div>
+                        <a href="{{route('profile',app()->getLocale())}}" class="address">
+                            {{auth()->user()->profile->address?__('client.change_address'):__('client.set_address')}}
+                        </a>
+                    @endif
+                </div>
+                <div class="row last">
+                    <div>Payemnt Method:</div>
+                    <br/>
+                    <div class="flex">
+                        <div>
+                            <input onchange="hideBank()" type="radio" name="payment_method" value="cash"
+                                   id="pmmt_cash"/>
+                            <label for="pmmt_cash">{{__('client.cash')}}</label>
+
+                        </div>
+                        <div>
+                            <input onchange="showBank()" type="radio" name="payment_method" value="card"
+                                   id="pmmt_bank"/>
+                            <label for="pmmt_bank">{{__('client.card')}}</label>
+                        </div>
+                    </div>
+                    <div class="banks flex banks_pmmt">
+                        @foreach($banks as $bank)
+                            <?php
+                            $name = "";
+                            switch ($bank->title) {
+                                case 'tbc':
+                                    $name = "tbc.png";
+                                    break;
+                                case 'Georgian Bank':
+                                    $name = "georgian-bank.png";
+                                    break;
+                                case 'Credo':
+                                    $name = 'credo.png';
+                                    break;
+                            }
+                            ?>
+                            <input id="{{$bank->title}}" name="bank" value="{{$bank->id}}" type="radio"/>
+                            <label for="{{$bank->title}}"> <img style="width: 150px" src="/img/banks/{{$name}}" alt=""/></label>
+                        @endforeach
+                    </div>
+                    <br>
+                    @if ($errors->has('payment_method'))
+                        <p class="profile-error-block">{{__('client.please_choose_payment_method')}}</p>
+                    @elseif($errors->has('bank'))
+                        <p class="profile-error-block">{{__('client.pleas_choose_bank')}}</p>
+                    @endif
+                </div>
+                <div class="flex total">
+                    <div>Total</div>
+                    <div id="total-price" data-price="">$ {{round($total,2)}}</div>
+                </div>
+                <button type="submit" class="proceed">Proceed To Checkout</button>
+
+            </form>
+        </div>
+    </section>
+
+@endsection

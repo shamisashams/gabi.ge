@@ -30,6 +30,6 @@ class OrderProduct extends Model
     }
 
     public function availableLanguage() {
-        return $this->language()->where('language_id','=', Localization::getIdByName(app()->getLocale()));
+        return $this->language()->where('language_id','=', Language::getIdByName(app()->getLocale()));
     }
 }

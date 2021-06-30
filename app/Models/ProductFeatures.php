@@ -20,4 +20,8 @@ class ProductFeatures extends Model
     {
         return $this->belongsTo('App\Models\Feature', 'feature_id');
     }
+
+    public function productAnswers(){
+        return $this->hasMany(ProductAnswers::class,'product_id','product_id');
+    }
 }
