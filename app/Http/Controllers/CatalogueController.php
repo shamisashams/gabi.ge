@@ -38,14 +38,14 @@ class CatalogueController extends Controller
             'sortParams' => ['sort' => 'position', 'order' => 'DESC']
         ]);
 
-        $products = $this->productRepository->getData($request, ['saleProduct.sale', 'availableLanguage', 'files','category.availableLanguage'], false);
+        $products = $this->productRepository->getData($request, ['saleProduct.sale', 'availableLanguage', 'files', 'category.availableLanguage'], false);
 //        $staticFilterData = ['category'];
 
         return view('pages.product.catalogue', [
-            'products' => $products->orderBy('created_at', 'DESC')->paginate(16),
             'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
 //            'staticFilterData' => $staticFilterData,
+            'products' => $products->orderBy('created_at', 'DESC')->paginate(16),
             'category' => $category
         ]);
     }
@@ -64,8 +64,8 @@ class CatalogueController extends Controller
         return view('pages.product.details', [
             'product' => $this->productRepository->getProductById($id),
             'category' => $category,
-            'productFeatures'=>$this->productRepository->getSingleProductFeatures($id)['productFeatures'],
-            'productAnswers'=>$this->productRepository->getSingleProductFeatures($id)['productAnswers'],
+            'productFeatures' => $this->productRepository->getSingleProductFeatures($id)['productFeatures'],
+            'productAnswers' => $this->productRepository->getSingleProductFeatures($id)['productAnswers'],
             'bestSellerProducts' => $this->productRepository->getNewProducts(),
         ]);
     }

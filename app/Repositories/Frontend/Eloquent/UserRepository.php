@@ -57,7 +57,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function userOrders()
     {
-        return Order::where(['user_id' => auth()->user()->id])->with('products')->orderBy('created_at', 'desc')->get();
+        return Order::where(['user_id' => auth()->user()->id])->with('products')->orderBy('created_at', 'desc')->paginate(12);
 
     }
 

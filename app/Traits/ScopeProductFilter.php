@@ -11,6 +11,7 @@ namespace App\Traits;
 
 
 use App\Models\Language;
+use App\Models\Product;
 use App\Models\ProductAnswers;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -97,7 +98,22 @@ trait ScopeProductFilter
      */
     public function scopeMinPrice($query, $price)
     {
-        $query->where('price', '>=', intval($price * 100));
+//        Product::calculatePrice()
+//        $products = $query->with('saleProduct.sale.availableLanguage')->get();;
+//        $arr = [];
+//        foreach ($products as $product) {
+//            if ($product->saleProduct && $product->saleProduct->sale) {
+//                $discountPrice = Product::calculatePrice($product->price, $product->saleProduct->sale->discount, $product->saleProduct->sale->type);
+//                if ($discountPrice >= intval($price)) {
+//                    $arr[] = $product->id;
+//                }
+//            } elseif ($product->price >= intval($price * 100)) {
+//                $arr[] = $product->id;
+//            }
+//        }
+//        return $query->whereIn('id', $arr);
+        return $query->where('price', '>=', intval($price * 100));
+
 
     }
 
@@ -109,6 +125,19 @@ trait ScopeProductFilter
      */
     public function scopeMaxPrice($query, $price)
     {
+//        $products = $query->with('saleProduct.sale.availableLanguage')->get();;
+//        $arr = [];
+//        foreach ($products as $product) {
+//            if ($product->saleProduct && $product->saleProduct->sale) {
+//                $discountPrice = Product::calculatePrice($product->price, $product->saleProduct->sale->discount, $product->saleProduct->sale->type);
+//                if ($discountPrice <= intval($price)) {
+//                    $arr[] = $product->id;
+//                }
+//            } elseif ($product->price <= intval($price * 100)) {
+//                $arr[] = $product->id;
+//            }
+//        }
+//        return $query->whereIn('id', $arr);
         return $query->where('price', '<=', intval($price * 100));
 
     }

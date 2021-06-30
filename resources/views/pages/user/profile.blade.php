@@ -155,18 +155,8 @@
                         </a>
                     </div>
                 @endforeach
-                <div class="pagination">
-                    <button class="prev_page">Previous</button>
-                    <div class="pagination_slides">
-                        <button class="page_number">1</button>
-                        <button class="page_number active">2</button>
-                        <button class="page_number">3</button>
-                        <button class="page_number">4</button>
-                    </div>
-                    <button class="next_page">Next</button>
-                </div>
-
             </div>
+            {{$orders->appends(request()->query())->links('vendor.pagination.orders')}}
         </div>
         <div class="profile_tabs_content">
             <div class="title">{{__('client.change_your_password')}}</div>

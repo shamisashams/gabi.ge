@@ -42,18 +42,19 @@ class PurchaseRepository extends BaseRepository implements PurchaseRepositoryInt
             }
             $total += $shipmentPrice; // mitana
 
-//            $paymentType = PaymentType::where(['title' => $request['payment_method']])->first();
+            $paymentType = PaymentType::where(['title' => $request['payment_method']])->first();
 
-//            $bank = Bank::where(['id' => $request['card_payment'], 'payment_type_id' => $paymentType->id])->first();
+
+            $bank = Bank::where(['id' => $request['bank'], 'payment_type_id' => $paymentType ? $paymentType->id : ""])->first();
 //            if (!$bank) {
 //                $bank = Bank::where(['title' => $request['installment_bank'], 'payment_type_id' => $paymentType->id])->first();
 //            }
             try {
                 DB::beginTransaction();
                 $order = Order::create([
-                    'bank_id' => 1,
+                    'bank_id' => $bank ? $bank->id : null,
                     'user_id' => auth()->user()->id,
-                    'payment_type_id' => 1,
+                    'payment_type_id' => $paymentType ? $paymentType->id : null,
                     'transaction_id' => uniqid(),
                     'shipment_price' => $shipmentPrice,
                     'total_price' => $total,

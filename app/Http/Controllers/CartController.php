@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\Bank;
 use App\Models\Feature;
 use App\Models\Language;
 use App\Models\Localization;
@@ -47,7 +48,11 @@ class CartController extends Controller
             }
 
         }
-        return view('pages.cart.index', compact('products', 'total'));
+        return view('pages.cart.index',[
+            'products'=>$products,
+            'total'=>$total,
+            'banks'=>Bank::all()
+        ]);
     }
 
     public function addToCart(Request $request, $locale, $id)

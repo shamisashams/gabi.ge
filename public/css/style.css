@@ -3707,3 +3707,48 @@ img {
 .cart_total_fee .row.last a {
     margin: 0 5px;
 }
+
+
+.cart_total_fee .row.last .flex {
+    margin: 0 -5px;
+    justify-content: flex-start;
+}
+
+.cart_total_fee .row.last label {
+    padding: 4px 30px;
+    border: #dcdcdc 1px solid;
+    font-size: 16px;
+    font-weight: 500;
+    color: #9a9a9a;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.cart_total_fee .row.last input {
+    display: none;
+}
+
+.cart_total_fee .row.last input:checked + label {
+    border: #2d2d2d 1px solid;
+    color: #2d2d2d;
+}
+
+.cart_total_fee .row.last .show_banks {
+    position: relative;
+}
+
+.cart_total_fee .row.last label {
+    margin-right: 15px;
+}
+
+.cart_total_fee .row.last .banks {
+    justify-content: space-between;
+    margin-top: 0px;
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.3s;
+}
+.cart_total_fee .row.last .banks.shown {
+    margin-top: 20px;
+    max-height: 50px;
+}

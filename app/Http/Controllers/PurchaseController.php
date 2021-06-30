@@ -29,9 +29,12 @@ class PurchaseController extends Controller
 
     public function saveOrder(string $locale, Request $request)
     {
+
         $request->validate([
             'shipping' => 'required|string|max:255',
-            'address' => 'required|string|max:255'
+            'address' => 'required|string|max:255',
+            'bank' => $request['payment_method'] == 'card' ? 'required|string|max:255' : 'string|max:255',
+            'payment_method' => 'required|string|max:255'
         ]);
         if ($this->purchaseRepository->saveOrder($request)) {
             session(['products' => []]);
@@ -39,7 +42,6 @@ class PurchaseController extends Controller
         }
         return redirect(route('profile', $locale))->with('success', __('client.order_not_saved'));
     }
-
 
 
 }

@@ -99,7 +99,7 @@
                     @endif
                 </div>
                 <div class="row">
-                    <div>Address:</div>
+                    <div>{{__('client.address')}}:</div>
                     <br/>
                     @if(auth()->user())
                         <input hidden name="address" value="{{auth()->user()->profile->address}}"/>
@@ -118,18 +118,44 @@
                     <div>Payemnt Method:</div>
                     <br/>
                     <div class="flex">
-                        <a href="#">
+                        <div>
+                            <input onchange="hideBank()" type="radio" name="payment_method" value="cash"
+                                   id="pmmt_cash"/>
+                            <label for="pmmt_cash">{{__('client.cash')}}</label>
 
-                            <img src="/img/banks/3.png" alt=""/>
-                        </a>
-                        <a href="#">
-
-                            <img src="/img/banks/4.png" alt=""/>
-                        </a>
-                        <a href="#">
-                            <img src="/img/banks/5.png" alt=""/>
-                        </a>
+                        </div>
+                        <div>
+                            <input onchange="showBank()" type="radio" name="payment_method" value="card"
+                                   id="pmmt_bank"/>
+                            <label for="pmmt_bank">{{__('client.card')}}</label>
+                        </div>
                     </div>
+                    <div class="banks flex banks_pmmt">
+                        @foreach($banks as $bank)
+                            <?php
+                            $name = "";
+                            switch ($bank->title) {
+                                case 'tbc':
+                                    $name = "tbc.png";
+                                    break;
+                                case 'Georgian Bank':
+                                    $name = "georgian-bank.png";
+                                    break;
+                                case 'Credo':
+                                    $name = 'credo.png';
+                                    break;
+                            }
+                            ?>
+                            <input id="{{$bank->title}}" name="bank" value="{{$bank->id}}" type="radio"/>
+                            <label for="{{$bank->title}}"> <img style="width: 150px" src="/img/banks/{{$name}}" alt=""/></label>
+                        @endforeach
+                    </div>
+                    <br>
+                    @if ($errors->has('payment_method'))
+                        <p class="profile-error-block">{{__('client.please_choose_payment_method')}}</p>
+                    @elseif($errors->has('bank'))
+                        <p class="profile-error-block">{{__('client.pleas_choose_bank')}}</p>
+                    @endif
                 </div>
                 <div class="flex total">
                     <div>Total</div>
