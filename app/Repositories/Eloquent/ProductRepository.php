@@ -25,24 +25,6 @@
          parent::__construct($model);
      }
 
-     public function getData($request, $relation = null)
-     {
-         $productModelQuery = $this->model->query();
-
-         $productModel = $this->setFiltersFromRequest($productModelQuery, $request);
-
-         $perPage = 10;
-
-         if ($request->filled('per_page')) {
-             $perPage = $request['per_page'];
-         }
-
-         if ($relation) {
-             return $productModel->with($relation)->paginate($perPage);
-         }
-
-         return $productModel->paginate($perPage);
-     }
 
      public function update(string $lang, int $id, ProductRequest $request)
      {
@@ -190,74 +172,73 @@
          }
      }
 
-     public function delete(int $id)
-     {
-         return $this->find($id)->delete();
-     }
-
-     protected function setOldImagesOfProduct(ProductRequest $request, Product $product)
-     {
-         if (!count($product->files)) {
-             return $this;
-         }
-
-         foreach ($product->files as $productFileItem) {
-
-             if (is_null($request['old_images'])) {
-                 $this->removeProductImage($productFileItem);
-                 continue;
-             }
-
-             if (in_array($productFileItem->id, $request['old_images'])) {
-                 continue;
-             }
-
-             $this->removeProductImage($productFileItem);
-         }
-
-         return $this;
-     }
-
-     protected function addProductImageFromRequest(ProductRequest $request, Product $product)
-     {
-         if (!$request->hasFile('images')) {
-             return;
-         }
-
-         $requestFiles = $request->file('images');
-
-         foreach ($requestFiles as $key => $file) {
-
-             $nameOfImage = date('Ymhs') . $file->getClientOriginalName();
-             $imagePath = '/storage/app/public/product/' . $product->id;
-             $destination = base_path() . $imagePath;
-
-             $requestFiles[$key]->move($destination, $nameOfImage);
-
-             $product->files()->create([
-                 'name' => $nameOfImage,
-                 'path' => $imagePath,
-                 'format' => $file->getClientOriginalExtension(),
-             ]);
-         }
-     }
-
-     protected function removeProductImage(File $productFileItem)
-     {
-
-         $imagePath = 'public/product/' . $productFileItem->id . '/' . $productFileItem->name;
-
-         if (Storage::exists($imagePath)) {
-             Storage::delete($imagePath);
-         }
-
-         $productFileItem->delete();
-     }
-
-     public function findWithRelated(array $relations, int $id)
-     {
-         return $this->model->with($relations)->where('id', '=', $id)->get();
-     }
+//     public function delete(int $id)
+//     {
+//         return $this->find($id)->delete();
+//     }
+//
+//     protected function setOldImagesOfProduct(ProductRequest $request, Product $product)
+//     {
+//         if (!count($product->files)) {
+//             return $this;
+//         }
+//
+//         foreach ($product->files as $productFileItem) {
+//
+//             if (is_null($request['old_images'])) {
+//                 $this->removeProductImage($productFileItem);
+//                 continue;
+//             }
+//
+//             if (in_array($productFileItem->id, $request['old_images'])) {
+//                 continue;
+//             }
+//
+//             $this->removeProductImage($productFileItem);
+//         }
+//
+//         return $this;
+//     }
+//
+//     protected function addProductImageFromRequest(ProductRequest $request, Product $product)
+//     {
+//         if (!$request->hasFile('images')) {
+//             return;
+//         }
+//
+//         $requestFiles = $request->file('images');
+//
+//         foreach ($requestFiles as $key => $file) {
+//
+//             $nameOfImage = date('Ymhs') . $file->getClientOriginalName();
+//             $imagePath = '/storage/app/public/product/' . $product->id;
+//             $destination = base_path() . $imagePath;
+//
+//             $requestFiles[$key]->move($destination, $nameOfImage);
+//
+//             $product->files()->create([
+//                 'name' => $nameOfImage,
+//                 'path' => $imagePath,
+//                 'format' => $file->getClientOriginalExtension(),
+//             ]);
+//         }
+//     }
+//
+//     protected function removeProductImage(File $productFileItem)
+//     {
+//
+//         $imagePath = 'public/product/' . $productFileItem->id . '/' . $productFileItem->name;
+//
+//         if (Storage::exists($imagePath)) {
+//             Storage::delete($imagePath);
+//         }
+//
+//         $productFileItem->delete();
+//     }
+//
+//     public function findWithRelated(array $relations, int $id)
+//     {
+//         return $this->model->with($relations)->where('id', '=', $id)->get();
+//     }
 
  }
- 

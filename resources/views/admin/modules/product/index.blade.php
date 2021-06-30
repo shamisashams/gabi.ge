@@ -8,7 +8,7 @@
 		@include('admin.layouts.alert.alert')
 		@include('admin.modules.language-tab.tab')
 		<div class="card-content">
-		    <a href="{{route('productCreateView',app()->getLocale())}}"
+		    <a href="{{route('productCreate',app()->getLocale())}}"
 		       class="mb-4 btn waves-effect waves-light green darken-1">{{trans('admin.create_product')}}</a>
 		    <div>
 			{!! Form::open(['url' => route('productIndex',app()->getLocale()),'method' =>'get']) !!}
@@ -86,7 +86,7 @@
 					@endif
 				    </td>
 				    <td>
-					<a href="{{route('productEditView',[app()->getLocale(),$product->id])}}"><i
+					<a href="{{route('productEdit',[app()->getLocale(),$product->id])}}"><i
 						class="material-icons">edit</i></a>
 					<a href="{{route('productShow',[app()->getLocale(),$product->id])}}"><i class="material-icons">remove_red_eye</i></a>
 					{!! Form::open(['url' => route('productDestroy',[app()->getLocale(),$product->id]),'method' =>'delete','style'=>'display:inline-block']) !!}
