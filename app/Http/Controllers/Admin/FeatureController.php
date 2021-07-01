@@ -126,19 +126,19 @@ class FeatureController extends AdminController
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param string $locale
-     * @param int $id
-     * @return Application|RedirectResponse|Response|Redirector
-     */
-    public function destroy(string $locale, int $id)
-    {
-        if (!$this->featureRepository->delete($id)) {
-            return redirect(route('featureIndex', $locale))->with('danger', __('admin.feature_not_deleted'));
-        }
-        return redirect(route('featureIndex', $locale))->with('success', __('admin.feature_success_delete'));
-
-    }
+//    /**
+//     * Remove the specified resource from storage.
+//     *
+//     * @param string $locale
+//     * @param int $id
+//     * @return Application|RedirectResponse|Response|Redirector
+//     */
+//    public function destroy(string $locale, int $id)
+//    {
+//        if (!$this->featureRepository->delete($id)) {
+//            return redirect(route('featureIndex', $locale))->with('danger', __('admin.feature_not_deleted'));
+//        }
+//        return redirect(route('featureIndex', $locale))->with('success', __('admin.feature_success_delete'));
+//
+//    }
 }

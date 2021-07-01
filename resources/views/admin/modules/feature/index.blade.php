@@ -89,12 +89,12 @@
                                                         class="material-icons">edit</i></a>
                                                 <a href="{{route('featureShow',[app()->getLocale(),$feature->id])}}"><i
                                                         class="material-icons">remove_red_eye</i></a>
-                                                {!! Form::open(['url' => route('featureDestroy',[app()->getLocale(),$feature->id]),'method' =>'delete','style'=>'display:inline-block']) !!}
-                                                <a onclick="deleteAlert(this,'Are you sure, you want to delete this item?!');"
-                                                   type="submit">
-                                                    <i class="material-icons dp48">delete</i>
-                                                </a>
-                                                {!! Form::close() !!}
+{{--                                                {!! Form::open(['url' => route('featureDestroy',[app()->getLocale(),$feature->id]),'method' =>'delete','style'=>'display:inline-block']) !!}--}}
+{{--                                                <a onclick="deleteAlert(this,'Are you sure, you want to delete this item?!');"--}}
+{{--                                                   type="submit">--}}
+{{--                                                    <i class="material-icons dp48">delete</i>--}}
+{{--                                                </a>--}}
+{{--                                                {!! Form::close() !!}--}}
                                             </td>
                                         </tr>
                                     @endforeach

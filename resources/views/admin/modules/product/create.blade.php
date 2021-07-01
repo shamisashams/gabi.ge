@@ -65,38 +65,62 @@
                                                         </div>
 
 
+                                                        {{--                                                        <div class="col s12 input-field">--}}
+                                                        {{--                                                            <input id="slug" name="slug" type="text"--}}
+                                                        {{--                                                                   class="validate {{ $errors->has('slug') ? 'invalid' : 'valid' }}"--}}
+                                                        {{--                                                                   value="{{old('slug')}}"--}}
+                                                        {{--                                                                   data-error=".errorTxt">--}}
+                                                        {{--                                                            <label for="slug"--}}
+                                                        {{--                                                                   class="active">{{trans('admin.slug')}}</label>--}}
+                                                        {{--                                                            @if ($errors->has('slug'))--}}
+                                                        {{--                                                                <small--}}
+                                                        {{--                                                                    class="errorTxt">{{ $errors->first('slug') }}</small>--}}
+                                                        {{--                                                            @endif--}}
+                                                        {{--                                                        </div>--}}
+
+
                                                         <div class="col s12 input-field">
-                                                            <input id="slug" name="slug" type="text"
-                                                                   class="validate {{ $errors->has('slug') ? 'invalid' : 'valid' }}"
-                                                                   value="{{old('slug')}}"
+                                                            <input id="meta_title" name="meta_title" type="text"
+                                                                   class="validate {{ $errors->has('meta_title') ? 'invalid' : 'valid' }}"
+                                                                   value="{{old('meta_title')}}"
                                                                    data-error=".errorTxt">
-                                                            <label for="slug"
-                                                                   class="active">{{trans('admin.slug')}}</label>
-                                                            @if ($errors->has('slug'))
+                                                            <label for="meta_title"
+                                                                   class="active">{{trans('admin.meta_title')}}</label>
+                                                            @if ($errors->has('meta_title'))
                                                                 <small
-                                                                    class="errorTxt">{{ $errors->first('slug') }}</small>
+                                                                    class="errorTxt">{{ $errors->first('meta_title') }}</small>
                                                             @endif
                                                         </div>
+
+
+                                                        <div class="col s12 input-field">
+                                                            <input id="meta_description" name="meta_description" type="text"
+                                                                   class="validate {{ $errors->has('meta_description') ? 'invalid' : 'valid' }}"
+                                                                   value="{{old('meta_description')}}"
+                                                                   data-error=".errorTxt">
+                                                            <label for="meta_description"
+                                                                   class="active">{{trans('admin.meta_description')}}</label>
+                                                            @if ($errors->has('meta_description'))
+                                                                <small
+                                                                    class="errorTxt">{{ $errors->first('meta_description') }}</small>
+                                                            @endif
+                                                        </div>
+
+                                                        <div class="col s12 input-field">
+                                                            <input id="meta_keyword" name="meta_keyword" type="text"
+                                                                   class="validate {{ $errors->has('meta_keyword') ? 'invalid' : 'valid' }}"
+                                                                   value="{{old('meta_keyword')}}"
+                                                                   data-error=".errorTxt">
+                                                            <label for="meta_keyword"
+                                                                   class="active">{{trans('admin.meta_keyword')}}</label>
+                                                            @if ($errors->has('meta_keyword'))
+                                                                <small
+                                                                    class="errorTxt">{{ $errors->first('meta_keyword') }}</small>
+                                                            @endif
+                                                        </div>
+
                                                     </div>
 
-
-                                                    <div class="col s12 input-field">
-
-                                                        <select name="sale" class="select2 browser-default">
-                                                            <option value="" disabled selected>Choose your option
-                                                            </option>
-                                                            @foreach($sales as $sale):
-                                                            <option
-                                                                {{old('sale') ==  $sale->id   ?   "selected":""}} value="{{$sale->id}}">{{(count($sale->availableLanguage) > 0) ?  $sale->availableLanguage[0]->title : ''}}</option>
-                                                            @endforeach
-
-                                                        </select>
-                                                        <label for="sale" class="">{{trans('admin.sale')}}</label>
-                                                        @if ($errors->has('sale'))
-                                                            <small
-                                                                class="errorTxt">{{ $errors->first('sale') }}</small>
-                                                        @endif
-                                                    </div>
 
                                                 </div>
                                                 <div class="col s12 m6">
@@ -152,6 +176,36 @@
                                                             {{--                                                            </div>--}}
                                                         </div>
 
+                                                        <div class="col s12 input-field">
+                                                            <input id="position" name="weight" type="number"
+                                                                   class="validate {{ $errors->has('weight') ? 'invalid' : 'valid' }}"
+                                                                   value="{{old('weight')}}"
+                                                                   data-error=".errorTxt">
+                                                            <label for="position"
+                                                                   class="active">{{trans('admin.weight')}}</label>
+                                                            @if ($errors->has('weight'))
+                                                                <small
+                                                                    class="errorTxt">{{ $errors->first('weight') }}</small>
+                                                            @endif
+                                                        </div>
+
+                                                        <div class="col s12 input-field">
+
+                                                            <select name="sale" class="select2 browser-default">
+                                                                <option value="" disabled selected>Choose your option
+                                                                </option>
+                                                                @foreach($sales as $sale):
+                                                                <option
+                                                                    {{old('sale') ==  $sale->id   ?   "selected":""}} value="{{$sale->id}}">{{(count($sale->availableLanguage) > 0) ?  $sale->availableLanguage[0]->title : ''}}</option>
+                                                                @endforeach
+
+                                                            </select>
+                                                            <label for="sale" class="">{{trans('admin.sale')}}</label>
+                                                            @if ($errors->has('sale'))
+                                                                <small
+                                                                    class="errorTxt">{{ $errors->first('sale') }}</small>
+                                                            @endif
+                                                        </div>
 
                                                         <div class="col s12 input-field">
 
@@ -173,7 +227,6 @@
                                                                     class="errorTxt">{{ $errors->first('feature') }}</small>
                                                             @endif
                                                         </div>
-
 
 
                                                     </div>

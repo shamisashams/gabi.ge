@@ -17,7 +17,6 @@
                                 <tr>
 				    <th>@lang('admin.id')</th>
 				    <th>@lang('admin.title')</th>
-				    <th>@lang('admin.slug')</th>
 				    <th>@lang('admin.description')</th>
 				    <th>@lang('admin.status')</th>
 				    <th>@lang('admin.actions')</th>
@@ -36,14 +35,6 @@
 					@if ($errors->has('title'))
 					<span class="help-block">
 					    {{ $errors->first('title') }}
-					</span>
-					@endif
-				    </th>
-				    <th>
-					{{ Form::text('slug',Request::get('slug'),  ['class' => 'form-control', 'no','onChange' => 'this.form.submit()']) }}
-					@if ($errors->has('slug'))
-					<span class="help-block">
-					    {{ $errors->first('slug') }}
 					</span>
 					@endif
 				    </th>
@@ -74,7 +65,6 @@
 				<tr>
 				    <td>{{$product->id}}</td>
 				    <td>{{(count($product->availableLanguage) > 0) ?  $product->availableLanguage[0]->title : ''}}</td>
-				    <td>{{(count($product->availableLanguage) > 0) ?  $product->availableLanguage[0]->slug : ''}}</td>
 				    <td>{{(count($product->availableLanguage) > 0) ?  $product->availableLanguage[0]->description : ''}}</td>
 				    <td>
 					@if($product->status)

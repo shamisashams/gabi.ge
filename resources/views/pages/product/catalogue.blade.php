@@ -101,7 +101,7 @@
                         <div
                             class="titles">{{count($productAnswer->feature->availableLanguage)>0?$productAnswer->feature->availableLanguage[0]->title:""}}</div>
                         @foreach($productAnswer->feature->answer as $answer)
-                            @if($answer->status && (in_array($answer->id,$productAnswers)))
+                            @if(in_array($answer->id,$productAnswers))
                                 <div>
                                     <label class="container">
                                         {{count($answer->availableLanguage)>0?$answer->availableLanguage[0]->title:""}}

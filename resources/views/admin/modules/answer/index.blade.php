@@ -101,12 +101,6 @@
                                                         class="material-icons">edit</i></a>
                                                 <a href="{{route('answerShow',[app()->getLocale(),$answer->id])}}"><i
                                                         class="material-icons">remove_red_eye</i></a>
-                                                {!! Form::open(['url' => route('answerDestroy',[app()->getLocale(),$answer->id]),'method' =>'delete','style'=>'display:inline-block']) !!}
-                                                <a onclick="deleteAlert(this,'Are you sure, you want to delete this item?!');"
-                                                   type="submit">
-                                                    <i class="material-icons dp48">delete</i>
-                                                </a>
-                                                {!! Form::close() !!}
                                             </td>
                                         </tr>
                                     @endforeach

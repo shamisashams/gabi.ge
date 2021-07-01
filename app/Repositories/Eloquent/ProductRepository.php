@@ -1,176 +1,307 @@
 <?php
 
- namespace App\Repositories\Eloquent;
+namespace App\Repositories\Eloquent;
 
- use App\Repositories\ProductRepositoryInterface;
- use App\Repositories\Eloquent\Base\BaseRepository;
- use Illuminate\Http\Request;
- use App\Models\Product;
- use App\Traits\RequestFilter;
- use App\Http\Request\Admin\ProductRequest;
- use Illuminate\Support\Facades\DB;
- use App\Models\ProductLanguage;
- use App\Models\Language;
- use Illuminate\Support\Facades\Storage;
- use App\Models\File;
- use App\Models\SaleProduct;
+use App\Models\ProductAnswers;
+use App\Repositories\ProductRepositoryInterface;
+use App\Repositories\Eloquent\Base\BaseRepository;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Traits\RequestFilter;
+use App\Http\Request\Admin\ProductRequest;
+use Illuminate\Support\Facades\DB;
+use App\Models\ProductLanguage;
+use App\Models\Language;
+use Illuminate\Support\Facades\Storage;
+use App\Models\File;
+use App\Models\SaleProduct;
 
- class ProductRepository extends BaseRepository implements ProductRepositoryInterface
- {
+class ProductRepository extends BaseRepository implements ProductRepositoryInterface
+{
 
-     use RequestFilter;
+    use RequestFilter;
 
-     public function __construct(Product $model)
-     {
-         parent::__construct($model);
-     }
-
-
-     public function update(string $lang, int $id, ProductRequest $request)
-     {
-
-         $request['status'] = isset($request['status']) ? 1 : 0;
-
-         try {
-             DB::beginTransaction();
-
-             $productItem = $this->find($id);
-
-             if (!$productItem) {
-                 return false;
-             }
-
-             $productItem->update([
-                 'position' => $request['position'],
-                 'status' => $request['status'],
-                 'category_id' => $request['category_id'],
-                 'price' => $request['price']
-             ]);
-
-             $productId = $productItem->id;
-
-             $currentLanguageId = Language::getIdByName($lang);
-
-             $productLanguageItem = ProductLanguage::where([
-                         'product_id' => $productId,
-                         'language_id' => $currentLanguageId
-                     ])->first();
-
-             if (is_null($productLanguageItem)) {
-                 ProductLanguage::create([
-                     'product_id' => $productId,
-                     'language_id' => $currentLanguageId,
-                     'title' => $request['title'],
-                     'description' => $request['description'],
-                     'short_description' => $request['short_description'],
-                     'slug' => $request['slug']
-                 ]);
-             } else {
-                 $productLanguageItem->update([
-                     'title' => $request['title'],
-                     'description' => $request['description'],
-                     'short_description' => $request['short_description'],
-                     'slug' => $request['slug']
-                 ]);
-             }
+    public function __construct(Product $model)
+    {
+        parent::__construct($model);
+    }
 
 
-             $this->setOldImagesOfProduct($request, $productItem)
-                     ->addProductImageFromRequest($request, $productItem);
+    public function update(string $lang, int $id, ProductRequest $request)
+    {
 
-             DB::commit();
-             return true;
-         } catch (\Exception $queryException) {
-             DB::rollBack();
-             return false;
-         }
-     }
 
-     public function store(string $lang, ProductRequest $request)
-     {
-         $fields = $request->only([
-             'product_id',
-             'price',
-             'title',
-             'slug',
-             'description',
-             'status',
-             'position',
-             'short_description',
-             'category_id',
-             'answers',
-             'feature',
-             'sale'
-         ]);
+        $request['status'] = isset($request['status']) ? 1 : 0;
+        try {
+            DB::beginTransaction();
 
-         $fields['status'] = isset($fields['status']) ? 1 : 0;
-         //// Create new item
+            $productItem = $this->find($id);
 
-         try {
-             DB::beginTransaction();
+            $productItem->update([
+                'position' => $request['position'],
+                'status' => $request['status'],
+                'category_id' => $request['category_id'],
+                'price' => $request['price'],
+                'weight' => $request['weight']
+            ]);
 
-             $productItem = $this->model->create([
-                 'position' => $fields['position'],
-                 'status' => $fields['status'],
-                 'category_id' => $fields['category_id'],
-                 'price' => $fields['price']
-             ]);
+            $languageId = Language::getIdByName($lang);
+            $language = $productItem->language()->where('language_id', $languageId)->first();
+            if ($language) {
+                $productItem->language()->update([
+                    'language_id' => $languageId,
+                    'title' => $request['title'],
+                    'description' => $request['description'],
+                    'slug' => $request['slug'],
+                    'short_description' => $request['short_description'],
+                    'meta_title' => $request['meta_title'],
+                    'meta_description' => $request['meta_description'],
+                    'meta_keyword' => $request['meta_keyword'],
+                ]);
+            } else {
+                ProductLanguage::create([
+                    'product_id' => $productItem->id,
+                    'language_id' => $languageId,
+                    'title' => $request['title'],
+                    'description' => $request['description'],
+                    'slug' => $request['slug'],
+                    'short_description' => $request['short_description'],
+                    'meta_title' => $request['meta_title'],
+                    'meta_description' => $request['meta_description'],
+                    'meta_keyword' => $request['meta_keyword'],
+                ]);
+            }
 
-             $productId = $productItem->id;
+            $this->updateProductAnswers($request, $productItem);
 
-             if (!$productId) {
-                 return false;
-             }
-             /// Save with correct language
-             $languageId = Language::getIdByName($lang);
+            $this->updateSaleProduct($request, $productItem);
 
-             ProductLanguage::create([
-                 'product_id' => $productId,
-                 'language_id' => $languageId,
-                 'title' => $fields['title'],
-                 'description' => $fields['description'],
-                 'slug' => $fields['slug'],
-                 'short_description' => $fields['short_description']
-             ]);
+            $this->updateImages($request, $productItem);
 
-             $this->addProductImageFromRequest($request, $productItem);
+            DB::commit();
+            return true;
 
-             if (isset($fields['answers']) && is_array($fields['answers'])) {
-                 foreach ($fields['answers'] as $answerInfo) {
-                     $featureAndAnswerData = explode('-', $answerInfo);
+        } catch (\Exception $queryException) {
+            DB::rollBack();
+            return false;
+        }
+    }
 
-                     if (count($featureAndAnswerData) !== 2) {
-                         continue;
-                     }
+    public function store(string $lang, ProductRequest $request)
+    {
+        $request['status'] = isset($request['status']) ? 1 : 0;
+        // Create new item
 
-                     $featureId = (int) $featureAndAnswerData[1];
-                     $answerId = (int) $featureAndAnswerData[0];
 
-                     $productItem->features()->create([
-                         'feature_id' => $featureId
-                     ]);
+        try {
+            DB::beginTransaction();
 
-                     $productItem->answers()->create([
-                         'feature_id' => $featureId,
-                         'answer_id' => $answerId
-                     ]);
-                 }
-             }
+            $productItem = $this->model->create([
+                'position' => $request['position'],
+                'status' => $request['status'],
+                'category_id' => $request['category_id'],
+                'price' => $request['price'],
+                'weight' => $request['weight']
+            ]);
 
-             if (isset($fields['sale'])) {
-                 SaleProduct::create([
-                     'product_id' => $productItem->id,
-                     'sale_id' => (int) $fields['sale']
-                 ]);
-             }
+            /// Save with correct language
+            $languageId = Language::getIdByName($lang);
 
-             DB::commit();
-             return true;
-         } catch (\Exception $queryException) {
-             DB::rollBack();
-             return false;
-         }
-     }
+            ProductLanguage::create([
+                'product_id' => $productItem->id,
+                'language_id' => $languageId,
+                'title' => $request['title'],
+                'description' => $request['description'],
+                'slug' => $request['slug'],
+                'short_description' => $request['short_description'],
+                'meta_title' => $request['meta_title'],
+                'meta_description' => $request['meta_description'],
+                'meta_keyword' => $request['meta_keyword'],
+            ]);
+
+
+            $this->saveProductAnswers($request, $productItem);
+
+            $this->saveSaleProduct($request, $productItem);
+
+
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $key => $file) {
+                    $imagename = date('Ymhs') . $file->getClientOriginalName();
+                    $destination = base_path() . '/storage/app/public/product/' . $productItem->id;
+                    $request->file('images')[$key]->move($destination, $imagename);
+                    $productItem->files()->create([
+                        'name' => $imagename,
+                        'path' => '/storage/app/public/product/' . $productItem->id,
+                        'format' => $file->getClientOriginalExtension(),
+                    ]);
+                }
+            }
+            DB::commit();
+            return true;
+        } catch (\Exception $queryException) {
+            DB::rollBack();
+            return false;
+        }
+    }
+
+
+    public function getSingleProductFeatures(int $id)
+    {
+        $filterData = ProductAnswers::with(['feature.availableLanguage', 'feature.answer.availableLanguage', 'feature.englishLanguage'])->where('product_id', $id);
+
+        $productFeatures = $filterData
+            ->groupBy('feature_id')
+            ->get()
+            ->sortBy(function ($query) {
+                return $query->feature->position;
+            });
+
+
+        $productAnswers = $filterData->groupBy('answer_id')->get()->pluck('answer_id')->toArray();
+
+        return [
+            'productFeatures' => $productFeatures,
+            'productAnswers' => $productAnswers
+        ];
+    }
+
+
+    protected function saveProductAnswers($request, $productItem)
+    {
+
+        if ($request['answer']) {
+            foreach ($request['answer'] as $key => $answers) {
+                foreach ($answers as $answer) {
+                    $data[] =
+                        [
+                            'product_id' => $productItem->id,
+                            'feature_id' => $key,
+                            'answer_id' => $answer,
+                            'created_at' => Carbon::now(),
+                            'updated_at' => Carbon::now(),
+                        ];
+                }
+            }
+            ProductAnswers::insert($data);
+        }
+
+    }
+
+
+    protected function saveSaleProduct($request, $productItems)
+    {
+        if ($request['sale']) {
+            SaleProduct::create([
+                'sale_id' => $request['sale'],
+                'product_id' => $productItems->id,
+            ]);
+        }
+    }
+
+    protected function updateProductAnswers($request, $productItem)
+    {
+        $featuresId = ProductAnswers::where(['product_id' => $productItem->id])->groupBy('feature_id')->pluck('feature_id')->toArray();
+        $answersId = ProductAnswers::where(['product_id' => $productItem->id])->groupBy('answer_id')->pluck('answer_id')->toArray();
+        $arrayAnswers = $answersId;
+        $arrayFeatures = $featuresId;
+        $data = [];
+        if ($request['answer']) {
+            foreach ($request['answer'] as $key => $answers) {
+                foreach ($answers as $answer) {
+
+                    $isAnswer = in_array($answer, $answersId);
+                    $isFeature = in_array($key, $featuresId);
+
+                    if (!$isFeature || !$isAnswer) {
+                        $data[] =
+                            [
+                                'product_id' => $productItem->id,
+                                'feature_id' => $key,
+                                'answer_id' => $answer,
+                                'created_at' => Carbon::now(),
+                                'updated_at' => Carbon::now(),
+                            ];
+                    }
+
+                    if ($isFeature) {
+                        $featureKey = array_search($key, $arrayFeatures);
+                        array_splice($arrayFeatures, $featureKey, 1);
+                    }
+                    if ($isAnswer) {
+                        $answerKey = array_search($answer, $arrayAnswers);
+                        array_splice($arrayAnswers, $answerKey, 1);
+                    }
+
+                }
+            }
+
+            count($arrayAnswers) > 0 ? ProductAnswers::where(['product_id' => $productItem->id])->whereIn('answer_id', $arrayAnswers)->delete() : "";
+            count($arrayFeatures) > 0 ? ProductAnswers::where(['product_id' => $productItem->id])->whereIn('feature_id', $arrayFeatures)->delete() : "";
+            count($data) > 0 ? ProductAnswers::insert($data) : "";
+        } else {
+            $productItem->answers()->delete();
+        }
+    }
+
+    protected function updateSaleProduct($request, $productItems)
+    {
+
+        if ($request['sale']) {
+            if ($productItems->saleProduct) {
+                $productItems->saleProduct()->update([
+                    'sale_id' => $request['sale'],
+                    'product_id' => $productItems->id,
+                ]);
+            } else {
+                SaleProduct::create([
+                    'sale_id' => $request['sale'],
+                    'product_id' => $productItems->id,
+                ]);
+            }
+        } else {
+            $productItems->saleProduct()->delete();
+        }
+    }
+
+
+    public function updateImages($request, $model)
+    {
+        if (count($model->files) > 0) {
+            foreach ($model->files as $file) {
+                if ($request['old_images'] == null) {
+                    if (Storage::exists('public/product/' . $model->id . '/' . $file->name)) {
+                        Storage::delete('public/product/' . $model->id . '/' . $file->name);
+                    }
+                    $file->delete();
+                    continue;
+                }
+                if (!in_array($file->id, $request['old_images'])) {
+                    if (Storage::exists('public/product/' . $model->id . '/' . $file->name)) {
+                        Storage::delete('public/product/' . $model->id . '/' . $file->name);
+                    }
+                    $file->delete();
+
+                }
+            }
+        }
+
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $key => $file) {
+                $imagename = date('Ymhs') . $file->getClientOriginalName();
+                $destination = base_path() . '/storage/app/public/product/' . $model->id;
+                $request->file('images')[$key]->move($destination, $imagename);
+                $model->files()->create([
+                    'name' => $imagename,
+                    'path' => '/storage/app/public/product/' . $model->id,
+                    'format' => $file->getClientOriginalExtension(),
+                ]);
+            }
+        }
+
+    }
 
 //     public function delete(int $id)
 //     {
@@ -200,45 +331,6 @@
 //         return $this;
 //     }
 //
-//     protected function addProductImageFromRequest(ProductRequest $request, Product $product)
-//     {
-//         if (!$request->hasFile('images')) {
-//             return;
-//         }
-//
-//         $requestFiles = $request->file('images');
-//
-//         foreach ($requestFiles as $key => $file) {
-//
-//             $nameOfImage = date('Ymhs') . $file->getClientOriginalName();
-//             $imagePath = '/storage/app/public/product/' . $product->id;
-//             $destination = base_path() . $imagePath;
-//
-//             $requestFiles[$key]->move($destination, $nameOfImage);
-//
-//             $product->files()->create([
-//                 'name' => $nameOfImage,
-//                 'path' => $imagePath,
-//                 'format' => $file->getClientOriginalExtension(),
-//             ]);
-//         }
-//     }
-//
-//     protected function removeProductImage(File $productFileItem)
-//     {
-//
-//         $imagePath = 'public/product/' . $productFileItem->id . '/' . $productFileItem->name;
-//
-//         if (Storage::exists($imagePath)) {
-//             Storage::delete($imagePath);
-//         }
-//
-//         $productFileItem->delete();
-//     }
-//
-//     public function findWithRelated(array $relations, int $id)
-//     {
-//         return $this->model->with($relations)->where('id', '=', $id)->get();
-//     }
 
- }
+
+}

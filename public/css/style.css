@@ -450,7 +450,7 @@ img {
     height: 648px;
     position: relative;
     outline: none;
-    transition: all 1s cubic-bezier(0.7, 0, 0.3, 1);
+    /*transition: all 1s cubic-bezier(0.7, 0, 0.3, 1);*/
 }
 
 .hero_slideshow .slick-dots {

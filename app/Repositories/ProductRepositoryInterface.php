@@ -1,14 +1,16 @@
 <?php
 
- namespace App\Repositories;
+namespace App\Repositories;
 
- use Illuminate\Http\Request;
- use App\Http\Request\Admin\ProductRequest;
+use Illuminate\Http\Request;
+use App\Http\Request\Admin\ProductRequest;
 
- interface ProductRepositoryInterface
- {
+interface ProductRepositoryInterface
+{
 
-     public function update(string $lang, int $id, ProductRequest $request);
+    public function update(string $lang, int $id, ProductRequest $request);
 
-     public function store(string $lang, ProductRequest $request);
+    public function store(string $lang, ProductRequest $request);
+
+    public function getSingleProductFeatures(int $id);
  }

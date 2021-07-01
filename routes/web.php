@@ -81,17 +81,17 @@ Route::prefix('{locale?}')
                     ->name('update', 'productUpdate')
                     ->name('destroy', 'productDestroy');
 
-                     Route::get('products/answers/{id}', [ProductController::class, 'getFeatureAnswers'])
-                     ->name('productFeatureAnswers');
+                Route::get('feature-answers/{id}', [ProductController::class, 'getFeatureAnswers'])
+                    ->name('productFeatureAnswers');
 
-                     Route::resource('category', CategoryController::class)
-                     ->name('index', 'categoryIndex')
-                     ->name('create', 'categoryCreateView')
-                     ->name('store', 'categoryCreate')
-                     ->name('edit', 'categoryEditView')
-                     ->name('update', 'categoryUpdate')
-                     ->name('destroy', 'categoryDestroy')
-                     ->name('show', 'categoryShow');
+                Route::resource('category', CategoryController::class)
+                    ->name('index', 'categoryIndex')
+                    ->name('create', 'categoryCreateView')
+                    ->name('store', 'categoryCreate')
+                    ->name('edit', 'categoryEditView')
+                    ->name('update', 'categoryUpdate')
+                    ->name('destroy', 'categoryDestroy')
+                    ->name('show', 'categoryShow');
 
                 // Features
                 Route::resource('features', FeatureController::class)
@@ -169,8 +169,8 @@ Route::prefix('{locale?}')
             Route::post('login', [\App\Http\Controllers\Auth\AuthFrontendController::class, 'login'])->name('loginFront');
             Route::get('cart', [CartController::class, 'index'])->name('cart');
             Route::match(['get', 'post'], 'contact-us', [ContactController::class, 'index'])->name('contactUs');
-            Route::get( 'about-us', [\App\Http\Controllers\AboutController::class, 'index'])->name('aboutUs');
-            Route::get( 'helps', function(){
+            Route::get('about-us', [\App\Http\Controllers\AboutController::class, 'index'])->name('aboutUs');
+            Route::get('helps', function () {
                 return view('pages.helps.index');
             })->name('helps');
 

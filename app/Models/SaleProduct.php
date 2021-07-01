@@ -21,7 +21,10 @@ class SaleProduct extends Model
 {
     use HasFactory, Notifiable, ScopeSettingFilter, HasRolesAndPermissions, SoftDeletes;
 
-    protected $fillable = ['key'];
+    protected $fillable = [
+        'sale_id',
+        'product_id'
+    ];
 
     public function product()
     {

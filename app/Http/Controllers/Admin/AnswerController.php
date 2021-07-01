@@ -24,7 +24,7 @@ class AnswerController extends AdminController
     {
         $this->answerRepository = $answerRepository;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -102,19 +102,19 @@ class AnswerController extends AdminController
 
         return redirect(route('answerIndex', $locale))->with('success', __('admin.answer_success_update'));
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param string $locale
-     * @param int $id
-     * @return Application|RedirectResponse|Response|Redirector
-     */
-    public function destroy(string $locale, int $id)
-    {
-        if (!$this->answerRepository->delete($id)) {
-            return redirect(route('answerIndex', $locale))->with('danger', __('admin.answer_not_deleted'));
-        }
-        return redirect(route('answerIndex', $locale))->with('success', __('admin.answer_success_delete'));
-    }
+//
+//    /**
+//     * Remove the specified resource from storage.
+//     *
+//     * @param string $locale
+//     * @param int $id
+//     * @return Application|RedirectResponse|Response|Redirector
+//     */
+//    public function destroy(string $locale, int $id)
+//    {
+//        if (!$this->answerRepository->delete($id)) {
+//            return redirect(route('answerIndex', $locale))->with('danger', __('admin.answer_not_deleted'));
+//        }
+//        return redirect(route('answerIndex', $locale))->with('success', __('admin.answer_success_delete'));
+//    }
 }

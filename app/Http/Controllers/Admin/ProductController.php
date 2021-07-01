@@ -30,18 +30,18 @@ class ProductController extends AdminController
 
     public function store(string $lang, ProductRequest $request)
     {
-        if (false === $this->productRepository->store($lang, $request)) {
-            return redirect(route('productCreateView', $lang))->with('danger', __('admin.product_not_created'));
+        if (!$this->productRepository->store($lang, $request)) {
+            return redirect(route('productCreate', $lang))->with('danger', __('admin.product_not_created'));
         }
 
-        return redirect(route('productIndex', $lang))->with('success', __('admin.product_created_succesfully'));
+        return redirect(route('productIndex', $lang))->with('success', __('admin.product_created_successfully'));
     }
 
     public function create()
     {
         return view('admin.modules.product.create', [
             'categories' => Category::with('availableLanguage')->where('status', '=', '1')->get(),
-            'features' => Feature::with('availableLanguage')->where('status', '=', '1')->has('answer')->get(),
+            'features' => Feature::with(['availableLanguage', 'answer.availableLanguage'])->where('status', '=', '1')->has('answer')->get(),
             'sales' => Sale::with('availableLanguage')->get()
         ]);
     }
@@ -56,23 +56,21 @@ class ProductController extends AdminController
 
     public function edit(string $lang, int $id)
     {
-        $product = $this->productRepository->findWithRelated(['features.feature.answers.answer.availableLanguage'], $id);
-
-        if (!count($product)) {
-            return;
-        }
-
         return view('admin.modules.product.update', [
-            'productItem' => $product[0],
+            'productFeatures' => $this->productRepository->getSingleProductFeatures($id)['productFeatures'],
+            'productAnswers' => $this->productRepository->getSingleProductFeatures($id)['productAnswers'],
+            'featureIdArray' => $this->productRepository->getSingleProductFeatures($id)['productFeatures']->pluck('feature_id')->toArray(),
+            'product' => $this->productRepository->find($id),
             'categories' => Category::with('availableLanguage')->where('status', '=', '1')->get(),
-            'features' => Feature::with(['availableLanguage', 'answers'])->where('status', '=', '1')->get()
+            'sales' => Sale::with('availableLanguage')->get(),
+            'features' => Feature::with('availableLanguage')->where('status', '=', '1')->has('answer')->get(),
         ]);
     }
 
     public function update(string $lang, int $id, ProductRequest $request)
     {
-        if (false === $this->productRepository->update($lang, $id, $request)) {
-            return redirect(route('productEditView', $lang))->with('danger', __('admin.product_not_updated'));
+        if (!$this->productRepository->update($lang, $id, $request)) {
+            return redirect(route('productEdit', [$lang,$id]))->with('danger', __('admin.product_not_updated'));
         }
 
         return redirect(route('productIndex', $lang))->with('success', __('admin.product_updated_succesfully'));

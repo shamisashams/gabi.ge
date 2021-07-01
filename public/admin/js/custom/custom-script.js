@@ -9,6 +9,7 @@ NOTE:
 -----
 PLACE HERE YOUR OWN JS CODES AND IF NEEDED.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR CUSTOM SCRIPT IT'S BETTER LIKE THIS. */
+const locale = $('meta[name="language"]').attr('content');
 
 function deleteAlert(e, message) {
     if (confirm(message)) {
@@ -30,7 +31,7 @@ $('.product_feature').on('select2:select', (e) => {
         }
     });
     $.ajax({
-        url: 'answers/' + featureId,
+        url: '/'+locale+'/admin/feature-answers/' + featureId,
         method: 'GET',
         success: function (data) {
             let container = document.querySelector('#feature-row');
@@ -44,7 +45,7 @@ $('.product_feature').on('select2:select', (e) => {
             <div class="col s12 input-field" id="feature-${data.id}">
 
                 <select name="answer[${data.id}][]"
-                        class="product_feature select2 browser-default"
+                        class="product_answer select2 browser-default"
                         multiple="multiple">
 
                     ${options}
@@ -68,4 +69,3 @@ $('.product_feature').on('select2:unselect', (e) => {
     let feature = document.querySelector(`#feature-${featureId}`);
     feature ? feature.remove() : "";
 });
-

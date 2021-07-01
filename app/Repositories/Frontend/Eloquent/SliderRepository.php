@@ -17,12 +17,12 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
 
     public function getSliders()
     {
-        return $this->model::where(['type' => 'slider'])->with(['availableLanguage', 'files'])->get();
+        return $this->model::where(['type' => 'slider', 'status' => 1])->with(['availableLanguage', 'files'])->get();
     }
 
 
     public function getBanner()
     {
-        return $this->model::with(['availableLanguage'])->where(['type' => 'banner'])->first();
+        return $this->model::with(['availableLanguage'])->where(['type' => 'banner','status'=>1])->first();
     }
 }

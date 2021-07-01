@@ -25,7 +25,8 @@ class Product extends Model
         'vip',
         'sale',
         'sale_price',
-        'view'
+        'view',
+        'weight'
     ];
 
     public function files()
