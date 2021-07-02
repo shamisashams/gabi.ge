@@ -14,12 +14,7 @@ use App\Traits\ScopeCategoryFilter;
 class Category extends Model
 {
 
-    use HasFactory,
-        Notifiable,
-        ScopeFilter,
-        HasRolesAndPermissions,
-        SoftDeletes,
-        ScopeCategoryFilter;
+    use HasFactory, Notifiable, ScopeCategoryFilter, HasRolesAndPermissions, SoftDeletes;
 
     protected $fillable = [
         'position',
@@ -30,18 +25,27 @@ class Category extends Model
     public function getFilterScopes(): array
     {
         return [
-            'position' => [
+            'id' => [
                 'hasParam' => true,
-                'scopeMethod' => 'position'
+                'scopeMethod' => 'id'
+            ],
+            'title' => [
+                'hasParam' => true,
+                'scopeMethod' => 'title'
+            ],
+            'description' => [
+                'hasParam' => true,
+                'scopeMethod' => 'description'
             ],
             'status' => [
                 'hasParam' => true,
                 'scopeMethod' => 'status'
             ],
-            'parent_id' => [
-                'status' => true,
-                'scopeMethod' => 'parent_id'
+            'slug' => [
+                'hasParam' => true,
+                'scopeMethod' => 'slug'
             ],
+
         ];
     }
 

@@ -185,4 +185,44 @@ trait ScopeProductFilter
         return $query->whereIn('id', $idsArray);
 
     }
+
+    /**
+     * @param $query
+     * @param $title
+     *
+     * @return mixed
+     */
+    public function scopeTitle($query, $title)
+    {
+        $localizationID = Language::getIdByName(app()->getLocale());
+
+        return $query->whereHas('language', function ($query) use ($localizationID, $title) {
+            $query->where('title', 'like', "%{$title}%")->where('language_id', $localizationID);
+        });
+    }
+
+    /**
+     * @param $query
+     * @param $description
+     *
+     * @return mixed
+     */
+    public function scopeDescription($query, $description)
+    {
+        $localizationID = Language::getIdByName(app()->getLocale());
+
+        return $query->whereHas('language', function ($query) use ($localizationID, $description) {
+            $query->where('description', 'like', "%{$description}%")->where('language_id', $localizationID);
+        });
+    }
+
+    /**
+     * @param $query
+     * @param $status
+     * @return mixed
+     */
+    public function scopeStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }
 }

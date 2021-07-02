@@ -1,116 +1,119 @@
 <?php
 
- namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin;
 
- use Illuminate\Http\Request;
- use App\Repositories\CategoryRepositoryInterface;
- use App\Http\Request\Admin\CategoryRequest;
+use Illuminate\Http\Request;
+use App\Repositories\CategoryRepositoryInterface;
+use App\Http\Request\Admin\CategoryRequest;
 
- class CategoryController extends AdminController
- {
+class CategoryController extends AdminController
+{
 
-     protected $categoryRepository;
+    protected $categoryRepository;
 
-     public function __construct(CategoryRepositoryInterface $categoryRepository)
-     {
-         $this->categoryRepository = $categoryRepository;
-     }
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
 
-     /**
-      * Display a listing of the resource.
-      *
-      * @return Application|Factory|View|Response
-      */
-     public function index(Request $request)
-     {
-         $categories = $this->categoryRepository->getData($request, 'availableLanguage');
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
+        $request->validate([
+            'id' => 'integer|nullable',
+            'title' => 'string|max:255|nullable',
+            'slug' => 'string|max:255|nullable',
+            'status' => 'boolean|nullable',
+        ]);
 
-         return view('admin.modules.category.index', [
-             'categoriesLocal' => $categories
-         ]);
-     }
 
-     /**
-      * Show the form for creating a new resource.
-      *
-      * @return \Illuminate\Http\Response
-      */
-     public function create()
-     {
-         return view('admin.modules.category.create');
-     }
+        return view('admin.modules.category.index', [
+            'categoriesLocal' => $this->categoryRepository->getData($request, ['availableLanguage'])
+        ]);
+    }
 
-     /**
-      * Store a newly created resource in storage.
-      *
-      * @param  \Illuminate\Http\Request  $request
-      * @return \Illuminate\Http\Response
-      */
-     public function store(string $lang, CategoryRequest $request)
-     {
-         if (false === $this->categoryRepository->store($lang, $request)) {
-             return redirect(route('categoryCreateView', $lang))->with('danger', __('admin.category_not_created'));
-         }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('admin.modules.category.create');
+    }
 
-         return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_created_succesfully'));
-     }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(string $lang, CategoryRequest $request)
+    {
+        if (!$this->categoryRepository->store($lang, $request)) {
+            return redirect(route('categoryCreateView', $lang))->with('danger', __('admin.category_not_created'));
+        }
 
-     /**
-      * Display the specified resource.
-      *
-      * @param  int  $id
-      * @return \Illuminate\Http\Response
-      */
-     public function show(string $lang, int $id)
-     {
-         return view('admin.modules.category.view', [
-             'categoryItem' => $this->categoryRepository->find($id)
-         ]);
-     }
+        return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_created_succesfully'));
+    }
 
-     /**
-      * Show the form for editing the specified resource.
-      *
-      * @param  int  $id
-      * @return \Illuminate\Http\Response
-      */
-     public function edit(string $lang, int $id)
-     {
-         return view('admin.modules.category.update', [
-             'categoryItem' => $this->categoryRepository->find($id)
-         ]);
-     }
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(string $lang, int $id)
+    {
+        return view('admin.modules.category.view', [
+            'categoryItem' => $this->categoryRepository->find($id)
+        ]);
+    }
 
-     /**
-      * Update the specified resource in storage.
-      *
-      * @param  \Illuminate\Http\Request  $request
-      * @param  int  $id
-      * @return \Illuminate\Http\Response
-      */
-     public function update(string $lang, int $id, CategoryRequest $request)
-     {
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(string $lang, int $id)
+    {
+        return view('admin.modules.category.update', [
+            'categoryItem' => $this->categoryRepository->find($id)
+        ]);
+    }
 
-         if (false === $this->categoryRepository->update($lang, $id, $request)) {
-             return redirect(route('categoryEditView', $lang))->with('danger', __('admin.category_not_updated'));
-         }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(string $lang, int $id, CategoryRequest $request)
+    {
 
-         return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_updated_succesfully'));
-     }
+        if (!$this->categoryRepository->update($lang, $id, $request)) {
+            return redirect(route('categoryEditView', $lang))->with('danger', __('admin.category_not_updated'));
+        }
 
-     /**
-      * Remove the specified resource from storage.
-      *
-      * @param  int  $id
-      * @return \Illuminate\Http\Response
-      */
-     public function destroy(string $lang, int $id)
-     {
-         if (false === $this->categoryRepository->delete($id)) {
-             return redirect(route('categoryIndex', $lang))->with('danger', __('admin.category_not_deleted'));
-         }
-         return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_deleted_succesfully'));
-     }
+        return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_updated_successfully'));
+    }
 
- }
- 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(string $lang, int $id)
+    {
+        if (!$this->categoryRepository->delete($id)) {
+            return redirect(route('categoryIndex', $lang))->with('danger', __('admin.category_not_deleted'));
+        }
+        return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_deleted_successfully'));
+    }
+
+}

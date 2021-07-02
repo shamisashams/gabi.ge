@@ -48,10 +48,10 @@ class CartController extends Controller
             }
 
         }
-        return view('pages.cart.index',[
-            'products'=>$products,
-            'total'=>$total,
-            'banks'=>Bank::all()
+        return view('pages.cart.index', [
+            'products' => $products,
+            'total' => $total,
+            'banks' => Bank::all()
         ]);
     }
 
@@ -128,9 +128,9 @@ class CartController extends Controller
             }
             foreach ($cart as $item) {
                 if ($item->sale) {
-                    $total += intval($item->quantity) * intval($item->sale);
+                    $total += intval($item->quantity) * floatval($item->sale);
                 } else {
-                    $total += intval($item->quantity) * intval($item->price) / 100;
+                    $total += intval($item->quantity) * floatval($item->price) / 100;
                 }
             }
 

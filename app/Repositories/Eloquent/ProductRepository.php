@@ -49,7 +49,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             $languageId = Language::getIdByName($lang);
             $language = $productItem->language()->where('language_id', $languageId)->first();
             if ($language) {
-                $productItem->language()->update([
+                $language->update([
                     'language_id' => $languageId,
                     'title' => $request['title'],
                     'description' => $request['description'],
@@ -303,10 +303,10 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
     }
 
-//     public function delete(int $id)
-//     {
-//         return $this->find($id)->delete();
-//     }
+    public function delete(int $id)
+    {
+        return $this->find($id)->delete();
+    }
 //
 //     protected function setOldImagesOfProduct(ProductRequest $request, Product $product)
 //     {

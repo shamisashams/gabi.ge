@@ -91,7 +91,7 @@
                                 @endif
 			    </tbody>
 			</table>
-			{{ $products->links('admin.vendor.pagination.custom') }}
+			{{ $products->appends(request()->query())->links('admin.vendor.pagination.custom') }}
 
 		    </div>
 		</div>

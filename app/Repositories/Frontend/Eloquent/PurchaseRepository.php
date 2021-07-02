@@ -72,6 +72,7 @@ class PurchaseRepository extends BaseRepository implements PurchaseRepositoryInt
                 foreach ($cart as $item) {
                     $product = Product::find(intval($item->product_id));
                     if ($product && $item->quantity > 0) {
+
                         $products[] = [
                             'order_id' => $order->id,
                             'product_id' => $product->id,
@@ -79,6 +80,7 @@ class PurchaseRepository extends BaseRepository implements PurchaseRepositoryInt
                             'total_price' => ($product->saleProduct && $product->saleProduct->sale) ?
                                 Product::calculatePrice($product->price, $product->saleProduct->sale->discount, $product->saleProduct->sale->type) * 100
                                 : $product->price,
+                            'options' => json_encode($item->options),
                             'quantity' => intval($item->quantity),
                         ];
                     }

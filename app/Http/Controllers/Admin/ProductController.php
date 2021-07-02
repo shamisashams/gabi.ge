@@ -21,10 +21,15 @@ class ProductController extends AdminController
 
     public function index(Request $request, $locale)
     {
-        $products = $this->productRepository->getData($request, ['availableLanguage']);
 
+        $request->validate([
+            'id' => 'integer|nullable',
+            'title' => 'string|max:255|nullable',
+            'description' => 'string|nullable',
+            'status' => 'boolean|nullable',
+        ]);
         return view('admin.modules.product.index', [
-            'products' => $products
+            'products' => $this->productRepository->getData($request, ['availableLanguage'])
         ]);
     }
 
@@ -70,7 +75,7 @@ class ProductController extends AdminController
     public function update(string $lang, int $id, ProductRequest $request)
     {
         if (!$this->productRepository->update($lang, $id, $request)) {
-            return redirect(route('productEdit', [$lang,$id]))->with('danger', __('admin.product_not_updated'));
+            return redirect(route('productEdit', [$lang, $id]))->with('danger', __('admin.product_not_updated'));
         }
 
         return redirect(route('productIndex', $lang))->with('success', __('admin.product_updated_succesfully'));
@@ -78,7 +83,7 @@ class ProductController extends AdminController
 
     public function destroy(string $lang, int $id)
     {
-        if (false === $this->productRepository->delete($id)) {
+        if (!$this->productRepository->delete($id)) {
             return redirect(route('productIndex', $lang))->with('danger', __('admin.product_not_deleted'));
         }
         return redirect(route('productIndex', $lang))->with('success', __('admin.product_deleted_succesfully'));

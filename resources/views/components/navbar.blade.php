@@ -8,7 +8,8 @@
             ><img src="img/logo/obaby.png" alt=""
                 /></a>
             <div class="navbar">
-                <a href="{{route('welcome')}}" class="nav_link {{str_contains(substr(parse_url(route('welcome',app()->getLocale()), PHP_URL_PATH), 1),request()->path())?"active":""}}">{{__('client.home')}}</a>
+                <a href="{{route('welcome')}}"
+                   class="nav_link {{str_contains(substr(parse_url(route('welcome',app()->getLocale()), PHP_URL_PATH), 1),request()->path())?"active":""}}">{{__('client.home')}}</a>
                 <div class="nav_link">
                     {{__('client.categories')}}
 
@@ -31,7 +32,7 @@
                                                  src="/storage/category/{{$category->files[0]->fileable_id}}/{{$category->files[0]->name}}"
                                                  alt=""/>
                                         @else
-                                            <img src="noimage.png"/>
+                                            <img src="/noimage.png"/>
                                         @endif
                                         <img src="/img/products/frame.png" alt="" class="frame"/>
                                         <a class="cat_btn"

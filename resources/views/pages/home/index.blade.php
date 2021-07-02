@@ -133,7 +133,7 @@
                                     </span>
                                     </div>
                                     <div
-                                        class="sub roboto">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->description:""}}</div>
+                                        class="sub roboto">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->short_description:""}}</div>
                                 </div>
                                 <div>
                                     @if($product->saleProduct && $product->saleProduct->sale)
@@ -204,7 +204,7 @@
                             <div
                                 class="title">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}</div>
                             <div
-                                class="sub roboto">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->description:""}}</div>
+                                class="sub roboto">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->short_description:""}}</div>
                         </div>
                         <div>
                             @if($product->saleProduct && $product->saleProduct->sale)

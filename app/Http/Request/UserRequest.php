@@ -21,6 +21,7 @@ class UserRequest extends FormRequest
             'country' => 'required|string|max:100',
             'city' => 'required|string|max:100',
             'address' => 'required|string|max:100',
+            'phone' => 'required|string|max:100'
         ];
     }
 }

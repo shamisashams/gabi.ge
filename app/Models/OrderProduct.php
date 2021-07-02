@@ -13,7 +13,8 @@ class OrderProduct extends Model
         'product_id',
         'amount',
         'total_price',
-        'quantity'
+        'quantity',
+        'options'
     ];
     public function product()
     {

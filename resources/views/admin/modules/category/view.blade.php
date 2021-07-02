@@ -28,10 +28,6 @@
                                                 <td class="users-view-verified">{{(count($categoryItem->availableLanguage) > 0) ?  $categoryItem->availableLanguage[0]->slug : ''}}</td>
                                             </tr>
                                             <tr>
-                                                <td>{{trans('admin.parent_id')}}:</td>
-                                                <td class="users-view-role">{{$categoryItem->parent_id}}</td>
-                                            </tr>
-                                            <tr>
                                                 <td>{{trans('admin.status')}}:</td>
                                                 <td>
                                                     @if($categoryItem->status)

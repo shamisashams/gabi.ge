@@ -94,7 +94,8 @@
 
 
                                                         <div class="col s12 input-field">
-                                                            <input id="meta_description" name="meta_description" type="text"
+                                                            <input id="meta_description" name="meta_description"
+                                                                   type="text"
                                                                    class="validate {{ $errors->has('meta_description') ? 'invalid' : 'valid' }}"
                                                                    value="{{old('meta_description')}}"
                                                                    data-error=".errorTxt">
@@ -126,10 +127,9 @@
                                                 <div class="col s12 m6">
                                                     <div class="row" id="feature-row">
                                                         <div class="col s12 input-field">
-                                                            <input id="description" name="description" type="text"
-                                                                   class="validate {{ $errors->has('native') ? 'invalid' : 'valid' }}"
-                                                                   value="{{old('description')}}"
-                                                                   data-error=".errorTxt">
+                                                         <textarea id="description" name="description"
+                                                                   class="validate {{ $errors->has('description') ? 'invalid' : 'valid' }} materialize-textarea"
+                                                                   data-error=".errorTxt"></textarea>
                                                             <label for="description"
                                                                    class="active">{{trans('admin.description')}}</label>
                                                             @if ($errors->has('description'))
@@ -153,9 +153,9 @@
                                                         <div class="col s12 input-field">
 
 
-                                                        <textarea id="short_description" name="short_description"
-                                                                  class="validate {{ $errors->has('short_description') ? 'invalid' : 'valid' }}"
-                                                                  data-error=".errorTxt"> {{old('short_description')}} </textarea>
+                                                   <textarea id="short_description" name="short_description"
+                                                             class="validate {{ $errors->has('short_description') ? 'invalid' : 'valid' }} materialize-textarea"
+                                                             data-error=".errorTxt"></textarea>
                                                             <label for="short_description"
                                                                    class="active">{{trans('admin.short_description')}}</label>
                                                             @if ($errors->has('short_description'))

@@ -13,7 +13,8 @@
                                         <input name="old-images[]" id="old_images" hidden disabled
                                                value="{{$product->files}}">
                                         <form id="accountForm" novalidate="novalidate"
-                                              action="{{route('productUpdate',[app()->getLocale(),$product->id])}}" method="POST"
+                                              action="{{route('productUpdate',[app()->getLocale(),$product->id])}}"
+                                              method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
                                             {{method_field('PUT')}}
@@ -130,10 +131,9 @@
                                                 <div class="col s12 m6">
                                                     <div class="row" id="feature-row">
                                                         <div class="col s12 input-field">
-                                                            <input id="description" name="description" type="text"
-                                                                   class="validate {{ $errors->has('native') ? 'invalid' : 'valid' }}"
-                                                                   value="{{count($product->availableLanguage)>0?$product->availableLanguage[0]->description:""}}"
-                                                                   data-error=".errorTxt">
+                                                          <textarea id="description" name="description"
+                                                                    class="validate {{ $errors->has('description') ? 'invalid' : 'valid' }} materialize-textarea"
+                                                                    data-error=".errorTxt"> {{count($product->availableLanguage)>0?$product->availableLanguage[0]->description:""}}</textarea>
                                                             <label for="description"
                                                                    class="active">{{trans('admin.description')}}</label>
                                                             @if ($errors->has('description'))
@@ -158,8 +158,8 @@
 
 
                                                         <textarea id="short_description" name="short_description"
-                                                                  class="validate {{ $errors->has('short_description') ? 'invalid' : 'valid' }}"
-                                                                  data-error=".errorTxt"> {{old('short_description')}} </textarea>
+                                                                  class="validate {{ $errors->has('short_description') ? 'invalid' : 'valid' }} materialize-textarea"
+                                                                  data-error=".errorTxt"> {{count($product->availableLanguage)>0?$product->availableLanguage[0]->short_description:""}} </textarea>
                                                             <label for="short_description"
                                                                    class="active">{{trans('admin.short_description')}}</label>
                                                             @if ($errors->has('short_description'))
@@ -196,7 +196,7 @@
                                                         <div class="col s12 input-field">
 
                                                             <select name="sale" class="select2 browser-default">
-                                                                <option value=""  selected>Choose your option
+                                                                <option value="" selected>Choose your option
                                                                 </option>
                                                                 @foreach($sales as $sale):
                                                                 <option
@@ -265,7 +265,8 @@
                                                 <div class="col s12">
 
                                                     <label>
-                                                        <input type="checkbox" {{$product->status?"checked":""}} name="status">
+                                                        <input type="checkbox"
+                                                               {{$product->status?"checked":""}} name="status">
                                                         <span>{{trans('admin.status')}}</span>
                                                     </label>
 
@@ -283,7 +284,7 @@
 
                                                 <div class="col s12 display-flex justify-content-end mt-3">
                                                     <button type="submit" class="btn indigo">
-                                                        {{trans('admin.create')}}
+                                                        {{trans('admin.update')}}
                                                     </button>
                                                 </div>
                                             </div>

@@ -92,6 +92,18 @@ class Product extends Model
     public function getFilterScopes(): array
     {
         return [
+            'id' => [
+                'hasParam' => true,
+                'scopeMethod' => 'id'
+            ],
+            'title' => [
+                'hasParam' => true,
+                'scopeMethod' => 'title'
+            ],
+            'description' => [
+                'hasParam' => true,
+                'scopeMethod' => 'description'
+            ],
             'min_price' => [
                 'hasParam' => true,
                 'scopeMethod' => 'minPrice'
@@ -116,7 +128,7 @@ class Product extends Model
                 'hasParam' => true,
                 'scopeMethod' => 'sorted'
             ],
-            'feature'=>[
+            'feature' => [
                 'hasParam' => true,
                 'scopeMethod' => 'feature'
             ]
