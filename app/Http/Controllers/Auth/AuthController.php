@@ -169,4 +169,14 @@ class AuthController extends Controller
         }
         return redirect()->route('welcome', app()->getLocale());
     }
+
+    public function facebookAuth()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function facebookCallback()
+    {
+
+    }
 }

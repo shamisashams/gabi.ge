@@ -4,6 +4,7 @@ namespace App\Repositories\Frontend\Eloquent;
 
 use App\Http\Request\PasswordChangeRequest;
 use App\Http\Request\UserRequest;
+use App\Models\Answer;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Slider;
@@ -69,11 +70,17 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function orderProducts(int $id)
     {
-        return OrderProduct::where(['order_id' => $id])
+        $orderProducts = OrderProduct::where(['order_id' => $id])
             ->join('orders', 'orders.id', '=', 'order_products.order_id')
             ->where('orders.user_id', '=', auth()->user()->id)
             ->with(['product.availableLanguage', 'product.saleProduct.sale'])
             ->get();
+
+        foreach ($orderProducts as $orderProduct) {
+            $arr = array_values((array)json_decode($orderProduct->options));
+            $orderProduct['answers'] = Answer::whereIn('id', $arr)->with('availableLanguage')->get();
+        }
+        return $orderProducts;
     }
 
 }

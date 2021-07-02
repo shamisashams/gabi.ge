@@ -35,20 +35,28 @@
                     <div class="d2 bot25 flex">
                         <div><strong>{{__('client.products')}}</strong></div>
                         <div class="flex flex_end">
-                            <div><strong>{{__('client.quantity')}}</strong></div>
+                            <div><strong>{{__('client.features')}}</strong></div>
+                            <div class="last"><strong>{{__('client.quantity')}}</strong></div>
                             <div class="last"><strong>{{__('client.price')}}</strong></div>
                         </div>
                     </div>
                     @foreach($orderProducts as $orderProduct)
                         <div class="para flex">
-                            <div>
+                            <div class="first">
                                 {{count($orderProduct->availableLanguage)>0?$orderProduct->availableLanguage[0]->title:""}}
 
                             </div>
                             @if($orderProduct->product->saleProduct &&$orderProduct->product->saleProduct->sale)
 
                                 <div class="flex flex_end">
-                                    <div class="price">{{$orderProduct->quantity}}</div>
+                                    <div class="price">
+                                        <p>
+                                        @foreach($orderProduct->answers as $key=>$answer)
+                                            {{count($answer->availableLanguage)>0?$answer->availableLanguage[0]->title:""}}{{$key<count($orderProduct->answers)-1?',':""}}
+                                        @endforeach
+                                        </p>
+                                    </div>
+                                    <div class="price last">{{$orderProduct->quantity}}</div>
                                     <div class="price last">
                                         {{\App\Models\Product::calculatePrice($orderProduct->product->price,$orderProduct->product->saleProduct->sale->discount,$orderProduct->product->saleProduct->sale->type)}}
                                         $

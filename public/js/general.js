@@ -387,7 +387,7 @@ function getCartCount() {
 
                 $('#sub-total').text(`$${data.total.toFixed(2)}`);
                 $('#total-price').text(`$${data.total.toFixed(2)}`);
-                $('#total-price').attr('data-price',data.total.toFixed(2));
+                $('#total-price').attr('data-price', data.total.toFixed(2));
 
 
                 // $('#cart_count').text(data.count);
@@ -517,6 +517,9 @@ function checkProductDetailsSelection() {
                 }
             }
         })
+        if (allOptions.length === box.querySelectorAll('input[type="radio"]:checked').length) {
+            buttons.querySelector('.add_to_cart').disabled = false;
+        }
     }
 }
 
@@ -535,6 +538,9 @@ function checkSelection() {
                 }
             }
         })
+        if (allOptions.length === box.querySelectorAll('input[type="radio"]:checked').length) {
+            buttons.querySelector('.add_to_cart').disabled = false;
+        }
     }
 }
 

@@ -174,6 +174,10 @@ Route::prefix('{locale?}')
                 return view('pages.helps.index');
             })->name('helps');
 
+            Route::get('/facebook-auth', [AuthController::class, 'facebookAuth'])->name('facebookAuth');
+
+//            Route::get('/faceook-callback', [AuthController::class],);
+
             Route::middleware(['authFront'])->group(function () {
                 Route::get('logout', [\App\Http\Controllers\Auth\AuthFrontendController::class, 'logout'])->name('logoutFront');
                 Route::get('profile', [UserController::class, 'index'])->name('profile');

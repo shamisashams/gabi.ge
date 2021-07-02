@@ -70,17 +70,16 @@ class UserController extends Controller
 
     public function orderDetails(string $locale, int $id)
     {
-
         return view('pages.user.order-details', [
             'orderProducts' => $this->userRepository->orderProducts($id),
             'order' => $this->userRepository->userOrder($id)
         ]);
     }
 
-    public function downloadPdf(string $locale,$id)
+    public function downloadPdf(string $locale, $id)
     {
         $orderProducts = $this->userRepository->orderProducts(intval($id));
-        if (count($orderProducts)>0) {
+        if (count($orderProducts) > 0) {
             view()->share('orderProducts', $orderProducts);
             $pdf = PDF::loadView('/pages/pdf/order-products', $orderProducts);
             return $pdf->download('Order Products.pdf');

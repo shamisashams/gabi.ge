@@ -90,7 +90,7 @@
                             <img src="/img/icons/login/1.png" alt="" />
                             <p>{{__('client.login_with_google')}}</p>
                         </a>
-                        <a href="#" class="accs">
+                        <a href="{{route('facebookAuth')}}" class="accs">
                             <img src="/img/icons/login/2.png" alt="" />
                             <p>{{__('client.login_with_facebook')}}</p>
                         </a>

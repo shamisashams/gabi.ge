@@ -348,7 +348,6 @@ img {
 .header .category_dropdown .category_img.display .main {
     transform: scale(1);
     transition: 0.3s;
-    object-fit: contain;
 }
 
 .header .category_dropdown .category_img .frame {
@@ -450,7 +449,7 @@ img {
     height: 648px;
     position: relative;
     outline: none;
-    /*transition: all 1s cubic-bezier(0.7, 0, 0.3, 1);*/
+    /* transition: all 1s cubic-bezier(0.7, 0, 0.3, 1); */
 }
 
 .hero_slideshow .slick-dots {
@@ -496,6 +495,8 @@ img {
 
 .hero .slide img {
     position: absolute;
+    left: 0;
+    top: 0;
     z-index: -1;
     transition: all 1s cubic-bezier(0.7, 0, 0.3, 1);
     transform: scale(1.2);
@@ -797,7 +798,6 @@ img {
     height: 100%;
     top: 0;
     left: 0;
-    object-fit: contain;
 }
 
 .category_slide .frame {
@@ -1165,7 +1165,6 @@ img {
     color:rgba(34,34,34,.3);
     background-color: #ddd;
     cursor: default;
-
 }
 .popup_bg .product_popup .btm_btns .details {
     width: 130px;
@@ -1875,11 +1874,10 @@ img {
 }
 
 .customize .btns .add_to_cart:disabled {
-   color:rgba(34,34,34,.3);
+    color:rgba(34,34,34,.3);
     background-color: #ddd;
     cursor: default;
 }
-
 
 .customize .btns .add_to_cart img {
     margin-right: 15px;
@@ -2159,6 +2157,59 @@ img {
 .cart_total_fee .row {
     border-bottom: #dcdcdc 1px solid;
     padding: 30px 0;
+}
+
+.cart_total_fee .row.last {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.cart_total_fee .row.last .flex {
+    margin: 0 -5px;
+    justify-content: flex-start;
+}
+
+.cart_total_fee .row.last label {
+    padding: 4px 30px;
+    border: #dcdcdc 1px solid;
+    font-size: 16px;
+    font-weight: 500;
+    color: #9a9a9a;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.cart_total_fee .row.last input {
+    display: none;
+}
+
+.cart_total_fee .row.last input:checked + label {
+    border: #2d2d2d 1px solid;
+    color: #2d2d2d;
+}
+
+.cart_total_fee .row.last .show_banks {
+    position: relative;
+}
+
+.cart_total_fee .row.last label {
+    margin-right: 15px;
+}
+
+.cart_total_fee .row.last .banks {
+    justify-content: space-between;
+    margin-top: 0px;
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.3s;
+}
+.cart_total_fee .row.last .banks.shown {
+    margin-top: 20px;
+    max-height: 50px;
+}
+
+.cart_total_fee .row.last a {
+    margin: 0 5px;
 }
 
 .cart_total_fee .row .inputs {
@@ -2524,22 +2575,43 @@ img {
 .final_details_content .bot25 {
     margin-bottom: 25px;
 }
+
 .final_details_content .one .para {
     margin-bottom: 10px;
 }
 .final_details_content .two .price {
-    white-space: nowrap;
-    margin-left: 20px;
+    text-align: center;
 }
 .final_details_content .box {
     background-color: #fdfaf7;
     margin: 35px -40px;
     padding: 48px 40px;
 }
+.final_details_content .box .first {
+    min-width: 300px;
+    margin-right: 20px;
+}
 .final_details_content .box .flex {
+    align-items: flex-start;
+}
+.final_details_content .box .flex:nth-child(2) {
     padding-bottom: 20px;
     border-bottom: #dcdcdc 1px solid;
     margin-bottom: 20px;
+}
+.final_details_content .box .flex.flex_end {
+    padding-bottom: 0;
+    border-bottom: none;
+    margin-bottom: 0;
+    text-align: center;
+}
+.final_details_content .box .flex.flex_end div {
+    width: 100px;
+    text-align: center;
+}
+
+.final_details_content .box .flex .last {
+    margin-left: 40px;
 }
 .final_details_content .start {
     align-items: flex-start;
@@ -3599,6 +3671,14 @@ img {
     .final_details_content .box {
         margin: 35px 0;
         padding: 20px;
+        overflow-x: scroll;
+    }
+
+    .final_details_content .box .flex.flex_end div {
+        width: 55px;
+    }
+    .final_details_content .box .flex .last {
+        margin-left: 25px;
     }
 }
 @media screen and (max-width: 600px) {
@@ -3620,6 +3700,18 @@ img {
         right: 22px;
     }
 }
+@media screen and (max-width: 500px) {
+    .final_details_content .bot25 {
+        margin-bottom: 16px;
+    }
+    .final_details_content .box .flex .last {
+        margin-left: 19px;
+    }
+    .final_details_content .box .flex.flex_end div {
+        width: 48px;
+    }
+}
+
 .error-block {
     margin-top: -25px;
     margin-bottom: 20px;
@@ -3642,113 +3734,11 @@ img {
     color: red;
 }
 
-
-.final_details_content .two .price {
-    white-space: nowrap;
-    text-align: center;
-}
-.final_details_content .box .flex.flex_end {
-    padding-bottom: 0;
-    border-bottom: none;
-    margin-bottom: 0;
-    text-align: center;
-}
-.final_details_content .box .flex.flex_end div {
-    width: 80px;
-    text-align: center;
-}
-
-.final_details_content .box .flex .last {
-    margin-left: 40px;
-}
-
-@media screen and (max-width: 1000px) {
-    .final_details_content .content {
-        font-size: 13px;
-    }
-    .final_details_content {
-        padding-bottom: 100px;
-    }
-    .final_details_content .dl_pdf {
-        bottom: 22px;
-    }
-    .final_details_content .box {
-        margin: 35px 0;
-        padding: 20px;
-    }
-    .final_details_content .box .flex.flex_end div {
-        width: 55px;
-    }
-    .final_details_content .box .flex .last {
-        margin-left: 25px;
-    }
-}
-@media screen and (max-width: 500px) {
-    .final_details_content .bot25 {
-        margin-bottom: 16px;
-    }
-    .final_details_content .box .flex .last {
-        margin-left: 19px;
-    }
-    .final_details_content .box .flex.flex_end div {
-        width: 48px;
-    }
-}
-
-.cart_total_fee .row.last {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.cart_total_fee .row.last .flex {
-    margin: 0 -5px;
-}
-
-.cart_total_fee .row.last a {
-    margin: 0 5px;
-}
-
-
-.cart_total_fee .row.last .flex {
-    margin: 0 -5px;
-    justify-content: flex-start;
-}
-
-.cart_total_fee .row.last label {
-    padding: 4px 30px;
-    border: #dcdcdc 1px solid;
-    font-size: 16px;
-    font-weight: 500;
-    color: #9a9a9a;
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.cart_total_fee .row.last input {
-    display: none;
-}
-
-.cart_total_fee .row.last input:checked + label {
-    border: #2d2d2d 1px solid;
-    color: #2d2d2d;
-}
-
-.cart_total_fee .row.last .show_banks {
+.summer_discount .left_bg {
     position: relative;
+    width: 587px;
+    height: 100%;
+    margin-right: 35px;
 }
 
-.cart_total_fee .row.last label {
-    margin-right: 15px;
-}
 
-.cart_total_fee .row.last .banks {
-    justify-content: space-between;
-    margin-top: 0px;
-    max-height: 0;
-    overflow: hidden;
-    transition: 0.3s;
-}
-.cart_total_fee .row.last .banks.shown {
-    margin-top: 20px;
-    max-height: 50px;
-}
