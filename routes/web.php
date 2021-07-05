@@ -186,12 +186,13 @@ Route::prefix('{locale?}')
                 Route::post('save-order', [PurchaseController::class, 'saveOrder'])->name('saveOrder');
                 Route::get('order-details/{id}', [UserController::class, 'orderDetails'])->name('orderDetails');
                 Route::get('download-pdf/{id}', [UserController::class, 'downloadPdf'])->name('downloadPdf');
-                Route::get('privacy-policy', function () {
-                    return view('auth.privacy-policy');
-                })->name('privacyPolicy');
-
-                Route::get('deletion-callback', [AuthController::class, 'facebookDataDeletionCallback'])->name('deletionCallback');
             });
+
+            Route::get('privacy-policy', function () {
+                return view('auth.privacy-policy');
+            })->name('privacyPolicy');
+
+            Route::get('deletion-callback', [AuthController::class, 'facebookDataDeletionCallback'])->name('deletionCallback');
 
         });
     });
