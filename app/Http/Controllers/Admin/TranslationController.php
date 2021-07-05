@@ -141,7 +141,7 @@ class TranslationController extends AdminController
     public function destroy(string $locale, int $id)
     {
         if (!$this->translationRepository->delete($id)) {
-            return redirect(route('translationIndex', $locale))->with('danger', trans('translation_not_delete'));
+            return redirect(route('translationIndex', $locale))->with('danger', trans('admin.translation_not_delete'));
         }
         return redirect(route('translationIndex', $locale))->with('success', trans('admin.translation_success_delete'));
 

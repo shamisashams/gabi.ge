@@ -73,10 +73,10 @@ class LanguageController extends AdminController
     {
 
         if (!$this->languageRepository->store($request)) {
-            return redirect(route('languageEditView', $locale))->with('danger', 'Language does not created.');
+            return redirect(route('languageEditView', $locale))->with('danger', __('admin.language_not_created'));
         }
 
-        return redirect(route('languageIndex', $locale))->with('success', 'Language was successfully created.');
+        return redirect(route('languageIndex', $locale))->with('success', __('admin.language_success_create'));
 
     }
 
@@ -121,10 +121,10 @@ class LanguageController extends AdminController
     {
 
         if (!$this->languageRepository->update($id, $request)) {
-            return redirect(route('languageEditView', $locale))->with('danger', 'Language does not update.');
+            return redirect(route('languageEditView', $locale))->with('danger', __('admin.language_not_update'));
         }
 
-        return redirect(route('languageIndex', $locale))->with('success', 'Language update successfully.');
+        return redirect(route('languageIndex', $locale))->with('success', __('admin.language_update_success'));
 
     }
 
@@ -138,9 +138,9 @@ class LanguageController extends AdminController
     public function destroy(string $locale, int $id)
     {
         if (!$this->languageRepository->delete($id)) {
-            return redirect(route('languageIndex', $locale))->with('danger', 'Language is default.');
+            return redirect(route('languageIndex', $locale))->with('danger', __('admin.language_is_default'));
         }
-        return redirect(route('languageIndex', $locale))->with('success', 'Language delete successfully.');
+        return redirect(route('languageIndex', $locale))->with('success', __('admin.language_success_delete'));
 
     }
 }

@@ -125,7 +125,7 @@ class SaleController extends AdminController
             return redirect(route('saleEditView', [$locale, $id]))->with('danger', __('admin.sale_not_update'));
         }
 
-        return redirect(route('saleIndex', $locale))->with('success', __('admin.sale.success_update'));
+        return redirect(route('saleIndex', $locale))->with('success', __('admin.sale_success_update'));
 
     }
 
