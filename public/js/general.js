@@ -323,7 +323,7 @@ function addToCartAjax($id, options, quantity) {
                     success.classList.add("done");
                     timeout = setTimeout(function () {
                         closePopupBg.click();
-                    }, 2000);
+                    }, 3000);
                 }
 
                 getCartCount();
@@ -681,7 +681,7 @@ function addToModal(product) {
             <div class="success flex center popup_success">
 
                 <img src="/img/icons/popup/success.png" alt="">
-                <div>Lorem Ipsum</div>
+                <div>Product was successfully added to cart</div>
 
 
             </div>
