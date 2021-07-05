@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="">
+    <meta name="description" content="@yield('description','kabala-shop')">
 
     <meta name="language" content="{{app()->getLocale()}}">
 
-    <meta name="keywords" content="">
+    <meta name="keywords" content="@yield('keywords','kabala')">
     <meta name="author" content="">
     <meta name="author" content="insite.international">
     <link href="/favicon.ico" rel="shortcut icon">
@@ -23,7 +23,7 @@
 
     @yield('head')
 
-        <title> shop - Home </title>
+    <title> shop - Home </title>
 </head>
 
 <body>

@@ -1,7 +1,11 @@
 @extends('layouts.base')
+
 @section('head')
-    <title>{{__('app.title_home')}}</title>
+    <title>{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}</title>
 @endsection
+
+@section('description',count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_description:"")
+@section('keywords',count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_keyword:"")
 
 @section('content')
     <section class="path">
