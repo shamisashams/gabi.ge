@@ -179,4 +179,13 @@ class AuthController extends Controller
     {
 
     }
+
+
+    public function facebookDataDeletionCallback(Request $request)
+    {
+        $data = ['url' => "iop", 'confirmation_code' => 'success'];
+        return response()->json($data);
+    }
+
+
 }
