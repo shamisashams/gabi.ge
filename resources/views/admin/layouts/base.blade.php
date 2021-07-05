@@ -16,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/favicon/favicon-32x32.png">
 {{--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">--}}
     <!-- BEGIN: VENDOR CSS-->
-{{--    <link href="{{asset('../admin/vendors/vendors.min.css')}}" rel="stylesheet">--}}
+    <link href="{{asset('../admin/vendors/vendors.min.css')}}" rel="stylesheet">
 {{--    <link href="{{asset('../admin/vendors/animate-css/animate.css')}}" rel="stylesheet">--}}
 {{--    <link href="{{asset('../admin/vendors/chartist-js/chartist.min.css')}}" rel="stylesheet">--}}
 {{--    <link href="{{asset('../admin/vendors/chartist-js/chartist-plugin-tooltip.css')}}" rel="stylesheet">--}}
