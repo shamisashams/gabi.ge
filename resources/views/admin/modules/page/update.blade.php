@@ -81,6 +81,17 @@
                                                     <textarea id="content" class="ckeditor form-control"
                                                               name="content">{{(count($page->availableLanguage) > 0) ?  $page->availableLanguage[0]->content : ''}}</textarea>
                                                 </div>
+                                                <div class="col s12">
+                                                    <label for="content_2">{{trans('admin.content_2')}}</label>
+                                                    <textarea id="content_2" class="ckeditor form-control"
+                                                              name="content_2">{{(count($page->availableLanguage) > 0) ?  $page->availableLanguage[0]->content_2 : ''}}</textarea>
+                                                </div>
+                                                <div class="col s12">
+                                                    <label for="content_3">{{trans('admin.content_3')}}</label>
+                                                    <textarea id="content_3" class="ckeditor form-control"
+                                                              name="content_3">{{(count($page->availableLanguage) > 0) ?  $page->availableLanguage[0]->content_3 : ''}}</textarea>
+                                                </div>
+
                                                 <div class="col s12 m6" style="margin-top:20px">
                                                     <div class="input-images"></div>
                                                     @if ($errors->has('images'))
