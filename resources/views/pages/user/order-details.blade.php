@@ -40,6 +40,7 @@
                             <div class="last"><strong>{{__('client.price')}}</strong></div>
                         </div>
                     </div>
+
                     @foreach($orderProducts as $orderProduct)
                         <div class="para flex">
                             <div class="first">
@@ -51,9 +52,9 @@
                                 <div class="flex flex_end">
                                     <div class="price">
                                         <p>
-                                        @foreach($orderProduct->answers as $key=>$answer)
-                                            {{count($answer->availableLanguage)>0?$answer->availableLanguage[0]->title:""}}{{$key<count($orderProduct->answers)-1?',':""}}
-                                        @endforeach
+                                            @foreach($orderProduct->answers as $key=>$answer)
+                                                {{count($answer->availableLanguage)>0?$answer->availableLanguage[0]->title:""}}{{$key<count($orderProduct->answers)-1?',':""}}
+                                            @endforeach
                                         </p>
                                     </div>
                                     <div class="price last">{{$orderProduct->quantity}}</div>
@@ -64,7 +65,14 @@
                                 </div>
                             @else
                                 <div class="flex flex_end">
-                                    <div class="price">{{$orderProduct->quantity}}</div>
+                                    <div class="price">
+                                        <p>
+                                            @foreach($orderProduct->answers as $key=>$answer)
+                                                {{count($answer->availableLanguage)>0?$answer->availableLanguage[0]->title:""}}{{$key<count($orderProduct->answers)-1?',':""}}
+                                            @endforeach
+                                        </p>
+                                    </div>
+                                    <div class="price last">{{$orderProduct->quantity}}</div>
                                     <div class="price last">
                                         {{$orderProduct->product->price/100}} $
                                     </div>
@@ -85,7 +93,6 @@
                                 : {{($order->total_price/100)-$order->shipment_price}} $
                             </div>
                             <div class="d2">{{__('client.shipping_handling')}}: {{$order->shipment_price}} $</div>
-                            <div class="d2">Free shipping: - 7.31 $</div>
                         </div>
                     </div>
                     {{--                    <div class="d2" style="margin-bottom: 16px">Billing address:</div>--}}
