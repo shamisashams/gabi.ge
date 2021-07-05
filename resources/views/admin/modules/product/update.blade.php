@@ -141,18 +141,6 @@
                                                                     class="errorTxt">{{ $errors->first('description') }}</small>
                                                             @endif
                                                         </div>
-                                                        <div class="col s12 input-field">
-                                                            <input id="position" name="position" type="number"
-                                                                   class="validate {{ $errors->has('position') ? 'invalid' : 'valid' }}"
-                                                                   value="{{$product->position}}"
-                                                                   data-error=".errorTxt">
-                                                            <label for="position"
-                                                                   class="active">{{trans('admin.position')}}</label>
-                                                            @if ($errors->has('position'))
-                                                                <small
-                                                                    class="errorTxt">{{ $errors->first('position') }}</small>
-                                                            @endif
-                                                        </div>
 
                                                         <div class="col s12 input-field">
 

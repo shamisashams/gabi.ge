@@ -39,7 +39,6 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             $productItem = $this->find($id);
 
             $productItem->update([
-                'position' => $request['position'],
                 'status' => $request['status'],
                 'category_id' => $request['category_id'],
                 'price' => $request['price'],
@@ -98,7 +97,6 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             DB::beginTransaction();
 
             $productItem = $this->model->create([
-                'position' => $request['position'],
                 'status' => $request['status'],
                 'category_id' => $request['category_id'],
                 'price' => $request['price'],
