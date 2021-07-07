@@ -1,5 +1,7 @@
 @extends('layouts.base')
-
+@section('head')
+    <title>{{__('app.helps')}}</title>
+@endsection
 @section('content')
 
     <section class="path">

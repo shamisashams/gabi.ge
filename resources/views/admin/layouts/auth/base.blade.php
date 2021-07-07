@@ -3,9 +3,9 @@
 <head>
     @hasSection('title')
 
-        <title>@yield('title') - {{ config('app.name') }}</title>
+        <title>@yield('title') - Baby Shop</title>
     @else
-        <title>{{ config('app.name') }}</title>
+        <title>Baby Shop</title>
     @endif
     <meta charset="utf-8">
     <meta content="ie=edge" http-equiv="x-ua-compatible">
