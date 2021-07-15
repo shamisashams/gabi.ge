@@ -31,11 +31,9 @@ const popUpBg = document.querySelector(".popup_bg");
 const closePopup = document.querySelector(".close_popup");
 const mainProductView = document.querySelectorAll(".view_popup_product");
 
-
 let timeout;
 
-
-const locale = $('meta[name="language"]').attr('content');
+const locale = $('meta[name="language"]').attr("content");
 
 // sidebar filters show more
 
@@ -163,7 +161,6 @@ if (qAndA) {
     });
 }
 
-
 // popup success
 
 // if (addCart) {
@@ -171,7 +168,6 @@ if (qAndA) {
 //         success.classList.add("done");
 //     });
 // }
-
 
 // open popup
 
@@ -184,56 +180,72 @@ mainProductView.forEach((el) => {
 // close popup
 
 if (closePopup) {
-
     closePopup.addEventListener("click", () => {
         popUpBg.classList.remove("open");
     });
 }
 
-
 //  product amount
 
 function increaseValue(type = null) {
-    let value = type === "details" ? parseInt(document.getElementById("product_numb").value, 10) :
-        parseInt(document.getElementById("product_number").value, 10);
+    let value =
+        type === "details"
+            ? parseInt(document.getElementById("product_numb").value, 10)
+            : parseInt(document.getElementById("product_number").value, 10);
     value = isNaN(value) ? 0 : value;
     value++;
-    type === "details" ? document.getElementById("product_numb").value = value :
-        document.getElementById("product_number").value = value
+    type === "details"
+        ? (document.getElementById("product_numb").value = value)
+        : (document.getElementById("product_number").value = value);
 }
 
 function decreaseValue(type = null) {
-    let value = type === "details" ? parseInt(document.getElementById("product_numb").value, 10) :
-        parseInt(document.getElementById("product_number").value, 10);
+    let value =
+        type === "details"
+            ? parseInt(document.getElementById("product_numb").value, 10)
+            : parseInt(document.getElementById("product_number").value, 10);
 
     value = isNaN(value) ? 0 : value;
     value--;
     value < 1 ? (value = 1) : "";
-    type === "details" ? document.getElementById("product_numb").value = value :
-        document.getElementById("product_number").value = value;
+    type === "details"
+        ? (document.getElementById("product_numb").value = value)
+        : (document.getElementById("product_number").value = value);
 }
 
-
 function increase(id, options) {
+    let value = parseInt(
+        document.getElementById(
+            `product_number-${id}-${JSON.stringify(options)}`
+        ).value,
+        10
+    );
 
-    let value = parseInt(document.getElementById(`product_number-${id}-${JSON.stringify(options)}`).value, 10);
-
-    addcartcount(id, options, +1)
+    addcartcount(id, options, +1);
     value = isNaN(value) ? 0 : value;
     value++;
-    document.getElementById(`product_number-${id}-${JSON.stringify(options)}`).value = value;
+    document.getElementById(
+        `product_number-${id}-${JSON.stringify(options)}`
+    ).value = value;
 }
 
 function decrease(id, options) {
-    let value = parseInt(document.getElementById(`product_number-${id}-${JSON.stringify(options)}`).value, 10);
+    let value = parseInt(
+        document.getElementById(
+            `product_number-${id}-${JSON.stringify(options)}`
+        ).value,
+        10
+    );
 
     value = isNaN(value) ? 0 : value;
     value--;
     let type = value < 1 ? 0 : -1;
     value < 1 ? (value = 1) : "";
-    addcartcount(id, options, type)
+    addcartcount(id, options, type);
 
-    document.getElementById(`product_number-${id}-${JSON.stringify(options)}`).value = value;
+    document.getElementById(
+        `product_number-${id}-${JSON.stringify(options)}`
+    ).value = value;
 }
 
 // profile tab content
@@ -264,44 +276,40 @@ $(document).ready(function () {
     getCartCount();
 });
 
-
 function addToCart(el, $id) {
     let object = {};
-    let box = document.querySelector('#customize');
+    let box = document.querySelector("#customize");
     if (box) {
-        let quantity = document.querySelector('#product_number').value;
+        let quantity = document.querySelector("#product_number").value;
         let options = box.querySelectorAll('input[type="radio"]:checked');
-        let allOptions = box.querySelectorAll('.title');
-        options.forEach(item => {
-            if (item.getAttribute('data-feature')) {
-                object[item.getAttribute('data-feature')] = item.value;
+        let allOptions = box.querySelectorAll(".title");
+        options.forEach((item) => {
+            if (item.getAttribute("data-feature")) {
+                object[item.getAttribute("data-feature")] = item.value;
             }
-        })
+        });
 
         if (allOptions.length === options.length) {
             addToCartAjax($id, object, quantity);
-
         }
     }
-
-};
+}
 
 function addToCartProductDetails(el, $id) {
     let object = {};
-    let box = document.querySelector('#customize-details');
+    let box = document.querySelector("#customize-details");
     if (box) {
-        let quantity = document.querySelector('#product_numb').value;
+        let quantity = document.querySelector("#product_numb").value;
         let options = box.querySelectorAll('input[type="radio"]:checked');
-        let allOptions = box.querySelectorAll('.title');
-        options.forEach(item => {
-            if (item.getAttribute('data-feature')) {
-                object[item.getAttribute('data-feature')] = item.value;
+        let allOptions = box.querySelectorAll(".title");
+        options.forEach((item) => {
+            if (item.getAttribute("data-feature")) {
+                object[item.getAttribute("data-feature")] = item.value;
             }
-        })
+        });
 
         if (allOptions.length === options.length) {
             addToCartAjax($id, object, quantity);
-
         }
     }
 }
@@ -309,12 +317,15 @@ function addToCartProductDetails(el, $id) {
 function addToCartAjax($id, options, quantity) {
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
     });
     $.ajax({
-        url: `/${locale}/addtocart/` + $id + `?options=${JSON.stringify(options)}&quantity=${quantity}`,
-        method: 'GET',
+        url:
+            `/${locale}/addtocart/` +
+            $id +
+            `?options=${JSON.stringify(options)}&quantity=${quantity}`,
+        method: "GET",
         success: function (data) {
             if (data.status == true) {
                 let success = document.querySelector(".popup_success");
@@ -328,49 +339,60 @@ function addToCartAjax($id, options, quantity) {
 
                 getCartCount();
             }
-        }
+        },
     });
 }
 
 function getCartCount() {
-
     $.ajax({
         url: `/${locale}/getcartcount/`,
-        method: 'GET',
+        method: "GET",
         success: function (data) {
             if (data.status == true) {
-                $('#cart-count').text(data.count + " / $" + (data.total.toFixed(2) * 100) / 100);
-                let cart = document.querySelectorAll('.cart_item_header');
-                let cartDropDown = document.querySelector('.cart_dropdown');
+                $("#cart-count").text(
+                    data.count + " / $" + (data.total.toFixed(2) * 100) / 100
+                );
+                let cart = document.querySelectorAll(".cart_item_header");
+                let cartDropDown = document.querySelector(".cart_dropdown");
                 cartDropDown.innerHTML = "";
-                data.products.forEach(item => {
+                data.products.forEach((item) => {
                     let element = `
 
                         <div class="item cart_item_header">
-                          <a style="display: contents" href="/${locale}/catalogue/${item.category_id}/details/${item.id}"">
+                          <a style="display: contents" href="/${locale}/catalogue/${
+                        item.category_id
+                    }/details/${item.id}"">
                         <div>
                             <div class="title">${item.title}</div>
-                            <div class="number">${item.quantity} x $${item.sale ? item.sale : item.price}</div>
+                            <div class="number">${item.quantity} x $${
+                        item.sale ? item.sale : item.price
+                    }</div>
                         </div>
                         <div class="picture">
-                            <img src="/storage/product/${item.id}/${item.file}" alt=""/>
+                            <img src="/storage/product/${item.id}/${
+                        item.file
+                    }" alt=""/>
                         </div>
                           </a>
 
-                        <button type="button" class="remove_item" onclick="removefromcart(this,${item.id})">
+                        <button type="button" class="remove_item" onclick="removefromcart(this,${
+                            item.id
+                        })">
                             <p hidden>${item.options}</p>
                             <img src="/img/icons/header/remove.png" alt=""/>
                         </button>
                     </div>
-                 `
+                 `;
                     $(cartDropDown).append(element);
 
                     // cartDropDown.insertBefore('<div></div>', checkoutTotal);
-                })
+                });
                 let checkout = `
                                     <div class="checkout" id="checkout-total">
                         <div class="total">total</div>
-                        <div class="price">$ ${Math.round(data.total * 100) / 100}</div>
+                        <div class="price">$ ${
+                            Math.round(data.total * 100) / 100
+                        }</div>
                     </div>
                     <div class="checkout">
                         <a href="/${locale}/cart">
@@ -382,13 +404,12 @@ function getCartCount() {
                                 <img src="/img/icons/header/right.png" alt=""/>
                             </button>
                         </a>
-                    </div>`
+                    </div>`;
                 $(cartDropDown).append(checkout);
 
-                $('#sub-total').text(`$${data.total.toFixed(2)}`);
-                $('#total-price').text(`$${data.total.toFixed(2)}`);
-                $('#total-price').attr('data-price', data.total.toFixed(2));
-
+                $("#sub-total").text(`$${data.total.toFixed(2)}`);
+                $("#total-price").text(`$${data.total.toFixed(2)}`);
+                $("#total-price").attr("data-price", data.total.toFixed(2));
 
                 // $('#cart_count').text(data.count);
                 // $('#cart_price').text(`${data.total}₾`)
@@ -402,220 +423,270 @@ function getCartCount() {
                 // $('#step_3_product_price').text(`${data.total}₾`)
                 // $('#step_3_product_total').text(`${data.total}₾`)
 
-                $('#cart_total').text(`${data.total}₾`)
-
+                $("#cart_total").text(`${data.total}₾`);
 
                 data.products.forEach((el) => {
-
-                    let element = document.getElementById(`cart_product_total-${el.id}-${el.options}`);
+                    let element = document.getElementById(
+                        `cart_product_total-${el.id}-${el.options}`
+                    );
 
                     if (el.sale) {
-                        $(element).text(`$ ${(el.sale * el.quantity).toFixed(2)}`)
+                        $(element).text(
+                            `$ ${(el.sale * el.quantity).toFixed(2)}`
+                        );
                         // $(`#cart_product_total-step-${el.id}`).text(`${(el.sale / 100) * el.quantity}₾`)
                         //  $(`#cart_2_product_total-step-${el.id}`).text(`${(el.sale / 100) * el.quantity}₾`)
                         //  $(`#cart_3_product_total-step-${el.id}`).text(`${(el.sale / 100) * el.quantity}₾`)
                     } else {
-                        $(element).text(`$ ${(el.price * el.quantity).toFixed(2)}`)
+                        $(element).text(
+                            `$ ${(el.price * el.quantity).toFixed(2)}`
+                        );
                     }
-
-                })
+                });
             }
-        }
+        },
     });
 }
 
 function addcartcount(id, options, type) {
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
     });
     $.ajax({
-        url: `/${locale}/addcartcount/` + id + "/" + type + "?options=" + JSON.stringify(options),
-        method: 'GET',
+        url:
+            `/${locale}/addcartcount/` +
+            id +
+            "/" +
+            type +
+            "?options=" +
+            JSON.stringify(options),
+        method: "GET",
         success: function (data) {
             if (data.status == true) {
                 getCartCount();
             }
-        }
+        },
     });
 }
 
 function removefromcart(el = null, id, options = null) {
-
-    let features = el ? JSON.parse(el.firstElementChild.textContent) : (options ? options : "")
-
+    let features = el
+        ? JSON.parse(el.firstElementChild.textContent)
+        : options
+        ? options
+        : "";
 
     if (features) {
         $.ajaxSetup({
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
         });
         $.ajax({
             url: `/${locale}/removefromcart`,
-            method: 'GET',
+            method: "GET",
             data: {
                 id,
-                features: JSON.stringify(features)
+                features: JSON.stringify(features),
             },
             success: function (data) {
                 if (data.status === true) {
-                    let productItem = document.getElementById(`product_item-${id}-${JSON.stringify(features)}`);
+                    let productItem = document.getElementById(
+                        `product_item-${id}-${JSON.stringify(features)}`
+                    );
                     if (productItem) {
                         productItem.remove();
                     }
 
                     getCartCount();
                 }
-            }
+            },
         });
     }
 }
 
 function changeType(type) {
-
     let url = new URL(window.location.href);
 
     let params = url.searchParams;
-    params.set('type', type);
+    params.set("type", type);
 
     url.search = params.toString();
 
-    window.history.pushState('', '', url.toString());
-    console.log(url.toString())
-
+    window.history.pushState("", "", url.toString());
+    console.log(url.toString());
 }
 
-let params = (new URL(window.location.href)).searchParams.get('type');
-let profile = document.querySelector('#tab-profile');
-let order = document.querySelector('#tab-order');
-let password = document.querySelector('#tab-password');
-if (params === 'profile') {
+let params = new URL(window.location.href).searchParams.get("type");
+let profile = document.querySelector("#tab-profile");
+let order = document.querySelector("#tab-order");
+let password = document.querySelector("#tab-password");
+if (params === "profile") {
     profile.click();
 }
-if (params === 'order') {
+if (params === "order") {
     order.click();
 }
-if (params === 'password') {
+if (params === "password") {
     password.click();
-
 }
 checkProductDetailsSelection();
 
 function checkProductDetailsSelection() {
-    let box = document.querySelector('#customize-details');
-    let buttons = document.querySelector('.btns');
+    let box = document.querySelector("#customize-details");
+    let buttons = document.querySelector(".btns");
     if (box) {
         let answers = box.querySelectorAll('input[type="radio"]');
-        let allOptions = box.querySelectorAll('.title');
-        answers.forEach(item => {
+        let allOptions = box.querySelectorAll(".title");
+        answers.forEach((item) => {
             item.onchange = function () {
-                let options = box.querySelectorAll('input[type="radio"]:checked');
+                let options = box.querySelectorAll(
+                    'input[type="radio"]:checked'
+                );
                 if (allOptions.length === options.length) {
-                    buttons.querySelector('.add_to_cart').disabled = false;
+                    buttons.querySelector(".add_to_cart").disabled = false;
                 }
-            }
-        })
-        if (allOptions.length === box.querySelectorAll('input[type="radio"]:checked').length) {
-            buttons.querySelector('.add_to_cart').disabled = false;
+            };
+        });
+        if (
+            allOptions.length ===
+            box.querySelectorAll('input[type="radio"]:checked').length
+        ) {
+            buttons.querySelector(".add_to_cart").disabled = false;
         }
     }
 }
 
-
 function checkSelection() {
-    let box = document.querySelector('#customize');
-    let buttons = document.querySelector('.btm_btns');
+    let box = document.querySelector("#customize");
+    let buttons = document.querySelector(".btm_btns");
     if (box) {
         let answers = box.querySelectorAll('input[type="radio"]');
-        let allOptions = box.querySelectorAll('.title');
-        answers.forEach(item => {
+        let allOptions = box.querySelectorAll(".title");
+        answers.forEach((item) => {
             item.onchange = function () {
-                let options = box.querySelectorAll('input[type="radio"]:checked');
+                let options = box.querySelectorAll(
+                    'input[type="radio"]:checked'
+                );
                 if (allOptions.length === options.length) {
-                    buttons.querySelector('.add_to_cart').disabled = false;
+                    buttons.querySelector(".add_to_cart").disabled = false;
                 }
-            }
-        })
-        if (allOptions.length === box.querySelectorAll('input[type="radio"]:checked').length) {
-            buttons.querySelector('.add_to_cart').disabled = false;
+            };
+        });
+        if (
+            allOptions.length ===
+            box.querySelectorAll('input[type="radio"]:checked').length
+        ) {
+            buttons.querySelector(".add_to_cart").disabled = false;
         }
     }
 }
 
 function addToModal(product) {
-    let popupContainer = document.querySelector('#popup_bg');
-    let images = '';
-    let mainImages = '';
-    let price = '';
-    let features = '';
+    let popupContainer = document.querySelector("#popup_bg");
+    let images = "";
+    let mainImages = "";
+    let price = "";
+    let features = "";
     if (product.files) {
-        product.files.forEach(item => {
+        product.files.forEach((item) => {
             images = images.concat(`
               <div class="small_img_popup flex center">
                  <img src="/storage/product/${item.fileable_id}/${item.name}" alt="" />
               </div>
-        `)
-        })
+        `);
+        });
 
         product.files.forEach((item, i) => {
             mainImages = mainImages.concat(`
-                <img class="main_img_popup ${i === 0 ? 'display' : ""}" src="/storage/product/${item.fileable_id}/${item.name}" alt="" />
-            `)
-        })
+                <img class="main_img_popup ${
+                    i === 0 ? "display" : ""
+                }" src="/storage/product/${item.fileable_id}/${
+                item.name
+            }" alt="" />
+            `);
+        });
     }
 
     if (product.sale_product && product.sale_product.sale) {
         let sale = product.sale_product.sale;
         price = `
                <div class="main">
-                 $ ${sale.type == 'fixed' ? ((product.prcie / 100) - sale.discount).toFixed(2) :
-            ((product.price / 100) - (((product.price / 100) * sale.discount) / 100)).toFixed(2)
-        }
+                 $ ${
+                     sale.type == "fixed"
+                         ? (product.prcie / 100 - sale.discount).toFixed(2)
+                         : (
+                               product.price / 100 -
+                               ((product.price / 100) * sale.discount) / 100
+                           ).toFixed(2)
+                 }
                </div>
                <div class="last">$ ${(product.price / 100).toFixed(2)}</div>
                <div class="off">
-                  -${sale.type == "percent" ? sale.discount :
-            ((sale.discount * 100) / (product.price / 100)).toFixed(2)}%
+                  -${
+                      sale.type == "percent"
+                          ? sale.discount
+                          : (
+                                (sale.discount * 100) /
+                                (product.price / 100)
+                            ).toFixed(2)
+                  }%
                </div>
-               `
+               `;
     } else {
         price = `
             <div class="main">$ ${(product.price / 100).toFixed(2)}</div>
-`
+`;
     }
 
     getProductFeatures(product.id, function (productAnswers, productFeatures) {
-
         for (const key in productFeatures) {
             if (productFeatures.hasOwnProperty(key)) {
-
                 let productAnswer = productFeatures[key];
-                let options = '';
-                if (productAnswer.feature.type !== 'input' || productAnswer.feature.english_language.length > 0 ? productAnswer.feature.english_language[0].title == "category" : "") {
+                let options = "";
+                if (
+                    productAnswer.feature.type !== "input" ||
+                    productAnswer.feature.english_language.length > 0
+                        ? productAnswer.feature.english_language[0].title ==
+                          "category"
+                        : ""
+                ) {
                     continue;
                 }
-                productAnswer.feature.answer.forEach(answer => {
+                productAnswer.feature.answer.forEach((answer) => {
                     if (answer.status && productAnswers.includes(answer.id)) {
                         options = options.concat(`
                             <div class="box">
-                                <input type="radio" name="feature[${productAnswer.feature.id}][]"
-                                       data-feature="${productAnswer.feature.id}" id="${answer.id}"
+                                <input type="radio" name="feature[${
+                                    productAnswer.feature.id
+                                }][]"
+                                       data-feature="${
+                                           productAnswer.feature.id
+                                       }" id="${answer.id}"
                                            value="${answer.id}"
                                  />
                                 <label for="${answer.id}" class="box">
-                                ${answer.available_language.length > 0 ? answer.available_language[0].title : ""}
+                                ${
+                                    answer.available_language.length > 0
+                                        ? answer.available_language[0].title
+                                        : ""
+                                }
                               </label>
                             </div>
                          `);
                     }
-                })
-
+                });
 
                 features = features.concat(`
                    <div class="options">
-                        <div class="title">${productAnswer.feature.available_language.length > 0 ? productAnswer.feature.available_language[0].title : ''}</div>
+                        <div class="title">${
+                            productAnswer.feature.available_language.length > 0
+                                ? productAnswer.feature.available_language[0]
+                                      .title
+                                : ""
+                        }</div>
                         <div class="box_grid">
                         ${options}
                         </div>
@@ -630,7 +701,11 @@ function addToModal(product) {
         <div class="close_popup_bg"></div>
             <div class="product_popup">
             <div class="head flex">
-                <div>${product.available_language.length > 0 ? product.available_language[0].title : ""}</div>
+                <div>${
+                    product.available_language.length > 0
+                        ? product.available_language[0].title
+                        : ""
+                }</div>
                 <button onclick="popUpBg.classList.remove('open')" class="close_popup">
                     <img src="/img/icons/popup/close.png" alt="" />
                 </button>
@@ -650,7 +725,11 @@ function addToModal(product) {
                       ${price}
                     </div>
                     <p><span>ID:</span> ${product.id}</p>
-                    <p><span>Category:</span> ${product.category.available_language.length > 0 ? product.category.available_language[0].title : ""}</p>
+                    <p><span>Category:</span> ${
+                        product.category.available_language.length > 0
+                            ? product.category.available_language[0].title
+                            : ""
+                    }</p>
                     <div class="btns flex">
                         <div class="number_input">
                             <button class="decrease" onclick="decreaseValue()">-</button>
@@ -668,12 +747,18 @@ function addToModal(product) {
                 </div>
             </div>
             <div class="flex center btm_btns">
-                <a href="/${locale}/catalogue/${product.category_id}/details/${product.id}">
+                <a href="/${locale}/catalogue/${product.category_id}/details/${
+            product.id
+        }">
                     <button class="details">Detiles</button>
                 </a>
 
-                    <button id="add_to_cart" ${disabled ? 'disabled' : ""} onclick="addToCart(this, ${product.id})" class="add_to_cart flex center popup_add_to_cart">
-                        <img src="/img/icons/header/cart.png" alt="" />
+                    <button id="add_to_cart" ${
+                        disabled ? "disabled" : ""
+                    } onclick="addToCart(this, ${
+            product.id
+        })" class="add_to_cart flex center popup_add_to_cart">
+                        <img src="/img/icons/details/cart.png" alt="" />
                         <div>Add To Card</div>
                     </button>
             </div>
@@ -685,33 +770,29 @@ function addToModal(product) {
 
 
             </div>
-        </div>`
+        </div>`;
 
-        popupContainer.innerHTML = '';
+        popupContainer.innerHTML = "";
         $(popupContainer).append(content);
         checkSelection();
         closeModal();
-
     });
-
-
 }
-
 
 function getProductFeatures(id, callback) {
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
     });
     $.ajax({
         url: `/${locale}/getFeatures/` + id,
-        method: 'GET',
+        method: "GET",
         success: function (data) {
             if (data.status) {
                 callback(data.productAnswers, data.productFeatures);
             }
-        }
+        },
     });
 }
 
@@ -738,4 +819,3 @@ function closeModal() {
         });
     });
 }
-

@@ -88,7 +88,7 @@ img {
 
 .header {
     font-size: 16px;
-    padding: 40px 0;
+    padding: 30px 0;
 }
 
 .header .logo_mobile {
@@ -210,9 +210,13 @@ img {
 .header .links .cart_dropdown .checkout button {
     width: 129px;
     height: 36px;
-    color: #2d2d2d;
+    color: #fff;
     font-size: 14px;
-    background-color: #f5e5d6;
+    background-color: #677868;
+    transition: 0.3s;
+}
+.header .links .cart_dropdown .checkout button:hover {
+    background-color: #153116;
 }
 
 .header .links .cart_dropdown .checkout .go {
@@ -258,7 +262,7 @@ img {
     left: calc(50% - 17px);
     width: 33px;
     height: 1px;
-    background-color: #2d2d2d;
+    background-color: #153116;
     transform: scaleX(0);
     transition: 0.2s all;
     transform-origin: center;
@@ -273,7 +277,7 @@ img {
 }
 
 .header .nav_link.active {
-    color: #2d2d2d;
+    color: #153116;
     font-weight: bold;
 }
 
@@ -466,7 +470,7 @@ img {
     margin: 0 4px;
     width: 54px;
     height: 6px;
-    background-color: #fff;
+    background-color: #677868;
     position: relative;
     cursor: pointer;
 }
@@ -476,7 +480,7 @@ img {
     content: "";
     width: 100%;
     height: 100%;
-    background-color: #f5e5d6;
+    background-color: #153116;
     left: 0;
     top: 0;
     transform: scaleX(0);
@@ -529,7 +533,11 @@ img {
 .hero .slide .overlay {
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.37), rgba(0, 0, 0, 0));
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.37),
+        rgba(0, 0, 0, 0)
+    );
     display: flex;
     align-items: center;
     justify-content: center;
@@ -560,8 +568,8 @@ img {
 .hero .slide .hero_box .hero_btn {
     height: 66px;
     width: 202px;
-    background: #f5e5d6;
-    color: #2d2d2d;
+    background: #153116;
+    color: #fff;
     font-size: 16px;
     position: relative;
     transform: translateY(15px);
@@ -635,7 +643,7 @@ img {
 .products_viewport .arrows button {
     width: 60px;
     height: 60px;
-    background-color: #f5e5d6;
+    background-color: #677868;
     border-radius: 50%;
     transition: 0.3s;
     display: flex;
@@ -650,6 +658,7 @@ img {
 
 .main_product_view {
     margin: 0 17.5px;
+    cursor: pointer;
 }
 
 .main_product_view .pic {
@@ -678,12 +687,12 @@ img {
 }
 
 .main_product_view .pic .label.new {
-    background-color: #f5e5d6;
-    color: #0a0a0a;
+    background-color: #677868;
+    color: #fff;
 }
 
 .main_product_view .pic .label.off {
-    background-color: #2d2d2d;
+    background-color: #153116;
     color: #fff;
 }
 
@@ -692,7 +701,7 @@ img {
 }
 
 .main_product_view .detail .title {
-    color: #2d2d2d;
+    color: #153116;
     font-size: 16px;
 }
 .main_product_view .detail .sub {
@@ -832,10 +841,10 @@ img {
     bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #fff;
+    background-color: #153116;
     padding: 12px 40px;
     font-size: 16px;
-    color: #393939;
+    color: #fff;
     text-transform: uppercase;
     z-index: 10;
     font-weight: bold;
@@ -853,7 +862,7 @@ img {
     height: 100%;
     top: 0;
     left: 0;
-    background: linear-gradient(to right, #f5e5d6, transparent);
+    background: linear-gradient(to right, #153116, transparent);
     z-index: 10;
 }
 
@@ -864,7 +873,7 @@ img {
     height: 100%;
     top: 0;
     right: 0;
-    background: linear-gradient(to left, #f5e5d6, transparent);
+    background: linear-gradient(to left, #153116, transparent);
     z-index: 10;
 }
 
@@ -872,6 +881,10 @@ img {
     margin-bottom: 150px;
     display: flex;
     align-items: flex-start;
+}
+
+.summer_discount .products_viewport {
+    width: 70%;
 }
 
 .summer_discount .left_bg {
@@ -914,7 +927,7 @@ img {
     width: 60%;
     padding: 22px 0;
     font-size: 31px;
-    color: #393939;
+    color: #153116;
     font-weight: bold;
     background: #fff;
     text-transform: uppercase;
@@ -932,7 +945,7 @@ img {
 }
 
 .footer {
-    background: #f5e5d6;
+    background: #153116;
     width: 100%;
     padding-top: 51px;
 }
@@ -965,12 +978,18 @@ img {
     transition: 0.2s;
 }
 
-.footer_content .social_media .sm img {
+.footer_content .social_media .sm svg {
     width: 60%;
+    transition: 0.2s;
+    fill: #707070;
 }
 
 .footer_content .social_media .sm:hover {
     transform: scale(1.1);
+    border: 1px solid #bbbbbb;
+}
+.footer_content .social_media .sm:hover svg {
+    fill: #bbbbbb;
 }
 
 .footer_content div {
@@ -978,12 +997,12 @@ img {
 }
 
 .footer_content .para {
-    color: #707070;
+    color: #677868;
     font-size: 16px;
 }
 
 .footer_content .title {
-    color: #2d2d2d;
+    color: #677868;
     font-size: 16px;
     font-weight: 500;
     margin-bottom: 16px;
@@ -992,12 +1011,15 @@ img {
 .footer_content .title.last {
     margin-bottom: 6px;
 }
+.footer_content .last {
+    color: #fff;
+}
 
 .footer_content .link {
     font-size: 14px;
     font-weight: 450;
     margin-bottom: 9px;
-    color: #4d4d4d;
+    color: #fff;
     display: block;
 }
 
@@ -1005,7 +1027,7 @@ img {
     position: relative;
     width: 100%;
     height: 48px;
-    border: #4d4d4d solid 1px;
+    border: #fff solid 1px;
     margin-top: 16px;
 }
 
@@ -1018,14 +1040,14 @@ img {
 }
 
 .footer_content .email input::placeholder {
-    color: #4d4d4d;
+    color: #677868;
 }
 
 .footer_content .email .ok {
     width: 65px;
     height: 38px;
-    background-color: #2d2d2d;
-    color: #fff;
+    background-color: #fff;
+    color: #153116;
     top: 4px;
     right: 5px;
     position: absolute;
@@ -1036,6 +1058,7 @@ img {
 .footer_bottom {
     background: #fff;
     padding: 13px 0;
+    border-bottom: #153116 2px solid;
 }
 
 .footer_bottom .design {
@@ -1161,11 +1184,6 @@ img {
     font-size: 16px;
     color: #2d2d2d;
 }
-.popup_bg .product_popup .btm_btns button:disabled {
-    color:rgba(34,34,34,.3);
-    background-color: #ddd;
-    cursor: default;
-}
 .popup_bg .product_popup .btm_btns .details {
     width: 130px;
     background-color: transparent;
@@ -1173,7 +1191,8 @@ img {
     margin-right: 20px;
 }
 .popup_bg .product_popup .btm_btns .add_to_cart {
-    background-color: #f5e5d6;
+    background-color: #677868;
+    color: #fff;
     width: 234px;
 }
 .popup_bg .product_popup .btm_btns .add_to_cart img {
@@ -1210,21 +1229,21 @@ img {
 .path {
     width: 100%;
     padding: 40px 0;
-    background-color: rgba(245, 229, 214, 0.2);
+    background-color: rgba(103, 120, 104, 0.2);
     margin-bottom: 100px;
 }
 
 .path .path_took {
     font-size: 16px;
-    color: #4d4d4d;
+    color: #677868;
 }
 
 .path .current {
     font-family: "roboto";
     font-size: 28px;
     line-height: 37px;
-    color: #000000;
-    font-weight: 350;
+    color: #153116;
+    font-weight: 400;
 }
 
 /******************* Product Page *******************/
@@ -1313,9 +1332,9 @@ img {
     height: 32px;
     width: 70px;
     font-size: 14px;
-    color: #2d2d2d;
+    color: #fff;
     transition: 0.2s;
-    background-color: #f5e5d6;
+    background-color: #677868;
 }
 
 .product_content_section .page_input .ok:active {
@@ -1359,9 +1378,9 @@ img {
 .sidebar_filters .price_control .ok {
     width: 80px;
     height: 32px;
-    background-color: #f5e5d6;
-    color: #2d2d2d;
-    font-size: 14;
+    background-color: #677868;
+    color: #fff;
+    font-size: 14px;
     font-weight: 500;
     margin-left: 19px;
     transition: 0.2s;
@@ -1510,10 +1529,10 @@ img {
 .contact_section .form .send {
     width: 297px;
     height: 48px;
-    background-color: #f5e5d6;
+    background-color: #677868;
     font-size: 16px;
     font-weight: 500;
-    color: #2d2d2d;
+    color: #fff;
     margin-top: 40px;
     transition: 0.3s;
 }
@@ -1549,8 +1568,8 @@ img {
 }
 
 .login_signup_box .head .lisu_navigation {
-    background-color: #f5e5d6;
-    color: #2d2d2d;
+    background-color: #677868;
+    color: #fff;
     font-size: 16px;
     width: 50%;
     height: 100%;
@@ -1592,9 +1611,9 @@ img {
     width: 100%;
     margin-top: 10px;
     font-size: 16px;
-    color: #000000;
+    color: #fff;
     font-weight: 500;
-    background-color: #f5e5d6;
+    background-color: #677868;
     height: 48px;
     transition: 0.2s;
 }
@@ -1649,7 +1668,7 @@ img {
 }
 
 .product_full_view .slider .arrow {
-    background-color: #f5e5d6;
+    background-color: #677868;
     border-radius: 50%;
     width: 46px;
     height: 46px;
@@ -1670,7 +1689,7 @@ img {
 }
 
 .product_full_view .slider .arrow img {
-    width: 6px;
+    width: auto;
 }
 
 .product_full_view .vertical_slider_view {
@@ -1832,7 +1851,7 @@ img {
 }
 
 .customize .options .box_grid input:checked + label {
-    background-color: #f5e5d696;
+    background-color: #15311696;
 }
 
 .customize .options .box_grid .box:active {
@@ -1867,16 +1886,10 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f5e5d6;
-    color: #2d2d2d;
+    background-color: #677868;
+    color: #fff;
     height: 48px;
     padding: 0 32px;
-}
-
-.customize .btns .add_to_cart:disabled {
-    color:rgba(34,34,34,.3);
-    background-color: #ddd;
-    cursor: default;
 }
 
 .customize .btns .add_to_cart img {
@@ -1884,7 +1897,7 @@ img {
 }
 
 .information_section {
-    background-color: rgba(245, 229, 214, 0.2);
+    background-color: rgba(103, 120, 104, 0.2);
     padding: 22px 0 100px 0;
     margin-bottom: 150px;
 }
@@ -2132,10 +2145,10 @@ img {
 }
 
 .shopping_cart_body .shopping_table .coupon .ok {
-    background-color: #f5e5d6;
+    background-color: #677868;
     width: 70px;
     height: 48px;
-    color: #2d2d2d;
+    color: #fff;
     font-size: 16px;
     font-weight: 500;
     transition: 0.2s;
@@ -2322,7 +2335,7 @@ img {
 }
 
 .profile_section .profile_tabs .icn {
-    background: #f5e5d6;
+    background: #153116;
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -2356,10 +2369,10 @@ img {
 
 .profile_section .profile_tabs .log_out {
     width: 100%;
-    background: #f5e5d6;
+    background: #677868;
     height: 55px;
     font-size: 16px;
-    color: #2d2d2d;
+    color: #fff;
     transition: 0.2s;
 }
 
@@ -2410,8 +2423,8 @@ img {
 .profile_section .profile_tabs_content .update {
     width: 289px;
     height: 55px;
-    background: #f5e5d6;
-    color: #2d2d2d;
+    background: #677868;
+    color: #fff;
     font-size: 16px;
     transition: 0.2s;
     margin-top: 40px;
@@ -2594,7 +2607,7 @@ img {
 .final_details_content .box .flex {
     align-items: flex-start;
 }
-.final_details_content .box .flex {
+.final_details_content .box .flex:nth-child(2) {
     padding-bottom: 20px;
     border-bottom: #dcdcdc 1px solid;
     margin-bottom: 20px;
@@ -2627,7 +2640,7 @@ img {
 .final_details_content .dl_pdf {
     width: 280px;
     height: 55px;
-    background-color: #f5e5d6;
+    background-color: #153116;
     color: #2d2d2d;
     font-size: 16px;
     position: absolute;
@@ -3003,6 +3016,10 @@ img {
     .summer_discount {
         flex-direction: column-reverse;
         align-items: center;
+    }
+
+    .summer_discount .products_viewport {
+        width: 100%;
     }
 
     .product_grid {
@@ -3734,30 +3751,12 @@ img {
     color: red;
 }
 
-.summer_discount .left_bg {
-    position: relative;
-    width: 587px;
-    height: 100%;
-    margin-right: 35px;
-}
-
-.summer_discount .products_viewport {
-    width: 70%;
-}
-
-@media screen and (max-width: 1100px) {
-    .summer_discount .products_viewport {
-        width: 100%;
-    }
-}
-
 .alert {
     padding: 20px;
     background-color: #f44336; /* Red */
     color: white;
     margin-bottom: 15px;
 }
-
 /* The close button */
 .closebtn {
     margin-left: 15px;
@@ -3769,9 +3768,7 @@ img {
     cursor: pointer;
     transition: 0.3s;
 }
-
 /* When moving the mouse over the close button */
 .closebtn:hover {
     color: black;
 }
-
