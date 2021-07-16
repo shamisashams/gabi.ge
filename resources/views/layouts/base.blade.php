@@ -19,7 +19,7 @@
         type="text/css"
         href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
     />
-    <link href="{{asset('../css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('../css/style.css?v=2')}}" rel="stylesheet">
 
     @yield('head')
 
