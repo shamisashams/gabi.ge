@@ -149,7 +149,7 @@
                 <button
                     {{count($productAnswers)>0?"disabled":""}} onclick="addToCartProductDetails(this, '{{$product->id}}')"
                     class="add_to_cart">
-                    <img src="/img/icons/header/cart.png" alt=""/>
+                    <img src="/img/icons/details/cart.png" alt=""/>
                     <div>{{__('client.add_to_cart')}}</div>
                 </button>
             </div>
