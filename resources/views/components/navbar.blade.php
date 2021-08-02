@@ -158,7 +158,7 @@
                     </svg>
                     {{auth()->user()->name}}
                 </a>
-                <a href="{{route('logoutFront',app()->getLocale())}}" class="links">Log Out</a>
+                <a href="{{route('logoutFront',app()->getLocale())}}" class="links">{{__('client.log_out')}}</a>
             @endguest
             <div class="links languages">
                 <svg

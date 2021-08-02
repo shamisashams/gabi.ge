@@ -123,7 +123,7 @@
                 <div class="product_grid">
                     @foreach($products as $product)
                         {{--                        <a href="{{route('productDetails',[app()->getLocale(),$category->id,$product->id])}}">--}}
-                        <div onclick="addToModal({{$product}})" class="main_product_view">
+                        <div class="main_product_view">
                             <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
                                 <div class="pic">
                                     @if($product->saleProduct && $product->saleProduct->sale)
@@ -146,15 +146,15 @@
                                     @endif
                                     <div class="on_hover_btns">
                                         <a class="view_popup_product">
-                                            <button type="button" class="add_to_cart view">
+                                            <button onclick="addToModal({{$product}})" type="button" class="add_to_cart view">
                                                 <img src="/img/icons/profile/view.svg" alt=""/>
-                                                <div class="roboto">View</div>
+                                                <div class="roboto">{{__('client.view')}}</div>
                                             </button>
                                         </a>
                                         <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
                                             <button type="button" class="add_to_cart details">
                                                 <img src="/img/icons/profile/magnifying-glass.svg" alt=""/>
-                                                <div class="roboto">Details</div>
+                                                <div class="roboto">{{__('client.details')}}</div>
                                             </button>
                                         </a>
                                     </div>
