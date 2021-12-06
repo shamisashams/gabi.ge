@@ -1,11 +1,11 @@
 <header class="header wrapper">
     <a href="{{route('welcome',app()->getLocale())}}" class="logo logo_mobile"
-    ><img src="img/logo/obaby.png" alt=""
+    ><img src="/img/logo/obaby.png" alt=""
         /></a>
     <div class="header_content flex">
         <div class="flex columns">
             <a href="{{route('welcome',app()->getLocale())}}" class="logo"
-            ><img src="img/logo/obaby.png" alt=""
+            ><img src="/img/logo/obaby.png" alt=""
                 /></a>
             <div class="navbar">
                 <a href="{{route('welcome')}}"

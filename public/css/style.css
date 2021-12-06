@@ -951,6 +951,7 @@ img {
     background: #153116;
     width: 100%;
     padding-top: 51px;
+    overflow: hidden;
 }
 
 .footer_content {
