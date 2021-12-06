@@ -5,7 +5,7 @@
  * User:
  * Date-Time: 16.12.20
  * Time: 18:15
- * @author Vito Makhatadze <vitomaxatadze@gmail.com>
+ * @author Insite International <hello@insite.international>
  */
 namespace App\Breadcrumbs;
 

@@ -5,7 +5,7 @@
  * User:
  * Date-Time: 15.12.20
  * Time: 14:09
- * @author Vito Makhatadze <vitomaxatadze@gmail.com>
+ * @author Insite International <hello@insite.international>
  */
 
 namespace App\Http\Request\Admin;

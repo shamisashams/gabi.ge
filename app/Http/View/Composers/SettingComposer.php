@@ -5,7 +5,7 @@
  * User:
  * Date-Time: 13.01.21
  * Time: 16:57
- * @author Vito Makhatadze <vitomaxatadze@gmail.com>
+ * @author Insite International <hello@insite.international>
  */
 
 namespace App\Http\View\Composers;

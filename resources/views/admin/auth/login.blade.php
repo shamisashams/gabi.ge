@@ -57,10 +57,10 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s6 m6 l6">
-                                    <p class="margin medium-small"><a href="user-register.html">{{__('client.register_now')}}</a></p>
+                                    <!-- <p class="margin medium-small"><a href="user-register.html">{{__('client.register_now')}}</a></p> -->
                                 </div>
                                 <div class="input-field col s6 m6 l6">
-                                    <p class="margin right-align medium-small"><a href="user-forgot-password.html">{{__('client.forgot_password')}} ?</a></p>
+                                    <!-- <p class="margin right-align medium-small"><a href="user-forgot-password.html">{{__('client.forgot_password')}} ?</a></p> -->
                                 </div>
                             </div>
                         </form>

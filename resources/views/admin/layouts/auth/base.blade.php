@@ -11,7 +11,7 @@
     <meta content="ie=edge" http-equiv="x-ua-compatible">
     <meta content="template language" name="keywords">
     <meta content="Tamerlan Soziev" name="author">
-    <meta content="Admin dashboard html template" name="description">
+    <meta content="Kabala Admin Dashboard" name="description">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="/favicon.ico" rel="shortcut icon">
     <link rel="apple-touch-icon" href="../../../app-assets/images/favicon/apple-touch-icon-152x152.png">
