@@ -2,7 +2,7 @@
 	File Name: editor-quill.js
 	Description: Quill is a modern rich text editor built for compatibility and extensibility.
 	----------------------------------------------------------------------------------------
-	Item Name: Materialize Admin Template
+	Item Name: Materialize Kabala Admin Dashboard
 	Version: 1.0
 	Author: GeeksLabs
 	Author URL: http://www.themeforest.net/user/geekslabs

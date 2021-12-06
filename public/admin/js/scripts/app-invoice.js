@@ -87,37 +87,37 @@ $(document).ready(function () {
     var selectOption = this.options[e.target.selectedIndex].text;
     /*switch case for product select change also change product description */
     switch (selectOption) {
-      case "Frest Admin Template":
+      case "Frest Kabala Admin Dashboard":
         $(e.target)
           .closest(".invoice-item-filed")
           .find(".invoice-item-desc")
           .val("The most developer friendly & highly customisable HTML5 Admin");
         break;
-      case "Stack Admin Template":
+      case "Stack Kabala Admin Dashboard":
         $(e.target)
           .closest(".invoice-item-filed")
           .find(".invoice-item-desc")
-          .val("Ultimate Bootstrap 4 Admin Template for Next Generation Applications.");
+          .val("Ultimate Bootstrap 4 Kabala Admin Dashboard for Next Generation Applications.");
         break;
-      case "Robust Admin Template":
+      case "Robust Kabala Admin Dashboard":
         $(e.target)
           .closest(".invoice-item-filed")
           .find(".invoice-item-desc")
           .val(
-            "Robust admin is super flexible, powerful, clean & modern responsive bootstrap admin template with unlimited possibilities"
+            "Robust admin is super flexible, powerful, clean & modern responsive bootstrap Kabala Admin Dashboard with unlimited possibilities"
           );
         break;
-      case "Apex Admin Template":
+      case "Apex Kabala Admin Dashboard":
         $(e.target)
           .closest(".invoice-item-filed")
           .find(".invoice-item-desc")
-          .val("Developer friendly and highly customizable Angular 7+ jQuery Free Bootstrap 4 gradient ui admin template. ");
+          .val("Developer friendly and highly customizable Angular 7+ jQuery Free Bootstrap 4 gradient ui Kabala Admin Dashboard. ");
         break;
-      case "Modern Admin Template":
+      case "Modern Kabala Admin Dashboard":
         $(e.target)
           .closest(".invoice-item-filed")
           .find(".invoice-item-desc")
-          .val("The most complete & feature packed bootstrap 4 admin template of 2019!");
+          .val("The most complete & feature packed bootstrap 4 Kabala Admin Dashboard of 2019!");
         break;
     }
   });
