@@ -211,7 +211,7 @@ trait ScopeFilter
      */
     public function scopeText($query, $text)
     {
-        return $query->where('group',$text);
+        return $query->where('text', 'like', '%' . $text . '%');
     }
 
 
