@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasRolesAndPermissions;
+use App\Traits\ScopeUserFilter;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,7 +11,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRolesAndPermissions;
+    use HasFactory, Notifiable, HasRolesAndPermissions, ScopeUserFilter;
 
     /**
      * The attributes that are mass assignable.
@@ -67,4 +68,26 @@ class User extends Authenticatable
     {
         return $this->language()->where('language_id', '=', Language::getIdByName(app()->getLocale()));
     }
+    public function getFilterScopes(): array
+    {
+        return [
+            'id' => [
+                'hasParam' => true,
+                'scopeMethod' => 'id'
+            ],
+            'name' => [
+                'hasParam' => true,
+                'scopeMethod' => 'name'
+            ],
+            'email' => [
+                'hasParam' => true,
+                'scopeMethod' => 'email'
+            ],
+            'status' => [
+                'hasParam' => true,
+                'scopeMethod' => 'status'
+            ],
+        ];
+    }
+
 }

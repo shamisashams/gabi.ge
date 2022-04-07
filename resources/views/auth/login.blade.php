@@ -83,19 +83,19 @@
 
                     <button class="lisu_btn">{{__('client.register_account')}}</button>
                 </form>
-                <div class="sign_with">
-                    <div class="title">{{__('client.or_sign_in_with')}}</div>
-                    <div class="flex">
-                        <a href="#" class="accs">
-                            <img src="/img/icons/login/1.png" alt="" />
-                            <p>{{__('client.login_with_google')}}</p>
-                        </a>
-                        <a href="{{route('facebookAuth')}}" class="accs">
-                            <img src="/img/icons/login/2.png" alt="" />
-                            <p>{{__('client.login_with_facebook')}}</p>
-                        </a>
-                    </div>
-                </div>
+{{--                <div class="sign_with">--}}
+{{--                    <div class="title">{{__('client.or_sign_in_with')}}</div>--}}
+{{--                    <div class="flex">--}}
+{{--                        <a href="#" class="accs">--}}
+{{--                            <img src="/img/icons/login/1.png" alt="" />--}}
+{{--                            <p>{{__('client.login_with_google')}}</p>--}}
+{{--                        </a>--}}
+{{--                        <a href="{{route('facebookAuth')}}" class="accs">--}}
+{{--                            <img src="/img/icons/login/2.png" alt="" />--}}
+{{--                            <p>{{__('client.login_with_facebook')}}</p>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
         </div>
     </section>

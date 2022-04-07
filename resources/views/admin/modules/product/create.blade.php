@@ -119,6 +119,15 @@
                                                                     class="errorTxt">{{ $errors->first('meta_keyword') }}</small>
                                                             @endif
                                                         </div>
+                                                        <div class="col s12">
+                                                            <label for="shipping">{{trans('admin.shipping')}}</label>
+                                                            <textarea id="shipping" class="ckeditor form-control"
+                                                                      name="shipping"></textarea>
+                                                            @if ($errors->has('shipping'))
+                                                                <small
+                                                                    class="errorTxt">{{ $errors->first('shipping') }}</small>
+                                                            @endif
+                                                        </div>
 
                                                     </div>
 
@@ -126,31 +135,50 @@
                                                 </div>
                                                 <div class="col s12 m6">
                                                     <div class="row" id="feature-row">
-                                                        <div class="col s12 input-field">
-                                                         <textarea id="description" name="description"
-                                                                   class="validate {{ $errors->has('description') ? 'invalid' : 'valid' }} materialize-textarea"
-                                                                   data-error=".errorTxt"></textarea>
-                                                            <label for="description"
-                                                                   class="active">{{trans('admin.description')}}</label>
+                                                        <div class="col s12">
+                                                            <label for="description">{{trans('admin.description')}}</label>
+                                                            <textarea id="description" class="ckeditor form-control"
+                                                                      name="description"></textarea>
                                                             @if ($errors->has('description'))
                                                                 <small
                                                                     class="errorTxt">{{ $errors->first('description') }}</small>
                                                             @endif
                                                         </div>
+                                                        <div class="col s12">
+                                                            <label for="short_description">{{trans('admin.short_description')}}</label>
+                                                            <textarea id="short_description" class="ckeditor form-control"
+                                                                      name="short_description"></textarea>
+                                                            @if ($errors->has('short_description'))
+                                                                <small
+                                                                    class="errorTxt">{{ $errors->first('short_description') }}</small>
+                                                            @endif
+                                                        </div>
+{{--                                                        <div class="col s12 input-field">--}}
+{{--                                                         <textarea id="description" name="description"--}}
+{{--                                                                   class="validate {{ $errors->has('description') ? 'invalid' : 'valid' }} materialize-textarea"--}}
+{{--                                                                   data-error=".errorTxt"></textarea>--}}
+{{--                                                            <label for="description"--}}
+{{--                                                                   class="active">{{trans('admin.description')}}</label>--}}
+{{--                                                            @if ($errors->has('description'))--}}
+{{--                                                                <small--}}
+{{--                                                                    class="errorTxt">{{ $errors->first('description') }}</small>--}}
+{{--                                                            @endif--}}
+{{--                                                        </div>--}}
 
 
                                                         <div class="col s12 input-field">
 
 
-                                                   <textarea id="short_description" name="short_description"
-                                                             class="validate {{ $errors->has('short_description') ? 'invalid' : 'valid' }} materialize-textarea"
-                                                             data-error=".errorTxt"></textarea>
-                                                            <label for="short_description"
-                                                                   class="active">{{trans('admin.short_description')}}</label>
-                                                            @if ($errors->has('short_description'))
-                                                                <small
-                                                                    class="errorTxt">{{ $errors->first('short_description') }}</small>
-                                                            @endif
+
+{{--                                                   <textarea id="short_description" name="short_description"--}}
+{{--                                                             class="validate {{ $errors->has('short_description') ? 'invalid' : 'valid' }} materialize-textarea"--}}
+{{--                                                             data-error=".errorTxt"></textarea>--}}
+{{--                                                            <label for="short_description"--}}
+{{--                                                                   class="active">{{trans('admin.short_description')}}</label>--}}
+{{--                                                            @if ($errors->has('short_description'))--}}
+{{--                                                                <small--}}
+{{--                                                                    class="errorTxt">{{ $errors->first('short_description') }}</small>--}}
+{{--                                                            @endif--}}
 
 
                                                             {{--                                                            <div--}}
@@ -259,4 +287,6 @@
             <div class="content-overlay"></div>
         </div>
     </div>
+    <script src="{{asset('../admin/ckeditor/ckeditor.js')}}"></script>
+
 @endsection

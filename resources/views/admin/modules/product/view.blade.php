@@ -24,6 +24,10 @@
                                                 <td>{{trans('admin.short_description')}}:</td>
                                                 <td class="users-view-latest-activity">{{(count($productItem->availableLanguage) > 0) ?  $productItem->availableLanguage[0]->short_description : ''}}</td>
                                             </tr>
+                                            <tr>
+                                                <td>{{trans('admin.shipping')}}:</td>
+                                                <td class="users-view-latest-activity">{{(count($productItem->availableLanguage) > 0) ?  $productItem->availableLanguage[0]->shipping : ''}}</td>
+                                            </tr>
 
 
                                             <tr>

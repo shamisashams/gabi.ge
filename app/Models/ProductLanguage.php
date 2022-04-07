@@ -16,6 +16,7 @@
 	 'title',
 	 'description',
 	 'short_description',
+	 'shipping',
 	 'slug',
 	 'meta_title',
 	 'meta_description',
@@ -33,4 +34,3 @@
      }
 
  }
- 

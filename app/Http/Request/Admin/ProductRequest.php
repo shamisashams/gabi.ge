@@ -42,7 +42,8 @@ class ProductRequest extends FormRequest
             'meta_description' => 'nullable|string|max:255',
             'meta_keyword' => 'nullable|string|max:255',
             'weight' => 'required|numeric',
-            'short_description' => 'nullable|string|max:255'
+            'short_description' => 'nullable|string',
+            'shipping' => 'nullable|string'
         ];
 //
 //         if (Route::currentRouteName() !== 'productUpdate') {

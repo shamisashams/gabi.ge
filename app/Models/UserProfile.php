@@ -24,7 +24,8 @@ class UserProfile extends Model
         'last_name',
         'address',
         'city',
-        'country'
+        'country',
+        'phone'
     ];
 
 }

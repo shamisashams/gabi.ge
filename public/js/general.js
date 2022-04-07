@@ -395,10 +395,10 @@ function getCartCount() {
                         }</div>
                     </div>
                     <div class="checkout">
-                        <a href="/${locale}/cart">
+                        <!--<a href="/${locale}/cart">
                             <button class="view_cart">View Cart</button>
-                        </a>
-                        <a href="shopping-cart.html">
+                        </a>//-->
+                        <a href="/${locale}/cart">
                             <button class="go">
                                 <div>Checkout</div>
                                 <img src="/img/icons/header/right.png" alt=""/>

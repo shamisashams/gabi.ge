@@ -164,15 +164,18 @@
         <div class="information_content wrapper clicked">
             {{--            <div class="title">Product Information</div>--}}
             <p class="para">
-                {{(count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->short_description : ''}}
+{{--                @dd($product->availableLanguage[0]->short_description)--}}
+                {!! (count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->description : ''!!}
+
             </p>
         </div>
         <div class="information_content wrapper">
             {{--            <div class="title">Additional Information</div>--}}
-            {{(count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->description : ''}}
+            {!! (count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->short_description : '' !!}
+
         </div>
         <div class="information_content wrapper">
-            <div class="title">Shipping & Returns</div>
+            {!! (count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->shipping : '' !!}
         </div>
     </section>
     @include('pages.best-sellers.index')

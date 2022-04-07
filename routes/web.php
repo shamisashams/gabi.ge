@@ -147,6 +147,15 @@ Route::prefix('{locale?}')
                     ->name('update', 'sliderUpdate')
                     ->name('destroy', 'sliderDestroy')
                     ->name('show', 'sliderShow');
+
+                Route::resource('user', \App\Http\Controllers\Admin\UserController::class)
+                    ->name('index', 'userIndex')
+                    ->name('create', 'userCreateView')
+                    ->name('store', 'userCreate')
+                    ->name('edit', 'userEditView')
+                    ->name('update', 'userUpdate')
+                    ->name('destroy', 'userDestroy')
+                    ->name('show', 'userShow');
             });
         });
         Route::middleware(['active'])->group(function () {

@@ -31,6 +31,7 @@ use App\Repositories\SaleRepositoryInterface;
 use App\Repositories\SettingRepositoryInterface;
 use App\Repositories\SliderRepositoryInterface;
 use App\Repositories\TranslationRepositoryInterface;
+use App\Repositories\UserAdminRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\VerificationRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
@@ -77,6 +78,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
         $this->app->bind(\App\Repositories\Frontend\UserRepositoryInterface::class, \App\Repositories\Frontend\Eloquent\UserRepository::class);
         $this->app->bind(PurchaseRepositoryInterface::class, PurchaseRepository::class);
+        $this->app->bind(UserAdminRepositoryInterface::class, \App\Repositories\Eloquent\UserAdminRepository::class);
     }
 
 }
