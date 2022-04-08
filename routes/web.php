@@ -156,6 +156,15 @@ Route::prefix('{locale?}')
                     ->name('update', 'userUpdate')
                     ->name('destroy', 'userDestroy')
                     ->name('show', 'userShow');
+
+                Route::resource('order', \App\Http\Controllers\Admin\OrderController::class)
+                    ->name('index', 'orderIndex')
+                    ->name('create', 'orderCreateView')
+                    ->name('store', 'orderCreate')
+                    ->name('edit', 'orderEditView')
+                    ->name('update', 'orderUpdate')
+                    ->name('destroy', 'orderDestroy')
+                    ->name('show', 'orderShow');
             });
         });
         Route::middleware(['active'])->group(function () {

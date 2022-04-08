@@ -26,6 +26,7 @@ use App\Repositories\Frontend\Eloquent\PurchaseRepository;
 use App\Repositories\Frontend\ProductRepositoryInterface;
 use App\Repositories\Frontend\PurchaseRepositoryInterface;
 use App\Repositories\LanguageRepositoryInterface;
+use App\Repositories\OrderRepositoryInsterface;
 use App\Repositories\PageRepositoryInterface;
 use App\Repositories\SaleRepositoryInterface;
 use App\Repositories\SettingRepositoryInterface;
@@ -79,6 +80,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\Frontend\UserRepositoryInterface::class, \App\Repositories\Frontend\Eloquent\UserRepository::class);
         $this->app->bind(PurchaseRepositoryInterface::class, PurchaseRepository::class);
         $this->app->bind(UserAdminRepositoryInterface::class, \App\Repositories\Eloquent\UserAdminRepository::class);
+        $this->app->bind(OrderRepositoryInsterface::class, \App\Repositories\Eloquent\OrderRepository::class);
     }
 
 }

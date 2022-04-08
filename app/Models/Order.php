@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\ScopeOrderFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Order extends Model
 {
-    use HasFactory;
+    use HasFactory, ScopeOrderFilter;
 
     const STATUS_PENDING = 3;
     const STATUS_SUCCESS = 1;
@@ -74,5 +75,27 @@ class Order extends Model
     public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function getFilterScopes(): array
+    {
+        return [
+            'id' => [
+                'hasParam' => true,
+                'scopeMethod' => 'id'
+            ],
+            'total_price' => [
+                'hasParam' => true,
+                'scopeMethod' => 'totalPrice'
+            ],
+            'email' => [
+                'hasParam' => true,
+                'scopeMethod' => 'email'
+            ],
+            'status' => [
+                'hasParam' => true,
+                'scopeMethod' => 'status'
+            ],
+        ];
     }
 }
