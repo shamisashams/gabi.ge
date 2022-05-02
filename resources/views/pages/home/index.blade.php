@@ -138,11 +138,11 @@
                                 <div>
                                     @if($product->saleProduct && $product->saleProduct->sale)
                                         <div class="title price">
-                                            ${{\App\Models\Product::calculatePrice($product->price,$product->saleProduct->sale->discount,$product->saleProduct->sale->type)}}
+                                            ₾{{\App\Models\Product::calculatePrice($product->price,$product->saleProduct->sale->discount,$product->saleProduct->sale->type)}}
                                         </div>
-                                        <div class="discount">${{round($product->price/100,2)}}</div>
+                                        <div class="discount">₾{{round($product->price/100,2)}}</div>
                                     @else
-                                        <div class="title price">${{round($product->price/100,2)}}  </div>
+                                        <div class="title price">₾{{round($product->price/100,2)}}  </div>
                                     @endif
                                 </div>
                             </div>
@@ -211,9 +211,9 @@
                                 <div class="title price">
                                     ₾ ${{\App\Models\Product::calculatePrice($product->price,$product->saleProduct->sale->discount,$product->saleProduct->sale->type)}}
                                 </div>
-                                <div class="discount">${{round($product->price/100,2)}}</div>
+                                <div class="discount">₾{{round($product->price/100,2)}}</div>
                             @else
-                                <div class="title price">${{round($product->price/100,2)}}  </div>
+                                <div class="title price">₾{{round($product->price/100,2)}}  </div>
                             @endif
                         </div>
                     </div>

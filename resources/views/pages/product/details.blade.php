@@ -89,7 +89,7 @@
             <div class="prices flex">
                 @if($product->saleProduct && $product->saleProduct->sale)
                     <div class="main">
-                        $ {{\App\Models\Product::calculatePrice($product->price,$product->saleProduct->sale->discount,$product->saleProduct->sale->type)}}</div>
+                        ₾ {{\App\Models\Product::calculatePrice($product->price,$product->saleProduct->sale->discount,$product->saleProduct->sale->type)}}</div>
                     <div class="last">$ {{round($product->price/100,2)}}</div>
                     <div class="off">
                         @if($product->saleProduct->sale->type=="percent")
@@ -99,7 +99,7 @@
                         @endif
                     </div>
                 @else
-                    <div class="main">$ {{round($product->price/100,2)}}</div>
+                    <div class="main">₾ {{round($product->price/100,2)}}</div>
                 @endif
             </div>
             {{--            <div class="colors">--}}

@@ -49,25 +49,29 @@ class PermissionsSeeder extends Seeder
         );
 
         // Insert permissions
-        DB::table('permissions')->insert($permissions);
+        //DB::table('permissions')->insert($permissions);
 
-        DB::table('users')->insert([
+        /*DB::table('users')->insert([
             'name' => 'test test',
             'email' => 'webmaster@gmail.com',
-            'password' => Hash::make('Webmaster'),
-        ]);
+            'password' => '$2y$10$SakPBMAjmo0rhBU/0RuVjuTB4pOZqeU.pZVxpnOPR.PBe1nkdcsPa',
+        ]);*/
 
         DB::table('roles')->insert([
             'name' => 'Admin',
             'slug' => 'admin'
         ]);
-
-        DB::table('users_roles')->insert([
-            'user_id' => 5,
-            'role_id' => 3
+        DB::table('roles')->insert([
+            'name' => 'User',
+            'slug' => 'user'
         ]);
+/*
+        DB::table('users_roles')->insert([
+            'user_id' => 1,
+            'role_id' => 1
+        ]);*/
 
-        foreach ($permissions as $key => $item) {
+        /*foreach ($permissions as $key => $item) {
             DB::table('roles_permissions')->insert([
                 'role_id' => 3,
                 'permission_id' => $key + 1
@@ -77,6 +81,6 @@ class PermissionsSeeder extends Seeder
                 'user_id' => 5,
                 'permission_id' => $key + 1
             ]);
-        }
+        }*/
     }
 }

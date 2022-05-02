@@ -350,7 +350,7 @@ function getCartCount() {
         success: function (data) {
             if (data.status == true) {
                 $("#cart-count").text(
-                    data.count + " / $" + (data.total.toFixed(2) * 100) / 100
+                    data.count + " / ₾" + (data.total.toFixed(2) * 100) / 100
                 );
                 let cart = document.querySelectorAll(".cart_item_header");
                 let cartDropDown = document.querySelector(".cart_dropdown");
@@ -364,7 +364,7 @@ function getCartCount() {
                     }/details/${item.id}"">
                         <div>
                             <div class="title">${item.title}</div>
-                            <div class="number">${item.quantity} x $${
+                            <div class="number">${item.quantity} x ₾${
                         item.sale ? item.sale : item.price
                     }</div>
                         </div>
@@ -390,7 +390,7 @@ function getCartCount() {
                 let checkout = `
                                     <div class="checkout" id="checkout-total">
                         <div class="total">total</div>
-                        <div class="price">$ ${
+                        <div class="price">₾ ${
                             Math.round(data.total * 100) / 100
                         }</div>
                     </div>
@@ -407,8 +407,8 @@ function getCartCount() {
                     </div>`;
                 $(cartDropDown).append(checkout);
 
-                $("#sub-total").text(`$${data.total.toFixed(2)}`);
-                $("#total-price").text(`$${data.total.toFixed(2)}`);
+                $("#sub-total").text(`₾${data.total.toFixed(2)}`);
+                $("#total-price").text(`₾${data.total.toFixed(2)}`);
                 $("#total-price").attr("data-price", data.total.toFixed(2));
 
                 // $('#cart_count').text(data.count);
@@ -439,7 +439,7 @@ function getCartCount() {
                         //  $(`#cart_3_product_total-step-${el.id}`).text(`${(el.sale / 100) * el.quantity}₾`)
                     } else {
                         $(element).text(
-                            `$ ${(el.price * el.quantity).toFixed(2)}`
+                            `₾ ${(el.price * el.quantity).toFixed(2)}`
                         );
                     }
                 });

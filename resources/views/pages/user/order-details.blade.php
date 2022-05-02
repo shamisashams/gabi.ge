@@ -21,7 +21,7 @@
                         {{__('client.order_number')}}:
                         <span class="dc">{{$order->id}}</span>
                     </div>
-                    <div class="h_i">{{__('total_price')}}: <span class="dc"> {{$order->total_price/100}} $ </span>
+                    <div class="h_i">{{__('total_price')}}: <span class="dc"> {{$order->total_price/100}} ₾ </span>
                     </div>
                 </div>
                 <div class="one">
@@ -60,7 +60,7 @@
                                     <div class="price last">{{$orderProduct->quantity}}</div>
                                     <div class="price last">
                                         {{\App\Models\Product::calculatePrice($orderProduct->product->price,$orderProduct->product->saleProduct->sale->discount,$orderProduct->product->saleProduct->sale->type)}}
-                                        $
+                                        ₾
                                     </div>
                                 </div>
                             @else
@@ -92,7 +92,7 @@
                             <div class="d2">{{__('client.items_subtotal')}}
                                 : {{($order->total_price/100)-$order->shipment_price}} $
                             </div>
-                            <div class="d2">{{__('client.shipping_handling')}}: {{$order->shipment_price}} $</div>
+                            <div class="d2">{{__('client.shipping_handling')}}: {{$order->shipment_price}} ₾</div>
                         </div>
                     </div>
                     {{--                    <div class="d2" style="margin-bottom: 16px">Billing address:</div>--}}
@@ -102,7 +102,7 @@
                         </div>
                         <div class="right flex column">
                             <div class="d2" style="white-space: nowrap; margin-left: 5px">
-                                <strong>{{__('grand_total')}}: {{$order->total_price/100}} $</strong>
+                                <strong>{{__('grand_total')}}: {{$order->total_price/100}} ₾</strong>
                             </div>
                             <button class="print_this_page flex column">
                                 <img src="/img/icons/profile/print.png" alt=""/>

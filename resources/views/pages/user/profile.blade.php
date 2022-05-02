@@ -138,7 +138,7 @@
                     <div class="ordered_item flex">
                         <div class="c2">{{$order->id}}</div>
                         <div class="c2">{{$order->created_at}}</div>
-                        <div class="c2">${{round($order->total_price/100,2)}}</div>
+                        <div class="c2">₾{{round($order->total_price/100,2)}}</div>
                         @if($order->status==\App\Models\Order::STATUS_PENDING)
                             <div class="c2 green">{{__('client.pending')}}</div>
                         @elseif($order->status==\App\Models\Order::STATUS_FAIL)

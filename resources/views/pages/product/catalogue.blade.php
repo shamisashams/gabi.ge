@@ -87,8 +87,8 @@
                 <div class="section">
                     <div class="titles">{{__('client.price_filter')}}</div>
                     <p>
-                        {{__('client.price')}}: <label for="min">${{Request::get('min_price')}}</label> — <label
-                            for="max">${{Request::get('max_price')}}</label>
+                        {{__('client.price')}}: <label for="min">₾{{Request::get('min_price')}}</label> — <label
+                            for="max">₾{{Request::get('max_price')}}</label>
                     </p>
                     <div class="price_control">
                         <input id="min" name="min_price" type="text" value="{{Request::get('min_price')}}"/>
@@ -171,11 +171,11 @@
                                 <div>
                                     @if($product->saleProduct && $product->saleProduct->sale)
                                         <div class="title price">
-                                            ${{\App\Models\Product::calculatePrice($product->price,$product->saleProduct->sale->discount,$product->saleProduct->sale->type)}}
+                                            ₾{{\App\Models\Product::calculatePrice($product->price,$product->saleProduct->sale->discount,$product->saleProduct->sale->type)}}
                                         </div>
-                                        <div class="discount">${{round($product->price/100,2)}}</div>
+                                        <div class="discount">₾{{round($product->price/100,2)}}</div>
                                     @else
-                                        <div class="title price">${{round($product->price/100,2)}}  </div>
+                                        <div class="title price">₾{{round($product->price/100,2)}}  </div>
                                     @endif
                                 </div>
                             </div>

@@ -37,7 +37,7 @@
                             <div>{{$product['title']}}</div>
                         </div>
                         <div class="c2" id="car_product_price-{{$product['id']}}">
-                            $ {{$product['sale']?:$product['price']}}</div>
+                            ₾ {{$product['sale']?:$product['price']}}</div>
                         <div class="c2">
                             @foreach($product['options'] as $key=>$option)
                                 {{count($option->availableLanguage)>0?$option->availableLanguage[0]->title:""}}{{$key<count($product['options'])-1?',':""}}
@@ -61,7 +61,7 @@
                             </div>
                         </div>
                         <div class="c2" id="cart_product_total-{{$product['id']}}-{{$product['features']}}">
-                            ${{($product['sale']?:$product['price'])*$product['quantity']}}</div>
+                            ₾{{($product['sale']?:$product['price'])*$product['quantity']}}</div>
                         <p hidden>{{$product['features']}}</p>
                         <button class="remove_item_cart"
                                 onclick="removefromcart(null,{{$product['id']}},{{$product['features']}})">
@@ -79,7 +79,7 @@
             <div class="head row">{{__('client.cart_total')}}</div>
             <div class="row flex">
                 <div>{{__('client.sub_total')}}:</div>
-                <div id="sub-total">${{round($total,2)}}</div>
+                <div id="sub-total">₾{{round($total,2)}}</div>
             </div>
             <form method="post" action="{{route('saveOrder',app()->getLocale())}}">
                 @csrf
@@ -92,7 +92,7 @@
                                    value="from_office" data-price="0.00"/>
                             <label for="ship_1">{{__('client.from_office')}}</label>
                         </div>
-                        <div>$00.00</div>
+                        <div>₾00.00</div>
                     </div>
                     @if ($errors->has('shipping'))
                         <p class="profile-error-block">{{ $errors->first('shipping') }}</p>
@@ -159,7 +159,7 @@
                 </div>
                 <div class="flex total">
                     <div>Total</div>
-                    <div id="total-price" data-price="">$ {{round($total,2)}}</div>
+                    <div id="total-price" data-price="">₾ {{round($total,2)}}</div>
                 </div>
                 <button type="submit" class="proceed">Proceed To Checkout</button>
 

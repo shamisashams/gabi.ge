@@ -28,7 +28,7 @@ $('.product_feature').on('select2:select', (e) => {
         }
     });
     $.ajax({
-        url: '/'+locale+'/admin/feature-answers/' + featureId,
+        url: '/'+locale+'/adminpanel/feature-answers/' + featureId,
         method: 'GET',
         success: function (data) {
             let container = document.querySelector('#feature-row');

@@ -35,7 +35,7 @@ use App\Http\Controllers\Admin\ProductController;
 Route::prefix('{locale?}')
     ->middleware('setlocale')
     ->group(function () {
-        Route::prefix('admin')->group(function () {
+        Route::prefix('adminpanel')->group(function () {
             Route::get('/', function () {
                 if (Auth::user() && Auth::user()->can('isAdmin')) {
                     return redirect(\route('productIndex', app()->getLocale()));
