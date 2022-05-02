@@ -46,7 +46,7 @@
                         <img class="product" src="noimage.png"/>
                     @endif
                     <img class="frame" src="img/products/frame.png" alt=""/>
-                    <a class="category_name" href="{{route('catalogue',[app()->getLocale(),$category->id])}}"
+                    <a class="category_name" href="{{route('catalogueSeo',[app()->getLocale(),$category->availableLanguage[0]->slug])}}"
                        style="overflow-wrap: anywhere">
                         {{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}
                     </a>
@@ -90,7 +90,7 @@
                 @foreach($discountedProducts as $product)
 
                         <div class="main_product_view">
-                            <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
+                            <a href="{{route('productDetailsSeo',[app()->getLocale(),$product->category->availableLanguageS->slug,$product->availableLanguageS->slug])}}">
                             <div class="pic">
                                 @if($product->saleProduct && $product->saleProduct->sale)
                                     <div class="label off">
@@ -165,7 +165,7 @@
         <div class="flex new_products_slide">
             @foreach($newProducts as $product)
                 <div class="main_product_view">
-                    <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
+                    <a href="{{route('productDetailsSeo',[app()->getLocale(),$product->category->availableLanguageS->slug,$product->availableLanguageS->slug])}}">
                     <div class="pic">
                         @if($product->saleProduct && $product->saleProduct->sale)
                             <div class="label off">

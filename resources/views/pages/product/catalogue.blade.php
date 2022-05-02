@@ -123,8 +123,9 @@
                 <div class="product_grid">
                     @foreach($products as $product)
                         {{--                        <a href="{{route('productDetails',[app()->getLocale(),$category->id,$product->id])}}">--}}
+                    {{--@dd($product)--}}
                         <div class="main_product_view">
-                            <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
+                            <a href="{{route('productDetailsSeo',[app()->getLocale(),$product->category->availableLanguageS->slug,$product->availableLanguageS->slug])}}">
                                 <div class="pic">
                                     @if($product->saleProduct && $product->saleProduct->sale)
                                         <div class="label off">
@@ -151,7 +152,7 @@
                                                 <div class="roboto">{{__('client.view')}}</div>
                                             </button>
                                         </a>
-                                        <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
+                                        <a href="{{route('productDetailsSeo',[app()->getLocale(),$product->category_id,$product->id])}}">
                                             <button type="button" class="add_to_cart details">
                                                 <img src="/img/icons/profile/magnifying-glass.svg" alt=""/>
                                                 <div class="roboto">{{__('client.details')}}</div>

@@ -31,6 +31,20 @@
 
                                                         </div>
 
+                                                        <div class="col s12 input-field">
+                                                            <input id="title" name="title" type="text"
+                                                                   class="validate {{ $errors->has('slug') ? 'invalid' : 'valid' }}"
+                                                                   value="{{old('slug')}}"
+                                                                   data-error=".errorTxt">
+                                                            <label for="title"
+                                                                   class="active">{{trans('admin.slug')}}</label>
+                                                            @if ($errors->has('slug'))
+                                                                <small
+                                                                    class="errorTxt">{{ $errors->first('slug') }}</small>
+                                                            @endif
+
+                                                        </div>
+
 
                                                         <div class="col s12 input-field">
 

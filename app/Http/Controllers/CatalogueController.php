@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Language;
 use App\Models\Product;
 use App\Models\ProductAnswers;
 use App\Repositories\Frontend\ProductRepositoryInterface;
@@ -38,8 +39,32 @@ class CatalogueController extends Controller
             'sortParams' => ['sort' => 'position', 'order' => 'DESC']
         ]);
 
-        $products = $this->productRepository->getData($request, ['saleProduct.sale', 'availableLanguage', 'files', 'category.availableLanguage'], false);
+        $products = $this->productRepository->getData($request, ['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files', 'category.availableLanguageS'], false);
 //        $staticFilterData = ['category'];
+        //dd($products->get());
+
+        return view('pages.product.catalogue', [
+            'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
+            'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
+//            'staticFilterData' => $staticFilterData,
+            'products' => $products->orderBy('created_at', 'DESC')->paginate(16),
+            'category' => $category
+        ]);
+    }
+
+    public function catalogueSeo(string $lang, Request $request, $category_slug)
+    {
+        $category = Category::query()->whereHas('language',function ($query) use ($category_slug){
+            $query->where('slug', $category_slug)->where('language_id', '=', Language::getIdByName(app()->getLocale()));
+        })->first();
+        $request->merge([
+            'category' => $category->id,
+            'sortParams' => ['sort' => 'position', 'order' => 'DESC']
+        ]);
+
+        $products = $this->productRepository->getData($request, ['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files', 'category.availableLanguageS'], false);
+//        $staticFilterData = ['category'];
+        //dd($products->get());
 
         return view('pages.product.catalogue', [
             'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
@@ -66,6 +91,22 @@ class CatalogueController extends Controller
             'category' => $category,
             'productFeatures' => $this->productRepository->getSingleProductFeatures($id)['productFeatures'],
             'productAnswers' => $this->productRepository->getSingleProductFeatures($id)['productAnswers'],
+            'bestSellerProducts' => $this->productRepository->getNewProducts(),
+        ]);
+    }
+
+    public function showSeo(string $locale, $category_slug, $product_slug)
+    {
+        $product = $this->productRepository->getProductByslug($product_slug);
+        $category = Category::query()->whereHas('language',function ($query) use ($category_slug){
+            $query->where('slug', $category_slug)->where('language_id', '=', Language::getIdByName(app()->getLocale()));
+        })->first();
+        //dd($category);
+        return view('pages.product.details', [
+            'product' => $product,
+            'category' => $category,
+            'productFeatures' => $this->productRepository->getSingleProductFeatures($product->id)['productFeatures'],
+            'productAnswers' => $this->productRepository->getSingleProductFeatures($product->id)['productAnswers'],
             'bestSellerProducts' => $this->productRepository->getNewProducts(),
         ]);
     }

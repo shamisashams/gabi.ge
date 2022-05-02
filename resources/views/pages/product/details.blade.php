@@ -1,5 +1,7 @@
 @extends('layouts.base')
 
+{{--@dd($category)--}}
+
 @section('head')
     <title>{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}</title>
 @endsection

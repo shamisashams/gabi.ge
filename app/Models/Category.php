@@ -59,9 +59,19 @@ class Category extends Model
         return $this->hasMany(CategoryLanguage::class, 'category_id');
     }
 
+    public function languageS()
+    {
+        return $this->hasOne(CategoryLanguage::class, 'category_id');
+    }
+
     public function availableLanguage()
     {
         return $this->language()->where('language_id', '=', Language::getIdByName(app()->getLocale()));
+    }
+
+    public function availableLanguageS()
+    {
+        return $this->languageS()->where('language_id', '=', Language::getIdByName(app()->getLocale()));
     }
 
     public function childCategories()

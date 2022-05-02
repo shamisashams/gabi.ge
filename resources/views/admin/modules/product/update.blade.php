@@ -35,6 +35,20 @@
 
                                                         </div>
 
+                                                        <div class="col s12 input-field">
+                                                            <input id="title" name="slug" type="text"
+                                                                   class="validate {{ $errors->has('slug') ? 'invalid' : 'valid' }}"
+                                                                   value="{{count($product->availableLanguage)>0?$product->availableLanguage[0]->slug:""}}"
+                                                                   data-error=".errorTxt">
+                                                            <label for="title"
+                                                                   class="active">{{trans('admin.slug')}}</label>
+                                                            @if ($errors->has('slug'))
+                                                                <small
+                                                                    class="errorTxt">{{ $errors->first('slug') }}</small>
+                                                            @endif
+
+                                                        </div>
+
 
                                                         <div class="col s12 input-field">
 

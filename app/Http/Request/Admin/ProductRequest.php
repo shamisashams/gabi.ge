@@ -2,6 +2,9 @@
 
 namespace App\Http\Request\Admin;
 
+use App\Models\CategoryLanguage;
+use App\Models\Language;
+use App\Models\ProductLanguage;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +29,8 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
+        $localizationID = Language::getIdByName(app()->getLocale());
+        $product = ProductLanguage::where(['product_id' => $this->product, 'language_id' => $localizationID])->first();
 
         $rules = [
             'title' => 'required|string|max:255',
@@ -43,7 +48,9 @@ class ProductRequest extends FormRequest
             'meta_keyword' => 'nullable|string|max:255',
             'weight' => 'required|numeric',
             'short_description' => 'nullable|string',
-            'shipping' => 'nullable|string'
+            'shipping' => 'nullable|string',
+            'slug' => ['required', $product ? Rule::unique('product_languages', 'slug')->ignore($product->id) :
+                Rule::unique('product_languages', 'slug')]
         ];
 //
 //         if (Route::currentRouteName() !== 'productUpdate') {

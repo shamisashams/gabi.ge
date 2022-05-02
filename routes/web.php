@@ -173,6 +173,9 @@ Route::prefix('{locale?}')
             Route::get('/catalogue/{category}', [CatalogueController::class, 'catalogue'])->name('catalogue');
             Route::get('/catalogue/{category}/details/{product}', [CatalogueController::class, 'show'])->name('productDetails');
 
+            Route::get('/{category}', [CatalogueController::class, 'catalogueSeo'])->name('catalogueSeo');
+            Route::get('/{category}/{product}', [CatalogueController::class, 'showSeo'])->name('productDetailsSeo');
+
             Route::get('/addcartcount/{id}/{type}', [CartController::class, 'addCartCount'])->name('addCartCount');
             Route::get('/removefromcart', [CartController::class, 'removeFromCart'])->name('removeFromCart');
             Route::get('/addtocart/{id}', [CartController::class, 'addToCart'])->name('addToCart');

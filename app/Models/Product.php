@@ -39,6 +39,11 @@ class Product extends Model
         return $this->hasMany('App\Models\ProductLanguage', 'product_id');
     }
 
+    public function languageS()
+    {
+        return $this->hasOne('App\Models\ProductLanguage', 'product_id');
+    }
+
     public function features()
     {
         return $this->hasMany('App\Models\ProductFeatures', 'product_id');
@@ -52,6 +57,11 @@ class Product extends Model
     public function availableLanguage()
     {
         return $this->language()->where('language_id', '=', Language::getIdByName(app()->getLocale()));
+    }
+
+    public function availableLanguageS()
+    {
+        return $this->languageS()->where('language_id', '=', Language::getIdByName(app()->getLocale()));
     }
 
     public function category()

@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Frontend\Eloquent;
 
+use App\Models\Language;
 use App\Models\Product;
 use App\Models\ProductAnswers;
 use App\Models\ProductFeatures;
@@ -83,6 +84,16 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     public function getProductById(int $id)
     {
         return $this->model::where(['id' => $id])->with(['availableLanguage', 'files', 'saleProduct.sale'])->first();
+    }
+
+    public function getProductBySlug($slug)
+    {
+
+        $localizationID = Language::getIdByName(app()->getLocale());
+
+        return $this->model::query()->whereHas('language',function ($query) use ($slug, $localizationID){
+            $query->where('slug', $slug)->where('language_id', $localizationID);
+        })->with(['availableLanguage', 'files', 'saleProduct.sale'])->first();
     }
 
 }
