@@ -28,7 +28,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
     public function getDiscountedProducts()
     {
-        return $this->model::with(['saleProduct.sale', 'availableLanguage', 'files','category.availableLanguage'])
+        return $this->model::with(['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files','category.availableLanguage', 'category.availableLanguageS'])
             ->has('saleProduct.sale')
             ->take(6)
             ->get();
@@ -36,7 +36,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
     public function getNewProducts()
     {
-        return $this->model::with(['saleProduct.sale', 'availableLanguage', 'files','category.availableLanguage'])
+        return $this->model::with(['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files','category.availableLanguage', 'category.availableLanguageS'])
             ->orderBy('created_at', 'desc')
             ->take(10)
             ->get();
