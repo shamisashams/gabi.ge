@@ -95,7 +95,7 @@ class CatalogueController extends Controller
         ]);
     }
 
-    public function showSeo(string $locale, $category_slug, $product_slug)
+    public function showSeo(string $locale, $category_slug = null, $product_slug = null)
     {
         $product = $this->productRepository->getProductByslug($product_slug);
         $category = Category::query()->whereHas('language',function ($query) use ($category_slug){
