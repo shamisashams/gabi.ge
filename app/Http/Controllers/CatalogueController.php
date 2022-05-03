@@ -100,7 +100,7 @@ class CatalogueController extends Controller
         $product = $this->productRepository->getProductByslug($product_slug);
         $category = Category::query()->whereHas('language',function ($query) use ($category_slug){
             $query->where('slug', $category_slug)->where('language_id', '=', Language::getIdByName(app()->getLocale()));
-        })->first();
+        })->firstOrFail();
         //dd($category);
         return view('pages.product.details', [
             'product' => $product,

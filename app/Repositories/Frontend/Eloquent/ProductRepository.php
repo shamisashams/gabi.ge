@@ -22,6 +22,12 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     {
         return $this->model::inRandomOrder()
             ->with(['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files','category.availableLanguage','category.availableLanguageS'])
+            ->whereHas('language',function ($query){
+                $query->where('slug','!=',null);
+            })
+            ->whereHas('category.language',function ($query){
+                $query->where('slug','!=',null);
+            })
             ->take(10)
             ->get();
     }
