@@ -21,7 +21,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     public function getBestSeller()
     {
         return $this->model::inRandomOrder()
-            ->with(['saleProduct.sale', 'availableLanguage', 'files','category.availableLanguage'])
+            ->with(['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files','category.availableLanguage'])
             ->take(10)
             ->get();
     }
