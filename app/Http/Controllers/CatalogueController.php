@@ -56,7 +56,7 @@ class CatalogueController extends Controller
     {
         $category = Category::query()->whereHas('language',function ($query) use ($category_slug){
             $query->where('slug', $category_slug)->where('language_id', '=', Language::getIdByName(app()->getLocale()));
-        })->first();
+        })->firstOrFail();
         $request->merge([
             'category' => $category->id,
             'sortParams' => ['sort' => 'position', 'order' => 'DESC']
