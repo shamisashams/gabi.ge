@@ -277,6 +277,7 @@ $(document).ready(function () {
 });
 
 function addToCart(el, $id) {
+    checkSelection_alert_p()
     let object = {};
     let box = document.querySelector("#customize");
     if (box) {
@@ -296,6 +297,8 @@ function addToCart(el, $id) {
 }
 
 function addToCartProductDetails(el, $id) {
+
+    checkSelection_alert();
     let object = {};
     let box = document.querySelector("#customize-details");
     if (box) {
@@ -532,7 +535,7 @@ if (params === "order") {
 if (params === "password") {
     password.click();
 }
-checkProductDetailsSelection();
+//checkProductDetailsSelection();
 
 function checkProductDetailsSelection() {
     let box = document.querySelector("#customize-details");
@@ -584,7 +587,64 @@ function checkSelection() {
     }
 }
 
+function checkSelection_alert() {
+
+    let box = document.querySelector("#customize-details");
+    let buttons = document.querySelector(".btm_btns");
+    if (box) {
+        let answers = box.querySelectorAll('input[type="radio"]');
+        let allOptions = box.querySelectorAll(".title");
+        answers.forEach((item) => {
+            item.onchange = function () {
+                let options = box.querySelectorAll(
+                    'input[type="radio"]:checked'
+                );
+                if (allOptions.length !== options.length) {
+                    alert('select options')
+                    return false;
+                }
+            };
+        });
+        if (
+            allOptions.length !==
+            box.querySelectorAll('input[type="radio"]:checked').length
+        ) {
+            alert('select options')
+            return false;
+        }
+    }
+}
+
+function checkSelection_alert_p() {
+
+    let box = document.querySelector("#customize");
+    let buttons = document.querySelector(".btm_btns");
+    if (box) {
+        let answers = box.querySelectorAll('input[type="radio"]');
+        let allOptions = box.querySelectorAll(".title");
+        answers.forEach((item) => {
+            item.onchange = function () {
+                let options = box.querySelectorAll(
+                    'input[type="radio"]:checked'
+                );
+                if (allOptions.length !== options.length) {
+                    alert('select options')
+                    return false;
+                }
+            };
+        });
+        if (
+            allOptions.length !==
+            box.querySelectorAll('input[type="radio"]:checked').length
+        ) {
+            alert('select options')
+            return false;
+        }
+    }
+}
+
 function addToModal(product) {
+    console.log(product)
     let popupContainer = document.querySelector("#popup_bg");
     let images = "";
     let mainImages = "";
@@ -614,7 +674,7 @@ function addToModal(product) {
         let sale = product.sale_product.sale;
         price = `
                <div class="main">
-                 $ ${
+                 ₾ ${
                      sale.type == "fixed"
                          ? (product.prcie / 100 - sale.discount).toFixed(2)
                          : (
@@ -623,7 +683,7 @@ function addToModal(product) {
                            ).toFixed(2)
                  }
                </div>
-               <div class="last">$ ${(product.price / 100).toFixed(2)}</div>
+               <div class="last">₾ ${(product.price / 100).toFixed(2)}</div>
                <div class="off">
                   -${
                       sale.type == "percent"
@@ -637,7 +697,7 @@ function addToModal(product) {
                `;
     } else {
         price = `
-            <div class="main">$ ${(product.price / 100).toFixed(2)}</div>
+            <div class="main">₾ ${(product.price / 100).toFixed(2)}</div>
 `;
     }
 
@@ -695,8 +755,9 @@ function addToModal(product) {
             }
         }
 
-        let disabled = productAnswers.length > 0;
-
+        //et disabled = productAnswers.length > 0;
+        let disabled = false
+        console.log(product);
         let content = `
         <div class="close_popup_bg"></div>
             <div class="product_popup">
@@ -774,7 +835,7 @@ function addToModal(product) {
 
         popupContainer.innerHTML = "";
         $(popupContainer).append(content);
-        checkSelection();
+        //checkSelection();
         closeModal();
     });
 }

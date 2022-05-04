@@ -7,6 +7,7 @@
     <meta name="description" content="@yield('description','kabala-shop')">
 
     <meta name="language" content="{{app()->getLocale()}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta name="keywords" content="@yield('keywords','kabala')">
     <meta name="author" content="">
@@ -45,7 +46,7 @@
 <script src="{{asset('../js/slide.js')}}"></script>
 <script src="{{asset('../js/general.js')}}"></script>
 <script src="{{asset('../js/main.js')}}"></script>
-
+@stack('script')
 </body>
 
 </html>

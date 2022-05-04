@@ -28,20 +28,25 @@
         </div>
         <div>
             <div class="title">Information</div>
-            <a href="#" class="link">About Babyshop</a>
-            <a href="#" class="link">Delivery Terms</a>
-            <a href="#" class="link">Register Return Online</a>
-            <a href="#" class="link">Cookies</a>
-            <a href="#" class="link">Terms & Conditions</a>
-            <a href="#" class="link">Integrity Policy</a>
+            <a href="{{route('welcome')}}" class="link {{str_contains(substr(parse_url(route('welcome',app()->getLocale()), PHP_URL_PATH), 1),request()->path())?"active":""}}">{{__('client.home')}}</a>
+            <a href="{{route('contactUs',app()->getLocale())}}"
+               class="link {{str_contains(request()->path(),substr(parse_url(route('contactUs',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.contact_us')}}</a>
+            <a href="{{route('aboutUs',app()->getLocale())}}"
+               class="link {{str_contains(request()->path(),substr(parse_url(route('aboutUs',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.about_us')}}</a>
+            <a href="{{route('helps',app()->getLocale())}}"
+               class="link {{str_contains(request()->path(),substr(parse_url(route('helps',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.helps')}}</a>
         </div>
         <div>
             <div class="title">Customer Service</div>
-            <a href="#" class="link">Returns & Exchange</a>
-            <a href="#" class="link">FAQ</a>
-            <a href="#" class="link">Payment Methods</a>
-            <a href="#" class="link">Size Guides</a>
-            <a href="#" class="link">Contact Us</a>
+            @foreach($categories as $key=>$category)
+                <a class="link" href="{{route('catalogueSeo',[app()->getLocale(),$category->availableLanguage[0]->slug])}}">
+                    {{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}
+                </a>
+                @if($loop->iteration > 4)
+                    @break
+                @endif
+            @endforeach
+
         </div>
         <div>
             <div class="title last">
@@ -52,8 +57,8 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             </p>
             <div class="email">
-                <input type="text " placeholder="example@email.com" />
-                <button class="ok roboto">Ok</button>
+                <input id="sb_inp" type="email " placeholder="example@email.com" />
+                <button id="sb_btn" class="ok roboto">Ok</button>
             </div>
         </div>
     </div>
@@ -71,3 +76,29 @@
         </div>
     </div>
 </footer>
+
+@push('script')
+    <script>
+        let locale_f = $('meta[name="language"]').attr("content");
+        $('#sb_btn').click(function (e){
+            let val = $('#sb_inp').val();
+            //console.log($('meta[name="csrf-token"]').attr("content"))
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+            });
+            $.ajax({
+                url: `/${locale_f}/subscribe/`,
+                method: "post",
+                data: { email: val },
+                success: function (data) {
+                    console.log(data)
+                },
+                error: function (data){
+                    console.log(data)
+                }
+            });
+        });
+    </script>
+@endpush

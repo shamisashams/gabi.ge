@@ -7,6 +7,7 @@ use App\Mail\ContactEmail;
 use App\Models\Language;
 use App\Models\Page;
 use App\Models\Setting;
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -50,6 +51,14 @@ class ContactController extends Controller
         return view('pages.contact-us.index', [
             'page' => $page
         ]);
+    }
+
+
+    public function subscribe(Request $request){
+        $request->validate([
+            'email' => 'required|unique:subscribers'
+        ]);
+        Subscriber::query()->insert(['email'=>$request->post('email')]);
     }
 
 }

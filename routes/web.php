@@ -215,8 +215,10 @@ Route::prefix('{locale?}')
 
             Route::get('deletion-callback', [AuthController::class, 'facebookDataDeletionCallback'])->name('deletionCallback');
 
-            Route::get('/{category}', [CatalogueController::class, 'catalogueSeo'])->name('catalogueSeo');
-            Route::get('/{category}/{product}', [CatalogueController::class, 'showSeo'])->name('productDetailsSeo');
+            Route::post('subscribe',[ContactController::class, 'subscribe'])->name('subscribe');
+
+            Route::get('/{category?}', [CatalogueController::class, 'catalogueSeo'])->name('catalogueSeo');
+            Route::get('/{category?}/{product?}', [CatalogueController::class, 'showSeo'])->name('productDetailsSeo');
         });
     });
 
