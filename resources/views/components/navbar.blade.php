@@ -17,7 +17,7 @@
 
                         <div>
                             @foreach($categories as $key=>$category)
-                                <a href="{{route('catalogueSeo',[app()->getLocale(),$category->availableLanguage[0]->slug])}}">
+                                <a href="{{route('catalogueSeo',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:null])}}">
                                     <div
                                         class="category_list {{$key==0?"active":""}}">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</div>
                                 </a>
@@ -36,7 +36,7 @@
                                         @endif
                                         <img src="/img/products/frame.png" alt="" class="frame"/>
                                         <a class="cat_btn"
-                                           href="{{route('catalogueSeo',[app()->getLocale(),$category->availableLanguage[0]->slug])}}">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}
+                                           href="{{route('catalogueSeo',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:null])}}">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}
                                         </a>
                                     </div>
                                 @endforeach
