@@ -221,6 +221,9 @@ Route::prefix('{locale?}')
 
             Route::post('subscribe',[ContactController::class, 'subscribe'])->name('subscribe');
 
+            Route::get('best-sellers',[CatalogueController::class, 'bestSellers'])->name('bestSellers');
+            Route::get('summer-discount',[CatalogueController::class, 'discount'])->name('discount');
+
             Route::get('/{category?}', [CatalogueController::class, 'catalogueSeo'])->name('catalogueSeo');
             Route::get('/{category?}/{product?}', [CatalogueController::class, 'showSeo'])->name('productDetailsSeo');
         });

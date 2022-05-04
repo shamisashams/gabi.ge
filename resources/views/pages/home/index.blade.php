@@ -84,7 +84,7 @@
         <section class="products_viewport">
             <div class="products_head flex">
                 <div class="title">{{__('client.summer_discount')}}</div>
-                <a href="#" class="see_more">{{__('client.see_more')}}</a>
+                <a href="{{route('discount')}}" class="see_more">{{__('client.see_more')}}</a>
             </div>
             <div class="product_grid">
                 @foreach($discountedProducts as $product)

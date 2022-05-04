@@ -32,6 +32,8 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             ->get();
     }
 
+
+
     public function getDiscountedProducts()
     {
         return $this->model::with(['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files','category.availableLanguage', 'category.availableLanguageS'])
