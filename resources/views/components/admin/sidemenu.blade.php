@@ -66,7 +66,7 @@
                 href="{{route('userIndex',app()->getLocale())}}"><i class="material-icons dp48">person</i><span>{{trans('admin.users')}}</span></a>
         </li>
         <li class="bold"><a
-                class="waves-effect waves-cyan {{str_contains(route('userIndex',app()->getLocale()),request()->path())?"active":""}}"
+                class="waves-effect waves-cyan {{str_contains(route('orderIndex',app()->getLocale()),request()->path())?"active":""}}"
                 href="{{route('orderIndex',app()->getLocale())}}"><i class="material-icons dp48">add_shopping_cart</i><span>{{trans('admin.orders')}}</span></a>
         </li>
         <li class="bold"><a
