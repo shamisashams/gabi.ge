@@ -94,9 +94,11 @@
                 data: { email: val },
                 success: function (data) {
                     console.log(data)
+                    alert('ok')
                 },
                 error: function (data){
                     console.log(data)
+                    if(data.hasOwnProperty('responseJSON')) alert(data.responseJSON.message);
                 }
             });
         });
