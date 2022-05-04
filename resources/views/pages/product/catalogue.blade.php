@@ -125,7 +125,7 @@
                         {{--                        <a href="{{route('productDetails',[app()->getLocale(),$category->id,$product->id])}}">--}}
                     {{--@dd($product)--}}
                         <div class="main_product_view">
-                            <a href="{{route('productDetailsSeo',[app()->getLocale(),$product->category->availableLanguageS->slug,$product->availableLanguageS->slug])}}">
+                            <a href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug : null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null])}}">
                                 <div class="pic">
                                     @if($product->saleProduct && $product->saleProduct->sale)
                                         <div class="label off">
@@ -152,7 +152,7 @@
                                                 <div class="roboto">{{__('client.view')}}</div>
                                             </button>
                                         </a>
-                                        <a href="{{route('productDetailsSeo',[app()->getLocale(),$product->category->availableLanguageS->slug,$product->availableLanguageS->slug])}}">
+                                        <a href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug: null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null])}}">
                                             <button type="button" class="add_to_cart details">
                                                 <img src="/img/icons/profile/magnifying-glass.svg" alt=""/>
                                                 <div class="roboto">{{__('client.details')}}</div>
