@@ -757,7 +757,7 @@ function addToModal(product) {
 
         //et disabled = productAnswers.length > 0;
         let disabled = false
-        console.log(product);
+        //console.log(product.category.available_language);
         let content = `
         <div class="close_popup_bg"></div>
             <div class="product_popup">

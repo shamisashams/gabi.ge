@@ -62,7 +62,7 @@ class CatalogueController extends Controller
             'sortParams' => ['sort' => 'position', 'order' => 'DESC']
         ]);
 
-        $products = $this->productRepository->getData($request, ['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files', 'category.availableLanguageS'], false);
+        $products = $this->productRepository->getData($request, ['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files', 'category.availableLanguageS', "category.availableLanguage"], false);
 //        $staticFilterData = ['category'];
         //dd($products->get());
 
