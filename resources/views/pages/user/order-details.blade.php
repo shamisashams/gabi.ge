@@ -74,7 +74,7 @@
                                     </div>
                                     <div class="price last">{{$orderProduct->quantity}}</div>
                                     <div class="price last">
-                                        {{$orderProduct->product->price/100}} $
+                                        {{$orderProduct->product->price/100}} ₾
                                     </div>
                                 </div>
                             @endif
@@ -90,7 +90,7 @@
                         </div>
                         <div style="text-align: end">
                             <div class="d2">{{__('client.items_subtotal')}}
-                                : {{($order->total_price/100)-$order->shipment_price}} $
+                                : {{($order->total_price/100)-$order->shipment_price}} ₾
                             </div>
                             <div class="d2">{{__('client.shipping_handling')}}: {{$order->shipment_price}} ₾</div>
                         </div>
