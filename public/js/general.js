@@ -707,11 +707,11 @@ function addToModal(product) {
                 let productAnswer = productFeatures[key];
                 let options = "";
                 if (
-                    productAnswer.feature.type !== "input" ||
-                    productAnswer.feature.english_language.length > 0
+                    productAnswer.feature.type === "input" ||
+                    (productAnswer.feature.english_language.length > 0
                         ? productAnswer.feature.english_language[0].title ==
                           "category"
-                        : ""
+                        : "")
                 ) {
                     continue;
                 }
