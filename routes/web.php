@@ -167,12 +167,8 @@ Route::prefix('{locale?}')
                     ->name('show', 'orderShow');
                 Route::resource('subscriber', \App\Http\Controllers\Admin\SubscriberController::class)
                     ->name('index', 'subscriberIndex')
-                    ->name('create', 'orderCreateView')
-                    ->name('store', 'orderCreate')
-                    ->name('edit', 'orderEditView')
-                    ->name('update', 'orderUpdate')
-                    ->name('destroy', 'subscriberDestroy')
-                    ->name('show', 'orderShow');
+
+                    ->name('destroy', 'subscriberDestroy');
             });
         });
         Route::middleware(['active'])->group(function () {
