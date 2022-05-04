@@ -117,6 +117,7 @@
             {{--            --}}
 
             <?php $isFeature = false ?>
+            @dd($productFeatures)
             @foreach($productFeatures as $productAnswer)
                 @if($productAnswer->feature->type !== 'input' || count($productAnswer->feature->englishLanguage)>0?$productAnswer->feature->englishLanguage[0]->title=="category":"")
                     @continue
