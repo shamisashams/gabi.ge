@@ -640,17 +640,30 @@ function checkSelection_alert_p() {
                 let options = box.querySelectorAll(
                     'input[type="radio"]:checked'
                 );
-                if (allOptions.length !== options.length) {
+                /*if (allOptions.length !== options.length) {
                     alert('select options')
                     return false;
-                }
+                }*/
+                options.forEach(function (el,i){
+                    //console.log(el)
+                    $(el).parents('.options').find('.title').css('color','black');
+                })
             };
         });
         if (
             allOptions.length !==
             box.querySelectorAll('input[type="radio"]:checked').length
         ) {
-            alert('select options')
+            let not_checked = $("input[type=\"radio\"]:not(:checked)")
+            //console.log(not_checked)
+            not_checked.each(function (i,el){
+                //console.log(el)
+
+                if($(el).parents('.options').find('input[type="radio"]:checked').length < 1){
+                    $(el).parents('.options').find('.title').css('color','red');
+                }
+            })
+
             return false;
         }
     }
