@@ -180,6 +180,7 @@ Route::prefix('{locale?}')
             //Route::fallback(CatalogueController::class.'@proxy')->name('product-catalog');
 
 
+
             Route::get('/addcartcount/{id}/{type}', [CartController::class, 'addCartCount'])->name('addCartCount');
             Route::get('/removefromcart', [CartController::class, 'removeFromCart'])->name('removeFromCart');
             Route::get('/addtocart/{id}', [CartController::class, 'addToCart'])->name('addToCart');
@@ -225,8 +226,11 @@ Route::prefix('{locale?}')
             Route::get('summer-discount',[CatalogueController::class, 'discount'])->name('discount');
             Route::get('new',[CatalogueController::class, 'new'])->name('new');
 
+            Route::get('/page/{slug?}',[\App\Http\Controllers\PageController::class, 'viewPage'])->name('viewPage');
+
             Route::get('/{category?}', [CatalogueController::class, 'catalogueSeo'])->name('catalogueSeo');
             Route::get('/{category?}/{product?}', [CatalogueController::class, 'showSeo'])->name('productDetailsSeo');
+
         });
     });
 

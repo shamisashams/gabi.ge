@@ -30,7 +30,9 @@ class AboutController extends Controller
         if (!$page) {
             return abort('404');
         }
-        return view('pages.about-us.index', [
+
+
+        return view('pages.'. $page->type .'.index', [
             'page' => $page
         ]);
     }

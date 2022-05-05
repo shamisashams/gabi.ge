@@ -26,5 +26,6 @@ class ViewServiceProvider extends ServiceProvider
     {
         View::composer('*', 'App\Http\View\Composers\LanguageComposer');
         View::composer('*', 'App\Http\View\Composers\SettingComposer');
+        View::composer('*', 'App\Http\View\Composers\PageComposer');
     }
 }
