@@ -116,7 +116,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
         return $this->model::query()->whereHas('language',function ($query) use ($slug, $localizationID){
             $query->where('slug', $slug)->where('language_id', $localizationID);
-        })->with(['availableLanguage', 'files', 'saleProduct.sale'])->first();
+        })->with(['availableLanguage', 'files', 'saleProduct.sale'])->firstOrFail();
     }
 
 }
