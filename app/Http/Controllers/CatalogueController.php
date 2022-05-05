@@ -184,7 +184,7 @@ class CatalogueController extends Controller
         //dd($products->get());
 
         return view('pages.product.catalogue_s', [
-            'title' => __('client.summer-discount'),
+            'title' => __('client.new_products'),
             'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
 //            'staticFilterData' => $staticFilterData,
