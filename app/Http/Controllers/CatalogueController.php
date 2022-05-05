@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Language;
 use App\Models\Product;
 use App\Models\ProductAnswers;
+use App\Models\Setting;
 use App\Repositories\Frontend\ProductRepositoryInterface;
 use App\Services\ProductService;
 use Illuminate\Contracts\Console\Application;
@@ -56,7 +57,16 @@ class CatalogueController extends Controller
     {
         $category = Category::query()->whereHas('language',function ($query) use ($category_slug){
             $query->where('slug', $category_slug)->where('language_id', '=', Language::getIdByName(app()->getLocale()));
-        })->firstOrFail();
+        })->first();
+
+        $cat_redirect = Setting::query()->where('key','category_not_found_redirect')->first();
+        $val = count($cat_redirect->availableLanguage) > 0 ? $cat_redirect->availableLanguage[0]->value : false;
+        if((!$category) && $val){
+            return redirect($val,301);
+        } elseif (!$category){
+            return abort(404);
+        }
+
         $request->merge([
             'category' => $category->id,
             'sortParams' => ['sort' => 'position', 'order' => 'DESC']
@@ -98,9 +108,28 @@ class CatalogueController extends Controller
     public function showSeo(string $locale, $category_slug = null, $product_slug = null)
     {
         $product = $this->productRepository->getProductByslug($product_slug);
+        $prod_redirect = Setting::query()->where('key','product_not_found_redirect')->first();
+        $val = count($prod_redirect->availableLanguage) > 0 ? $prod_redirect->availableLanguage[0]->value : false;
+        if((!$product) && $val){
+            return redirect($val,301);
+        } elseif (!$product){
+            return abort(404);
+        }
+
         $category = Category::query()->whereHas('language',function ($query) use ($category_slug){
             $query->where('slug', $category_slug)->where('language_id', '=', Language::getIdByName(app()->getLocale()));
-        })->firstOrFail();
+        })->first();
+
+        $cat_redirect = Setting::query()->where('key','category_not_found_redirect')->first();
+        $val = count($cat_redirect->availableLanguage) > 0 ? $cat_redirect->availableLanguage[0]->value : false;
+        if((!$category) && $val){
+            return redirect($val,301);
+        } elseif (!$category){
+            return abort(404);
+        }
+
+
+
         //dd($category);
         return view('pages.product.details', [
             'product' => $product,

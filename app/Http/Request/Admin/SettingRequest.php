@@ -2,7 +2,7 @@
 /**
  *  app/Http/Request/Admin/SettingRequest.php
  *
- * User: 
+ * User:
  * Date-Time: 18.12.20
  * Time: 10:29
  * @author Insite International <hello@insite.international>
@@ -32,7 +32,7 @@ class SettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'value' => 'required|string|max:255'
+            'value' => 'max:255'
         ];
     }
 }
