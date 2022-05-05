@@ -78,7 +78,7 @@ class LanguageComposer
             $prod = ProductLanguage::query()->where('slug',$params['product'])->first();
             $language_id = Language::getIdByName($lang);
             $cat = CategoryLanguage::query()->where('category_id',$cat->category_id)->where('language_id',$language_id)->first();
-            $prod = ProductLanguage::query()->where('product_id',$prod->product_id)->first();
+            $prod = ProductLanguage::query()->where('product_id',$prod->product_id)->where('language_id',$language_id)->first();
             if($cat && $prod)
                 return route('productDetailsSeo',['locale' => $lang,'category' => $cat->slug, 'product' => $prod->slug]);
 
