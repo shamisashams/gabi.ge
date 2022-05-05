@@ -115,6 +115,8 @@ class CartController extends Controller
                     $products[] = [
                         'id' => $product->id,
                         'category_id' => $product->category_id,
+                        'cat_slug' => isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug : null,
+                        'prod_slug' => isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug : null,
                         'price' => $product->price / 100,
                         'sale' => $product->saleProduct && $product->saleProduct->sale ?
                             Product::calculatePrice($product->price, $product->saleProduct->sale->discount, $product->saleProduct->sale->type) : '',
