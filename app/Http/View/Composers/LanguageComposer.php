@@ -68,19 +68,25 @@ class LanguageComposer
         if (request()->route()->named('catalogueSeo')) {
             $params = request()->route()->parameters();
             $cat = CategoryLanguage::query()->where('slug',$params['category'])->first();
-            $language_id = Language::getIdByName($lang);
-            $cat = CategoryLanguage::query()->where('category_id',$cat->category_id)->where('language_id',$language_id)->first();
-            if($cat)
-            return route('catalogueSeo',['locale' => $lang,'category' => $cat->slug]);
+            if ($cat){
+                $language_id = Language::getIdByName($lang);
+                $cat = CategoryLanguage::query()->where('category_id',$cat->category_id)->where('language_id',$language_id)->first();
+                if($cat)
+                    return route('catalogueSeo',['locale' => $lang,'category' => $cat->slug]);
+            }
+
         } elseif (request()->route()->named('productDetailsSeo')){
             $params = request()->route()->parameters();
             $cat = CategoryLanguage::query()->where('slug',$params['category'])->first();
             $prod = ProductLanguage::query()->where('slug',$params['product'])->first();
-            $language_id = Language::getIdByName($lang);
-            $cat = CategoryLanguage::query()->where('category_id',$cat->category_id)->where('language_id',$language_id)->first();
-            $prod = ProductLanguage::query()->where('product_id',$prod->product_id)->where('language_id',$language_id)->first();
-            if($cat && $prod)
-                return route('productDetailsSeo',['locale' => $lang,'category' => $cat->slug, 'product' => $prod->slug]);
+            if($cat && $prod){
+                $language_id = Language::getIdByName($lang);
+                $cat = CategoryLanguage::query()->where('category_id',$cat->category_id)->where('language_id',$language_id)->first();
+                $prod = ProductLanguage::query()->where('product_id',$prod->product_id)->where('language_id',$language_id)->first();
+                if($cat && $prod)
+                    return route('productDetailsSeo',['locale' => $lang,'category' => $cat->slug, 'product' => $prod->slug]);
+            }
+
 
         } else {
             return str_replace($replaceLang,$replaceBy,$actual_link);
