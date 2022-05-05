@@ -617,7 +617,10 @@ function checkSelection_alert() {
             //console.log(not_checked)
             not_checked.each(function (i,el){
                 //console.log(el)
-                $(el).parents('.options').find('.title').css('color','red');
+
+                if($(el).parents('.options').find('input[type="radio"]:checked').length < 1){
+                    $(el).parents('.options').find('.title').css('color','red');
+                }
             })
 
             return false;
