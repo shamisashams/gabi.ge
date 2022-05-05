@@ -45,13 +45,20 @@
                     </div>
                 </div>
 
-                {{--@dd($page_slugs['contact-us']['slug'])--}}
+                {{--@dd(request()->path())--}}
+                <?php
+                $path = request()->path();
+                $path = explode('/',$path);
+                $slug = end($path);
+                $slug = urldecode($slug);
+                //echo $slug;
+                ?>
                 <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['contact-us']['slug']) ? $page_slugs['contact-us']['slug'] : null])}}"
-                   class="nav_link {{str_contains(request()->path(),substr(parse_url(route('viewPage',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.contact_us')}}</a>
+                   class="nav_link {{($slug == (isset($page_slugs['contact-us']['slug']) ? $page_slugs['contact-us']['slug'] : null))?"active":""}}">{{__('client.contact_us')}}</a>
                 <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['about-us']['slug']) ? $page_slugs['about-us']['slug'] : null])}}"
-                   class="nav_link {{str_contains(request()->path(),substr(parse_url(route('viewPage',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.about_us')}}</a>
+                   class="nav_link {{($slug == (isset($page_slugs['about-us']['slug']) ? $page_slugs['about-us']['slug'] : null)) ?"active":""}}">{{__('client.about_us')}}</a>
                 <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['helps']['slug']) ? $page_slugs['helps']['slug'] : null])}}"
-                   class="nav_link {{str_contains(request()->path(),substr(parse_url(route('viewPage',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.helps')}}</a>
+                   class="nav_link {{($slug == (isset($page_slugs['helps']['slug']) ? $page_slugs['helps']['slug'] : null))?"active":""}}">{{__('client.helps')}}</a>
             </div>
         </div>
         <div class="flex columns">
