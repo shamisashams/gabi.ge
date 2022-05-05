@@ -155,7 +155,7 @@
     <section class="products_viewport wrapper">
         <div class="products_head flex">
             <div class="title">{{__('client.new_products')}}</div>
-            <a href="#" class="see_more">{{__('client.see_more')}}</a>
+            <a href="{{route('new')}}" class="see_more">{{__('client.see_more')}}</a>
         </div>
         <div class="arrows">
             <button id="next_np">

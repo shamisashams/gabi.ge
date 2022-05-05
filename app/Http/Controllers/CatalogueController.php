@@ -158,7 +158,28 @@ class CatalogueController extends Controller
             'sortParams' => ['sort' => 'position', 'order' => 'DESC']
         ]);
 
-        $products = $this->productRepository->getData($request, ['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files', 'category.availableLanguageS', 'category.availableLanguage'], false);
+        $products = $this->productRepository->getAll($request, true);
+//        $staticFilterData = ['category'];
+        //dd($products->get());
+
+        return view('pages.product.catalogue_s', [
+            'title' => __('client.summer-discount'),
+            'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
+            'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
+//            'staticFilterData' => $staticFilterData,
+            'products' => $products->orderBy('created_at', 'DESC')->paginate(16),
+            'category' => null
+        ]);
+    }
+
+    public function new($locale, Request $request){
+
+
+        $request->merge([
+            'sortParams' => ['sort' => 'position', 'order' => 'DESC']
+        ]);
+
+        $products = $this->productRepository->getAll($request, false, true);
 //        $staticFilterData = ['category'];
         //dd($products->get());
 

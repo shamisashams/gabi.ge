@@ -33,6 +33,21 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     }
 
 
+    public function getAll(Request $request, $discount = false, $new = false){
+        $data = $this->model->filter($request);
+
+        $data->with(['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files', 'category.availableLanguageS', 'category.availableLanguage']);
+
+        if($discount){
+            $data->has('saleProduct.sale');
+        }
+        if($new){
+            $data->orderBy('created_at', 'desc');
+        }
+
+
+        return $data;
+    }
 
     public function getDiscountedProducts()
     {

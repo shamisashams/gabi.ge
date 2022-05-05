@@ -223,6 +223,7 @@ Route::prefix('{locale?}')
 
             Route::get('best-sellers',[CatalogueController::class, 'bestSellers'])->name('bestSellers');
             Route::get('summer-discount',[CatalogueController::class, 'discount'])->name('discount');
+            Route::get('new',[CatalogueController::class, 'new'])->name('new');
 
             Route::get('/{category?}', [CatalogueController::class, 'catalogueSeo'])->name('catalogueSeo');
             Route::get('/{category?}/{product?}', [CatalogueController::class, 'showSeo'])->name('productDetailsSeo');
