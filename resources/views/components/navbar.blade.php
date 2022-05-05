@@ -50,7 +50,7 @@
                    class="nav_link {{str_contains(request()->path(),substr(parse_url(route('viewPage',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.contact_us')}}</a>
                 <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['about-us']['slug']) ? $page_slugs['about-us']['slug'] : null])}}"
                    class="nav_link {{str_contains(request()->path(),substr(parse_url(route('viewPage',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.about_us')}}</a>
-                <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['help']['slug']) ? $page_slugs['help']['slug'] : null])}}"
+                <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['helps']['slug']) ? $page_slugs['helps']['slug'] : null])}}"
                    class="nav_link {{str_contains(request()->path(),substr(parse_url(route('viewPage',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.helps')}}</a>
             </div>
         </div>
