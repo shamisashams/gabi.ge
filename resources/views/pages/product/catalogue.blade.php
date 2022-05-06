@@ -2,7 +2,7 @@
 @section('head')
     <title>{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</title>
 @endsection
-
+@section('description'){{count($category->availableLanguage)>0?$category->availableLanguage[0]->description:""}}@endsection
 @section('content')
     <style>
         /* Customize the label (the container) */
