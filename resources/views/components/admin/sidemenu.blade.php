@@ -4,7 +4,7 @@
                     class="hide-on-med-and-down" src="/admin/images/logo/materialize-logo-color.png"
                     alt="materialize logo"/><img class="show-on-medium-and-down hide-on-med-and-up"
                                                  src="../../../app-assets/images/logo/materialize-logo.png"
-                                                 alt="materialize logo"/><span class="logo-text hide-on-med-and-down">Kabala</span></a><a
+                                                 alt="materialize logo"/><span class="logo-text hide-on-med-and-down">Gabi</span></a><a
                 class="navbar-toggler" href="#"><i class="material-icons">radio_button_checked</i></a></h1>
     </div>
     <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out"
