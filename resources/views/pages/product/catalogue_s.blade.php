@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @section('head')
-    <title>{{__('app.title_home')}} - {{$title}}</title>
+    <title>{{$title}}</title>
 @endsection
 
 @section('content')

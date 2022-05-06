@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @section('head')
-    <title>{{__('app.title_home')}} - {{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</title>
+    <title>{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</title>
 @endsection
 
 @section('content')
