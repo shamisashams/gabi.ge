@@ -372,7 +372,7 @@ function getCartCount() {
                     }</div>
                         </div>
                         <div class="picture">
-                            <img src="/storage/product/${item.id}/${
+                            <img src="/storage/product/${item.id}/thumb/${
                         item.file
                     }" alt=""/>
                         </div>
@@ -680,7 +680,7 @@ function addToModal(product) {
         product.files.forEach((item) => {
             images = images.concat(`
               <div class="small_img_popup flex center">
-                 <img src="/storage/product/${item.fileable_id}/${item.name}" alt="" />
+                 <img src="/storage/product/${item.fileable_id}/thumb/${item.name}" alt="" />
               </div>
         `);
         });
