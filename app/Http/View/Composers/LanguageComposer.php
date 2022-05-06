@@ -13,6 +13,7 @@ namespace App\Http\View\Composers;
 use App\Models\CategoryLanguage;
 use App\Models\Language;
 use App\Models\Localization;
+use App\Models\PageLanguage;
 use App\Models\ProductLanguage;
 use Illuminate\View\View;
 
@@ -65,8 +66,9 @@ class LanguageComposer
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $replaceLang = '/'.app()->getLocale();
         $replaceBy = '/'.$lang;
+        $params = request()->route()->parameters();
         if (request()->route()->named('catalogueSeo')) {
-            $params = request()->route()->parameters();
+
             $cat = CategoryLanguage::query()->where('slug',$params['category'])->first();
             if ($cat){
                 $language_id = Language::getIdByName($lang);
@@ -76,7 +78,7 @@ class LanguageComposer
             }
 
         } elseif (request()->route()->named('productDetailsSeo')){
-            $params = request()->route()->parameters();
+
             $cat = CategoryLanguage::query()->where('slug',$params['category'])->first();
             $prod = ProductLanguage::query()->where('slug',$params['product'])->first();
             if($cat && $prod){
@@ -88,7 +90,17 @@ class LanguageComposer
             }
 
 
-        } else {
+        } elseif (request()->route()->named('viewPage')) {
+            $page = PageLanguage::query()->where('slug',$params['slug'])->first();
+            if ($page){
+                $language_id = Language::getIdByName($lang);
+                $page = PageLanguage::query()->where('page_id',$page->page_id)->where('language_id',$language_id)->first();
+                if($page)
+                    return route('viewPage',['locale' => $lang,'slug' => $page->slug]);
+            }
+        }
+
+        else {
             return str_replace($replaceLang,$replaceBy,$actual_link);
         }
 
