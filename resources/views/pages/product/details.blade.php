@@ -28,7 +28,7 @@
                         @foreach($product->files as $file)
                             <div class="fullview_slider_item active">
                                 <img
-                                    src="/storage/product/{{$file->fileable_id}}/{{$file->name}}"
+                                    src="/storage/product/{{$file->fileable_id}}/thumb/{{$file->name}}"
                                     alt=""/>
                             </div>
                         @endforeach
