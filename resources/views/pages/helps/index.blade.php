@@ -1,7 +1,9 @@
 @extends('layouts.base')
 @section('head')
-    <title>{{__('app.helps')}}</title>
+    <title>{{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->meta_title : null}}</title>
 @endsection
+@section('description'){{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->description : null}}@endsection
+@section('keywords'){{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->description : null}}@endsection
 @section('content')
 
     <section class="path">
