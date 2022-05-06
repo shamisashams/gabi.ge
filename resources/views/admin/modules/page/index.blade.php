@@ -36,6 +36,7 @@
                                 <thead>
                                 <tr>
                                     <th>{{trans('admin.id')}}</th>
+                                    <th>{{trans('admin.type')}}</th>
                                     <th>{{trans('admin.title')}}</th>
                                     <th>{{trans('admin.slug')}}</th>
                                     <th>{{trans('admin.status')}}</th>
@@ -63,6 +64,7 @@
                                     @foreach($pages as $page)
                                         <tr>
                                             <td>{{$page->id}}</td>
+                                            <td>{{$page->type}}</td>
                                             <td>{{count($page->availableLanguage)>0?$page->availableLanguage[0]->title:""}}</td>
                                             <td>{{count($page->availableLanguage)>0?$page->availableLanguage[0]->slug:""}}</td>
                                             <td>

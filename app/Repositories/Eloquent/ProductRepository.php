@@ -16,6 +16,7 @@ use App\Models\Language;
 use Illuminate\Support\Facades\Storage;
 use App\Models\File;
 use App\Models\SaleProduct;
+use Gumlet\ImageResize;
 
 class ProductRepository extends BaseRepository implements ProductRepositoryInterface
 {
@@ -269,6 +270,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
     public function updateImages($request, $model)
     {
+        //dd($request->file('images'));
         if (count($model->files) > 0) {
             foreach ($model->files as $file) {
                 if ($request['old_images'] == null) {
@@ -282,6 +284,9 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                     if (Storage::exists('public/product/' . $model->id . '/' . $file->name)) {
                         Storage::delete('public/product/' . $model->id . '/' . $file->name);
                     }
+                    if (Storage::exists('public/product/' . $model->id . '/thumb/' . $file->name)) {
+                        Storage::delete('public/product/' . $model->id . '/thumb/' . $file->name);
+                    }
                     $file->delete();
 
                 }
@@ -291,9 +296,20 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $key => $file) {
+                $image = new ImageResize($file);
+                $image->resizeToHeight(360);
+
+                $image->crop(360, 360, true, ImageResize::CROPCENTER);
+                $image->save(date('Ymhs') . $file->getClientOriginalName());
+                $img = $image->getImageAsString();
+
+
+
                 $imagename = date('Ymhs') . $file->getClientOriginalName();
                 $destination = base_path() . '/storage/app/public/product/' . $model->id;
+                $thumb = 'public/product/' . $model->id .'/thumb/'.$imagename;
                 $request->file('images')[$key]->move($destination, $imagename);
+                Storage::put($thumb,$img);
                 $model->files()->create([
                     'name' => $imagename,
                     'path' => '/storage/app/public/product/' . $model->id,

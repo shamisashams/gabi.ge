@@ -25,8 +25,8 @@
                     @endif
                     @if(isset($product->files[0]))
                         <img class="p_img"
-                             src="/storage/product/{{$product->files[0]->fileable_id}}/{{$product->files[0]->name}}"
-                             alt=""/>
+                             src="/storage/product/{{$product->files[0]->fileable_id}}/thumb/{{$product->files[0]->name}}"
+                             alt="{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}"/>
                     @else
                         <img src="noimage.png"/>
                     @endif

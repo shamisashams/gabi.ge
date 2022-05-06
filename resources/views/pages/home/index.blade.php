@@ -1,7 +1,10 @@
 @extends('layouts.base')
 @section('head')
-    <title>{{__('app.title_home')}}</title>
+    <title>{{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->meta_title : null}}</title>
+
 @endsection
+@section('description'){{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->description : null}}@endsection
+@section('keywords'){{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->description : null}}@endsection
 
 @section('content')
     <section class="hero wrapper">
@@ -104,8 +107,8 @@
                                 @endif
                                 @if(isset($product->files[0]))
                                     <img class="p_img"
-                                         src="/storage/product/{{$product->files[0]->fileable_id}}/{{$product->files[0]->name}}"
-                                         alt=""/>
+                                         src="/storage/product/{{$product->files[0]->fileable_id}}/thumb/{{$product->files[0]->name}}"
+                                         alt="{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}"/>
                                 @else
                                     <img src="noimage.png"/>
                                 @endif
@@ -178,8 +181,8 @@
                         @endif
                         @if(isset($product->files[0]))
                             <img class="p_img"
-                                 src="/storage/product/{{$product->files[0]->fileable_id}}/{{$product->files[0]->name}}"
-                                 alt=""/>
+                                 src="/storage/product/{{$product->files[0]->fileable_id}}/thumb/{{$product->files[0]->name}}"
+                                 alt="{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}"/>
                         @else
                             <img src="noimage.png"/>
                         @endif

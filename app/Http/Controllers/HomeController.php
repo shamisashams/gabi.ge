@@ -8,6 +8,7 @@ use App\Models\Answer;
 use App\Models\Feature;
 use App\Models\Language;
 use App\Models\Localization;
+use App\Models\Page;
 use App\Models\Setting;
 use App\Repositories\AnswerRepositoryInterface;
 use App\Repositories\Frontend\CategoryRepositoryInterface;
@@ -42,12 +43,14 @@ class HomeController extends Controller
      */
     public function index($locale, Request $request)
     {
+        $page = Page::query()->where('type','home')->with('availableLanguage')->firstOrFail();
 
         return view('pages.home.index', [
             'bestSellerProducts' => $this->productRepository->getBestSeller(),
             'discountedProducts' => $this->productRepository->getDiscountedProducts(),
             'newProducts' => $this->productRepository->getNewProducts(),
 //            'categories' => $this->categoryRepository->getMainCategories(),
+        'page' => $page,
             'sliders' => $this->sliderRepository->getSliders(),
             'banner' => $this->sliderRepository->getBanner()
         ]);
