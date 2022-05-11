@@ -38,6 +38,9 @@ class SetLocale
             return $this->redirectTo($segments);
         }
         app()->setLocale($locale);
+        if (preg_match('/.+\/$/', $request->getRequestUri())) {
+            return redirect()->to(rtrim($request->getRequestUri(), '/'), 301);
+        }
         return $next($request);
     }
 
