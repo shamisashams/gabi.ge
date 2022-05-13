@@ -31,7 +31,6 @@ use App\Http\Controllers\Admin\ProductController;
    |
   */
 
-
 Route::prefix('{locale?}')
     ->middleware('setlocale')
     ->group(function () {
@@ -233,9 +232,13 @@ Route::prefix('{locale?}')
 
             Route::any('payments/bog/status',[PurchaseController::class, 'bogResponse'])->name('bogResponse');
 
-            Route::any('bog/callback/status', [\App\BogPay\BogCallbackController::class, 'status'])->withoutMiddleware('web');
-            Route::any('bog/callback/refund',[\App\BogPay\BogCallbackController::class, 'refund'])->withoutMiddleware('web');
+
 
         });
+        Route::any('bog/callback/status', [\App\BogPay\BogCallbackController::class, 'status'])->withoutMiddleware('web')->name('bogCallbackStatus');
+        Route::any('bog/callback/refund',[\App\BogPay\BogCallbackController::class, 'refund'])->withoutMiddleware('web')->name('bogCallbackRefund');
+
     });
+
+
 

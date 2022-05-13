@@ -5,6 +5,7 @@ namespace App\BogPay;
 use Illuminate\Http\Request;
 
 use App\Models\Order;
+use App\Http\Controllers\Controller;
 
 class BogCallbackController extends Controller
 {
@@ -12,6 +13,7 @@ class BogCallbackController extends Controller
 
     public function status(Request $request){
 
+        //dd($request->all());
         switch ($request->status){
             case 'success':
                 Order::where('id','=',$request->shop_order_id)->update(['status' => 1]);
