@@ -45,6 +45,8 @@ class PurchaseRepository extends BaseRepository implements PurchaseRepositoryInt
             $paymentType = PaymentType::where(['title' => $request['payment_method']])->first();
 
 
+            //$bank = $request->post('bank');
+            //$paymentType = $request->post('payment_method');
             $bank = Bank::where(['id' => $request['bank'], 'payment_type_id' => $paymentType ? $paymentType->id : ""])->first();
 //            if (!$bank) {
 //                $bank = Bank::where(['title' => $request['installment_bank'], 'payment_type_id' => $paymentType->id])->first();
@@ -87,7 +89,7 @@ class PurchaseRepository extends BaseRepository implements PurchaseRepositoryInt
                 }
                 $order->products()->createMany($products);
                 DB::commit();
-                return true;
+                return $order;
             } catch (QueryException $exception) {
                 DB::rollBack();
                 return false;

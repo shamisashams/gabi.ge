@@ -231,6 +231,11 @@ Route::prefix('{locale?}')
             Route::get('/{category?}', [CatalogueController::class, 'catalogueSeo'])->name('catalogueSeo');
             Route::get('/{category?}/{product?}', [CatalogueController::class, 'showSeo'])->name('productDetailsSeo');
 
+            Route::any('payments/bog/status',[PurchaseController::class, 'bogResponse'])->name('bogResponse');
+
+            Route::any('bog/callback/status', [\App\BogPay\BogCallbackController::class, 'status'])->withoutMiddleware('web');
+            Route::any('bog/callback/refund',[\App\BogPay\BogCallbackController::class, 'refund'])->withoutMiddleware('web');
+
         });
     });
 

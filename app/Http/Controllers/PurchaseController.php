@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Lang;
+use App\BogPay\BogPaymentController;
 
 class PurchaseController extends Controller
 {
@@ -30,17 +31,32 @@ class PurchaseController extends Controller
     public function saveOrder(string $locale, Request $request)
     {
 
+        //dd($request->all());
         $request->validate([
             'shipping' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'bank' => $request['payment_method'] == 'card' ? 'required|string|max:255' : 'string|max:255',
             'payment_method' => 'required|string|max:255'
         ]);
-        if ($this->purchaseRepository->saveOrder($request)) {
+        if ($order = $this->purchaseRepository->saveOrder($request)) {
+            //dd($order->paymentType->title);
             session(['products' => []]);
-            return redirect($locale . '/profile?type=order')->with('success', __('client.order_saved'));
+            if($order->paymentType->title == 'card' && $order->bank->title == 'bog'){
+                return app(BogPaymentController::class)->make_order($order->id,$order->total_price);
+            } else {
+                return redirect($locale . '/profile?type=order')->with('success', __('client.order_saved'));
+            }
+
         }
         return redirect(route('profile', $locale))->with('success', __('client.order_not_saved'));
+    }
+
+    public function bogResponse(Request $request){
+        $order = Order::query()->find($request->order_id);
+
+        if($order->status == 1) return redirect(route('orderSuccessView').'?transactionID='.$order->transaction_id);
+        else if($order->status == 2) return redirect(route('orderFailView'));
+        else return redirect(route('bogResponse'));
     }
 
 

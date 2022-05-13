@@ -130,6 +130,7 @@
                             <label for="pmmt_bank">{{__('client.card')}}</label>
                         </div>
                     </div>
+
                     <div class="banks flex banks_pmmt">
                         @foreach($banks as $bank)
                             <?php
@@ -137,11 +138,13 @@
                             switch ($bank->title) {
                                 case 'tbc':
                                     $name = "tbc.png";
+                                    $title = __('client.bank_tbc');
                                     break;
-                                case 'Georgian Bank':
+                                case 'bog':
                                     $name = "georgian-bank.png";
+                                    $title = __('client.bank_bog');
                                     break;
-                                case 'Credo':
+                                case 'redo':
                                     $name = 'credo.png';
                                     break;
                             }
