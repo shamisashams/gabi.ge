@@ -32,13 +32,16 @@ class BogPaymentController extends Controller
 
     public function make_order($order_id,$total){
 
+        $locale = 0;
+        if(app()->getLocale() !== 'ge') $locale = 1;
+
         $response = $this->bog_pay->make_order(
-            0,
+            1,
             route('bogResponse').'?order_id='.$order_id,
             [['currency_code' => 'GEL', 'value' => $total]],
             0,
             [],
-            1,
+            $locale,
             $order_id,
             false
         );
