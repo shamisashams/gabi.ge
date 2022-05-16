@@ -946,6 +946,22 @@ img {
     margin: 0;
     width: 100%;
 }
+.blog_section {
+    background-color: #f9f9f9;
+    padding: 40px 0;
+    width: 100% !important;
+}
+.blog_section .btn {
+    text-align: center;
+}
+.blog_section .view_all {
+    color: #fff;
+    background-color: #0e064d;
+    padding: 11px 56px;
+    text-align: center;
+    width: fit-content;
+    margin: auto;
+}
 
 .footer {
     background: #0e064d;
@@ -2684,21 +2700,22 @@ img {
     background-color: rgba(255, 255, 255, 0.438);
     backdrop-filter: blur(30px);
 }
-.blogs_page .blog_grid {
+.blog_grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 50px 35px;
     margin-bottom: 75px;
 }
-.blogs_page .blog_box {
+.blog_box {
     width: 100%;
     color: #031431;
 }
-.blogs_page .shallow {
+.blogs_page .shallow,
+.blog_box .shallow {
     color: #b6b7bc;
     font-size: 14px;
 }
-.blogs_page .blog_box .read_more {
+.blog_box .read_more {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -2712,11 +2729,11 @@ img {
     z-index: 100;
     white-space: nowrap;
 }
-.blogs_page .blog_box:hover .read_more {
+.blog_box:hover .read_more {
     opacity: 1;
     transform: translate(-50%, -50%);
 }
-.blogs_page .blog_box .img_frame {
+.blog_box .img_frame {
     width: 100%;
     height: 360px;
     margin-bottom: 17px;
@@ -2724,21 +2741,21 @@ img {
     padding: 15px;
     position: relative;
 }
-.blogs_page .blog_box .img {
+.blog_box .img {
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
-.blogs_page .blog_box .img img {
+.blog_box .img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: 0.5s;
 }
-.blogs_page .blog_box:hover .img img {
+.blog_box:hover .img img {
     transform: scale(1.1);
 }
-.blogs_page .blog_box .flex img {
+.blog_box .flex img {
     margin-right: 5px;
 }
 .pagination button {
@@ -2839,7 +2856,7 @@ img {
     .header .nav_link {
         margin-left: 23px;
     }
-    .blogs_page .blog_grid {
+    .blog_grid {
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 40px 15px;
     }
@@ -2997,7 +3014,7 @@ img {
     .header .header_content .columns {
         margin: 0;
     }
-    .blogs_page .blog_box .img_frame {
+    .blog_box .img_frame {
         height: 269px;
     }
 }
@@ -3094,10 +3111,10 @@ img {
     }
 }
 @media screen and (max-width: 700px) {
-    .blogs_page .blog_box .img_frame {
+    .blog_box .img_frame {
         height: 301px;
     }
-    .blogs_page .blog_grid {
+    .blog_grid {
         grid-template-columns: 1fr;
     }
 }
