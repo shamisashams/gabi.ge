@@ -42,7 +42,7 @@ class PurchaseController extends Controller
             //dd($order->paymentType->title);
             session(['products' => []]);
             if($order->paymentType->title == 'card' && $order->bank->title == 'bog'){
-                return app(BogPaymentController::class)->make_order($order->id,$order->total_price);
+                return app(BogPaymentController::class)->make_order($order->id,round($order->total_price / 100,2));
             } else {
                 return redirect($locale . '/profile?type=order')->with('success', __('client.order_saved'));
             }

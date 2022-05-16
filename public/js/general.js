@@ -435,7 +435,7 @@ function getCartCount() {
 
                     if (el.sale) {
                         $(element).text(
-                            `$ ${(el.sale * el.quantity).toFixed(2)}`
+                            `₾ ${(el.sale * el.quantity).toFixed(2)}`
                         );
                         // $(`#cart_product_total-step-${el.id}`).text(`${(el.sale / 100) * el.quantity}₾`)
                         //  $(`#cart_2_product_total-step-${el.id}`).text(`${(el.sale / 100) * el.quantity}₾`)
