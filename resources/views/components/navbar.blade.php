@@ -59,6 +59,8 @@
                    class="nav_link {{($slug == (isset($page_slugs['about-us']['slug']) ? $page_slugs['about-us']['slug'] : null)) ?"active":""}}">{{__('client.about_us')}}</a>
                 <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['helps']['slug']) ? $page_slugs['helps']['slug'] : null])}}"
                    class="nav_link {{($slug == (isset($page_slugs['helps']['slug']) ? $page_slugs['helps']['slug'] : null))?"active":""}}">{{__('client.helps')}}</a>
+                <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['blogs']['slug']) ? $page_slugs['blogs']['slug'] : null])}}"
+                   class="nav_link {{($slug == (isset($page_slugs['blogs']['slug']) ? $page_slugs['blogs']['slug'] : null))?"active":""}}">blogs</a>
             </div>
         </div>
         <div class="flex columns">

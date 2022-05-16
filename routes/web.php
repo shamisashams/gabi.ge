@@ -198,6 +198,12 @@ Route::prefix('{locale?}')
             Route::get('helps', function () {
                 return view('pages.helps.index');
             })->name('helps');
+            Route::get('blogs', function () {
+                return view('pages.blogs.index');
+            })->name('blogs');
+            Route::get('single-blog', function () {
+                return view('pages.single-blog.index');
+            })->name('single-blog'); 
 
             Route::get('/facebook-auth', [AuthController::class, 'facebookAuth'])->name('facebookAuth');
 
