@@ -58,7 +58,7 @@ class PurchaseController extends Controller
         if($order->status == 1) return redirect(route('orderSuccessView').'?transactionID='.$order->transaction_id);
         else if($order->status == 2) return redirect(route('orderFailView'));
         else {
-            sleep(3);
+            //sleep(3);
             return redirect(route('bogResponse').'?order_id='.$request->get('order_id'));
         }
     }
