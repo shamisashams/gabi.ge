@@ -1885,6 +1885,10 @@ $(document).ready(function () {
         directory = 'page';
       }
 
+      if (el.fileable_type === 'App\\Models\\Blog') {
+        directory = 'blog';
+      }
+
       imagedata.push({
         id: el.id,
         src: "".concat(baseUrl, "storage/").concat(directory, "/").concat(el.fileable_id, "/").concat(el.name)

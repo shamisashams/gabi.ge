@@ -10,6 +10,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Page;
 use App\Models\Setting;
 use Illuminate\Contracts\Foundation\Application;
@@ -35,6 +36,8 @@ class PageController extends Controller
             ->with('availableLanguage')
             ->first();
 
+        //dd($page);
+
         $page_redirect = Setting::query()->where('key','page_not_found_redirect')->first();
         $val = count($page_redirect->availableLanguage) > 0 ? $page_redirect->availableLanguage[0]->value : false;
         if((!$page) && $val){
@@ -43,8 +46,20 @@ class PageController extends Controller
             return abort(404);
         }
 
-        return view('pages.'. $page->type .'.index', [
-            'page' => $page
-        ]);
+        switch ($page->type){
+            case 'blogs':
+                return view('pages.'. $page->type .'.index', [
+                    'page' => $page,
+                    'blogs' => Blog::with('availableLanguage')->paginate('6')
+                ]);
+                break;
+            default:
+                return view('pages.'. $page->type .'.index', [
+                    'page' => $page
+                ]);
+
+        }
+
+
     }
 }

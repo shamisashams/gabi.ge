@@ -168,6 +168,15 @@ Route::prefix('{locale?}')
                     ->name('index', 'subscriberIndex')
 
                     ->name('destroy', 'subscriberDestroy');
+
+                Route::resource('blogs', \App\Http\Controllers\Admin\BlogController::class)
+                    ->name('index', 'blogIndex')
+                    ->name('store', 'blogStore')
+                    ->name('create', 'blogCreate')
+                    ->name('show', 'blogShow')
+                    ->name('edit', 'blogEdit')
+                    ->name('update', 'blogUpdate')
+                    ->name('destroy', 'blogDestroy');
             });
         });
         Route::middleware(['active'])->group(function () {
@@ -177,7 +186,7 @@ Route::prefix('{locale?}')
             Route::get('/catalogue/{category}/details/{product}', [CatalogueController::class, 'show'])->name('productDetails');
 
             //Route::fallback(CatalogueController::class.'@proxy')->name('product-catalog');
-
+            Route::get('/blog/{blog}',[\App\Http\Controllers\BlogController::class,'viewBlog'])->name('viewBlog');
 
 
             Route::get('/addcartcount/{id}/{type}', [CartController::class, 'addCartCount'])->name('addCartCount');
@@ -198,12 +207,14 @@ Route::prefix('{locale?}')
             Route::get('helps', function () {
                 return view('pages.helps.index');
             })->name('helps');
-            Route::get('blogs', function () {
+            /*Route::get('blogs', function () {
                 return view('pages.blogs.index');
-            })->name('blogs');
+            })->name('blogs');*/
             Route::get('single-blog', function () {
                 return view('pages.single-blog.index');
-            })->name('single-blog'); 
+            })->name('single-blog');
+
+
 
             Route::get('/facebook-auth', [AuthController::class, 'facebookAuth'])->name('facebookAuth');
 
