@@ -43,7 +43,7 @@ class BlogRequest extends FormRequest
             'meta_description' => 'nullable|string|max:255',
             //'meta_keyword' => 'nullable|string|max:255',
 
-            'slug' => ['required', $blog ? Rule::unique('blog_languages', 'slug')->ignore($blog->id) :
+            'slug' => ['required','alpha_dash', $blog ? Rule::unique('blog_languages', 'slug')->ignore($blog->id) :
                 Rule::unique('blog_languages', 'slug')]
         ];
 //

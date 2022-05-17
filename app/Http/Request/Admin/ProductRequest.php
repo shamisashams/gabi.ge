@@ -49,7 +49,7 @@ class ProductRequest extends FormRequest
             'weight' => 'required|numeric',
             'short_description' => 'nullable|string',
             'shipping' => 'nullable|string',
-            'slug' => ['required', $product ? Rule::unique('product_languages', 'slug')->ignore($product->id) :
+            'slug' => ['required','alpha_dash', $product ? Rule::unique('product_languages', 'slug')->ignore($product->id) :
                 Rule::unique('product_languages', 'slug')]
         ];
 //
