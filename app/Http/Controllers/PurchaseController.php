@@ -60,7 +60,7 @@ class PurchaseController extends Controller
         else if($order->status == 2) return redirect(route('orderFailView'));
         else {
             //sleep(3);
-            return 'https://gabi.ge/' . app()->getLocale() . '/payments/bog/status?order_id='.$order->id;
+            return redirect('https://gabi.ge/' . app()->getLocale() . '/payments/bog/status?order_id='.$order->id);
         }
     }
 
