@@ -55,6 +55,7 @@ class PurchaseController extends Controller
         //dump($request->order_id);
         $order = Order::query()->where('id',$request->get('order_id'))->first();
 
+        dd($order);
         if($order->status == 1) return redirect(route('orderSuccessView').'?transactionID='.$order->transaction_id);
         else if($order->status == 2) return redirect(route('orderFailView'));
         else {
