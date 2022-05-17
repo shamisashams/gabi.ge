@@ -37,7 +37,7 @@ class BogPaymentController extends Controller
 
         $response = $this->bog_pay->make_order(
             1,
-            route('bogResponse').'?order_id='.$order_id,
+            'https://gabi.ge/payments/bog/status?order_id='.$order_id,
             [['currency_code' => 'GEL', 'value' => $total]],
             0,
             [],
