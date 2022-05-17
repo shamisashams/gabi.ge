@@ -52,8 +52,8 @@ class PurchaseController extends Controller
     }
 
     public function bogResponse(Request $request){
-        dd($request->order_id);
-        $order = Order::query()->find($request->order_id);
+        //dd($request->order_id);
+        $order = Order::query()->where('id',$request->order_id)->first();
 
         if($order->status == 1) return redirect(route('orderSuccessView').'?transactionID='.$order->transaction_id);
         else if($order->status == 2) return redirect(route('orderFailView'));
