@@ -214,7 +214,12 @@ Route::prefix('{locale?}')
                 return view('pages.single-blog.index');
             })->name('single-blog');
 
-
+            Route::get('payment/success',function (){
+                echo 'success';
+            })->name('orderSuccessView');
+            Route::get('payment/fail',function (){
+                echo 'fail';
+            })->name('orderFailView');
 
             Route::get('/facebook-auth', [AuthController::class, 'facebookAuth'])->name('facebookAuth');
 
@@ -249,12 +254,7 @@ Route::prefix('{locale?}')
 
             Route::any('payments/bog/status',[PurchaseController::class, 'bogResponse'])->name('bogResponse');
 
-            Route::get('payment/success',function (){
-                echo 'success';
-            })->name('orderSuccessView');
-            Route::get('payment/fail',function (){
-                echo 'fail';
-            })->name('orderFailView');
+
 
 
 
