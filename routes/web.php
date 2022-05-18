@@ -212,14 +212,13 @@ Route::prefix('{locale?}')
             })->name('blogs');*/
             Route::get('single-blog', function () {
                 return view('pages.single-blog.index');
-            })->name('single-blog');
-
-            Route::get('payment/success',function (){
-                echo 'success';
-            })->name('orderSuccessView');
-            Route::get('payment/fail',function (){
-                echo 'fail';
-            })->name('orderFailView');
+            })->name('single-blog'); 
+            Route::get('success', function () {
+                return view('pages.result.success');
+            })->name('success'); 
+            Route::get('failure', function () {
+                return view('pages.result.failure');
+            })->name('failure'); 
 
             Route::get('/facebook-auth', [AuthController::class, 'facebookAuth'])->name('facebookAuth');
 
