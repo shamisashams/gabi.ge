@@ -154,91 +154,47 @@
             </div>
         </section>
     </section>
+
     <section class="products_viewport blog_section">
         <div class="wrapper">
             <div class="products_head ">
                 <div class="title">Blog</div>
-            </div>  
+            </div>
             <div class="blog_grid">
-            <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['single-blog']['slug']) ? $page_slugs['single-blog']['slug'] : null])}}" class="blog_box">
+                @foreach($blogs as $blog)
+            <a href="{{route('viewBlog',[app()->getLocale(),count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->slug : ''])}}" class="blog_box">
                 <div class="img_frame">
                     <div class="read_more">Read more</div>
                     <div class="img">
-                        <img src="/img/blogs/4.png" alt=""/>
+                        <img src="{{asset($blog->firstImage ? ('storage/blog/' . $blog->firstImage->fileable_id .'/'. $blog->firstImage->name) : null)}}" alt=""/>
                     </div>
                 </div>
                 <div class="flex">
                     <div>
-                        <div class="head">Header of the article</div>
-                        <div class="date shallow">10/02/2022</div>
+                        <div class="head">{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->title : ''}}</div>
+                        <div class="date shallow">{{$blog->created_at}}</div>
                     </div>
                     <div>
-                        <div class="flex center shallow">
+                        {{--<div class="flex center shallow">
                             <img src="/img/icons/blogs/share.svg" alt=""/>
                             <span>223</span>
-                        </div>
+                        </div>--}}
                         <div class="flex center shallow">
                             <img src="/img/icons/blogs/eye.svg" alt=""/>
-                            <span>799</span>
+                            <span>{{$blog->views}}</span>
                         </div>
                     </div>
                 </div>
             </a>
-            <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['single-blog']['slug']) ? $page_slugs['single-blog']['slug'] : null])}}" class="blog_box">
-                <div class="img_frame">
-                    <div class="read_more">Read more</div>
-                    <div class="img">
-                        <img src="/img/blogs/5.png" alt=""/>
-                    </div>
-                </div>
-                <div class="flex">
-                    <div>
-                        <div class="head">Header of the article</div>
-                        <div class="date shallow">10/02/2022</div>
-                    </div>
-                    <div>
-                        <div class="flex center shallow">
-                            <img src="/img/icons/blogs/share.svg" alt=""/>
-                            <span>223</span>
-                        </div>
-                        <div class="flex center shallow">
-                            <img src="/img/icons/blogs/eye.svg" alt=""/>
-                            <span>799</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['single-blog']['slug']) ? $page_slugs['single-blog']['slug'] : null])}}" class="blog_box">
-                <div class="img_frame">
-                    <div class="read_more">Read more</div>
-                    <div class="img">
-                        <img src="/img/blogs/3.png" alt=""/>
-                    </div>
-                </div>
-                <div class="flex">
-                    <div>
-                        <div class="head">Header of the article</div>
-                        <div class="date shallow">10/02/2022</div>
-                    </div>
-                    <div>
-                        <div class="flex center shallow">
-                            <img src="/img/icons/blogs/share.svg" alt=""/>
-                            <span>223</span>
-                        </div>
-                        <div class="flex center shallow">
-                            <img src="/img/icons/blogs/eye.svg" alt=""/>
-                            <span>799</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
+                @endforeach
+
             </div>
             <div class="btn">
 
                 <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['blogs']['slug']) ? $page_slugs['blogs']['slug'] : null])}}" class="view_all">View all</a>
             </div>
         </div>
- 
+
 
     </section>
     <section class="products_viewport wrapper">
