@@ -1,9 +1,9 @@
 @extends('layouts.base')
 @section('head')
-    <title>{{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->meta_title : null}}</title>
+    <title>@lang('client.order_fail')</title>
 @endsection
-@section('description'){{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->description : null}}@endsection
-@section('keywords'){{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->description : null}}@endsection
+@section('description')@lang('client.order_fail')@endsection
+@section('keywords')@lang('client.order_fail')@endsection
 @section('content')
 
     <section class="path">

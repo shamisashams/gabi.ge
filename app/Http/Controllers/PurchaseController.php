@@ -56,8 +56,8 @@ class PurchaseController extends Controller
         $order = Order::query()->where('id',$request->get('order_id'))->first();
 
         //dd($order);
-        if($order->status == 1) return redirect(route('orderSuccessView').'?transactionID='.$order->transaction_id);
-        else if($order->status == 2) return redirect(app()->getLocale() .'/profile?type=order');
+        if($order->status == 1) return redirect(route('success').'?transactionID='.$order->transaction_id);
+        else if($order->status == 2) return redirect(route('failure'));
         else {
             sleep(3);
             return redirect('https://gabi.ge/' . app()->getLocale() . '/payments/bog/status?order_id='.$order->id);
