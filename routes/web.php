@@ -193,7 +193,7 @@ Route::prefix('{locale?}')
             Route::get('/removefromcart', [CartController::class, 'removeFromCart'])->name('removeFromCart');
             Route::get('/addtocart/{id}', [CartController::class, 'addToCart'])->name('addToCart');
             Route::get('/getcartcount', [CartController::class, 'getCartCount'])->name('getCartCount');
-            Route::get('/getFeatures/{id}', [HomeController::class, 'getSingleProductFeaturesApi'])->name('getFeatures');
+            Route::get('/getfeatures/{id}', [HomeController::class, 'getSingleProductFeaturesApi'])->name('getFeatures');
 
             //Login
 

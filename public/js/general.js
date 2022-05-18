@@ -873,7 +873,7 @@ function getProductFeatures(id, callback) {
         },
     });
     $.ajax({
-        url: `/${locale}/getFeatures/` + id,
+        url: `/${locale}/getfeatures/` + id,
         method: "GET",
         success: function (data) {
             if (data.status) {
