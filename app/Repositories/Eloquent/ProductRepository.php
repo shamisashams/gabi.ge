@@ -135,7 +135,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                     $image->resizeToHeight(360);
 
                     $image->crop(360, 360, true, ImageResize::CROPCENTER);
-                    $image->save(date('Ymhs') . $file->getClientOriginalName());
+                    //$image->save(date('Ymhs') . $file->getClientOriginalName());
                     $img = $image->getImageAsString();
 
                     $imagename = date('Ymhs') . $file->getClientOriginalName();
@@ -310,7 +310,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                 $image->resizeToHeight(360);
 
                 $image->crop(360, 360, true, ImageResize::CROPCENTER);
-                $image->save(date('Ymhs') . $file->getClientOriginalName());
+                //$image->save(date('Ymhs') . $file->getClientOriginalName());
                 $img = $image->getImageAsString();
 
 
