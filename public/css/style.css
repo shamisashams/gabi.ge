@@ -2773,7 +2773,7 @@ img {
 .single_blog .showcase {
     height: 640px;
     margin-bottom: 35px;
-    background: url(/img/blogs/2.png) no-repeat;
+    background-repeat: no-repeat;
 }
 .single_blog .showcase_innerbox .bold {
     line-height: 100%;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Request\Admin;
 
+use App\Models\BlogLanguage;
 use App\Models\CategoryLanguage;
 use App\Models\Language;
 use App\Models\ProductLanguage;
@@ -9,7 +10,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Route;
 
-class ProductRequest extends FormRequest
+class BlogRequest extends FormRequest
 {
 
     /**
@@ -30,27 +31,20 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         $localizationID = Language::getIdByName(app()->getLocale());
-        $product = ProductLanguage::where(['product_id' => $this->product, 'language_id' => $localizationID])->first();
+        $blog = BlogLanguage::where(['blog_id' => $this->blog, 'language_id' => $localizationID])->first();
 
         $rules = [
             'title' => 'required|string|max:255',
-            //'category' => 'required|integer',
-            'price' => 'required|numeric',
-            'category_id' => 'required|numeric',
-            'sale' => 'nullable|numeric',
-            'feature.*' => 'numeric',
-            'answers.*' => 'string',
-            'description' => 'required|string',
+            'title_2' => 'required|string|max:255',
+
+            'text' => 'required|string',
             //'sale_price' => 'nullable|numeric',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
-            'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:255',
-            'meta_keyword' => 'nullable|string|max:255',
-            'weight' => 'required|numeric',
-            'short_description' => 'nullable|string',
-            'shipping' => 'nullable|string',
-            'slug' => ['required','alpha_dash', $product ? Rule::unique('product_languages', 'slug')->ignore($product->id) :
-                Rule::unique('product_languages', 'slug')]
+            //'meta_keyword' => 'nullable|string|max:255',
+
+            'slug' => ['required','alpha_dash', $blog ? Rule::unique('blog_languages', 'slug')->ignore($blog->id) :
+                Rule::unique('blog_languages', 'slug')]
         ];
 //
 //         if (Route::currentRouteName() !== 'productUpdate') {

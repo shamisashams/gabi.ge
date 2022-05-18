@@ -168,6 +168,15 @@ Route::prefix('{locale?}')
                     ->name('index', 'subscriberIndex')
 
                     ->name('destroy', 'subscriberDestroy');
+
+                Route::resource('blogs', \App\Http\Controllers\Admin\BlogController::class)
+                    ->name('index', 'blogIndex')
+                    ->name('store', 'blogStore')
+                    ->name('create', 'blogCreate')
+                    ->name('show', 'blogShow')
+                    ->name('edit', 'blogEdit')
+                    ->name('update', 'blogUpdate')
+                    ->name('destroy', 'blogDestroy');
             });
         });
         Route::middleware(['active'])->group(function () {
@@ -177,14 +186,14 @@ Route::prefix('{locale?}')
             Route::get('/catalogue/{category}/details/{product}', [CatalogueController::class, 'show'])->name('productDetails');
 
             //Route::fallback(CatalogueController::class.'@proxy')->name('product-catalog');
-
+            Route::get('/blog/{blog}',[\App\Http\Controllers\BlogController::class,'viewBlog'])->name('viewBlog');
 
 
             Route::get('/addcartcount/{id}/{type}', [CartController::class, 'addCartCount'])->name('addCartCount');
             Route::get('/removefromcart', [CartController::class, 'removeFromCart'])->name('removeFromCart');
             Route::get('/addtocart/{id}', [CartController::class, 'addToCart'])->name('addToCart');
             Route::get('/getcartcount', [CartController::class, 'getCartCount'])->name('getCartCount');
-            Route::get('/getFeatures/{id}', [HomeController::class, 'getSingleProductFeaturesApi'])->name('getFeatures');
+            Route::get('/getfeatures/{id}', [HomeController::class, 'getSingleProductFeaturesApi'])->name('getFeatures');
 
             //Login
 
@@ -198,9 +207,9 @@ Route::prefix('{locale?}')
             Route::get('helps', function () {
                 return view('pages.helps.index');
             })->name('helps');
-            Route::get('blogs', function () {
+            /*Route::get('blogs', function () {
                 return view('pages.blogs.index');
-            })->name('blogs');
+            })->name('blogs');*/
             Route::get('single-blog', function () {
                 return view('pages.single-blog.index');
             })->name('single-blog'); 
@@ -239,10 +248,12 @@ Route::prefix('{locale?}')
 
             Route::get('/page/{slug?}',[\App\Http\Controllers\PageController::class, 'viewPage'])->name('viewPage');
 
-            Route::get('/{category?}', [CatalogueController::class, 'catalogueSeo'])->name('catalogueSeo');
-            Route::get('/{category?}/{product?}', [CatalogueController::class, 'showSeo'])->name('productDetailsSeo');
+            Route::get('category/{category?}', [CatalogueController::class, 'catalogueSeo'])->name('catalogueSeo');
+            Route::get('product/{category?}/{product?}', [CatalogueController::class, 'showSeo'])->name('productDetailsSeo');
 
             Route::any('payments/bog/status',[PurchaseController::class, 'bogResponse'])->name('bogResponse');
+
+
 
 
 

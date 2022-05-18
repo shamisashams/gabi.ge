@@ -52,11 +52,16 @@ class PurchaseController extends Controller
     }
 
     public function bogResponse(Request $request){
-        $order = Order::query()->find($request->order_id);
+        //dump($request->order_id);
+        $order = Order::query()->where('id',$request->get('order_id'))->first();
 
+        //dd($order);
         if($order->status == 1) return redirect(route('orderSuccessView').'?transactionID='.$order->transaction_id);
-        else if($order->status == 2) return redirect(route('orderFailView'));
-        else return redirect(route('bogResponse'));
+        else if($order->status == 2) return redirect(app()->getLocale() .'/profile?type=order');
+        else {
+            sleep(3);
+            return redirect('https://gabi.ge/' . app()->getLocale() . '/payments/bog/status?order_id='.$order->id);
+        }
     }
 
 

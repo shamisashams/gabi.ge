@@ -362,7 +362,7 @@ function getCartCount() {
                     let element = `
 
                         <div class="item cart_item_header">
-                          <a style="display: contents" href="/${locale}/${
+                          <a style="display: contents" href="/${locale}/product/${
                         item.cat_slug
                     }/${item.prod_slug}"">
                         <div>
@@ -834,7 +834,7 @@ function addToModal(product) {
                 </div>
             </div>
             <div class="flex center btm_btns">
-                <a href="/${locale}/${product.category.available_language[0].slug}/${
+                <a href="/${locale}/product/${product.category.available_language[0].slug}/${
             product.available_language[0].slug
         }">
                     <button class="details">Detiles</button>
@@ -873,7 +873,7 @@ function getProductFeatures(id, callback) {
         },
     });
     $.ajax({
-        url: `/${locale}/getFeatures/` + id,
+        url: `/${locale}/getfeatures/` + id,
         method: "GET",
         success: function (data) {
             if (data.status) {

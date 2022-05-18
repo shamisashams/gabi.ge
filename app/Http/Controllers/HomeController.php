@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Request\Admin\AnswerRequest;
 use App\Mail\ContactEmail;
 use App\Models\Answer;
+use App\Models\Blog;
 use App\Models\Feature;
 use App\Models\Language;
 use App\Models\Localization;
@@ -49,7 +50,7 @@ class HomeController extends Controller
             'bestSellerProducts' => $this->productRepository->getBestSeller(),
             'discountedProducts' => $this->productRepository->getDiscountedProducts(),
             'newProducts' => $this->productRepository->getNewProducts(),
-//            'categories' => $this->categoryRepository->getMainCategories(),
+            'blogs' => Blog::with(['availableLanguage', 'firstImage'])->limit(3)->inRandomOrder()->get(),
         'page' => $page,
             'sliders' => $this->sliderRepository->getSliders(),
             'banner' => $this->sliderRepository->getBanner()

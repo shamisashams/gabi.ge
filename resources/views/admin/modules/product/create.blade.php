@@ -136,7 +136,7 @@
                                                         <div class="col s12">
                                                             <label for="shipping">{{trans('admin.shipping')}}</label>
                                                             <textarea id="shipping" class="ckeditor form-control"
-                                                                      name="shipping"></textarea>
+                                                                      name="shipping">{{old('shipping')}}</textarea>
                                                             @if ($errors->has('shipping'))
                                                                 <small
                                                                     class="errorTxt">{{ $errors->first('shipping') }}</small>
@@ -152,7 +152,7 @@
                                                         <div class="col s12">
                                                             <label for="description">{{trans('admin.description')}}</label>
                                                             <textarea id="description" class="ckeditor form-control"
-                                                                      name="description"></textarea>
+                                                                      name="description">{{old('description')}}</textarea>
                                                             @if ($errors->has('description'))
                                                                 <small
                                                                     class="errorTxt">{{ $errors->first('description') }}</small>
@@ -161,7 +161,7 @@
                                                         <div class="col s12">
                                                             <label for="short_description">{{trans('admin.short_description')}}</label>
                                                             <textarea id="short_description" class="ckeditor form-control"
-                                                                      name="short_description"></textarea>
+                                                                      name="short_description">{{old('short_description')}}</textarea>
                                                             @if ($errors->has('short_description'))
                                                                 <small
                                                                     class="errorTxt">{{ $errors->first('short_description') }}</small>

@@ -130,9 +130,19 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $key => $file) {
+
+                    $image = new ImageResize($file);
+                    $image->resizeToHeight(360);
+
+                    $image->crop(360, 360, true, ImageResize::CROPCENTER);
+                    //$image->save(date('Ymhs') . $file->getClientOriginalName());
+                    $img = $image->getImageAsString();
+
                     $imagename = date('Ymhs') . $file->getClientOriginalName();
                     $destination = base_path() . '/storage/app/public/product/' . $productItem->id;
+                    $thumb = 'public/product/' . $productItem->id .'/thumb/'.$imagename;
                     $request->file('images')[$key]->move($destination, $imagename);
+                    Storage::put($thumb,$img);
                     $productItem->files()->create([
                         'name' => $imagename,
                         'path' => '/storage/app/public/product/' . $productItem->id,
@@ -300,7 +310,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                 $image->resizeToHeight(360);
 
                 $image->crop(360, 360, true, ImageResize::CROPCENTER);
-                $image->save(date('Ymhs') . $file->getClientOriginalName());
+                //$image->save(date('Ymhs') . $file->getClientOriginalName());
                 $img = $image->getImageAsString();
 
 

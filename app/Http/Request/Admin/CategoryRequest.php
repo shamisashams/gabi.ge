@@ -44,7 +44,7 @@ class CategoryRequest extends FormRequest
         $rules = [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
-            'slug' => ['required', $category ? Rule::unique('category_languages', 'slug')->ignore($category->id) :
+            'slug' => ['required','alpha_dash', $category ? Rule::unique('category_languages', 'slug')->ignore($category->id) :
                 Rule::unique('category_languages', 'slug')]
         ];
 
