@@ -834,7 +834,7 @@ function addToModal(product) {
                 </div>
             </div>
             <div class="flex center btm_btns">
-                <a href="/${locale}/${product.category.available_language[0].slug}/${
+                <a href="/${locale}/product/${product.category.available_language[0].slug}/${
             product.available_language[0].slug
         }">
                     <button class="details">Detiles</button>
