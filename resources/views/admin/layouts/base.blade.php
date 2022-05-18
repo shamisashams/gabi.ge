@@ -65,5 +65,6 @@
 <!-- BEGIN PAGE LEVEL JS-->
 {{--<script src="{{asset('../admin/js/scripts/dashboard-modern.js')}}"></script>--}}
 {{--<script src="{{asset('../admin/js/scripts/intro.js')}}"></script>--}}
+@stack('script')
 </body>
 </html>

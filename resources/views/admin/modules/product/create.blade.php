@@ -304,3 +304,73 @@
     <script src="{{asset('../admin/ckeditor/ckeditor.js')}}"></script>
 
 @endsection
+
+@push('script')
+
+    <script>
+        function containsWhitespace(str) {
+            return /\s/.test(str);
+        }
+
+        $('button[type=submit]').click(function (e){
+            //console.log(CKEDITOR.instances.description.getData())
+            let error = 0;
+            if($('input[name=title]').val() == ''){
+                error++;
+                $('label[for=title]').css('color','red');
+            } else {
+                $('label[for=title]').css('color','#9e9e9e');
+
+            }
+            if($('input[name=slug]').val().trim() == ''){
+                error++;
+                $('label[for=slug]').css('color','red');
+            }
+            else if (containsWhitespace($('input[name=slug]').val())){
+                error++;
+                $('label[for=slug]').css('color','red');
+                alert('slug contains spaces!')
+            }
+            else {
+                $('label[for=slug]').css('color','#9e9e9e');
+            }
+
+            /*if(containsWhitespace($('input[name=slug]').val())){
+                error++;
+                $('label[for=slug]').css('color','red');
+                alert('slug contains spaces!')
+                return false
+            } else {
+                $('label[for=slug]').css('color','#9e9e9e');
+            }*/
+            if($('select[name=category_id]').val() == null){
+                error++;
+                $('label[for=category_id]').css('color','red');
+            } else {
+                $('label[for=category_id]').css('color','#9e9e9e');
+            }
+            if($('input[name=price]').val() == ''){
+                error++;
+                $('label[for=price]').css('color','red');
+            } else {
+                $('label[for=price]').css('color','#9e9e9e');
+            }
+            if(CKEDITOR.instances.description.getData().trim() == ''){
+                error++;
+                $('label[for=description]').css('color','red');
+            } else {
+                $('label[for=description]').css('color','#9e9e9e');
+            }
+            if($('input[name=weight]').val() == ''){
+                error++;
+                $('label[for=position]').css('color','red');
+            } else {
+                $('label[for=position]').css('color','#9e9e9e');
+            }
+            if(error > 0){
+                alert('Please fill-out required fields')
+                return false
+            }
+        });
+    </script>
+@endpush
