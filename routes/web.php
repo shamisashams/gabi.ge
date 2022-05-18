@@ -249,8 +249,8 @@ Route::prefix('{locale?}')
 
             Route::get('/page/{slug?}',[\App\Http\Controllers\PageController::class, 'viewPage'])->name('viewPage');
 
-            Route::get('/{category?}', [CatalogueController::class, 'catalogueSeo'])->name('catalogueSeo');
-            Route::get('/{category?}/{product?}', [CatalogueController::class, 'showSeo'])->name('productDetailsSeo');
+            Route::get('category/{category?}', [CatalogueController::class, 'catalogueSeo'])->name('catalogueSeo');
+            Route::get('product/{category?}/{product?}', [CatalogueController::class, 'showSeo'])->name('productDetailsSeo');
 
             Route::any('payments/bog/status',[PurchaseController::class, 'bogResponse'])->name('bogResponse');
 
