@@ -332,7 +332,18 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
     public function delete(int $id)
     {
-        return $this->find($id)->delete();
+        $model = $this->find($id);
+        foreach ($model->files as $file){
+
+            if (Storage::exists('public/product/' . $model->id . '/' . $file->name)) {
+                Storage::delete('public/product/' . $model->id . '/' . $file->name);
+            }
+            if (Storage::exists('public/product/' . $model->id . '/thumb/' . $file->name)) {
+                Storage::delete('public/product/' . $model->id . '/thumb/' . $file->name);
+            }
+            $file->delete();
+        }
+        return $model->delete();
     }
 //
 //     protected function setOldImagesOfProduct(ProductRequest $request, Product $product)

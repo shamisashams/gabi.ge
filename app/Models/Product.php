@@ -13,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
 class Product extends Model
 {
 
-    use HasFactory, Notifiable, ScopeProductFilter, HasRolesAndPermissions, SoftDeletes;
+    use HasFactory, Notifiable, ScopeProductFilter, HasRolesAndPermissions;
 
 
     protected $fillable = [
