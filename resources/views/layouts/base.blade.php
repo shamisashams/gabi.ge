@@ -22,6 +22,8 @@
     />
     <link href="{{asset('../css/style.css?v=2')}}" rel="stylesheet">
 
+
+
     @yield('head')
 
     <title> shop - Home </title>
@@ -46,6 +48,7 @@
 <script src="{{asset('../js/slide.js')}}"></script>
 <script src="{{asset('../js/general.js?v=234838')}}"></script>
 <script src="{{asset('../js/main.js')}}"></script>
+
 @stack('script')
 </body>
 

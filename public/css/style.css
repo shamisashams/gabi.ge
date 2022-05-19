@@ -1,6 +1,6 @@
 @font-face {
     font-family: "poppins";
-    src: url(../fonts/Poppins-Medium.ttf);
+    src: url(../fonts/ALK-SANET.ttf);
 }
 *,
 *::after,
@@ -90,8 +90,8 @@ img {
 }
 
 .header {
-    font-size: 16px;
-    padding: 30px 0;
+    font-size: 15px;
+    padding: 15px 0;
 }
 
 .header .logo_mobile {
@@ -109,7 +109,7 @@ img {
 .header .links {
     display: flex;
     align-items: center;
-    margin-left: 50px;
+    margin-left: 40px;
     transition: 0.2s;
     cursor: pointer;
     padding: 10px 0;
@@ -121,7 +121,7 @@ img {
 }
 
 .header .links svg {
-    margin-right: 10px;
+    margin-right: 5px;
     transition: 0.2s;
     fill: #808080;
 }
@@ -251,7 +251,7 @@ img {
 
 .header .nav_link {
     position: relative;
-    margin-left: 70px;
+    margin-left: 40px;
     transition: 0.2s all;
     display: inline-block;
     cursor: pointer;
@@ -849,7 +849,7 @@ img {
     font-size: 16px;
     color: #fff;
     text-transform: uppercase;
-    z-index: 10;
+    z-index: 20;
     font-weight: bold;
     transition: 0.2s;
 }
@@ -1716,6 +1716,10 @@ img {
     width: 276px;
 }
 
+.product_full_view .vertical_slider_view .slick-list {
+    height: auto !important;
+}
+
 .product_full_view .fullview_slider_item {
     cursor: pointer;
     width: 276px;
@@ -1732,6 +1736,23 @@ img {
 .product_full_view .fullview_slider_item img {
     height: 90%;
     width: auto;
+}
+
+.loupe {
+    display: none;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    box-shadow: 5px 5px 12px black;
+    background: rgba(0, 0, 0, 0.25);
+    cursor: crosshair;
+    overflow: hidden;
+}
+
+.loupe img {
+    position: absolute;
+    right: 0;
 }
 
 .product_full_view .large_view {
@@ -1798,7 +1819,7 @@ img {
 }
 
 .customize .title {
-    font-size: 12px;
+    font-size: 15px;
     color: #2d2d2d;
     margin-bottom: 10px;
     font-weight: 500;
@@ -2877,7 +2898,6 @@ img {
 @media screen and (max-width: 1200px) {
     .header {
         font-size: 14px;
-        padding: 22px 0;
     }
 
     .header .nav_link {
