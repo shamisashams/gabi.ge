@@ -157,6 +157,7 @@
                     <div>{{__('client.add_to_cart')}}</div>
                 </button>
             </div>
+            <div class="product_added flex"> <span>Product added to cart</span>    <img src="/img/icons/details/added.png" alt=""/></div>
         </div>
     </section>
     <section class="information_section">

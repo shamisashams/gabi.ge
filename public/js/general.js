@@ -277,7 +277,7 @@ $(document).ready(function () {
 });
 
 function addToCart(el, $id) {
-    checkSelection_alert_p()
+    checkSelection_alert_p();
     let object = {};
     let box = document.querySelector("#customize");
     if (box) {
@@ -297,7 +297,6 @@ function addToCart(el, $id) {
 }
 
 function addToCartProductDetails(el, $id) {
-
     checkSelection_alert();
     let object = {};
     let box = document.querySelector("#customize-details");
@@ -313,6 +312,12 @@ function addToCartProductDetails(el, $id) {
 
         if (allOptions.length === options.length) {
             addToCartAjax($id, object, quantity);
+            document.querySelector(".product_added").classList.add("show");
+            setTimeout(() => {
+                document
+                    .querySelector(".product_added")
+                    .classList.remove("show");
+            }, 5000);
         }
     }
 }
@@ -588,7 +593,6 @@ function checkSelection() {
 }
 
 function checkSelection_alert() {
-
     let box = document.querySelector("#customize-details");
     let buttons = document.querySelector(".btm_btns");
     if (box) {
@@ -603,25 +607,35 @@ function checkSelection_alert() {
                 /*if (allOptions.length !== options.length) {
 
                 }*/
-                options.forEach(function (el,i){
+                options.forEach(function (el, i) {
                     //console.log(el)
-                    $(el).parents('.options').find('.title').css('color','black');
-                })
+                    $(el)
+                        .parents(".options")
+                        .find(".title")
+                        .css("color", "black");
+                });
             };
         });
         if (
             allOptions.length !==
             box.querySelectorAll('input[type="radio"]:checked').length
         ) {
-            let not_checked = $("input[type=\"radio\"]:not(:checked)")
+            let not_checked = $('input[type="radio"]:not(:checked)');
             //console.log(not_checked)
-            not_checked.each(function (i,el){
+            not_checked.each(function (i, el) {
                 //console.log(el)
 
-                if($(el).parents('.options').find('input[type="radio"]:checked').length < 1){
-                    $(el).parents('.options').find('.title').css('color','red');
+                if (
+                    $(el)
+                        .parents(".options")
+                        .find('input[type="radio"]:checked').length < 1
+                ) {
+                    $(el)
+                        .parents(".options")
+                        .find(".title")
+                        .css("color", "red");
                 }
-            })
+            });
 
             return false;
         }
@@ -629,7 +643,6 @@ function checkSelection_alert() {
 }
 
 function checkSelection_alert_p() {
-
     let box = document.querySelector("#customize");
     let buttons = document.querySelector(".btm_btns");
     if (box) {
@@ -644,25 +657,35 @@ function checkSelection_alert_p() {
                     alert('select options')
                     return false;
                 }*/
-                options.forEach(function (el,i){
+                options.forEach(function (el, i) {
                     //console.log(el)
-                    $(el).parents('.options').find('.title').css('color','black');
-                })
+                    $(el)
+                        .parents(".options")
+                        .find(".title")
+                        .css("color", "black");
+                });
             };
         });
         if (
             allOptions.length !==
             box.querySelectorAll('input[type="radio"]:checked').length
         ) {
-            let not_checked = $("input[type=\"radio\"]:not(:checked)")
+            let not_checked = $('input[type="radio"]:not(:checked)');
             //console.log(not_checked)
-            not_checked.each(function (i,el){
+            not_checked.each(function (i, el) {
                 //console.log(el)
 
-                if($(el).parents('.options').find('input[type="radio"]:checked').length < 1){
-                    $(el).parents('.options').find('.title').css('color','red');
+                if (
+                    $(el)
+                        .parents(".options")
+                        .find('input[type="radio"]:checked').length < 1
+                ) {
+                    $(el)
+                        .parents(".options")
+                        .find(".title")
+                        .css("color", "red");
                 }
-            })
+            });
 
             return false;
         }
@@ -670,7 +693,7 @@ function checkSelection_alert_p() {
 }
 
 function addToModal(product) {
-    console.log(product)
+    console.log(product);
     let popupContainer = document.querySelector("#popup_bg");
     let images = "";
     let mainImages = "";
@@ -782,7 +805,7 @@ function addToModal(product) {
         }
 
         //et disabled = productAnswers.length > 0;
-        let disabled = false
+        let disabled = false;
         //console.log(product.category.available_language);
         let content = `
         <div class="close_popup_bg"></div>
@@ -834,9 +857,9 @@ function addToModal(product) {
                 </div>
             </div>
             <div class="flex center btm_btns">
-                <a href="/${locale}/product/${product.category.available_language[0].slug}/${
-            product.available_language[0].slug
-        }">
+                <a href="/${locale}/product/${
+            product.category.available_language[0].slug
+        }/${product.available_language[0].slug}">
                     <button class="details">Detiles</button>
                 </a>
 
