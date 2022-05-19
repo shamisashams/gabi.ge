@@ -1,6 +1,6 @@
 @font-face {
     font-family: "poppins";
-    src: url("/fonts/ALK-SANET.ttf");
+    src: url("/fonts/alkroundedmtav-medium.ttf");
 }
 *,
 *::after,
@@ -1781,14 +1781,13 @@ img {
     font-weight: 200;
 }
 .product_added {
-    color: #1aa83c;
+    color: #fff;
     justify-content: flex-start;
     margin-top: 20px;
     transition: 0.7s;
     transform: translateX(100%);
     opacity: 0;
-    background-color: #1aa83c;
-    border: 1px solid #1aa83c;
+    background-color: #0e064d;
     padding: 3px 15px;
     border-radius: 5px;
     width: fit-content;
@@ -1804,7 +1803,6 @@ img {
 .product_added.show {
     transform: translateX(0);
     opacity: 1;
-    background-color: #fff;
 }
 .product_added.show img {
     transform: scale(1);
