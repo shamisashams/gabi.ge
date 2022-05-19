@@ -42,7 +42,7 @@ class ProductRequest extends FormRequest
             'answers.*' => 'string',
             'description' => 'required|string',
             //'sale_price' => 'nullable|numeric',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:255',
             'meta_keyword' => 'nullable|string|max:255',
