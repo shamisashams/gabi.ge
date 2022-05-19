@@ -1,6 +1,6 @@
 @font-face {
     font-family: "poppins";
-    src: url(../fonts/ALK-SANET.ttf);
+    src: url("/fonts/ALK-SANET.ttf");
 }
 *,
 *::after,
