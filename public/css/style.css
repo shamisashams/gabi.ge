@@ -862,9 +862,16 @@ img {
     transform: scale(0.9);
 }
 
-.main_product_view {
+.best_seller_slide .main_product_view,
+.new_products_slide .main_product_view {
     margin: 0 17.5px;
     cursor: pointer;
+    width: 300px !important;
+    flex-shrink: 0;
+}
+.best_seller_slide .slick-track,
+.new_products_slide .slick-track {
+    display: flex;
 }
 
 .main_product_view .pic {
