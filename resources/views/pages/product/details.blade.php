@@ -43,22 +43,16 @@
 
 
                 <div class="large_view">
-                    <!-- @foreach($product->files as $key=>$file)
-                        <img
+                    @foreach($product->files as $key=>$file)
+                    <div class="magnified_img">
+                         <img
                             class="large_image_view {{$key==0?"display":""}}"
                             src="/storage/product/{{$file->fileable_id}}/{{$file->name}}"
                             alt=""
                         />
-                    @endforeach -->
-                    <div class="magnified_img">
-                        <img class="large_image_view" src="/img/products/1.png" alt=""/>
                     </div>
-                    <div class="magnified_img">
-                          <img class="large_image_view" src="/img/products/2.png" alt=""/>
-                    </div>
-                    <div class="magnified_img">
-                             <img class="large_image_view" src="/img/products/3.png" alt=""/>
-                    </div>
+                    
+                    @endforeach
                 </div>
                 <div class="loupe"></div>
             @else
