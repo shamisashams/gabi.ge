@@ -44,9 +44,9 @@
 
                 <div class="large_view">
                     @foreach($product->files as $key=>$file)
-                    <div class="magnified_img">
+                    <div class="magnified_img {{$key==0?"display":""}}">
                          <img
-                            class="large_image_view {{$key==0?"display":""}}"
+                            class="large_image_view "
                             src="/storage/product/{{$file->fileable_id}}/{{$file->name}}"
                             alt=""
                         />
