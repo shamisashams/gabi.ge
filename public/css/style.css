@@ -115,7 +115,7 @@ img {
     bottom: 0;
     width: 10px;
     height: 50%;
-    background: #fff;
+    background: #d6a550;
     transform-origin: center bottom;
     box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
@@ -150,7 +150,7 @@ img {
     left: 0;
     width: 10px;
     height: 10px;
-    background: #fff;
+    background: #d6a550;
     border-radius: 50%;
     animation: ball 4s infinite;
 }
