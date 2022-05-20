@@ -1974,6 +1974,7 @@ img {
 .loupe img {
     position: absolute;
     right: 0;
+    max-width: none;
 }
 
 .product_full_view .large_view {
@@ -1986,14 +1987,19 @@ img {
     margin-right: 35px;
 }
 
+.magnified_img {
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
 .product_full_view .large_view .large_image_view {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    display: none;
 }
 
-.product_full_view .large_view .large_image_view.display {
+.product_full_view .large_view .magnified_img.display {
     display: block;
 }
 

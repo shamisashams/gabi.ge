@@ -58,6 +58,7 @@
 <script src="{{asset('../js/slide.js')}}"></script>
 <script src="{{asset('../js/general.js?v=234838')}}"></script>
 <script src="{{asset('../js/main.js')}}"></script>
+<script src="{{asset('../js/magnifier.js')}}"></script>
 
 @stack('script')
 </body>
