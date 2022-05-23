@@ -23,12 +23,24 @@
     />
     <link href="{{asset('../css/style.css?v=2')}}" rel="stylesheet">
 
+
+
     @yield('head')
 
     <title> shop - Home </title>
 </head>
 
 <body>
+<div id="preloader">
+            <div class="loader">
+                <div class="loader__bar"></div>
+                <div class="loader__bar"></div>
+                <div class="loader__bar"></div>
+                <div class="loader__bar"></div>
+                <div class="loader__bar"></div>
+                <div class="loader__ball"></div>
+            </div>
+        </div>
 {{--<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0"--}}
 {{--        nonce="3c3lKlK8"></script>--}}
 
@@ -47,6 +59,8 @@
 <script src="{{asset('../js/slide.js')}}"></script>
 <script src="{{asset('../js/general.js?v=234838')}}"></script>
 <script src="{{asset('../js/main.js')}}"></script>
+<script src="{{asset('../js/magnifier.js')}}"></script>
+
 @stack('script')
 </body>
 

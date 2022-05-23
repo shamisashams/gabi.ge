@@ -41,15 +41,20 @@
                     </button>
                 </div>
 
+
                 <div class="large_view">
                     @foreach($product->files as $key=>$file)
-                        <img
-                            class="large_image_view {{$key==0?"display":""}}"
+                    <div class="magnified_img {{$key==0?"display":""}}">
+                         <img
+                            class="large_image_view "
                             src="/storage/product/{{$file->fileable_id}}/{{$file->name}}"
                             alt=""
                         />
+                    </div>
+                    
                     @endforeach
                 </div>
+                <div class="loupe"></div>
             @else
                 <div class="slider">
                     <div class="vertical_slider_view">
@@ -157,6 +162,7 @@
                     <div>{{__('client.add_to_cart')}}</div>
                 </button>
             </div>
+            <div class="product_added flex"> <span>{{__('client.product_added')}}</span>    <img src="/img/icons/details/added.png" alt=""/></div>
         </div>
     </section>
     <section class="information_section">
