@@ -860,7 +860,7 @@ function addToModal(product) {
                 <a href="/${locale}/product/${
             product.category.available_language[0].slug
         }/${product.available_language[0].slug}">
-                    <button class="details">Detiles</button>
+                    <button class="details">${__('client.details')}</button>
                 </a>
 
                     <button id="add_to_cart" ${
@@ -869,14 +869,14 @@ function addToModal(product) {
             product.id
         })" class="add_to_cart flex center popup_add_to_cart">
                         <img src="/img/icons/details/cart.png" alt="" />
-                        <div>Add To Card</div>
+                        <div>${__('client.add_to_cart')}</div>
                     </button>
             </div>
 
             <div class="success flex center popup_success">
 
                 <img src="/img/icons/popup/success.png" alt="">
-                <div>Product was successfully added to cart</div>
+                <div>${__('client.cart_add_success')}</div>
 
 
             </div>

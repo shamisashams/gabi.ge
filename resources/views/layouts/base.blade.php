@@ -24,7 +24,17 @@
     <link href="{{asset('../css/style.css?v=2')}}" rel="stylesheet">
 
 
+    <script>
 
+        function __ (key){
+            let data = key.split('.');
+            let translations = @json($client_translation);
+
+            if(translations.hasOwnProperty(data[1])){
+                return translations[data[1]];
+            }
+        }
+    </script>
 
 
 </head>
