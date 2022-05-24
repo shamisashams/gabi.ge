@@ -10,7 +10,7 @@
     <section class="path">
         <div class="path_content wrapper">
             <div class="path_took"><a href="{{route('welcome')}}">{{__('client.home')}}</div>
-            <div class="current">@lang('client.about_us')</div>
+            <div class="current">@lang('client.helps')</div>
         </div>
     </section>
 
