@@ -3,11 +3,11 @@
 {{--@dd($category)--}}
 
 @section('head')
-    <title>{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}</title>
+    <title>{{count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_title:""}}</title>
+    <meta name="description" content="{{count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_description:""}}">
+    <meta name="keywords" content="{{count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_keyword:""}}">
 @endsection
 
-@section('description',count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_description:"")
-@section('keywords',count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_keyword:"")
 
 @section('content')
     <section class="path">
@@ -51,7 +51,7 @@
                             alt=""
                         />
                     </div>
-                    
+
                     @endforeach
                 </div>
                 <div class="loupe"></div>
