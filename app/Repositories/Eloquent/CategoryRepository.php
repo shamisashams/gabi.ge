@@ -54,12 +54,18 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
                     'language_id' => $languageId,
                     'title' => $request['title'],
                     'description' => $request['description'],
+                    'meta_description' => $request['meta_description'],
+                    'meta_title' => $request['meta_title'],
+                    'meta_keyword' => $request['meta_keyword'],
                     'slug' => $request['slug']
                 ]);
             } else {
                 $language->update([
                     'title' => $request['title'],
                     'description' => $request['description'],
+                    'meta_description' => $request['meta_description'],
+                    'meta_title' => $request['meta_title'],
+                    'meta_keyword' => $request['meta_keyword'],
                     'slug' => $request['slug']
                 ]);
             }
@@ -97,6 +103,9 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
                 'language_id' => $languageId,
                 'title' => $request['title'],
                 'description' => $request['description'],
+                'meta_description' => $request['meta_description'],
+                'meta_title' => $request['meta_title'],
+                'meta_keyword' => $request['meta_keyword'],
                 'slug' => $request['slug']
             ]);
 

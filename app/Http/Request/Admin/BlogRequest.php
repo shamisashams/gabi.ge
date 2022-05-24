@@ -39,7 +39,7 @@ class BlogRequest extends FormRequest
 
             'text' => 'required|string',
             //'sale_price' => 'nullable|numeric',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg,webp',
             'meta_description' => 'nullable|string|max:255',
             //'meta_keyword' => 'nullable|string|max:255',
 

@@ -52,6 +52,7 @@ class CategoryController extends AdminController
      */
     public function store(string $lang, CategoryRequest $request)
     {
+
         if (!$this->categoryRepository->store($lang, $request)) {
             return redirect(route('categoryCreateView', $lang))->with('danger', __('admin.category_not_created'));
         }
