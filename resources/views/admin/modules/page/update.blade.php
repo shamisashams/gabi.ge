@@ -23,11 +23,11 @@
                                                 <div class="col s12 m6">
                                                     <div class="row">
                                                         <div class="col s12 input-field">
-                                                            <input id="username" name="title" type="text"
+                                                            <input id="title" name="title" type="text"
                                                                    class="validate {{ $errors->has('title') ? 'invalid' : 'valid' }}"
                                                                    value="{{(count($page->availableLanguage) > 0) ?  $page->availableLanguage[0]->title : ''}}"
                                                                    data-error=".errorTxt">
-                                                            <label for="username"
+                                                            <label for="title"
                                                                    class="active">{{trans('admin.title')}}</label>
                                                             @if ($errors->has('title'))
                                                                 <small
@@ -44,6 +44,19 @@
                                                             @if ($errors->has('meta_title'))
                                                                 <small
                                                                     class="errorTxt">{{ $errors->first('meta_title') }}</small>
+                                                            @endif
+                                                        </div>
+
+                                                        <div class="col s12 input-field">
+                                                            <input id="meta_keyword" name="meta_keyword" type="text"
+                                                                   class="validate {{ $errors->has('meta_keyword') ? 'invalid' : 'valid' }}"
+                                                                   value="{{(count($page->availableLanguage) > 0) ?  $page->availableLanguage[0]->meta_keyword : ''}}"
+                                                                   data-error=".errorTxt">
+                                                            <label for="meta_keyword"
+                                                                   class="active">{{trans('admin.meta_keyword')}}</label>
+                                                            @if ($errors->has('meta_keyword'))
+                                                                <small
+                                                                    class="errorTxt">{{ $errors->first('meta_keyword') }}</small>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -63,15 +76,15 @@
                                                             @endif
                                                         </div>
                                                         <div class="col s12 input-field">
-                                                            <input id="description" name="description" type="text"
-                                                                   class="validate {{ $errors->has('description') ? 'invalid' : 'valid' }}"
-                                                                   value="{{(count($page->availableLanguage) > 0) ?  $page->availableLanguage[0]->description : ''}}"
+                                                            <input id="meta_description" name="meta_description" type="text"
+                                                                   class="validate {{ $errors->has('meta_description') ? 'invalid' : 'valid' }}"
+                                                                   value="{{(count($page->availableLanguage) > 0) ?  $page->availableLanguage[0]->meta_description : ''}}"
                                                                    data-error=".errorTxt">
-                                                            <label for="description"
-                                                                   class="active">{{trans('admin.description')}}</label>
-                                                            @if ($errors->has('description'))
+                                                            <label for="meta_description"
+                                                                   class="active">{{trans('admin.meta_description')}}</label>
+                                                            @if ($errors->has('meta_description'))
                                                                 <small
-                                                                    class="errorTxt">{{ $errors->first('description') }}</small>
+                                                                    class="errorTxt">{{ $errors->first('meta_description') }}</small>
                                                             @endif
                                                         </div>
                                                     </div>

@@ -44,7 +44,8 @@ class PageRepository extends BaseRepository implements PageRepositoryInterface
                     'slug' => $request['slug'],
                     'title' => $request['title'],
                     'meta_title' => $request['meta_title'],
-                    'description' => $request['description'],
+                    'meta_description' => $request['meta_description'],
+                    'meta_keyword' => $request['meta_keyword'],
                     'content' => $request['content'],
                     'content_2' => $request['content_2'],
                     'content_3' => $request['content_3'],
@@ -52,7 +53,8 @@ class PageRepository extends BaseRepository implements PageRepositoryInterface
             } else {
                 $pageLanguage->title = $request['title'];
                 $pageLanguage->meta_title = $request['meta_title'];
-                $pageLanguage->description = $request['description'];
+                $pageLanguage->meta_description = $request['meta_description'];
+                $pageLanguage->meta_keyword = $request['meta_keyword'];
                 $pageLanguage->slug = $request['slug'];
                 $pageLanguage->content = $request['content'];
                 $pageLanguage->content_2 = $request['content_2'];
