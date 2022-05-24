@@ -1,9 +1,10 @@
 @extends('layouts.base')
 @section('head')
-    <title>{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->title : null}}</title>
+    <title>{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->meta_title : null}}</title>
+    <meta name="description" content="{{count($blog->availableLanguage)>0?$blog->availableLanguage[0]->meta_description:""}}">
+    <meta name="keywords" content="{{count($blog->availableLanguage)>0?$blog->availableLanguage[0]->meta_keywords:""}}">
 @endsection
-@section('description'){{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->meta_description : null}}@endsection
-{{--@section('keywords'){{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->kew_words : null}}@endsection--}}
+
 @section('content')
 
 

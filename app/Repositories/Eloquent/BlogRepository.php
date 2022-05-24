@@ -59,6 +59,7 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
                 'blog_id' => $this->model->id,
                 'language_id' => $localizationID,
                 'title' => $request['title'],
+                'meta_title' => $request['meta_title'],
                 'title_2' => $request['title_2'],
                 'text' => $request['text'],
                 'text_2' => $request['text_2'],
@@ -120,6 +121,7 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
                     'blog_id' => $data->id,
                     'language_id' => $localizationID,
                     'title' => $request['title'],
+                    'meta_title' => $request['meta_title'],
                     'title_2' => $request['title_2'],
                     'text' => $request['text'],
                     'text_2' => $request['text_2'],
@@ -130,6 +132,7 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
                 ]);
             } else {
                 $sliderLanguage->title = $request['title'];
+                $sliderLanguage->meta_title = $request['meta_title'];
                 $sliderLanguage->title_2 = $request['title_2'];
                 $sliderLanguage->text = $request['text'];
                 $sliderLanguage->text_2 = $request['text_2'];

@@ -1,9 +1,10 @@
 @extends('layouts.base')
 @section('head')
     <title>@lang('client.success')</title>
+    <meta name="description" content="@lang('client.success')">
+    <meta name="keywords" content="@lang('client.success')">
 @endsection
-@section('description')@lang('client.success')@endsection
-@section('keywords')@lang('client.success')@endsection
+
 @section('content')
 
     <section class="path">

@@ -1,6 +1,8 @@
 @extends('layouts.base')
 @section('head')
     <title>{{__('app.cart')}}</title>
+    <meta name="description" content="{{__('app.cart')}}">
+    <meta name="keywords" content="{{__('app.cart')}}">
 @endsection
 
 @section('content')
