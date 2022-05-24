@@ -170,7 +170,6 @@
             <div class="info_head clicked">@lang('client.description')</div>
             <div class="info_head">@lang('client.add_info')</div>
             <div class="info_head">@lang('client.ship_returns')</div>
-            @lang('client.checkout')
         </div>
         <div class="information_content wrapper clicked">
             {{--            <div class="title">Product Information</div>--}}
