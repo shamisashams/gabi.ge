@@ -72,8 +72,8 @@
                     </div>
                 @endforeach
                 <div class="flex coupon">
-                    <input type="text" placeholder="Coupon Code"/>
-                    <button class="ok">Ok</button>
+                    <input type="text" placeholder="{{__('client.coupon_code')}}"/>
+                    <button class="ok">{{__('client.ok')}}</button>
                 </div>
             </div>
         </div>
@@ -117,7 +117,7 @@
                     @endif
                 </div>
                 <div class="row last">
-                    <div>Payemnt Method:</div>
+                    <div>{{__('client.payment_method')}}:</div>
                     <br/>
                     <div class="flex">
                         <div>
@@ -163,10 +163,10 @@
                     @endif
                 </div>
                 <div class="flex total">
-                    <div>Total</div>
+                    <div>{{__('client.total')}}</div>
                     <div id="total-price" data-price="">₾ {{round($total,2)}}</div>
                 </div>
-                <button type="submit" class="proceed">Proceed To Checkout</button>
+                <button type="submit" class="proceed">{{__('client.proceed_checkout')}}</button>
 
             </form>
         </div>
