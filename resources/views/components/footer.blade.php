@@ -53,7 +53,7 @@
                 @lang('client.footer_text3')
             </p>
             <div class="email">
-                <input id="sb_inp" type="email " placeholder="example@email.com" />
+                <input id="sb_inp" type="email " placeholder="@lang('client.enter_email')" />
                 <button id="sb_btn" class="ok roboto">@lang('client.ok')</button>
             </div>
         </div>
