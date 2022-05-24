@@ -29,7 +29,7 @@
                             <div class="fullview_slider_item active">
                                 <img
                                     src="/storage/product/{{$file->fileable_id}}/thumb/{{$file->name}}"
-                                    alt=""/>
+                                    alt="{{count($file->availableLanguage)>0?$file->availableLanguage[0]->title:""}}"/>
                             </div>
                         @endforeach
                     </div>
@@ -48,7 +48,7 @@
                          <img
                             class="large_image_view "
                             src="/storage/product/{{$file->fileable_id}}/{{$file->name}}"
-                            alt=""
+                            alt="{{count($file->availableLanguage)>0?$file->availableLanguage[0]->title:""}}"
                         />
                     </div>
 
