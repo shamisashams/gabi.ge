@@ -5,10 +5,7 @@
                 <img src="/img/logo/2.png" alt="" />
             </a>
             <p class="para">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat
+                @lang('client.footer_text')
             </p>
             <div class="social_media">
                 <a href="#" class="sm">
@@ -27,7 +24,7 @@
             </div>
         </div>
         <div>
-            <div class="title">Information</div>
+            <div class="title">@lang('client.footer_nav_title1')</div>
             <a href="{{route('welcome')}}" class="link {{str_contains(substr(parse_url(route('welcome',app()->getLocale()), PHP_URL_PATH), 1),request()->path())?"active":""}}">{{__('client.home')}}</a>
             <a href="{{route('contactUs',app()->getLocale())}}"
                class="link {{str_contains(request()->path(),substr(parse_url(route('contactUs',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.contact_us')}}</a>
@@ -37,7 +34,7 @@
                class="link {{str_contains(request()->path(),substr(parse_url(route('helps',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.helps')}}</a>
         </div>
         <div>
-            <div class="title">Customer Service</div>
+            <div class="title">@lang('client.footer_nav_title2')</div>
             @foreach($categories as $key=>$category)
                 <a class="link" href="{{route('catalogueSeo',[app()->getLocale(),$category->availableLanguage[0]->slug])}}">
                     {{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}
@@ -50,15 +47,14 @@
         </div>
         <div>
             <div class="title last">
-                Enter Your Email To Get Info On New Arrivals And 10% Off Your First
-                Order From Babyshop.Com (T&C's Apply).
+                @lang('client.footer_text2')
             </div>
             <p class="para last">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                @lang('client.footer_text3')
             </p>
             <div class="email">
                 <input id="sb_inp" type="email " placeholder="example@email.com" />
-                <button id="sb_btn" class="ok roboto">Ok</button>
+                <button id="sb_btn" class="ok roboto">@lang('client.ok')</button>
             </div>
         </div>
     </div>
