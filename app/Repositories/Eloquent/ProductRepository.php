@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Models\FileLanguage;
 use App\Models\ProductAnswers;
 use App\Repositories\ProductRepositoryInterface;
 use App\Repositories\Eloquent\Base\BaseRepository;
@@ -79,13 +80,14 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
             $this->updateSaleProduct($request, $productItem);
 
-            $this->updateImages($request, $productItem);
+            $this->updateImages($request, $productItem, $lang);
 
             DB::commit();
             return true;
 
         } catch (\Exception $queryException) {
             DB::rollBack();
+            dd($queryException->getMessage());
             return false;
         }
     }
@@ -278,9 +280,10 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     }
 
 
-    public function updateImages($request, $model)
+    public function updateImages($request, $model, $lang)
     {
-        //dd($request->file('images'));
+        $languageId = Language::getIdByName($lang);
+        //dd($request->all());
         if (count($model->files) > 0) {
             foreach ($model->files as $file) {
                 if ($request['old_images'] == null) {
@@ -299,6 +302,24 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                     }
                     $file->delete();
 
+
+                }
+
+                $language = $file->languages()->where('language_id', $languageId)->first();
+                //dd($language);
+                if ($language) {
+                    $language->update([
+                        'language_id' => $languageId,
+                        'title' => $request['alt'][$file->id],
+                    ]);
+                } else {
+                    //dd($file->id);
+                    FileLanguage::create([
+                        'file_id' => $file->id,
+                        'language_id' => $languageId,
+                        'title' => $request['alt'][$file->id],
+
+                    ]);
                 }
             }
         }

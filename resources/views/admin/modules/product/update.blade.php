@@ -312,6 +312,18 @@
                                                     @endif
                                                 </div>
 
+                                                <div class="col s12" style="margin-top:20px">
+                                                    <h6>@lang('admin.img_alt')</h6>
+                                                </div>
+
+                                                @foreach($product->files as $file)
+                                                <div class="col s12">
+                                                    <input name="alt[{{$file->id}}]" type="text"
+                                                           value="{{count($file->availableLanguage)>0?$file->availableLanguage[0]->title:""}}" placeholder="{{$loop->iteration}}) @lang('admin.img_alt')">
+                                                </div>
+
+                                                @endforeach
+
                                                 <div class="col s12 display-flex justify-content-end mt-3">
                                                     <button type="submit" class="btn indigo">
                                                         {{trans('admin.update')}}

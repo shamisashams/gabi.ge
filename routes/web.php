@@ -185,7 +185,7 @@ Route::prefix('{locale?}')
             Route::get('/catalogue/{category}', [CatalogueController::class, 'catalogue'])->name('catalogue');
             Route::get('/catalogue/{category}/details/{product}', [CatalogueController::class, 'show'])->name('productDetails');
 
-            //Route::fallback(CatalogueController::class.'@proxy')->name('product-catalog');
+
             Route::get('/blog/{blog}',[\App\Http\Controllers\BlogController::class,'viewBlog'])->name('viewBlog');
 
 
@@ -212,13 +212,13 @@ Route::prefix('{locale?}')
             })->name('blogs');*/
             Route::get('single-blog', function () {
                 return view('pages.single-blog.index');
-            })->name('single-blog'); 
+            })->name('single-blog');
             Route::get('success', function () {
                 return view('pages.result.success');
-            })->name('success'); 
+            })->name('success');
             Route::get('failure', function () {
                 return view('pages.result.failure');
-            })->name('failure'); 
+            })->name('failure');
 
             Route::get('/facebook-auth', [AuthController::class, 'facebookAuth'])->name('facebookAuth');
 
@@ -253,7 +253,7 @@ Route::prefix('{locale?}')
 
             Route::any('payments/bog/status',[PurchaseController::class, 'bogResponse'])->name('bogResponse');
 
-
+            Route::fallback(CatalogueController::class.'@proxy')->name('product-catalog');
 
 
 
