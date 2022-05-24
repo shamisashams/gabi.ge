@@ -158,13 +158,13 @@
     <section class="products_viewport blog_section">
         <div class="wrapper">
             <div class="products_head ">
-                <div class="title">Blog</div>
+                <div class="title">@lang('client.blog_header')</div>
             </div>
             <div class="blog_grid">
                 @foreach($blogs as $blog)
             <a href="{{route('viewBlog',[app()->getLocale(),count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->slug : ''])}}" class="blog_box">
                 <div class="img_frame">
-                    <div class="read_more">Read more</div>
+                    <div class="read_more">@lang('client.read_more')</div>
                     <div class="img">
                         <img src="{{asset($blog->firstImage ? ('storage/blog/' . $blog->firstImage->fileable_id .'/'. $blog->firstImage->name) : null)}}" alt=""/>
                     </div>
@@ -191,7 +191,7 @@
             </div>
             <div class="btn">
 
-                <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['blogs']['slug']) ? $page_slugs['blogs']['slug'] : null])}}" class="view_all">View all</a>
+                <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['blogs']['slug']) ? $page_slugs['blogs']['slug'] : null])}}" class="view_all">@lang('client.view_all')</a>
             </div>
         </div>
 

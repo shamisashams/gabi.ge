@@ -77,8 +77,7 @@
     </style>
     <section class="path">
         <div class="path_content wrapper">
-            <div class="path_took"><a href="{{route('welcome',app()->getLocale())}}">Home</a>
-                / {{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</div>
+            <div class="path_took"><a href="{{route('welcome',app()->getLocale())}}">@lang('client.home')</a>
             <div
                 class="current">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</div>
         </div>
