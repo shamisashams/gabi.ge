@@ -12,7 +12,7 @@
             @foreach($sliders as $slider)
                 <div class="slide slide1">
                     @if(isset($slider->files[0]))
-                        <img src="/storage/slider/{{$slider->files[0]->fileable_id}}/{{$slider->files[0]->name}}"
+                        <img src="/storage/slider/{{$slider->files[0]->fileable_id}}/thumb/{{$slider->files[0]->name}}"
                              alt=""/>
                     @else
                         <img src="noimage.png"/>
