@@ -8,7 +8,7 @@
 @section('content')
     <section class="path">
         <div class="path_content wrapper">
-            <div class="path_took"><a href="{{route('welcome')}}">Home</a> / {{__('client.shopping_cart')}}</div>
+            <div class="path_took"><a href="{{route('welcome')}}">@lang('client.home')</a></div>
             <div class="current">{{__('client.shopping_cart')}}</div>
         </div>
     </section>
