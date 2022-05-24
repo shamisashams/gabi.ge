@@ -167,9 +167,9 @@
     </section>
     <section class="information_section">
         <div class="heads">
-            <div class="info_head clicked">Description</div>
-            <div class="info_head">Additional Information</div>
-            <div class="info_head">Shipping & Returns</div>
+            <div class="info_head clicked">@lang('client.description')</div>
+            <div class="info_head">@lang('client.add_info')</div>
+            <div class="info_head">@lang('client.ship_returns')</div>
         </div>
         <div class="information_content wrapper clicked">
             {{--            <div class="title">Product Information</div>--}}
