@@ -60,7 +60,7 @@
 {{--<script src="{{asset('../admin/js/scripts/customizer.js')}}"></script>--}}
 <script src="{{asset('../admin/js/scripts/ui-alerts.js')}}"></script>
 <script src="{{asset('../admin/uploader/image-uploader.js')}}"></script>
-<script src="{{asset('../js/app.js')}}"></script>
+<script src="{{asset('../js/app.js?v=4')}}"></script>
 <!-- END THEME  JS-->
 <!-- BEGIN PAGE LEVEL JS-->
 {{--<script src="{{asset('../admin/js/scripts/dashboard-modern.js')}}"></script>--}}
