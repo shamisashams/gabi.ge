@@ -9,7 +9,7 @@
 
     <section class="path">
         <div class="path_content wrapper">
-            <div class="path_took"><a href="{{route('welcome')}}">{{__('client.home')}}</a> / {{__('client.about_us')}}
+            <div class="path_took"><a href="{{route('welcome')}}">{{__('client.home')}}</a>
             </div>
             <div class="current">{{__('client.about_us')}}</div>
         </div>

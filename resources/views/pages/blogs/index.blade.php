@@ -11,8 +11,8 @@
     <section class="blogs_page wrapper">
         <div class="showcase flex center">
             <div class="showcase_innerbox flex center">
-                <div class="bold">BLOG</div>
-                <p>Read the stories you love to know</p>
+                <div class="bold">@lang('client.page_blog_header')</div>
+                <p>@lang('client.page_blog_subtitle')</p>
             </div>
         </div>
         <div class="blog_grid">
