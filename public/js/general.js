@@ -397,7 +397,7 @@ function getCartCount() {
                 });
                 let checkout = `
                                     <div class="checkout" id="checkout-total">
-                        <div class="total">total</div>
+                        <div class="total">${__('client.total')}</div>
                         <div class="price">₾ ${
                             Math.round(data.total * 100) / 100
                         }</div>
@@ -408,7 +408,7 @@ function getCartCount() {
                         </a>//-->
                         <a href="/${locale}/cart">
                             <button class="go">
-                                <div>Checkout</div>
+                                <div>${__('client.checkout')}</div>
                                 <img src="/img/icons/header/right.png" alt=""/>
                             </button>
                         </a>
