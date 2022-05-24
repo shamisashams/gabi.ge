@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Models\FileLanguage;
 use Illuminate\Support\Facades\DB;
 use App\Models\Language;
 use App\Models\Category;
@@ -70,7 +71,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
                 ]);
             }
 
-            $this->updateImages($request, $categoryItem);
+            $this->updateImages($request, $categoryItem, $lang);
 
             DB::commit();
             return true;
@@ -136,8 +137,10 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     }
 
 
-    public function updateImages($request, $model)
+    public function updateImages($request, $model, $lang)
     {
+        $languageId = Language::getIdByName($lang);
+
         if (count($model->files) > 0) {
             foreach ($model->files as $file) {
                 if ($request['old_images'] == null) {
@@ -153,6 +156,23 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
                     }
                     $file->delete();
 
+                }
+
+                $language = $file->languages()->where('language_id', $languageId)->first();
+                //dd($language);
+                if ($language) {
+                    $language->update([
+                        'language_id' => $languageId,
+                        'title' => $request['alt'][$file->id],
+                    ]);
+                } else {
+                    //dd($file->id);
+                    FileLanguage::create([
+                        'file_id' => $file->id,
+                        'language_id' => $languageId,
+                        'title' => $request['alt'][$file->id],
+
+                    ]);
                 }
             }
         }

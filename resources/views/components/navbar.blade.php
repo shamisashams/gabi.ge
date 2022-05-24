@@ -30,7 +30,7 @@
                                         @if(isset($category->files[0]))
                                             <img class="main"
                                                  src="/storage/category/{{$category->files[0]->fileable_id}}/{{$category->files[0]->name}}"
-                                                 alt=""/>
+                                                 alt="{{count($category->files[0]->availableLanguage)>0?$category->files[0]->availableLanguage[0]->title:""}}"/>
                                         @else
                                             <img src="/noimage.png"/>
                                         @endif
