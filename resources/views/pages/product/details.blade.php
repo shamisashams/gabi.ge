@@ -13,9 +13,9 @@
     <section class="path">
         <div class="path_content wrapper">
             <div class="path_took">
-                Home / Summer collections / Boys / Baby Dress
+                <a href="{{route('welcome')}}">@lang('client.home')</a> / <a href="{{route('catalogueSeo',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:""])}}">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</a>
             </div>
-            <div class="current">BABY DRESS</div>
+            <div class="current">{{(count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->title : ''}}</div>
         </div>
     </section>
 
