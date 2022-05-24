@@ -1,6 +1,8 @@
 @extends('layouts.base')
 @section('head')
     <title>{{$title}}</title>
+    <meta name="description" content="{{$description}}">
+    <meta name="keywords" content="{{$keyword}}">
 @endsection
 
 @section('content')

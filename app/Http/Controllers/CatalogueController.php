@@ -172,6 +172,8 @@ class CatalogueController extends Controller
 
         return view('pages.product.catalogue_s', [
             'title' => __('client.best-sellers'),
+            'description' => __('client.best-sellers'),
+            'keyword' => __('client.best-sellers'),
             'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
 //            'staticFilterData' => $staticFilterData,
@@ -193,6 +195,8 @@ class CatalogueController extends Controller
 
         return view('pages.product.catalogue_s', [
             'title' => __('client.summer-discount'),
+            'description' => __('client.summer-discount'),
+            'keyword' => __('client.summer-discount'),
             'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
 //            'staticFilterData' => $staticFilterData,
@@ -214,6 +218,8 @@ class CatalogueController extends Controller
 
         return view('pages.product.catalogue_s', [
             'title' => __('client.new_products'),
+            'description' => __('client.new_products'),
+            'keyword' => __('client.new_products'),
             'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
 //            'staticFilterData' => $staticFilterData,
