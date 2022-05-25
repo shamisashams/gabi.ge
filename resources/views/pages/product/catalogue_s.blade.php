@@ -95,7 +95,7 @@
                     <div class="price_control">
                         <input id="min" name="min_price" type="text" value="{{Request::get('min_price')}}"/>
                         <input id="max" name="max_price" type="text" value="{{Request::get('max_price')}}"/>
-                        <button class="ok">Ok</button>
+                        <button class="ok">{{__('client.ok')}}</button>
                     </div>
                 </div>
                 @foreach($productFeatures as $productAnswer)
@@ -189,8 +189,8 @@
 
                 {{ $products->appends(request()->query())->links('vendor.pagination.custom') }}
                 <div class="page_input">
-                    <input type="number" name="page" placeholder="Enter Page"/>
-                    <button class="ok">Ok</button>
+                    <input type="number" name="page" placeholder="{{__('client.enter_page')}}"/>
+                    <button class="ok">{{__('client.ok')}}</button>
                 </div>
             </section>
         </form>
