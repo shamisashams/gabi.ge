@@ -32,8 +32,8 @@
                      onclick="changeType('password')">{{__('client.change_password')}}</div>
             </div>
             <div class="row last">
-                <a href="{{route('client.helps')}}" class="link">{{__('client.helps')}}</a>
-                <a href="{{route('client.contact_us')}}" class="link">{{__('client.contact_us')}}</a>
+                <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['helps']['slug']) ? $page_slugs['helps']['slug'] : null])}}" class="link">{{__('client.helps')}}</a>
+                <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['contact-us']['slug']) ? $page_slugs['contact-us']['slug'] : null])}}" class="link">{{__('client.contact_us')}}</a>
             </div>
             <button onclick="window.location.href='{{route('logoutFront',app()->getLocale())}}'"
                     class="log_out">{{__('client.log_out')}}</button>
