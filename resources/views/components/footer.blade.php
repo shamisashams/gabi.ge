@@ -24,14 +24,23 @@
             </div>
         </div>
         <div>
+            <?php
+            $path = request()->path();
+            $path = explode('/',$path);
+            $slug = end($path);
+            $slug = urldecode($slug);
+            //echo $slug;
+            ?>
             <div class="title">@lang('client.footer_nav_title1')</div>
             <a href="{{route('welcome')}}" class="link {{str_contains(substr(parse_url(route('welcome',app()->getLocale()), PHP_URL_PATH), 1),request()->path())?"active":""}}">{{__('client.home')}}</a>
-            <a href="{{route('contactUs',app()->getLocale())}}"
-               class="link {{str_contains(request()->path(),substr(parse_url(route('contactUs',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.contact_us')}}</a>
-            <a href="{{route('aboutUs',app()->getLocale())}}"
-               class="link {{str_contains(request()->path(),substr(parse_url(route('aboutUs',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.about_us')}}</a>
-            <a href="{{route('helps',app()->getLocale())}}"
-               class="link {{str_contains(request()->path(),substr(parse_url(route('helps',app()->getLocale()), PHP_URL_PATH), 1))?"active":""}}">{{__('client.helps')}}</a>
+            <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['contact-us']['slug']) ? $page_slugs['contact-us']['slug'] : null])}}"
+               class="link {{($slug == (isset($page_slugs['contact-us']['slug']) ? $page_slugs['contact-us']['slug'] : null))?"active":""}}">{{__('client.contact_us')}}</a>
+            <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['about-us']['slug']) ? $page_slugs['about-us']['slug'] : null])}}"
+               class="link {{($slug == (isset($page_slugs['about-us']['slug']) ? $page_slugs['about-us']['slug'] : null)) ?"active":""}}">{{__('client.about_us')}}</a>
+            <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['helps']['slug']) ? $page_slugs['helps']['slug'] : null])}}"
+               class="link {{($slug == (isset($page_slugs['helps']['slug']) ? $page_slugs['helps']['slug'] : null))?"active":""}}">{{__('client.helps')}}</a>
+                <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['blogs']['slug']) ? $page_slugs['blogs']['slug'] : null])}}"
+                   class="link {{($slug == (isset($page_slugs['blogs']['slug']) ? $page_slugs['blogs']['slug'] : null))?"active":""}}">{{__('client.blogs')}}</a>
         </div>
         <div>
             <div class="title">@lang('client.footer_nav_title2')</div>
