@@ -290,6 +290,9 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                     if (Storage::exists('public/product/' . $model->id . '/' . $file->name)) {
                         Storage::delete('public/product/' . $model->id . '/' . $file->name);
                     }
+                    if (Storage::exists('public/product/' . $model->id . '/thumb/' . $file->name)) {
+                        Storage::delete('public/product/' . $model->id . '/thumb/' . $file->name);
+                    }
                     $file->delete();
                     continue;
                 }

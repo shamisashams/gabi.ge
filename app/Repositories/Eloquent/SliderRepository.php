@@ -138,12 +138,18 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
                         if (Storage::exists('public/slider/' . $data->id . '/' . $file->name)) {
                             Storage::delete('public/slider/' . $data->id . '/' . $file->name);
                         }
+                        if (Storage::exists('public/slider/' . $data->id . '/thumb/' . $file->name)) {
+                            Storage::delete('public/slider/' . $data->id . '/thumb/' . $file->name);
+                        }
                         $file->delete();
                         continue;
                     }
                     if (!in_array($file->id, $request['old_images'])) {
                         if (Storage::exists('public/slider/' . $data->id . '/' . $file->name)) {
                             Storage::delete('public/slider/' . $data->id . '/' . $file->name);
+                        }
+                        if (Storage::exists('public/slider/' . $data->id . '/thumb/' . $file->name)) {
+                            Storage::delete('public/slider/' . $data->id . '/thumb/' . $file->name);
                         }
                         $file->delete();
 
@@ -153,9 +159,18 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $key => $file) {
+                    $image = new ImageResize($file);
+                    $image->resizeToHeight(800);
+
+                    $image->crop(1920, 800, true, ImageResize::CROPCENTER);
+                    //$image->save(date('Ymhs') . $file->getClientOriginalName());
+                    $img = $image->getImageAsString();
+
                     $imagename = date('Ymhs') . $file->getClientOriginalName();
                     $destination = base_path() . '/storage/app/public/slider/' . $data->id;
+                    $thumb = 'public/slider/' . $data->id .'/thumb/'.$imagename;
                     $request->file('images')[$key]->move($destination, $imagename);
+                    Storage::put($thumb,$img);
                     $data->files()->create([
                         'name' => $imagename,
                         'path' => '/storage/app/public/slider/' . $data->id,

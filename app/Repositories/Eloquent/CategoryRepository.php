@@ -3,6 +3,7 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\FileLanguage;
+use Gumlet\ImageResize;
 use Illuminate\Support\Facades\DB;
 use App\Models\Language;
 use App\Models\Category;
@@ -112,9 +113,18 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $key => $file) {
+                    $image = new ImageResize($file);
+                    $image->resizeToHeight(600);
+
+                    $image->crop(800, 600, true, ImageResize::CROPCENTER);
+                    //$image->save(date('Ymhs') . $file->getClientOriginalName());
+                    $img = $image->getImageAsString();
+
                     $imagename = date('Ymhs') . $file->getClientOriginalName();
                     $destination = base_path() . '/storage/app/public/category/' . $categoryItem->id;
+                    $thumb = 'public/category/' . $this->model->id .'/thumb/'.$imagename;
                     $request->file('images')[$key]->move($destination, $imagename);
+                    Storage::put($thumb,$img);
                     $categoryItem->files()->create([
                         'name' => $imagename,
                         'path' => '/storage/app/public/category/' . $categoryItem->id,
@@ -147,12 +157,18 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
                     if (Storage::exists('public/category/' . $model->id . '/' . $file->name)) {
                         Storage::delete('public/category/' . $model->id . '/' . $file->name);
                     }
+                    if (Storage::exists('public/category/' . $model->id . '/thumb/' . $file->name)) {
+                        Storage::delete('public/category/' . $model->id . '/thumb/' . $file->name);
+                    }
                     $file->delete();
                     continue;
                 }
                 if (!in_array($file->id, $request['old_images'])) {
                     if (Storage::exists('public/category/' . $model->id . '/' . $file->name)) {
                         Storage::delete('public/category/' . $model->id . '/' . $file->name);
+                    }
+                    if (Storage::exists('public/category/' . $model->id . '/thumb/' . $file->name)) {
+                        Storage::delete('public/category/' . $model->id . '/thumb/' . $file->name);
                     }
                     $file->delete();
 
@@ -180,9 +196,18 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $key => $file) {
+                $image = new ImageResize($file);
+                $image->resizeToHeight(600);
+
+                $image->crop(800, 600, true, ImageResize::CROPCENTER);
+                //$image->save(date('Ymhs') . $file->getClientOriginalName());
+                $img = $image->getImageAsString();
+
                 $imagename = date('Ymhs') . $file->getClientOriginalName();
                 $destination = base_path() . '/storage/app/public/category/' . $model->id;
+                $thumb = 'public/category/' . $model->id .'/thumb/'.$imagename;
                 $request->file('images')[$key]->move($destination, $imagename);
+                Storage::put($thumb,$img);
                 $model->files()->create([
                     'name' => $imagename,
                     'path' => '/storage/app/public/category/' . $model->id,
