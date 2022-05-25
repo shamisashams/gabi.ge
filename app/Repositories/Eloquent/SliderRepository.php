@@ -188,12 +188,18 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
 
     public function delete(int $id)
     {
-        $data = $this->find($id);
+        $model = $this->find($id);
+        foreach ($model->files as $file){
 
-        if ($data && count($data->files) > 0) {
-            $data->files()->delete();
+            if (Storage::exists('public/slider/' . $model->id . '/' . $file->name)) {
+                Storage::delete('public/slider/' . $model->id . '/' . $file->name);
+            }
+            if (Storage::exists('public/slider/' . $model->id . '/thumb/' . $file->name)) {
+                Storage::delete('public/slider/' . $model->id . '/thumb/' . $file->name);
+            }
+            $file->delete();
         }
-        return $data ? $data->delete() : false;
+        return $model->delete();
     }
 
 }

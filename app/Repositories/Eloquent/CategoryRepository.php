@@ -143,7 +143,19 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
     public function delete($id)
     {
-        return $this->find($id)->delete();
+
+        $model = $this->find($id);
+        foreach ($model->files as $file){
+
+            if (Storage::exists('public/category/' . $model->id . '/' . $file->name)) {
+                Storage::delete('public/category/' . $model->id . '/' . $file->name);
+            }
+            if (Storage::exists('public/category/' . $model->id . '/thumb/' . $file->name)) {
+                Storage::delete('public/category/' . $model->id . '/thumb/' . $file->name);
+            }
+            $file->delete();
+        }
+        return $model->delete();
     }
 
 
