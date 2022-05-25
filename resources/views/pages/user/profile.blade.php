@@ -7,7 +7,7 @@
     <section class="path">
         <div class="path_content wrapper">
             <div class="path_took"><a href="{{route('welcome',app()->getLocale())}}">{{__('client.home')}} </a>
-                / {{__('client.profile')}}</div>
+                </div>
             <div class="current">{{__('client.profile')}}</div>
         </div>
     </section>
@@ -32,8 +32,8 @@
                      onclick="changeType('password')">{{__('client.change_password')}}</div>
             </div>
             <div class="row last">
-                <a href="{{route('helps')}}" class="link">{{__('client.helps')}}</a>
-                <a href="{{route('contactUs')}}" class="link">{{__('client.contact_us')}}</a>
+                <a href="{{route('client.helps')}}" class="link">{{__('client.helps')}}</a>
+                <a href="{{route('client.contact_us')}}" class="link">{{__('client.contact_us')}}</a>
             </div>
             <button onclick="window.location.href='{{route('logoutFront',app()->getLocale())}}'"
                     class="log_out">{{__('client.log_out')}}</button>
@@ -125,14 +125,14 @@
             </div>
         </div>
         <div id="tabs_content_order" class="profile_tabs_content">
-            <div class="title">Order History</div>
+            <div class="title">{{__('client.order_history')}}</div>
             <div class="order_table">
                 <div class="head flex">
-                    <div class="c2">Order ID</div>
-                    <div class="c2">Date</div>
-                    <div class="c2">Price</div>
-                    <div class="c2">Status</div>
-                    <div class="c2">View order</div>
+                    <div class="c2">{{__('client.order_id')}}</div>
+                    <div class="c2">{{__('client.order_date')}}</div>
+                    <div class="c2">{{__('client.order_price')}}</div>
+                    <div class="c2">{{__('client.order_status')}}</div>
+                    <div class="c2">{{__('client.order_view')}}</div>
                 </div>
                 @foreach($orders as $order)
                     <div class="ordered_item flex">
