@@ -77,7 +77,7 @@
     </style>
     <section class="path">
         <div class="path_content wrapper">
-            <div class="path_took"><a href="{{route('welcome',app()->getLocale())}}">Home</a>
+            <div class="path_took"><a href="{{route('welcome',app()->getLocale())}}">{{__('client.home')}}</a>
                 </div>
             <div
                 class="current">{{$title}}</div>
@@ -169,7 +169,7 @@
                                     <div
                                         class="title">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}</div>
                                     <div
-                                        class="sub roboto">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->short_description:""}}</div>
+                                        class="sub roboto">{!! count($product->availableLanguage)>0?$product->availableLanguage[0]->short_description:"" !!}</div>
                                 </div>
                                 <div>
                                     @if($product->saleProduct && $product->saleProduct->sale)
