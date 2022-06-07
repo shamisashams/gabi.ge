@@ -119,7 +119,7 @@
                                                 <div class="roboto">{{__('client.view')}}</div>
                                             </button>
                                         </a>
-                                        <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
+                                        <a href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug:null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null])}}">
                                             <button class="add_to_cart details">
                                                 <img src="/img/icons/profile/magnifying-glass.svg" alt="" />
                                                 <div class="roboto">{{__('client.details')}}</div>
@@ -235,7 +235,7 @@
                                         <div class="roboto">{{__('client.view')}}</div>
                                     </button>
                                 </a>
-                                <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
+                                <a href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug:null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null])}}">
                                     <button class="add_to_cart details">
                                         <img src="/img/icons/profile/magnifying-glass.svg" alt="" />
                                         <div class="roboto">{{__('client.details')}}</div>
