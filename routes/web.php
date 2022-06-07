@@ -182,8 +182,8 @@ Route::prefix('{locale?}')
         Route::middleware(['active'])->group(function () {
             Route::get('/', [HomeController::class, 'index'])->name('welcome');
 
-            Route::get('/catalogue/{category}', [CatalogueController::class, 'catalogue'])->name('catalogue');
-            Route::get('/catalogue/{category}/details/{product}', [CatalogueController::class, 'show'])->name('productDetails');
+            //Route::get('/catalogue/{category}', [CatalogueController::class, 'catalogue'])->name('catalogue');
+            //Route::get('/catalogue/{category}/details/{product}', [CatalogueController::class, 'show'])->name('productDetails');
 
 
             Route::get('/blog/{blog}',[\App\Http\Controllers\BlogController::class,'viewBlog'])->name('viewBlog');
