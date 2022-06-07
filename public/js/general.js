@@ -367,7 +367,7 @@ function getCartCount() {
                     let element = `
 
                         <div class="item cart_item_header">
-                          <a style="display: contents" href="/${locale}/product/${
+                          <a style="display: contents" href="/${locale}/${
                         item.cat_slug
                     }/${item.prod_slug}"">
                         <div>
