@@ -83,7 +83,7 @@
         </div>
     </section>
     <section class="product_content_section wrapper flex">
-        <form action="{{route('catalogue',[app()->getLocale(),$category->id])}}" style="display: contents">
+        <form action="{{route('catalogueSeo',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:""])}}" style="display: contents">
             <div class="sidebar_filters">
                 <div class="section">
                     <div class="titles">{{__('client.price_filter')}}</div>
