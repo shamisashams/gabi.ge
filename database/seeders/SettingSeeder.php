@@ -12,6 +12,7 @@ namespace Database\Seeders;
 
 use App\Models\Language;
 use App\Models\Localization;
+use App\Models\Setting;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -30,32 +31,17 @@ class SettingSeeder extends Seeder
         $localizations = [
             [
                 'key' => 'facebook',
-                'abbreviation' => 'ge',
-                'native' => 'ქართული',
-                'locale' => 'ka_GE',
-                'status' => true,
-                'default' => true
+
             ],
             [
                 'key' => 'instagram',
-                'abbreviation' => 'en',
-                'native' => 'English',
-                'locale' => 'en_US',
-                'status' => true,
-                'default' => false
+
             ],
-            [
-                'title' => 'RUS',
-                'abbreviation' => 'ru',
-                'native' => 'Русский',
-                'locale' => 'ru_RU',
-                'status' => true,
-                'default' => false
-            ]
+
         ];
 
 
         // Insert localizations
-        Language::insert($localizations);
+        Setting::insert($localizations);
     }
 }
