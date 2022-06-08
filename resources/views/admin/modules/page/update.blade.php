@@ -120,6 +120,63 @@
                                                         <span>{{trans('admin.status')}}</span>
                                                     </label>
                                                 </div>
+
+                                                @if($page->type == 'helps')
+
+
+                                                <div class="col s6">
+                                                    <a class="btn" href="{{route('addHelp')}}">@lang('admin.add_help')</a>
+                                                    <table class="striped">
+                                                        <tr>
+                                                            <th>{{trans('admin.id')}}</th>
+                                                            <th>{{trans('admin.title')}}</th>
+
+                                                            <th>{{trans('admin.action')}}</th>
+
+                                                            @foreach($helps as $help)
+                                                                <tr>
+                                                                    <td>{{$help->id}}</td>
+                                                                    <td>
+                                                                        {{(count($help->availableLanguage) > 0) ?  $help->availableLanguage[0]->title : ''}}
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="{{route('editHelp',[app()->getLocale(),$help])}}">edit</a>
+                                                                        <a href="{{route('deleteHelp',[app()->getLocale(),$help])}}">delete</a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tr>
+                                                    </table>
+                                                </div>
+
+
+                                                    <div class="col s6">
+                                                        <a class="btn" href="{{route('addFaq')}}">@lang('admin.add_faq')</a>
+                                                        <table class="striped">
+                                                            <tr>
+                                                                <th>{{trans('admin.id')}}</th>
+                                                                <th>{{trans('admin.question')}}</th>
+
+                                                                <th>{{trans('admin.action')}}</th>
+
+                                                            @foreach($faqs as $faq)
+                                                                <tr>
+                                                                    <td>{{$faq->id}}</td>
+                                                                    <td>
+                                                                        {{(count($faq->availableLanguage) > 0) ?  $faq->availableLanguage[0]->question : ''}}
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="{{route('editFaq',[app()->getLocale(),$faq])}}">edit</a>
+                                                                        <a href="{{route('deleteFaq',[app()->getLocale(),$faq])}}">delete</a>
+                                                                    </td>
+                                                                </tr>
+                                                                @endforeach
+                                                                </tr>
+                                                        </table>
+                                                    </div>
+
+                                                @endif
+
                                                 <div class="input-field col s12">
                                                     <button type="submit" class="btn indigo">
                                                         {{trans('admin.update')}}
