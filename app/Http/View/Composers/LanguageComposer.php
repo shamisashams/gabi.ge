@@ -100,6 +100,10 @@ class LanguageComposer
                         return route('viewPage',['locale' => $lang,'slug' => $page->slug]);
                 }
             }
+            elseif (request()->route()->named('proxy')) {
+
+                dd(5);
+            }
 
             else {
                 return str_replace($replaceLang,$replaceBy,$actual_link);
