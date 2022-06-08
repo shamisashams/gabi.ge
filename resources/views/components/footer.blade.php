@@ -49,7 +49,7 @@
         <div>
             <div class="title">@lang('client.footer_nav_title2')</div>
             @foreach($categories as $key=>$category)
-                <a class="link" href="{{route('catalogueSeo',[app()->getLocale(),count($category->availableLanguage) > 0 ? $category->availableLanguage[0]->slug : null])}}">
+                <a class="link" href="{{route('proxy',[app()->getLocale(),count($category->availableLanguage) > 0 ? $category->availableLanguage[0]->slug : null])}}">
                     {{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}
                 </a>
                 @if($loop->iteration > 4)
