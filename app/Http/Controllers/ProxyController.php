@@ -26,6 +26,6 @@ class ProxyController extends Controller
 
 
     public function proxy(Request $request){
-
+        echo dd(trim($request->getPathInfo(), '/'));
     }
 }
