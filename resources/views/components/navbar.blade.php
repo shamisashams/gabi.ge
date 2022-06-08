@@ -17,7 +17,7 @@
 
                         <div>
                             @foreach($categories as $key=>$category)
-                                <a href="{{route('catalogueSeo',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:null])}}">
+                                <a href="{{route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:null])}}">
                                     <div
                                         class="category_list {{$key==0?"active":""}}">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</div>
                                 </a>
@@ -36,7 +36,7 @@
                                         @endif
                                         <img src="/img/products/frame.png" alt="" class="frame"/>
                                         <a class="cat_btn"
-                                           href="{{route('catalogueSeo',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:null])}}">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}
+                                           href="{{route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:null])}}">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}
                                         </a>
                                     </div>
                                 @endforeach
@@ -53,13 +53,13 @@
                 $slug = urldecode($slug);
                 //echo $slug;
                 ?>
-                <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['contact-us']['slug']) ? $page_slugs['contact-us']['slug'] : null])}}"
+                <a href="{{route('proxy',[app()->getLocale(),isset($page_slugs['contact-us']['slug']) ? $page_slugs['contact-us']['slug'] : null])}}"
                    class="nav_link {{($slug == (isset($page_slugs['contact-us']['slug']) ? $page_slugs['contact-us']['slug'] : null))?"active":""}}">{{__('client.contact_us')}}</a>
-                <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['about-us']['slug']) ? $page_slugs['about-us']['slug'] : null])}}"
+                <a href="{{route('proxy',[app()->getLocale(),isset($page_slugs['about-us']['slug']) ? $page_slugs['about-us']['slug'] : null])}}"
                    class="nav_link {{($slug == (isset($page_slugs['about-us']['slug']) ? $page_slugs['about-us']['slug'] : null)) ?"active":""}}">{{__('client.about_us')}}</a>
-                <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['helps']['slug']) ? $page_slugs['helps']['slug'] : null])}}"
+                <a href="{{route('proxy',[app()->getLocale(),isset($page_slugs['helps']['slug']) ? $page_slugs['helps']['slug'] : null])}}"
                    class="nav_link {{($slug == (isset($page_slugs['helps']['slug']) ? $page_slugs['helps']['slug'] : null))?"active":""}}">{{__('client.helps')}}</a>
-                <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['blogs']['slug']) ? $page_slugs['blogs']['slug'] : null])}}"
+                <a href="{{route('proxy',[app()->getLocale(),isset($page_slugs['blogs']['slug']) ? $page_slugs['blogs']['slug'] : null])}}"
                    class="nav_link {{($slug == (isset($page_slugs['blogs']['slug']) ? $page_slugs['blogs']['slug'] : null))?"active":""}}">{{__('client.blogs')}}</a>
             </div>
         </div>

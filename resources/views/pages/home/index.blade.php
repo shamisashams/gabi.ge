@@ -49,7 +49,7 @@
                         <img class="product" src="noimage.png"/>
                     @endif
                     <img class="frame" src="img/products/frame.png" alt=""/>
-                    <a class="category_name" href="{{route('catalogueSeo',[app()->getLocale(),count($category->availableLanguage)>0 ? $category->availableLanguage[0]->slug:null])}}"
+                    <a class="category_name" href="{{route('proxy',[app()->getLocale(),count($category->availableLanguage)>0 ? $category->availableLanguage[0]->slug:null])}}"
                        style="overflow-wrap: anywhere">
                         {{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}
                     </a>
