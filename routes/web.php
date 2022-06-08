@@ -268,7 +268,7 @@ Route::prefix('{locale?}')
 
             Route::any('payments/bog/status',[PurchaseController::class, 'bogResponse'])->name('bogResponse');
 
-            //Route::fallback(CatalogueController::class.'@proxy')->name('product-catalog');
+            Route::fallback(\App\Http\Controllers\ProxyController::class.'@proxy')->name('proxy');
 
 
 
