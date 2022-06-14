@@ -283,14 +283,29 @@ function addToCart(el, $id) {
     if (box) {
         let quantity = document.querySelector("#product_number").value;
         let options = box.querySelectorAll('input[type="radio"]:checked');
-        let allOptions = box.querySelectorAll(".title");
+        let allOptions = box.querySelectorAll(".radio");
+        let selects = box.querySelectorAll("select");
         options.forEach((item) => {
             if (item.getAttribute("data-feature")) {
                 object[item.getAttribute("data-feature")] = item.value;
             }
         });
 
-        if (allOptions.length === options.length) {
+        let sel_pass = true;
+
+
+
+        selects.forEach((item) => {
+            if (item.getAttribute("data-feature")) {
+                object[item.getAttribute("data-feature")] = item.value;
+            }
+            if($(item).val() === ''){
+                sel_pass = false;
+            }
+
+        });
+
+        if ((allOptions.length === options.length) && sel_pass) {
             addToCartAjax($id, object, quantity);
         }
     }
@@ -702,7 +717,8 @@ function checkSelection_alert_p() {
     let buttons = document.querySelector(".btm_btns");
     if (box) {
         let answers = box.querySelectorAll('input[type="radio"]');
-        let allOptions = box.querySelectorAll(".title");
+        let allOptions = box.querySelectorAll(".radio");
+        let selects = box.querySelectorAll("select");
         answers.forEach((item) => {
             item.onchange = function () {
                 let options = box.querySelectorAll(
@@ -721,6 +737,39 @@ function checkSelection_alert_p() {
                 });
             };
         });
+
+        selects.forEach((item) => {
+            if($(item).val() !== ''){
+                $(item)
+                    .parents(".options")
+                    .find(".select")
+                    .css("color", "black");
+            } else {
+                $(item)
+                    .parents(".options")
+                    .find(".select")
+                    .css("color", "red");
+            }
+            item.onchange = function () {
+
+
+                console.log($(item).val())
+                if($(item).val() !== ''){
+                    $(item)
+                        .parents(".options")
+                        .find(".select")
+                        .css("color", "black");
+                } else {
+                    $(item)
+                        .parents(".options")
+                        .find(".select")
+                        .css("color", "red");
+                }
+
+
+            };
+        });
+
         if (
             allOptions.length !==
             box.querySelectorAll('input[type="radio"]:checked').length
@@ -810,6 +859,7 @@ function addToModal(product) {
             if (productFeatures.hasOwnProperty(key)) {
                 let productAnswer = productFeatures[key];
                 let options = "";
+                let sel_opt = "";
                 if (
                     productAnswer.feature.type === "input" ||
                     (productAnswer.feature.english_language.length > 0
@@ -821,41 +871,76 @@ function addToModal(product) {
                 }
                 productAnswer.feature.answer.forEach((answer) => {
                     if (answer.status && productAnswers.includes(answer.id)) {
-                        options = options.concat(`
+                        if (productAnswer.feature.type === "select"){
+                            sel_opt = sel_opt.concat(`
+                            <option value="${answer.id}">${
+                                answer.available_language.length > 0
+                                    ? answer.available_language[0].title
+                                    : ""
+                            }</option>
+                         `);
+                        } else {
+                            options = options.concat(`
                             <div class="box">
                                 <input type="radio" name="feature[${
-                                    productAnswer.feature.id
-                                }][]"
+                                productAnswer.feature.id
+                            }][]"
                                        data-feature="${
-                                           productAnswer.feature.id
-                                       }" id="${answer.id}"
+                                productAnswer.feature.id
+                            }" id="${answer.id}"
                                            value="${answer.id}"
                                  />
                                 <label for="${answer.id}" class="box">
                                 ${
-                                    answer.available_language.length > 0
-                                        ? answer.available_language[0].title
-                                        : ""
-                                }
+                                answer.available_language.length > 0
+                                    ? answer.available_language[0].title
+                                    : ""
+                            }
                               </label>
                             </div>
                          `);
+                        }
+
                     }
                 });
 
-                features = features.concat(`
+                if (productAnswer.feature.type === "select"){
+                    features = features.concat(`
                    <div class="options">
-                        <div class="title">${
-                            productAnswer.feature.available_language.length > 0
-                                ? productAnswer.feature.available_language[0]
-                                      .title
-                                : ""
-                        }</div>
+                        <div class="title select">${
+                        productAnswer.feature.available_language.length > 0
+                            ? productAnswer.feature.available_language[0]
+                                .title
+                            : ""
+                    }</div>
+                        <select name="feature[${
+                        productAnswer.feature.id
+                    }][]" data-feature="${
+                        productAnswer.feature.id
+                    }">
+                        <option value=""></option>
+                        ${sel_opt}
+                        </select>
+
+                    </div>
+    `);
+                } else {
+                    features = features.concat(`
+                   <div class="options">
+                        <div class="title radio">${
+                        productAnswer.feature.available_language.length > 0
+                            ? productAnswer.feature.available_language[0]
+                                .title
+                            : ""
+                    }</div>
                         <div class="box_grid">
                         ${options}
                         </div>
                     </div>
     `);
+                }
+
+
             }
         }
 
