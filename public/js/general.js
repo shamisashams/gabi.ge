@@ -303,14 +303,31 @@ function addToCartProductDetails(el, $id) {
     if (box) {
         let quantity = document.querySelector("#product_numb").value;
         let options = box.querySelectorAll('input[type="radio"]:checked');
-        let allOptions = box.querySelectorAll(".title");
+        let selects = box.querySelectorAll("select");
+
+        let allOptions = box.querySelectorAll(".radio");
         options.forEach((item) => {
             if (item.getAttribute("data-feature")) {
                 object[item.getAttribute("data-feature")] = item.value;
             }
         });
 
-        if (allOptions.length === options.length) {
+        let sel_pass = true;
+
+
+
+        selects.forEach((item) => {
+            if (item.getAttribute("data-feature")) {
+                object[item.getAttribute("data-feature")] = item.value;
+            }
+            if($(item).val() === ''){
+                sel_pass = false;
+            }
+
+        });
+
+
+        if ((allOptions.length === options.length) && sel_pass) {
             addToCartAjax($id, object, quantity);
             document.querySelector(".product_added").classList.add("show");
             setTimeout(() => {
@@ -597,7 +614,10 @@ function checkSelection_alert() {
     let buttons = document.querySelector(".btm_btns");
     if (box) {
         let answers = box.querySelectorAll('input[type="radio"]');
-        let allOptions = box.querySelectorAll(".title");
+        let allOptions = box.querySelectorAll(".radio");
+
+        let selects = box.querySelectorAll("select");
+        //console.log(selects.length);
         answers.forEach((item) => {
             item.onchange = function () {
                 let options = box.querySelectorAll(
@@ -611,9 +631,41 @@ function checkSelection_alert() {
                     //console.log(el)
                     $(el)
                         .parents(".options")
-                        .find(".title")
+                        .find(".radio")
                         .css("color", "black");
                 });
+            };
+        });
+
+        selects.forEach((item) => {
+            if($(item).val() !== ''){
+                $(item)
+                    .parents(".options")
+                    .find(".select")
+                    .css("color", "black");
+            } else {
+                $(item)
+                    .parents(".options")
+                    .find(".select")
+                    .css("color", "red");
+            }
+            item.onchange = function () {
+
+
+                    console.log($(item).val())
+                if($(item).val() !== ''){
+                    $(item)
+                        .parents(".options")
+                        .find(".select")
+                        .css("color", "black");
+                } else {
+                    $(item)
+                        .parents(".options")
+                        .find(".select")
+                        .css("color", "red");
+                }
+
+
             };
         });
         if (
@@ -632,13 +684,16 @@ function checkSelection_alert() {
                 ) {
                     $(el)
                         .parents(".options")
-                        .find(".title")
+                        .find(".radio")
                         .css("color", "red");
                 }
             });
 
             return false;
         }
+
+
+
     }
 }
 

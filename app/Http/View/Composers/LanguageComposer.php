@@ -102,10 +102,33 @@ class LanguageComposer
             }
             elseif (request()->route()->named('proxy')) {
 
+                /*$slug = request()->segments();
+
+                array_shift($slug);
+                $slug = implode('/',$slug);
+
+                //dd($slug);
+                $cat = CategoryLanguage::query()->where('slug',$slug)->first();
+                if ($cat){
+                    $language_id = Language::getIdByName($lang);
+                    $cat = CategoryLanguage::query()->where('category_id',$cat->category_id)->where('language_id',$language_id)->first();
+                    if($cat)
+                        return route('proxy',[$lang,$cat->slug]);
+                }
+
+                $page = PageLanguage::query()->where('slug',$slug)->first();
+                if ($page){
+                    //dd($lang);
+                    $language_id = Language::getIdByName($lang);
+                    $page = PageLanguage::query()->where('page_id',$page->page_id)->where('language_id',$language_id)->first();
+                    if($page)
+                        return route('proxy',[$lang,$page->slug]);
+                }*/
 
             }
 
             else {
+                //dd(4);
                 return str_replace($replaceLang,$replaceBy,$actual_link);
             }
         } else {

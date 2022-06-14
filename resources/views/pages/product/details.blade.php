@@ -121,6 +121,7 @@
             {{--            </div>--}}
             {{--            --}}
 
+            {{--@dd(session('products'))--}}
             <?php $isFeature = false ?>
             {{--@dd($productFeatures,count($productFeatures[1]->feature->englishLanguage))--}}
             {{--@dd(count($productFeatures[1]->feature->englishLanguage))--}}
@@ -128,32 +129,42 @@
                 @if($productAnswer->feature->type === 'input' || (count($productAnswer->feature->englishLanguage)>0?$productAnswer->feature->englishLanguage[0]->title=="category":""))
                     @continue
                 @endif
-                <div class="options">
-                    <div
-                        class="title">{{(count($productAnswer->feature->availableLanguage) > 0) ?  $productAnswer->feature->availableLanguage[0]->title : ''}}</div>
-                    <div class="box_grid">
-                        @foreach($productAnswer->feature->answer as $answer)
-                            @if($answer->status && (in_array($answer->id,$productAnswers)))
-                                <div class="box">
-                                    <input type="radio" name="popup-feature[{{$productAnswer->feature->id}}][]"
-                                           data-feature="{{$productAnswer->feature->id}}" id="details-{{$answer->id}}"
-                                           value="{{$answer->id}}"/>
-                                    <label for="details-{{$answer->id}}"
-                                           class="box">{{count($answer->availableLanguage)>0?$answer->availableLanguage[0]->title:""}}</label>
-                                </div>
-                            @endif
-                        @endforeach
-                    </div>
-                </div>
-                <div class="options">
-                    <div  class="title">ასაკი</div>
-                    <select name="" id="" value="" >
-                        <option value="">3-4</option>
-                        <option value="">5-6</option>
-                        <option value="">7-8</option>
-                        <option value="">9-10</option>
-                    </select>
-                </div>
+
+            @if($productAnswer->feature->type === 'select')
+                        <div class="options">
+                            <div  class="title select">{{(count($productAnswer->feature->availableLanguage) > 0) ?  $productAnswer->feature->availableLanguage[0]->title : ''}}</div>
+                            <select data-feature="{{$productAnswer->feature->id}}" name="popup-feature[{{$productAnswer->feature->id}}][]" id="details-{{$answer->id}}" >
+                                        <option value=""></option>
+                                @foreach($productAnswer->feature->answer as $answer)
+                                    @if($answer->status && (in_array($answer->id,$productAnswers)))
+
+                                        <option value="{{$answer->id}}">{{count($answer->availableLanguage)>0?$answer->availableLanguage[0]->title:""}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+            @else
+                        <div class="options">
+                            <div
+                                class="title radio">{{(count($productAnswer->feature->availableLanguage) > 0) ?  $productAnswer->feature->availableLanguage[0]->title : ''}}</div>
+                            <div class="box_grid">
+                                @foreach($productAnswer->feature->answer as $answer)
+                                    @if($answer->status && (in_array($answer->id,$productAnswers)))
+                                        {{--@if()--}}
+                                        <div class="box">
+                                            <input type="radio" name="popup-feature[{{$productAnswer->feature->id}}][]"
+                                                   data-feature="{{$productAnswer->feature->id}}" id="details-{{$answer->id}}"
+                                                   value="{{$answer->id}}"/>
+                                            <label for="details-{{$answer->id}}"
+                                                   class="box">{{count($answer->availableLanguage)>0?$answer->availableLanguage[0]->title:""}}</label>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+            @endif
+
+
 
 
 
