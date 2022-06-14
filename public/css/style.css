@@ -652,14 +652,14 @@ img {
 }
 
 .hero {
-    margin-bottom: 193px;
+    margin-bottom: 100px;
     position: relative;
     width: 100vw;
 }
 
 .hero .slide {
     width: 100%;
-    height: 648px;
+    height: calc(100vh - 120px);
     position: relative;
     outline: none;
     /* transition: all 1s cubic-bezier(0.7, 0, 0.3, 1); */
