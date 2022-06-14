@@ -23,7 +23,7 @@
                                 </a>
                             @endforeach
                         </div>
-                        <div>
+                        <div style="height: 100%">
                             <div class="category_img_placeholder">
                                 @foreach($categories as $key=>$category)
                                     <div class="category_img {{$key==0?"display":""}}">

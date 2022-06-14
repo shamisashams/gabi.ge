@@ -145,6 +145,16 @@
                         @endforeach
                     </div>
                 </div>
+                <div class="options">
+                    <div  class="title">ასაკი</div>
+                    <select name="" id="" value="" >
+                        <option value="">3-4</option>
+                        <option value="">5-6</option>
+                        <option value="">7-8</option>
+                        <option value="">9-10</option>
+                    </select>
+                </div>
+
 
 
             @endforeach

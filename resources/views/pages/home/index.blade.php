@@ -7,7 +7,7 @@
 @section('keywords'){{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->description : null}}@endsection
 
 @section('content')
-    <section class="hero wrapper">
+    <section class="hero ">
         <div class="hero_slideshow">
             @foreach($sliders as $slider)
                 <div class="slide slide1">
