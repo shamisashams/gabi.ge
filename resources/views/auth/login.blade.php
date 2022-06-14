@@ -34,6 +34,8 @@
                         <p class="error-block">{{ $errors->first('auth') }}</p>
                     @endif
                     <button class="lisu_btn">{{__('client.login')}}</button>
+                    <a href="{{route('fb-redirect')}}">facebook</a>
+                    <a href="{{route('google-redirect')}}">google</a>
                 </form>
 
                 <form method="POST" action="{{route('register',app()->getLocale())}}" class="form lisu_form_alt">

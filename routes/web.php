@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
    |--------------------------------------------------------------------------
@@ -237,6 +238,24 @@ Route::prefix('{locale?}')
 
             Route::get('/facebook-auth', [AuthController::class, 'facebookAuth'])->name('facebookAuth');
 
+            //Social-------------------------------------------------------
+            Route::get('/auth/facebook/redirect', function (){
+                return Socialite::driver('facebook')->redirect();
+            })->name('fb-redirect');
+
+            Route::get('/auth/facebook/callback',function (){
+                $user = Socialite::driver('facebook')->user();
+            })->name('fb-callback');
+
+            Route::get('/auth/google/redirect', function (){
+                return Socialite::driver('google')->redirect();
+            })->name('google-redirect');
+
+            Route::get('/auth/google/callback',function (){
+                $user = Socialite::driver('google')->user();
+            })->name('google-callback');
+            //--------------------------------------------------------------------------
+
 //            Route::get('/faceook-callback', [AuthController::class],);
 
             Route::middleware(['authFront'])->group(function () {
@@ -265,6 +284,9 @@ Route::prefix('{locale?}')
 
             Route::get('category/{category?}', [CatalogueController::class, 'catalogueSeo'])->name('catalogueSeo');
             Route::get('{category}/{product}', [CatalogueController::class, 'showSeo'])->name('productDetailsSeo');
+
+
+
 
             Route::any('payments/bog/status',[PurchaseController::class, 'bogResponse'])->name('bogResponse');
 
