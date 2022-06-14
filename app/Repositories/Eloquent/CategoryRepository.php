@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Models\FileLanguage;
+use Gumlet\ImageResize;
 use Illuminate\Support\Facades\DB;
 use App\Models\Language;
 use App\Models\Category;
@@ -54,17 +56,23 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
                     'language_id' => $languageId,
                     'title' => $request['title'],
                     'description' => $request['description'],
+                    'meta_description' => $request['meta_description'],
+                    'meta_title' => $request['meta_title'],
+                    'meta_keyword' => $request['meta_keyword'],
                     'slug' => $request['slug']
                 ]);
             } else {
                 $language->update([
                     'title' => $request['title'],
                     'description' => $request['description'],
+                    'meta_description' => $request['meta_description'],
+                    'meta_title' => $request['meta_title'],
+                    'meta_keyword' => $request['meta_keyword'],
                     'slug' => $request['slug']
                 ]);
             }
 
-            $this->updateImages($request, $categoryItem);
+            $this->updateImages($request, $categoryItem, $lang);
 
             DB::commit();
             return true;
@@ -97,14 +105,26 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
                 'language_id' => $languageId,
                 'title' => $request['title'],
                 'description' => $request['description'],
+                'meta_description' => $request['meta_description'],
+                'meta_title' => $request['meta_title'],
+                'meta_keyword' => $request['meta_keyword'],
                 'slug' => $request['slug']
             ]);
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $key => $file) {
+                    $image = new ImageResize($file);
+                    $image->resizeToHeight(480);
+
+                    $image->crop(720, 480, true, ImageResize::CROPCENTER);
+                    //$image->save(date('Ymhs') . $file->getClientOriginalName());
+                    $img = $image->getImageAsString();
+
                     $imagename = date('Ymhs') . $file->getClientOriginalName();
                     $destination = base_path() . '/storage/app/public/category/' . $categoryItem->id;
+                    $thumb = 'public/category/' . $this->model->id .'/thumb/'.$imagename;
                     $request->file('images')[$key]->move($destination, $imagename);
+                    Storage::put($thumb,$img);
                     $categoryItem->files()->create([
                         'name' => $imagename,
                         'path' => '/storage/app/public/category/' . $categoryItem->id,
@@ -123,17 +143,34 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
     public function delete($id)
     {
-        return $this->find($id)->delete();
+
+        $model = $this->find($id);
+        foreach ($model->files as $file){
+
+            if (Storage::exists('public/category/' . $model->id . '/' . $file->name)) {
+                Storage::delete('public/category/' . $model->id . '/' . $file->name);
+            }
+            if (Storage::exists('public/category/' . $model->id . '/thumb/' . $file->name)) {
+                Storage::delete('public/category/' . $model->id . '/thumb/' . $file->name);
+            }
+            $file->delete();
+        }
+        return $model->delete();
     }
 
 
-    public function updateImages($request, $model)
+    public function updateImages($request, $model, $lang)
     {
+        $languageId = Language::getIdByName($lang);
+
         if (count($model->files) > 0) {
             foreach ($model->files as $file) {
                 if ($request['old_images'] == null) {
                     if (Storage::exists('public/category/' . $model->id . '/' . $file->name)) {
                         Storage::delete('public/category/' . $model->id . '/' . $file->name);
+                    }
+                    if (Storage::exists('public/category/' . $model->id . '/thumb/' . $file->name)) {
+                        Storage::delete('public/category/' . $model->id . '/thumb/' . $file->name);
                     }
                     $file->delete();
                     continue;
@@ -142,8 +179,28 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
                     if (Storage::exists('public/category/' . $model->id . '/' . $file->name)) {
                         Storage::delete('public/category/' . $model->id . '/' . $file->name);
                     }
+                    if (Storage::exists('public/category/' . $model->id . '/thumb/' . $file->name)) {
+                        Storage::delete('public/category/' . $model->id . '/thumb/' . $file->name);
+                    }
                     $file->delete();
 
+                }
+
+                $language = $file->languages()->where('language_id', $languageId)->first();
+                //dd($language);
+                if ($language) {
+                    $language->update([
+                        'language_id' => $languageId,
+                        'title' => $request['alt'][$file->id],
+                    ]);
+                } else {
+                    //dd($file->id);
+                    FileLanguage::create([
+                        'file_id' => $file->id,
+                        'language_id' => $languageId,
+                        'title' => $request['alt'][$file->id],
+
+                    ]);
                 }
             }
         }
@@ -151,9 +208,18 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $key => $file) {
+                $image = new ImageResize($file);
+                $image->resizeToHeight(480);
+
+                $image->crop(720, 480, true, ImageResize::CROPCENTER);
+                //$image->save(date('Ymhs') . $file->getClientOriginalName());
+                $img = $image->getImageAsString();
+
                 $imagename = date('Ymhs') . $file->getClientOriginalName();
                 $destination = base_path() . '/storage/app/public/category/' . $model->id;
+                $thumb = 'public/category/' . $model->id .'/thumb/'.$imagename;
                 $request->file('images')[$key]->move($destination, $imagename);
+                Storage::put($thumb,$img);
                 $model->files()->create([
                     'name' => $imagename,
                     'path' => '/storage/app/public/category/' . $model->id,

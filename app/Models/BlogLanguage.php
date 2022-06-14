@@ -13,6 +13,7 @@ class BlogLanguage extends Model
         'blog_id',
         'language_id',
         'title',
+        'meta_title',
         'title_2',
         'text',
         'text_2',

@@ -64,7 +64,19 @@
                                                         </div>
 
 
-
+                                                        <div class="col s12 input-field">
+                                                            <input id="meta_title" name="meta_title"
+                                                                   type="text"
+                                                                   class="validate {{ $errors->has('meta_title') ? 'invalid' : 'valid' }}"
+                                                                   value="{{count($blog->availableLanguage)>0?$blog->availableLanguage[0]->meta_title:""}}"
+                                                                   data-error=".errorTxt">
+                                                            <label for="meta_title"
+                                                                   class="active">{{trans('admin.meta_title')}}</label>
+                                                            @if ($errors->has('meta_title'))
+                                                                <small
+                                                                    class="errorTxt">{{ $errors->first('meta_title') }}</small>
+                                                            @endif
+                                                        </div>
 
 
                                                         <div class="col s12 input-field">
@@ -155,6 +167,19 @@
                                                 </span>
                                                     @endif
                                                 </div>
+
+
+                                                <div class="col s12" style="margin-top:20px">
+                                                    <h6>@lang('admin.img_alt')</h6>
+                                                </div>
+
+                                                @foreach($blog->files as $file)
+                                                    <div class="col s12">
+                                                        <input name="alt[{{$file->id}}]" type="text"
+                                                               value="{{count($file->availableLanguage)>0?$file->availableLanguage[0]->title:""}}" placeholder="{{$loop->iteration}}) @lang('admin.img_alt')">
+                                                    </div>
+
+                                                @endforeach
 
                                                 <div class="col s12 display-flex justify-content-end mt-3">
                                                     <button type="submit" class="btn indigo">

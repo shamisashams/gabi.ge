@@ -21,7 +21,8 @@ class PageLanguage extends Model
         'slug',
         'title',
         'meta_title',
-        'description',
+        'meta_description',
+        'meta_keyword',
         'content',
     ];
 

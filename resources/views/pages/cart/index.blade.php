@@ -1,12 +1,14 @@
 @extends('layouts.base')
 @section('head')
     <title>{{__('app.cart')}}</title>
+    <meta name="description" content="{{__('app.cart')}}">
+    <meta name="keywords" content="{{__('app.cart')}}">
 @endsection
 
 @section('content')
     <section class="path">
         <div class="path_content wrapper">
-            <div class="path_took"><a href="{{route('welcome')}}">Home</a> / {{__('client.shopping_cart')}}</div>
+            <div class="path_took"><a href="{{route('welcome')}}">@lang('client.home')</a></div>
             <div class="current">{{__('client.shopping_cart')}}</div>
         </div>
     </section>
@@ -70,8 +72,8 @@
                     </div>
                 @endforeach
                 <div class="flex coupon">
-                    <input type="text" placeholder="Coupon Code"/>
-                    <button class="ok">Ok</button>
+                    <input type="text" placeholder="{{__('client.coupon_code')}}"/>
+                    <button class="ok">{{__('client.ok')}}</button>
                 </div>
             </div>
         </div>
@@ -115,7 +117,7 @@
                     @endif
                 </div>
                 <div class="row last">
-                    <div>Payemnt Method:</div>
+                    <div>{{__('client.payment_method')}}:</div>
                     <br/>
                     <div class="flex">
                         <div>
@@ -161,10 +163,10 @@
                     @endif
                 </div>
                 <div class="flex total">
-                    <div>Total</div>
+                    <div>{{__('client.total')}}</div>
                     <div id="total-price" data-price="">₾ {{round($total,2)}}</div>
                 </div>
-                <button type="submit" class="proceed">Proceed To Checkout</button>
+                <button type="submit" class="proceed">{{__('client.proceed_checkout')}}</button>
 
             </form>
         </div>

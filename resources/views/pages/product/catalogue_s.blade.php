@@ -1,6 +1,8 @@
 @extends('layouts.base')
 @section('head')
     <title>{{$title}}</title>
+    <meta name="description" content="{{$description}}">
+    <meta name="keywords" content="{{$keyword}}">
 @endsection
 
 @section('content')
@@ -75,7 +77,7 @@
     </style>
     <section class="path">
         <div class="path_content wrapper">
-            <div class="path_took"><a href="{{route('welcome',app()->getLocale())}}">Home</a>
+            <div class="path_took"><a href="{{route('welcome',app()->getLocale())}}">{{__('client.home')}}</a>
                 </div>
             <div
                 class="current">{{$title}}</div>
@@ -93,7 +95,7 @@
                     <div class="price_control">
                         <input id="min" name="min_price" type="text" value="{{Request::get('min_price')}}"/>
                         <input id="max" name="max_price" type="text" value="{{Request::get('max_price')}}"/>
-                        <button class="ok">Ok</button>
+                        <button class="ok">{{__('client.ok')}}</button>
                     </div>
                 </div>
                 @foreach($productFeatures as $productAnswer)
@@ -141,7 +143,7 @@
                                     @if(isset($product->files[0]))
                                         <img class="p_img"
                                              src="/storage/product/{{$product->files[0]->fileable_id}}/thumb/{{$product->files[0]->name}}"
-                                             alt="{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}"/>
+                                             alt="{{count($product->files[0]->availableLanguage)>0?$product->files[0]->availableLanguage[0]->title:""}}"/>
                                     @else
                                         <img src="noimage.png"/>
                                     @endif
@@ -167,7 +169,7 @@
                                     <div
                                         class="title">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}</div>
                                     <div
-                                        class="sub roboto">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->short_description:""}}</div>
+                                        class="sub roboto">{!! count($product->availableLanguage)>0?$product->availableLanguage[0]->short_description:"" !!}</div>
                                 </div>
                                 <div>
                                     @if($product->saleProduct && $product->saleProduct->sale)
@@ -187,8 +189,8 @@
 
                 {{ $products->appends(request()->query())->links('vendor.pagination.custom') }}
                 <div class="page_input">
-                    <input type="number" name="page" placeholder="Enter Page"/>
-                    <button class="ok">Ok</button>
+                    <input type="number" name="page" placeholder="{{__('client.enter_page')}}"/>
+                    <button class="ok">{{__('client.ok')}}</button>
                 </div>
             </section>
         </form>

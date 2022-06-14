@@ -52,6 +52,7 @@ class CategoryController extends AdminController
      */
     public function store(string $lang, CategoryRequest $request)
     {
+
         if (!$this->categoryRepository->store($lang, $request)) {
             return redirect(route('categoryCreateView', $lang))->with('danger', __('admin.category_not_created'));
         }
@@ -96,7 +97,7 @@ class CategoryController extends AdminController
     {
 
         if (!$this->categoryRepository->update($lang, $id, $request)) {
-            return redirect(route('categoryEditView', $lang))->with('danger', __('admin.category_not_updated'));
+            return redirect(route('categoryEditView', [$lang, $id]))->with('danger', __('admin.category_not_updated'));
         }
 
         return redirect(route('categoryIndex', $lang))->with('success', __('admin.category_updated_successfully'));

@@ -7,6 +7,7 @@ use App\Http\Request\Admin\SettingRequest;
 use App\Http\Request\Admin\SliderRequest;
 use App\Models\Blog;
 use App\Models\BlogLanguage;
+use App\Models\FileLanguage;
 use App\Models\Language;
 use App\Models\Localization;
 use App\Models\Setting;
@@ -18,6 +19,7 @@ use App\Repositories\ProductRepositoryInterface;
 use App\Repositories\Eloquent\Base\BaseRepository;
 use App\Repositories\SettingRepositoryInterface;
 use App\Repositories\SliderRepositoryInterface;
+use Gumlet\ImageResize;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -59,6 +61,7 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
                 'blog_id' => $this->model->id,
                 'language_id' => $localizationID,
                 'title' => $request['title'],
+                'meta_title' => $request['meta_title'],
                 'title_2' => $request['title_2'],
                 'text' => $request['text'],
                 'text_2' => $request['text_2'],
@@ -72,6 +75,13 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $key => $file) {
+                    $image = new ImageResize($file);
+                    $image->resizeToHeight(600);
+
+                    $image->crop(1650, 600, true, ImageResize::CROPCENTER);
+                    //$image->save(date('Ymhs') . $file->getClientOriginalName());
+                    $img = $image->getImageAsString();
+
                     $imagename = date('Ymhs') . $file->getClientOriginalName();
                     $destination = base_path() . '/storage/app/public/blog/' . $this->model->id;
                     $request->file('images')[$key]->move($destination, $imagename);
@@ -120,6 +130,7 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
                     'blog_id' => $data->id,
                     'language_id' => $localizationID,
                     'title' => $request['title'],
+                    'meta_title' => $request['meta_title'],
                     'title_2' => $request['title_2'],
                     'text' => $request['text'],
                     'text_2' => $request['text_2'],
@@ -130,6 +141,7 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
                 ]);
             } else {
                 $sliderLanguage->title = $request['title'];
+                $sliderLanguage->meta_title = $request['meta_title'];
                 $sliderLanguage->title_2 = $request['title_2'];
                 $sliderLanguage->text = $request['text'];
                 $sliderLanguage->text_2 = $request['text_2'];
@@ -146,6 +158,9 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
                         if (Storage::exists('public/blog/' . $data->id . '/' . $file->name)) {
                             Storage::delete('public/blog/' . $data->id . '/' . $file->name);
                         }
+                        if (Storage::exists('public/blog/' . $data->id . '/thumb/' . $file->name)) {
+                            Storage::delete('public/blog/' . $data->id . '/thumb/' . $file->name);
+                        }
                         $file->delete();
                         continue;
                     }
@@ -153,17 +168,46 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
                         if (Storage::exists('public/blog/' . $data->id . '/' . $file->name)) {
                             Storage::delete('public/blog/' . $data->id . '/' . $file->name);
                         }
+                        if (Storage::exists('public/blog/' . $data->id . '/thumb/' . $file->name)) {
+                            Storage::delete('public/blog/' . $data->id . '/thumb/' . $file->name);
+                        }
                         $file->delete();
 
+                    }
+
+                    $language = $file->languages()->where('language_id', $localizationID)->first();
+                    //dd($language);
+                    if ($language) {
+                        $language->update([
+                            'language_id' => $localizationID,
+                            'title' => $request['alt'][$file->id],
+                        ]);
+                    } else {
+                        //dd($file->id);
+                        FileLanguage::create([
+                            'file_id' => $file->id,
+                            'language_id' => $localizationID,
+                            'title' => $request['alt'][$file->id],
+
+                        ]);
                     }
                 }
             }
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $key => $file) {
+                    $image = new ImageResize($file);
+                    $image->resizeToHeight(600);
+
+                    $image->crop(1650, 600, true, ImageResize::CROPCENTER);
+                    //$image->save(date('Ymhs') . $file->getClientOriginalName());
+                    $img = $image->getImageAsString();
+
                     $imagename = date('Ymhs') . $file->getClientOriginalName();
                     $destination = base_path() . '/storage/app/public/blog/' . $data->id;
+                    $thumb = 'public/blog/' . $data->id .'/thumb/'.$imagename;
                     $request->file('images')[$key]->move($destination, $imagename);
+                    Storage::put($thumb,$img);
                     $data->files()->create([
                         'name' => $imagename,
                         'path' => '/storage/app/public/blog/' . $data->id,
@@ -181,12 +225,18 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
 
     public function delete(int $id)
     {
-        $data = $this->find($id);
+        $model = $this->find($id);
+        foreach ($model->files as $file){
 
-        if ($data && count($data->files) > 0) {
-            $data->files()->delete();
+            if (Storage::exists('public/blog/' . $model->id . '/' . $file->name)) {
+                Storage::delete('public/blog/' . $model->id . '/' . $file->name);
+            }
+            if (Storage::exists('public/blog/' . $model->id . '/thumb/' . $file->name)) {
+                Storage::delete('public/blog/' . $model->id . '/thumb/' . $file->name);
+            }
+            $file->delete();
         }
-        return $data ? $data->delete() : false;
+        return $model->delete();
     }
 
 }

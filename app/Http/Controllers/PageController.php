@@ -11,6 +11,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Faq;
+use App\Models\Help;
 use App\Models\Page;
 use App\Models\Setting;
 use Illuminate\Contracts\Foundation\Application;
@@ -51,6 +53,13 @@ class PageController extends Controller
                 return view('pages.'. $page->type .'.index', [
                     'page' => $page,
                     'blogs' => Blog::with('availableLanguage')->paginate('6')
+                ]);
+                break;
+            case 'helps':
+                return view('pages.'. $page->type .'.index', [
+                    'page' => $page,
+                    'helps' => Help::with('availableLanguage')->get(),
+                    'faqs' => Faq::with('availableLanguage')->get()
                 ]);
                 break;
             default:

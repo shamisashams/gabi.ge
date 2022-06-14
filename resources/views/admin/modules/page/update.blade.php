@@ -23,11 +23,11 @@
                                                 <div class="col s12 m6">
                                                     <div class="row">
                                                         <div class="col s12 input-field">
-                                                            <input id="username" name="title" type="text"
+                                                            <input id="title" name="title" type="text"
                                                                    class="validate {{ $errors->has('title') ? 'invalid' : 'valid' }}"
                                                                    value="{{(count($page->availableLanguage) > 0) ?  $page->availableLanguage[0]->title : ''}}"
                                                                    data-error=".errorTxt">
-                                                            <label for="username"
+                                                            <label for="title"
                                                                    class="active">{{trans('admin.title')}}</label>
                                                             @if ($errors->has('title'))
                                                                 <small
@@ -44,6 +44,19 @@
                                                             @if ($errors->has('meta_title'))
                                                                 <small
                                                                     class="errorTxt">{{ $errors->first('meta_title') }}</small>
+                                                            @endif
+                                                        </div>
+
+                                                        <div class="col s12 input-field">
+                                                            <input id="meta_keyword" name="meta_keyword" type="text"
+                                                                   class="validate {{ $errors->has('meta_keyword') ? 'invalid' : 'valid' }}"
+                                                                   value="{{(count($page->availableLanguage) > 0) ?  $page->availableLanguage[0]->meta_keyword : ''}}"
+                                                                   data-error=".errorTxt">
+                                                            <label for="meta_keyword"
+                                                                   class="active">{{trans('admin.meta_keyword')}}</label>
+                                                            @if ($errors->has('meta_keyword'))
+                                                                <small
+                                                                    class="errorTxt">{{ $errors->first('meta_keyword') }}</small>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -63,15 +76,15 @@
                                                             @endif
                                                         </div>
                                                         <div class="col s12 input-field">
-                                                            <input id="description" name="description" type="text"
-                                                                   class="validate {{ $errors->has('description') ? 'invalid' : 'valid' }}"
-                                                                   value="{{(count($page->availableLanguage) > 0) ?  $page->availableLanguage[0]->description : ''}}"
+                                                            <input id="meta_description" name="meta_description" type="text"
+                                                                   class="validate {{ $errors->has('meta_description') ? 'invalid' : 'valid' }}"
+                                                                   value="{{(count($page->availableLanguage) > 0) ?  $page->availableLanguage[0]->meta_description : ''}}"
                                                                    data-error=".errorTxt">
-                                                            <label for="description"
-                                                                   class="active">{{trans('admin.description')}}</label>
-                                                            @if ($errors->has('description'))
+                                                            <label for="meta_description"
+                                                                   class="active">{{trans('admin.meta_description')}}</label>
+                                                            @if ($errors->has('meta_description'))
                                                                 <small
-                                                                    class="errorTxt">{{ $errors->first('description') }}</small>
+                                                                    class="errorTxt">{{ $errors->first('meta_description') }}</small>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -107,6 +120,63 @@
                                                         <span>{{trans('admin.status')}}</span>
                                                     </label>
                                                 </div>
+
+                                                @if($page->type == 'helps')
+
+
+                                                <div class="col s6">
+                                                    <a class="btn" href="{{route('addHelp')}}">@lang('admin.add_help')</a>
+                                                    <table class="striped">
+                                                        <tr>
+                                                            <th>{{trans('admin.id')}}</th>
+                                                            <th>{{trans('admin.title')}}</th>
+
+                                                            <th>{{trans('admin.action')}}</th>
+
+                                                            @foreach($helps as $help)
+                                                                <tr>
+                                                                    <td>{{$help->id}}</td>
+                                                                    <td>
+                                                                        {{(count($help->availableLanguage) > 0) ?  $help->availableLanguage[0]->title : ''}}
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="{{route('editHelp',[app()->getLocale(),$help])}}">edit</a>
+                                                                        <a href="{{route('deleteHelp',[app()->getLocale(),$help])}}">delete</a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tr>
+                                                    </table>
+                                                </div>
+
+
+                                                    <div class="col s6">
+                                                        <a class="btn" href="{{route('addFaq')}}">@lang('admin.add_faq')</a>
+                                                        <table class="striped">
+                                                            <tr>
+                                                                <th>{{trans('admin.id')}}</th>
+                                                                <th>{{trans('admin.question')}}</th>
+
+                                                                <th>{{trans('admin.action')}}</th>
+
+                                                            @foreach($faqs as $faq)
+                                                                <tr>
+                                                                    <td>{{$faq->id}}</td>
+                                                                    <td>
+                                                                        {{(count($faq->availableLanguage) > 0) ?  $faq->availableLanguage[0]->question : ''}}
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="{{route('editFaq',[app()->getLocale(),$faq])}}">edit</a>
+                                                                        <a href="{{route('deleteFaq',[app()->getLocale(),$faq])}}">delete</a>
+                                                                    </td>
+                                                                </tr>
+                                                                @endforeach
+                                                                </tr>
+                                                        </table>
+                                                    </div>
+
+                                                @endif
+
                                                 <div class="input-field col s12">
                                                     <button type="submit" class="btn indigo">
                                                         {{trans('admin.update')}}

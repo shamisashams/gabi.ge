@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="@yield('description')">
+    <meta name="facebook-domain-verification" content="6ztqz12hxgejgtyjugys9wdvdlqrci" />
+    @yield('head')
 
     <meta name="language" content="{{app()->getLocale()}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <meta name="keywords" content="@yield('keywords')">
+
     <meta name="author" content="">
     <meta name="author" content="insite.international">
     <link href="/favicon.ico" rel="shortcut icon">
@@ -23,10 +24,19 @@
     <link href="{{asset('../css/style.css?v=2')}}" rel="stylesheet">
 
 
+    <script>
 
-    @yield('head')
+        function __ (key){
+            let data = key.split('.');
+            let translations = @json($client_translation);
 
-    <title> shop - Home </title>
+            if(translations.hasOwnProperty(data[1])){
+                return translations[data[1]];
+            }
+        }
+    </script>
+
+
 </head>
 
 <body>
@@ -56,7 +66,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script src="{{asset('../js/slide.js')}}"></script>
-<script src="{{asset('../js/general.js?v=234838')}}"></script>
+<script src="{{asset('../js/general.js?v=2348355166')}}"></script>
 <script src="{{asset('../js/main.js')}}"></script>
 <script src="{{asset('../js/magnifier.js')}}"></script>
 

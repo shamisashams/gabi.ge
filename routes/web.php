@@ -121,6 +121,18 @@ Route::prefix('{locale?}')
                     ->name('update', 'settingUpdate')
                     ->name('show', 'settingShow');
 
+                Route::get('pages/add_help', [PageController::class,'addHelp'])->name('addHelp');
+                Route::post('pages/add_help', [PageController::class,'addHelpStore'])->name('addHelpStore');
+                Route::get('pages/edit_help/{help}/add', [PageController::class,'editHelp'])->name('editHelp');
+                Route::put('pages/edit_help/{help}/update', [PageController::class,'updateHelp'])->name('helpUpdate');
+                Route::get('pages/edit_help/{help}/destroy', [PageController::class,'deleteHelp'])->name('deleteHelp');
+
+                Route::get('pages/add_faq', [PageController::class,'addFaq'])->name('addFaq');
+                Route::post('pages/add_faq', [PageController::class,'faqStore'])->name('faqStore');
+                Route::get('pages/faq/{faq}/edit', [PageController::class,'editFaq'])->name('editFaq');
+                Route::put('pages/faq/{faq}/update', [PageController::class,'updateFaq'])->name('faqUpdate');
+                Route::get('pages/faq/{faq}/destroy', [PageController::class,'deleteFaq'])->name('deleteFaq');
+
                 Route::resource('pages', PageController::class)->except('destroy')
                     ->name('index', 'pageIndex')
                     ->name('create', 'pageCreateView')
@@ -128,6 +140,8 @@ Route::prefix('{locale?}')
                     ->name('edit', 'pageEditView')
                     ->name('update', 'pageUpdate')
                     ->name('show', 'pageShow');
+
+
 
                 Route::resource('sales', SaleController::class)
                     ->name('index', 'saleIndex')
@@ -177,15 +191,16 @@ Route::prefix('{locale?}')
                     ->name('edit', 'blogEdit')
                     ->name('update', 'blogUpdate')
                     ->name('destroy', 'blogDestroy');
+
             });
         });
         Route::middleware(['active'])->group(function () {
             Route::get('/', [HomeController::class, 'index'])->name('welcome');
 
-            Route::get('/catalogue/{category}', [CatalogueController::class, 'catalogue'])->name('catalogue');
-            Route::get('/catalogue/{category}/details/{product}', [CatalogueController::class, 'show'])->name('productDetails');
+            //Route::get('/catalogue/{category}', [CatalogueController::class, 'catalogue'])->name('catalogue');
+            //Route::get('/catalogue/{category}/details/{product}', [CatalogueController::class, 'show'])->name('productDetails');
 
-            //Route::fallback(CatalogueController::class.'@proxy')->name('product-catalog');
+
             Route::get('/blog/{blog}',[\App\Http\Controllers\BlogController::class,'viewBlog'])->name('viewBlog');
 
 
@@ -212,13 +227,13 @@ Route::prefix('{locale?}')
             })->name('blogs');*/
             Route::get('single-blog', function () {
                 return view('pages.single-blog.index');
-            })->name('single-blog'); 
+            })->name('single-blog');
             Route::get('success', function () {
                 return view('pages.result.success');
-            })->name('success'); 
+            })->name('success');
             Route::get('failure', function () {
                 return view('pages.result.failure');
-            })->name('failure'); 
+            })->name('failure');
 
             Route::get('/facebook-auth', [AuthController::class, 'facebookAuth'])->name('facebookAuth');
 
@@ -249,11 +264,11 @@ Route::prefix('{locale?}')
             Route::get('/page/{slug?}',[\App\Http\Controllers\PageController::class, 'viewPage'])->name('viewPage');
 
             Route::get('category/{category?}', [CatalogueController::class, 'catalogueSeo'])->name('catalogueSeo');
-            Route::get('product/{category?}/{product?}', [CatalogueController::class, 'showSeo'])->name('productDetailsSeo');
+            Route::get('{category}/{product}', [CatalogueController::class, 'showSeo'])->name('productDetailsSeo');
 
             Route::any('payments/bog/status',[PurchaseController::class, 'bogResponse'])->name('bogResponse');
 
-
+            Route::fallback(\App\Http\Controllers\ProxyController::class.'@proxy')->name('proxy');
 
 
 

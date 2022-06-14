@@ -18,6 +18,10 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
     public function getMainCategories()
     {
-        return $this->model::with(['availableLanguage'])->byMain()->where(['status' => 1])->orderBy('position', 'asc')->take(10)->get();
+        return $this->model::with(['availableLanguage'])->byMain()->where(['status' => 1])->orderBy('position', 'asc')->get();
+    }
+
+    public function getBySlug($slug){
+
     }
 }

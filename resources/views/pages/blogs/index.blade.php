@@ -1,17 +1,18 @@
 @extends('layouts.base')
 @section('head')
     <title>{{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->meta_title : null}}</title>
+    <meta name="description" content="{{count($page->availableLanguage)>0?$page->availableLanguage[0]->meta_description:""}}">
+    <meta name="keywords" content="{{count($page->availableLanguage)>0?$page->availableLanguage[0]->meta_keyword:""}}">
 @endsection
-@section('description'){{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->description : null}}@endsection
-@section('keywords'){{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->description : null}}@endsection
+
 @section('content')
 
 
     <section class="blogs_page wrapper">
         <div class="showcase flex center">
             <div class="showcase_innerbox flex center">
-                <div class="bold">BLOG</div>
-                <p>Read the stories you love to know</p>
+                <div class="bold">@lang('client.page_blog_header')</div>
+                <p>@lang('client.page_blog_subtitle')</p>
             </div>
         </div>
         <div class="blog_grid">

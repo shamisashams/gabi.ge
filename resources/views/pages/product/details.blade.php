@@ -3,19 +3,19 @@
 {{--@dd($category)--}}
 
 @section('head')
-    <title>{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}</title>
+    <title>{{count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_title:""}}</title>
+    <meta name="description" content="{{count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_description:""}}">
+    <meta name="keywords" content="{{count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_keyword:""}}">
 @endsection
 
-@section('description',count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_description:"")
-@section('keywords',count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_keyword:"")
 
 @section('content')
     <section class="path">
         <div class="path_content wrapper">
             <div class="path_took">
-                Home / Summer collections / Boys / Baby Dress
+                <a href="{{route('welcome')}}">@lang('client.home')</a> / <a href="{{route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:""])}}">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</a>
             </div>
-            <div class="current">BABY DRESS</div>
+            <div class="current">{{(count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->title : ''}}</div>
         </div>
     </section>
 
@@ -29,7 +29,7 @@
                             <div class="fullview_slider_item active">
                                 <img
                                     src="/storage/product/{{$file->fileable_id}}/thumb/{{$file->name}}"
-                                    alt=""/>
+                                    alt="{{count($file->availableLanguage)>0?$file->availableLanguage[0]->title:""}}"/>
                             </div>
                         @endforeach
                     </div>
@@ -48,10 +48,10 @@
                          <img
                             class="large_image_view "
                             src="/storage/product/{{$file->fileable_id}}/{{$file->name}}"
-                            alt=""
+                            alt="{{count($file->availableLanguage)>0?$file->availableLanguage[0]->title:""}}"
                         />
                     </div>
-                    
+
                     @endforeach
                 </div>
                 <div class="loupe"></div>
@@ -177,9 +177,9 @@
     </section>
     <section class="information_section">
         <div class="heads">
-            <div class="info_head clicked">Description</div>
-            <div class="info_head">Additional Information</div>
-            <div class="info_head">Shipping & Returns</div>
+            <div class="info_head clicked">@lang('client.description')</div>
+            <div class="info_head">@lang('client.add_info')</div>
+            <div class="info_head">@lang('client.ship_returns')</div>
         </div>
         <div class="information_content wrapper clicked">
             {{--            <div class="title">Product Information</div>--}}

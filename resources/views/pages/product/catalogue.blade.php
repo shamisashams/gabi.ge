@@ -1,8 +1,10 @@
 @extends('layouts.base')
 @section('head')
-    <title>{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</title>
+    <title>{{count($category->availableLanguage)>0?$category->availableLanguage[0]->meta_title:""}}</title>
+    <meta name="description" content="{{count($category->availableLanguage)>0?$category->availableLanguage[0]->meta_description:""}}">
+    <meta name="keywords" content="{{count($category->availableLanguage)>0?$category->availableLanguage[0]->meta_keyword:""}}">
 @endsection
-@section('description'){{count($category->availableLanguage)>0?$category->availableLanguage[0]->description:""}}@endsection
+
 @section('content')
     <style>
         /* Customize the label (the container) */
@@ -75,14 +77,13 @@
     </style>
     <section class="path">
         <div class="path_content wrapper">
-            <div class="path_took"><a href="{{route('welcome',app()->getLocale())}}">Home</a>
-                / {{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</div>
+            <div class="path_took"><a href="{{route('welcome',app()->getLocale())}}">@lang('client.home')</a>
             <div
                 class="current">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</div>
         </div>
     </section>
     <section class="product_content_section wrapper flex">
-        <form action="{{route('catalogue',[app()->getLocale(),$category->id])}}" style="display: contents">
+        <form action="{{route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:""])}}" style="display: contents">
             <div class="sidebar_filters">
                 <div class="section">
                     <div class="titles">{{__('client.price_filter')}}</div>
@@ -93,7 +94,7 @@
                     <div class="price_control">
                         <input id="min" name="min_price" type="text" value="{{Request::get('min_price')}}"/>
                         <input id="max" name="max_price" type="text" value="{{Request::get('max_price')}}"/>
-                        <button class="ok">Ok</button>
+                        <button class="ok">{{__('client.ok')}}</button>
                     </div>
                 </div>
                 @foreach($productFeatures as $productAnswer)
@@ -141,7 +142,7 @@
                                     @if(isset($product->files[0]))
                                         <img class="p_img"
                                              src="/storage/product/{{$product->files[0]->fileable_id}}/thumb/{{$product->files[0]->name}}"
-                                             alt="{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}"/>
+                                             alt="{{count($product->files[0]->availableLanguage)>0?$product->files[0]->availableLanguage[0]->title:""}}"/>
                                     @else
                                         <img src="noimage.png"/>
                                     @endif
@@ -167,7 +168,7 @@
                                     <div
                                         class="title">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}</div>
                                     <div
-                                        class="sub roboto">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->short_description:""}}</div>
+                                        class="sub roboto">{!! count($product->availableLanguage)>0?$product->availableLanguage[0]->short_description:"" !!}</div>
                                 </div>
                                 <div>
                                     @if($product->saleProduct && $product->saleProduct->sale)
@@ -187,8 +188,8 @@
 
                 {{ $products->appends(request()->query())->links('vendor.pagination.custom') }}
                 <div class="page_input">
-                    <input type="number" name="page" placeholder="Enter Page"/>
-                    <button class="ok">Ok</button>
+                    <input type="number" name="page" placeholder="{{__('client.enter_page')}}"/>
+                    <button class="ok">{{__('client.ok')}}</button>
                 </div>
             </section>
         </form>

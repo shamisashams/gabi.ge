@@ -172,6 +172,8 @@ class CatalogueController extends Controller
 
         return view('pages.product.catalogue_s', [
             'title' => __('client.best-sellers'),
+            'description' => __('client.best-sellers'),
+            'keyword' => __('client.best-sellers'),
             'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
 //            'staticFilterData' => $staticFilterData,
@@ -193,6 +195,8 @@ class CatalogueController extends Controller
 
         return view('pages.product.catalogue_s', [
             'title' => __('client.summer-discount'),
+            'description' => __('client.summer-discount'),
+            'keyword' => __('client.summer-discount'),
             'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
 //            'staticFilterData' => $staticFilterData,
@@ -214,11 +218,46 @@ class CatalogueController extends Controller
 
         return view('pages.product.catalogue_s', [
             'title' => __('client.new_products'),
+            'description' => __('client.new_products'),
+            'keyword' => __('client.new_products'),
             'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
 //            'staticFilterData' => $staticFilterData,
             'products' => $products->orderBy('created_at', 'DESC')->paginate(16),
             'category' => null
+        ]);
+    }
+
+    public function proxy($locale,$slug){
+        //dd($slug);
+
+        $category = Category::query()->whereHas('language',function ($query) use ($category_slug){
+            $query->where('slug', $category_slug)->where('language_id', '=', Language::getIdByName(app()->getLocale()));
+        })->first();
+
+        $cat_redirect = Setting::query()->where('key','category_not_found_redirect')->first();
+        $val = count($cat_redirect->availableLanguage) > 0 ? $cat_redirect->availableLanguage[0]->value : false;
+        if((!$category) && $val){
+            return redirect($val,301);
+        } elseif (!$category){
+            return abort(404);
+        }
+
+        $request->merge([
+            'category' => $category->id,
+            'sortParams' => ['sort' => 'position', 'order' => 'DESC']
+        ]);
+
+        $products = $this->productRepository->getData($request, ['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files', 'category.availableLanguageS', 'category.availableLanguage'], false);
+//        $staticFilterData = ['category'];
+        //dd($products->get());
+
+        return view('pages.product.catalogue', [
+            'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
+            'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
+//            'staticFilterData' => $staticFilterData,
+            'products' => $products->orderBy('created_at', 'DESC')->paginate(16),
+            'category' => $category
         ]);
     }
 }

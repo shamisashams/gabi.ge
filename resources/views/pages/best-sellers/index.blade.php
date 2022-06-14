@@ -26,7 +26,7 @@
                     @if(isset($product->files[0]))
                         <img class="p_img"
                              src="/storage/product/{{$product->files[0]->fileable_id}}/thumb/{{$product->files[0]->name}}"
-                             alt="{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}"/>
+                             alt="{{count($product->files[0]->availableLanguage)>0?$product->files[0]->availableLanguage[0]->title:""}}"/>
                     @else
                         <img src="noimage.png"/>
                     @endif
@@ -52,7 +52,7 @@
                         <div
                             class="title">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}</div>
                         <div
-                            class="sub roboto">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->short_description:""}}</div>
+                            class="sub roboto">{!! count($product->availableLanguage)>0?$product->availableLanguage[0]->short_description:"" !!}</div>
                     </div>
                     <div>
                         @if($product->saleProduct && $product->saleProduct->sale)

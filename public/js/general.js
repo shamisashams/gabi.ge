@@ -367,7 +367,7 @@ function getCartCount() {
                     let element = `
 
                         <div class="item cart_item_header">
-                          <a style="display: contents" href="/${locale}/product/${
+                          <a style="display: contents" href="/${locale}/${
                         item.cat_slug
                     }/${item.prod_slug}"">
                         <div>
@@ -397,7 +397,7 @@ function getCartCount() {
                 });
                 let checkout = `
                                     <div class="checkout" id="checkout-total">
-                        <div class="total">total</div>
+                        <div class="total">${__('client.total')}</div>
                         <div class="price">₾ ${
                             Math.round(data.total * 100) / 100
                         }</div>
@@ -408,7 +408,7 @@ function getCartCount() {
                         </a>//-->
                         <a href="/${locale}/cart">
                             <button class="go">
-                                <div>Checkout</div>
+                                <div>${__('client.checkout')}</div>
                                 <img src="/img/icons/header/right.png" alt=""/>
                             </button>
                         </a>
@@ -857,10 +857,10 @@ function addToModal(product) {
                 </div>
             </div>
             <div class="flex center btm_btns">
-                <a href="/${locale}/product/${
+                <a href="/${locale}/${
             product.category.available_language[0].slug
         }/${product.available_language[0].slug}">
-                    <button class="details">Detiles</button>
+                    <button class="details">${__('client.details')}</button>
                 </a>
 
                     <button id="add_to_cart" ${
@@ -869,14 +869,14 @@ function addToModal(product) {
             product.id
         })" class="add_to_cart flex center popup_add_to_cart">
                         <img src="/img/icons/details/cart.png" alt="" />
-                        <div>Add To Card</div>
+                        <div>${__('client.add_to_cart')}</div>
                     </button>
             </div>
 
             <div class="success flex center popup_success">
 
                 <img src="/img/icons/popup/success.png" alt="">
-                <div>Product was successfully added to cart</div>
+                <div>${__('client.cart_add_success')}</div>
 
 
             </div>

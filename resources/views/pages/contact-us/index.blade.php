@@ -1,14 +1,15 @@
 @extends('layouts.base')
 @section('head')
     <title>{{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->meta_title : null}}</title>
+    <meta name="description" content="{{count($page->availableLanguage)>0?$page->availableLanguage[0]->meta_description:""}}">
+    <meta name="keywords" content="{{count($page->availableLanguage)>0?$page->availableLanguage[0]->meta_keyword:""}}">
 @endsection
-@section('description'){{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->description : null}}@endsection
-@section('keywords'){{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->description : null}}@endsection
+
 @section('content')
 
     <section class="path">
         <div class="path_content wrapper">
-            <div class="path_took"><a href="{{route('welcome')}}">{{__('client.home')}}</a> / {{__('client.contact')}}
+            <div class="path_took"><a href="{{route('welcome')}}">{{__('client.home')}}</a>
             </div>
             <div class="current">{{__('client.contact')}}</div>
         </div>

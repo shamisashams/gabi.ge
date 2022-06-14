@@ -61,7 +61,19 @@
 
 
 
-
+                                                        <div class="col s12 input-field">
+                                                            <input id="meta_title" name="meta_description"
+                                                                   type="text"
+                                                                   class="validate {{ $errors->has('meta_title') ? 'invalid' : 'valid' }}"
+                                                                   value="{{old('meta_title')}}"
+                                                                   data-error=".errorTxt">
+                                                            <label for="meta_title"
+                                                                   class="active">{{trans('admin.meta_title')}}</label>
+                                                            @if ($errors->has('meta_title'))
+                                                                <small
+                                                                    class="errorTxt">{{ $errors->first('meta_title') }}</small>
+                                                            @endif
+                                                        </div>
 
 
 

@@ -1,10 +1,10 @@
 @extends('layouts.base')
 @section('head')
     <title>{{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->meta_title : null}}</title>
-
+    <meta name="description" content="{{count($page->availableLanguage)>0?$page->availableLanguage[0]->meta_description:""}}">
+    <meta name="keywords" content="{{count($page->availableLanguage)>0?$page->availableLanguage[0]->meta_keyword:""}}">
 @endsection
-@section('description'){{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->description : null}}@endsection
-@section('keywords'){{count($page->availableLanguage) > 0 ? $page->availableLanguage[0]->description : null}}@endsection
+
 
 @section('content')
     <section class="hero ">
@@ -12,7 +12,7 @@
             @foreach($sliders as $slider)
                 <div class="slide slide1">
                     @if(isset($slider->files[0]))
-                        <img src="/storage/slider/{{$slider->files[0]->fileable_id}}/{{$slider->files[0]->name}}"
+                        <img src="/storage/slider/{{$slider->files[0]->fileable_id}}/thumb/{{$slider->files[0]->name}}"
                              alt=""/>
                     @else
                         <img src="noimage.png"/>
@@ -43,13 +43,13 @@
                 <div class="category">
                     @if(isset($category->files[0]))
                         <img class="product"
-                             src="/storage/category/{{$category->files[0]->fileable_id}}/{{$category->files[0]->name}}"
-                             alt=""/>
+                             src="/storage/category/{{$category->files[0]->fileable_id}}/thumb/{{$category->files[0]->name}}"
+                             alt="{{count($category->files[0]->availableLanguage)>0?$category->files[0]->availableLanguage[0]->title:""}}"/>
                     @else
                         <img class="product" src="noimage.png"/>
                     @endif
                     <img class="frame" src="img/products/frame.png" alt=""/>
-                    <a class="category_name" href="{{route('catalogueSeo',[app()->getLocale(),count($category->availableLanguage)>0 ? $category->availableLanguage[0]->slug:null])}}"
+                    <a class="category_name" href="{{route('proxy',[app()->getLocale(),count($category->availableLanguage)>0 ? $category->availableLanguage[0]->slug:null])}}"
                        style="overflow-wrap: anywhere">
                         {{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}
                     </a>
@@ -119,7 +119,7 @@
                                                 <div class="roboto">{{__('client.view')}}</div>
                                             </button>
                                         </a>
-                                        <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
+                                        <a href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug:null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null])}}">
                                             <button class="add_to_cart details">
                                                 <img src="/img/icons/profile/magnifying-glass.svg" alt="" />
                                                 <div class="roboto">{{__('client.details')}}</div>
@@ -158,13 +158,13 @@
     <section class="products_viewport blog_section">
         <div class="wrapper">
             <div class="products_head ">
-                <div class="title">Blog</div>
+                <div class="title">@lang('client.blog_header')</div>
             </div>
             <div class="blog_grid">
                 @foreach($blogs as $blog)
             <a href="{{route('viewBlog',[app()->getLocale(),count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->slug : ''])}}" class="blog_box">
                 <div class="img_frame">
-                    <div class="read_more">Read more</div>
+                    <div class="read_more">@lang('client.read_more')</div>
                     <div class="img">
                         <img src="{{asset($blog->firstImage ? ('storage/blog/' . $blog->firstImage->fileable_id .'/'. $blog->firstImage->name) : null)}}" alt=""/>
                     </div>
@@ -191,7 +191,7 @@
             </div>
             <div class="btn">
 
-                <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['blogs']['slug']) ? $page_slugs['blogs']['slug'] : null])}}" class="view_all">View all</a>
+                <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['blogs']['slug']) ? $page_slugs['blogs']['slug'] : null])}}" class="view_all">@lang('client.view_all')</a>
             </div>
         </div>
 
@@ -235,7 +235,7 @@
                                         <div class="roboto">{{__('client.view')}}</div>
                                     </button>
                                 </a>
-                                <a href="{{route('productDetails',[app()->getLocale(),$product->category_id,$product->id])}}">
+                                <a href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug:null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null])}}">
                                     <button class="add_to_cart details">
                                         <img src="/img/icons/profile/magnifying-glass.svg" alt="" />
                                         <div class="roboto">{{__('client.details')}}</div>

@@ -12,6 +12,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Request\Admin\FeatureRequest;
 use App\Http\Request\Admin\PageRequest;
+use App\Models\Faq;
+use App\Models\Help;
+use App\Repositories\Eloquent\FaqRepository;
+use App\Repositories\Eloquent\HelpRepository;
 use App\Repositories\PageRepositoryInterface;
 use App\Services\PageService;
 use Illuminate\Contracts\Foundation\Application;
@@ -25,10 +29,14 @@ use Illuminate\Routing\Redirector;
 class PageController extends AdminController
 {
     protected $pageRepository;
+    private $helpRepository;
+    private $faqRepository;
 
-    public function __construct(PageRepositoryInterface $pageRepository)
+    public function __construct(PageRepositoryInterface $pageRepository, HelpRepository $helpRepository, FaqRepository $faqRepository)
     {
         $this->pageRepository = $pageRepository;
+        $this->helpRepository = $helpRepository;
+        $this->faqRepository = $faqRepository;
     }
 
 
@@ -46,7 +54,8 @@ class PageController extends AdminController
             'status' => 'boolean|nullable',
         ]);
         return view('admin.modules.page.index', [
-            'pages' => $this->pageRepository->getData($request, ['availableLanguage'])
+            'pages' => $this->pageRepository->getData($request, ['availableLanguage']),
+
         ]);
 
     }
@@ -114,7 +123,9 @@ class PageController extends AdminController
     public function edit(string $locale, int $id)
     {
         return view('admin.modules.page.update', [
-            'page' => $this->pageRepository->find($id)
+            'page' => $this->pageRepository->find($id),
+            'helps' => Help::all(),
+            'faqs' => Faq::all()
         ]);
 
     }
@@ -135,5 +146,100 @@ class PageController extends AdminController
 
         return redirect(route('pageIndex', $locale))->with('success', __('admin.page_success_update'));
 
+    }
+
+    public function addHelp(){
+        return view('admin.modules.page.create-help', [
+            'help' => new Help,
+            'method' => 'post',
+            'action' => route('addHelpStore',app()->getLocale())
+        ]);
+    }
+
+    public function addHelpStore($locale,Request $request){
+
+        $request->validate([
+           'title' => 'required'
+        ]);
+
+        if (!$this->helpRepository->store($locale, $request)) {
+            return redirect(route('pageEditView',[$locale,5]))->with('danger', __('admin.category_not_created'));
+        }
+
+        return redirect(route('pageEditView',[$locale,5]))->with('success', __('admin.category_created_succesfully'));
+    }
+
+    public function editHelp(string $lang, Help $help)
+    {
+        return view('admin.modules.page.create-help', [
+            'help' => $help,
+            'method' => 'put',
+            'action' => route('helpUpdate',[app()->getLocale(),$help])
+        ]);
+    }
+
+    public function updateHelp(string $lang, Help $help, Request $request)
+    {
+        $request->validate([
+            'title' => 'required'
+        ]);
+        if (!$this->helpRepository->update($lang, $help->id, $request)) {
+            return redirect(route('pageIndex', [$lang, $help->id]))->with('danger', __('admin.page_not_update'));
+        }
+
+        return redirect(route('pageEditView',[$lang,5]))->with('success', __('admin.page_success_update'));
+    }
+
+    public function addFaq(){
+        return view('admin.modules.page.create-faq', [
+            'help' => new Faq(),
+            'method' => 'post',
+            'action' => route('faqStore',app()->getLocale())
+        ]);
+    }
+
+    public function faqStore($locale,Request $request){
+
+        //dd($request->all());
+        $request->validate([
+            'question' => 'required'
+        ]);
+
+        if (!$this->faqRepository->store($locale, $request)) {
+            return redirect(route('pageEditView',[$locale,5]))->with('danger', __('admin.category_not_created'));
+        }
+
+        return redirect(route('pageEditView',[$locale,5]))->with('success', __('admin.category_created_succesfully'));
+    }
+
+    public function editFaq(string $lang, Faq $faq)
+    {
+        return view('admin.modules.page.create-faq', [
+            'help' => $faq,
+            'method' => 'put',
+            'action' => route('faqUpdate',[app()->getLocale(),$faq])
+        ]);
+    }
+
+    public function updateFaq(string $lang, Faq $faq, Request $request)
+    {
+        $request->validate([
+            'question' => 'required'
+        ]);
+        if (!$this->faqRepository->update($lang, $faq->id, $request)) {
+            return redirect(route('pageEditView',[$lang,5]))->with('danger', __('admin.page_not_update'));
+        }
+
+        return redirect(route('pageEditView',[$lang,5]))->with('success', __('admin.page_success_update'));
+    }
+
+    public function deleteHelp($locale, Help $help){
+        $help->delete();
+        return redirect(route('pageEditView',[$locale,5]))->with('success', __('admin.success_delete'));
+    }
+
+    public function deleteFaq($locale, Faq $faq){
+        $faq->delete();
+        return redirect(route('pageEditView',[$locale,5]))->with('success', __('admin.success_delete'));
     }
 }
