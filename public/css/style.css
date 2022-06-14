@@ -1887,6 +1887,7 @@ img {
     border: #dcdcdc solid 1px;
     padding: 11px 21px;
     font-size: 12px;
+    margin-bottom: 10px;
 }
 
 .login_signup_box .sign_with .accs img {
@@ -2122,7 +2123,6 @@ img {
 .customize .options {
     margin-bottom: 20px;
 }
-
 .customize .options .box_grid .box,
 .customize .options select {
     display: inline-block;
