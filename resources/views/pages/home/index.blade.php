@@ -19,11 +19,11 @@
                     @endif
                     <div class="overlay">
                         <div class="hero_box">
-                            <div
-                                class="new">{{count($slider->availableLanguage)>0?$slider->availableLanguage[0]->title:""}}</div>
+                            <{{isset($htags['slider']->details) ? $htags['slider']->details : 'div'}}
+                                class="new">{{count($slider->availableLanguage)>0?$slider->availableLanguage[0]->title:""}}</{{isset($htags['slider']->details) ? $htags['slider']->details : 'div'}}>
                             <div class="title">
                             <span>
-                            {{count($slider->availableLanguage)>0?$slider->availableLanguage[0]->description:""}}
+                            {!! count($slider->availableLanguage)>0?$slider->availableLanguage[0]->description:"" !!}
                             </span>
                             </div>
                             <a href="{{$slider->redirect_url}}" target="_self">
