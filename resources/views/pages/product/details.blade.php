@@ -89,7 +89,7 @@
 
         <div class="customize" id="customize-details">
             <{{isset($htags['product']->details) ? $htags['product']->details : 'div'}}
-                class="product_name roboto">{{(count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->title : ''}}</{{isset($htags->product->details) ? $htags->product->details : 'div'}}>
+                class="product_name roboto">{{(count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->title : ''}}</{{isset($htags['product']->details) ? $htags['product']->details : 'div'}}>
             <p><span>ID:</span> {{$product->id}}</p>
             <p>
                 <span>Category:</span> {{(count($category->availableLanguage)> 0) ? $category->availableLanguage[0]->title : ''}}
@@ -110,6 +110,7 @@
                     <div class="main">₾ {{round($product->price/100,2)}}</div>
                 @endif
             </div>
+
             {{--            <div class="colors">--}}
             {{--                <div class="title">Color</div>--}}
             {{--                <button--}}
