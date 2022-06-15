@@ -48,7 +48,6 @@ $(".best_seller_slide").slick({
             breakpoint: 500,
             settings: {
                 slidesToShow: 1,
-                centerMode: true,
             },
         },
     ],
@@ -90,7 +89,6 @@ $(".new_products_slide").slick({
             breakpoint: 500,
             settings: {
                 slidesToShow: 1,
-                centerMode: true,
             },
         },
     ],
