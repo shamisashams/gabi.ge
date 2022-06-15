@@ -193,6 +193,15 @@ Route::prefix('{locale?}')
                     ->name('update', 'blogUpdate')
                     ->name('destroy', 'blogDestroy');
 
+                // Settings
+                Route::resource('htag', \App\Http\Controllers\Admin\HtagController::class)->except('destroy')
+                    ->name('index', 'hTagIndex')
+                    ->name('create', 'hTagCreateView')
+                    ->name('store', 'hTagCreate')
+                    ->name('edit', 'hTagEditView')
+                    ->name('update', 'hTagUpdate')
+                    ->name('show', 'hTagShow');
+
             });
         });
         Route::middleware(['active'])->group(function () {

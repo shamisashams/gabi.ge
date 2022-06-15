@@ -75,13 +75,13 @@
                                                 </div>
                                                 <div class="col s12 m6">
                                                     <div class="row">
-                                                        <div class="col s12 input-field">
-                                                            <input id="description" name="description" type="text"
-                                                                   class="validate {{ $errors->has('native') ? 'invalid' : 'valid' }}"
-                                                                   value="{{old('description')}}"
-                                                                   data-error=".errorTxt">
+                                                        <div class="col s12">
                                                             <label for="description"
                                                                    class="active">{{trans('admin.description')}}</label>
+                                                            <textarea id="description" name="description" type="text"
+                                                                   class="ckeditor validate {{ $errors->has('native') ? 'invalid' : 'valid' }}"
+                                                                      data-error=".errorTxt">{{old('description')}}</textarea>
+
                                                             @if ($errors->has('description'))
                                                                 <small
                                                                     class="errorTxt">{{ $errors->first('description') }}</small>
@@ -152,4 +152,5 @@
             <div class="content-overlay"></div>
         </div>
     </div>
+    <script src="{{asset('../admin/ckeditor/ckeditor.js')}}"></script>
 @endsection

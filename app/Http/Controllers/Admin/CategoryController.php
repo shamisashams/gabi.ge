@@ -96,6 +96,8 @@ class CategoryController extends AdminController
     public function update(string $lang, int $id, CategoryRequest $request)
     {
 
+        //dd($request->all());
+
         if (!$this->categoryRepository->update($lang, $id, $request)) {
             return redirect(route('categoryEditView', [$lang, $id]))->with('danger', __('admin.category_not_updated'));
         }

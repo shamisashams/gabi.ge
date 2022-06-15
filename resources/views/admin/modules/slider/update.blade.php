@@ -33,12 +33,12 @@
 
                                                         </div>
                                                         <div class="col s12 input-field">
-                                                            <input id="abbreviation" name="description" type="text"
-                                                                   class="validate {{ $errors->has('description') ? 'invalid' : 'valid' }}"
-                                                                   value="{{count($slider->availableLanguage)>0?$slider->availableLanguage[0]->description:""}}"
-                                                                   data-error=".errorTxt">
-                                                            <label for="name"
+                                                            <label for="description"
                                                                    class="active">{{trans('admin.description')}}</label>
+                                                            <textarea id="description" name="description" type="text"
+                                                                   class="ckeditor validate {{ $errors->has('description') ? 'invalid' : 'valid' }}"
+                                                                      data-error=".errorTxt">{{count($slider->availableLanguage)>0?$slider->availableLanguage[0]->description:""}}</textarea>
+
                                                             @if ($errors->has('description'))
                                                                 <small
                                                                     class="errorTxt">{{ $errors->first('description') }}</small>
@@ -137,4 +137,5 @@
             <div class="content-overlay"></div>
         </div>
     </div>
+    <script src="{{asset('../admin/ckeditor/ckeditor.js')}}"></script>
 @endsection

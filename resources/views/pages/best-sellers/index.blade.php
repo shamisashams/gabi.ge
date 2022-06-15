@@ -49,8 +49,8 @@
                 </a>
                 <div class="detail flex">
                     <div>
-                        <div
-                            class="title">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}</div>
+                        <{{isset($htags['product']->slider) ? $htags['product']->slider : 'div'}}
+                            class="title">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}</{{isset($htags['product']->slider) ? $htags['product']->slider : 'div'}}>
                         <div
                             class="sub roboto">{!! count($product->availableLanguage)>0?$product->availableLanguage[0]->short_description:"" !!}</div>
                     </div>

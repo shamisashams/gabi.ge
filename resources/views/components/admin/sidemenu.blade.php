@@ -77,6 +77,10 @@
                 class="waves-effect waves-cyan {{str_contains(route('blogIndex',app()->getLocale()),request()->path())?"active":""}}"
                 href="{{route('blogIndex',app()->getLocale())}}"><i class="material-icons dp48">blog</i><span>{{trans('admin.blog')}}</span></a>
         </li>
+        <li class="bold"><a
+                class="waves-effect waves-cyan {{str_contains(route('hTagIndex',app()->getLocale()),request()->path())?"active":""}}"
+                href="{{route('hTagIndex',app()->getLocale())}}"><i class="material-icons dp48">blog</i><span>{{trans('admin.h_tags')}}</span></a>
+        </li>
     </ul>
     <div class="navigation-background"></div>
     <a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only"

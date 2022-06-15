@@ -42,6 +42,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
             $categoryItem->update([
                 'position' => $request['position'],
                 'status' => $request['status'],
+                'h_tag' => $request['h_tag'],
             ]);
 
             $categoryId = $categoryItem->id;

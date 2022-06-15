@@ -18,11 +18,11 @@
                                                 <div class="col s12 m6">
                                                     <div class="row">
                                                         <div class="col s12 input-field">
-                                                            <input id="abbreviation" name="title" type="text"
+                                                            <input id="title" name="title" type="text"
                                                                    class="validate {{ $errors->has('title') ? 'invalid' : 'valid' }}"
                                                                    value="{{old('title')}}"
                                                                    data-error=".errorTxt">
-                                                            <label for="username"
+                                                            <label for="title"
                                                                    class="active">{{trans('admin.title')}}</label>
                                                             @if ($errors->has('title'))
                                                                 <small
@@ -31,12 +31,12 @@
 
                                                         </div>
                                                         <div class="col s12 input-field">
-                                                            <input id="abbreviation" name="description" type="text"
-                                                                   class="validate {{ $errors->has('description') ? 'invalid' : 'valid' }}"
-                                                                   value="{{old('description')}}"
-                                                                   data-error=".errorTxt">
-                                                            <label for="name"
+                                                            <label for="description"
                                                                    class="active">{{trans('admin.description')}}</label>
+                                                            <textarea id="description" name="description" type="text"
+                                                                   class="ckeditor validate {{ $errors->has('description') ? 'invalid' : 'valid' }}"
+                                                                      data-error=".errorTxt">{{old('description')}}</textarea>
+
                                                             @if ($errors->has('description'))
                                                                 <small
                                                                     class="errorTxt">{{ $errors->first('description') }}</small>
@@ -135,4 +135,5 @@
             <div class="content-overlay"></div>
         </div>
     </div>
+    <script src="{{asset('../admin/ckeditor/ckeditor.js')}}"></script>
 @endsection

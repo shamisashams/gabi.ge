@@ -19,7 +19,8 @@ class Category extends Model
     protected $fillable = [
         'position',
         'status',
-        'parent_id'
+        'parent_id',
+        'h_tag'
     ];
 
     public function getFilterScopes(): array
@@ -95,6 +96,20 @@ class Category extends Model
     public function scopeByMain($query)
     {
         return $query->where('parent_id', '=', null)->orWhere('parent_id', '=', "");
+    }
+
+    public function setHTagAttribute($value)
+    {
+
+
+        $this->attributes['h_tag'] = json_encode($value);
+    }
+
+    public function getHTagAttribute($value)
+    {
+
+
+        return json_decode($value);
     }
 
 }

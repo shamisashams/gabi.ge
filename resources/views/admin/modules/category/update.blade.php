@@ -21,9 +21,33 @@
                                               method="POST" enctype="multipart/form-data">
                                             {{ method_field('PUT') }}
                                             @csrf
+                                            <?php
+                                            $htags = [
+                                                'h1',
+                                                'h2',
+                                                'h3',
+                                                'h4',
+                                                'h5',
+                                                'h6'
+                                            ];
+                                            ?>
+
                                             <div class="row">
                                                 <div class="col s12 m6">
                                                     <div class="row">
+
+                                                        {{--@dd($categoryItem->h_tag)--}}
+                                                        <div class="col s12 input-field">
+                                                            <select name="h_tag[home]">
+                                                                @foreach($htags as $htag)
+                                                                    <option {{$categoryItem->h_tag && $categoryItem->h_tag->home == $htag ? 'selected':''}}>{{$htag}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <label
+                                                                   class="active">{{trans('admin.title_htag_home')}}</label>
+
+                                                        </div>
+
                                                         <div class="col s12 input-field">
                                                             <input id="title" name="title" type="text"
                                                                    class="validate {{ $errors->has('title') ? 'invalid' : 'valid' }}"
@@ -82,13 +106,13 @@
                                                 </div>
                                                 <div class="col s12 m6">
                                                     <div class="row">
-                                                        <div class="col s12 input-field">
-                                                            <input id="description" name="description" type="text"
-                                                                   class="validate {{ $errors->has('description') ? 'invalid' : 'valid' }}"
-                                                                   value="{{(count($categoryItem->availableLanguage) > 0) ?  $categoryItem->availableLanguage[0]->description : ''}}"
-                                                                   data-error=".errorTxt">
+                                                        <div class="col s12 ">
                                                             <label for="description"
                                                                    class="active">{{trans('admin.description')}}</label>
+                                                            <textarea id="description" name="description" type="text"
+                                                                   class="ckeditor validate {{ $errors->has('description') ? 'invalid' : 'valid' }}"
+                                                                      data-error=".errorTxt">{{(count($categoryItem->availableLanguage) > 0) ?  $categoryItem->availableLanguage[0]->description : ''}}</textarea>
+
                                                             @if ($errors->has('description'))
                                                                 <small
                                                                     class="errorTxt">{{ $errors->first('description') }}</small>
@@ -171,4 +195,6 @@
             <div class="content-overlay"></div>
         </div>
     </div>
+
+    <script src="{{asset('../admin/ckeditor/ckeditor.js')}}"></script>
 @endsection
