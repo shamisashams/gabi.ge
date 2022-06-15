@@ -78,8 +78,8 @@
     <section class="path">
         <div class="path_content wrapper">
             <div class="path_took"><a href="{{route('welcome',app()->getLocale())}}">@lang('client.home')</a>
-            <div
-                class="current">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</div>
+            <{{isset($htags['category']->details) ? $htags['category']->details : 'div'}}
+                class="current">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</{{isset($htags['category']->details) ? $htags['category']->details : 'div'}}>
         </div>
     </section>
     <section class="product_content_section wrapper flex">
