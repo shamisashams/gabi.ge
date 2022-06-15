@@ -32,6 +32,7 @@
                                                     <div class="row">
                                                         <div class="col s12 input-field">
                                                             <select name="value[details]">
+                                                                <option value=""></option>
                                                                 @foreach($htags as $htag)
                                                                     <option {{isset($setting->value->details) && $setting->value->details == $htag ? 'selected':''}}>{{$htag}}</option>
                                                                 @endforeach
@@ -48,6 +49,7 @@
                                                     <div class="row">
                                                         <div class="col s12 input-field">
                                                             <select name="value[slider]">
+                                                                <option value=""></option>
                                                                 @foreach($htags as $htag)
                                                                     <option {{isset($setting->value->slider) && $setting->value->slider == $htag ? 'selected':''}}>{{$htag}}</option>
                                                                 @endforeach
