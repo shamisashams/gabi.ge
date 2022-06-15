@@ -61,6 +61,24 @@
                                                     </div>
 
                                                 </div>
+
+                                                <div class="col s12 m6">
+                                                    <div class="row">
+                                                        <div class="col s12 input-field">
+                                                            <select id="cat" name="value[category]">
+                                                                <option value=""></option>
+                                                                @foreach($htags as $htag)
+                                                                    <option {{isset($setting->value->category) && $setting->value->category == $htag ? 'selected':''}}>{{$htag}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <label for="cat"
+                                                                   class="active">{{trans('admin.category_value')}}</label>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
                                                 <div class="col s12 m6">
 
                                                     <div class="col s12">
