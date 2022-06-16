@@ -10,77 +10,85 @@
     <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out"
         data-menu="menu-navigation" data-collapsible="menu-accordion">
 
-        <li class="bold"><a
-                class="waves-effect waves-cyan {{str_contains(route('languageIndex',app()->getLocale()),request()->path())?"active":""}} "
-                href="{{route('languageIndex',app()->getLocale())}}"><i class="material-icons">import_contacts</i><span
-                    class="menu-title" data-i18n="Mail">{{trans('admin.languages')}}</span></a>
 
+        <li class="{{str_contains(route('languageIndex',app()->getLocale()),request()->path()) || str_contains(route('translationIndex',app()->getLocale()),request()->path()) ?'active':''}} bold"><a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">language</i><span class="menu-title" data-i18n="Pages">{{trans('admin.languages')}}</span></a>
+            <div class="collapsible-body">
+                <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                    <li {!! str_contains(route('languageIndex',app()->getLocale()),request()->path())?'class="active"':'' !!}><a {!! str_contains(route('languageIndex',app()->getLocale()),request()->path())?'class="active"':'' !!} href="{{route('languageIndex',app()->getLocale())}}"><i class="material-icons">import_contacts</i><span data-i18n="Page Blank">{{trans('admin.add_language')}}</span></a>
+                    </li>
+                    <li {!! str_contains(route('translationIndex',app()->getLocale()),request()->path())?'class="active"':'' !!}><a {!! str_contains(route('translationIndex',app()->getLocale()),request()->path())?'class="active"':'' !!} href="{{route('translationIndex',app()->getLocale())}}"><i class="material-icons">g_translate</i><span data-i18n="Page Blank">{{trans('admin.translations')}}</span></a>
+                    </li>
+                </ul>
+            </div>
         </li>
 
-        <li class="bold"><a
-                class="waves-effect waves-cyan {{str_contains(route('translationIndex',app()->getLocale()),request()->path())?"active":""}}"
-                href="{{route('translationIndex',app()->getLocale())}}"><i
-                    class="material-icons dp48">g_translate</i><span>{{trans('admin.translations')}}</span></a>
+        <li class="{{str_contains(route('productIndex',app()->getLocale()),request()->path()) || str_contains(route('categoryIndex',app()->getLocale()),request()->path()) || str_contains(route('featureIndex',app()->getLocale()),request()->path()) || str_contains(route('answerIndex',app()->getLocale()),request()->path()) || str_contains(route('saleIndex',app()->getLocale()),request()->path()) ?'active':''}} bold"><a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">format_list_bulleted</i><span class="menu-title" data-i18n="Pages">{{trans('admin.catalog')}}</span></a>
+            <div class="collapsible-body">
+                <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                    <li {!! str_contains(route('productIndex',app()->getLocale()),request()->path())?'class="active"':'' !!}><a {!! str_contains(route('productIndex',app()->getLocale()),request()->path())?'class="active"':'' !!} href="{{route('productIndex',app()->getLocale())}}"><i class="material-icons">import_contacts</i><span data-i18n="Page Blank">{{trans('admin.products')}}</span></a>
+                    </li>
+                    <li {!! str_contains(route('categoryIndex',app()->getLocale()),request()->path())?'class="active"':'' !!}><a {!! str_contains(route('categoryIndex',app()->getLocale()),request()->path())?'class="active"':'' !!} href="{{route('categoryIndex',app()->getLocale())}}"><i class="material-icons">category</i><span data-i18n="Page Blank">{{trans('admin.categories')}}</span></a>
+                    </li>
+                    <li {!! str_contains(route('featureIndex',app()->getLocale()),request()->path())?'class="active"':'' !!}><a {!! str_contains(route('featureIndex',app()->getLocale()),request()->path())?'class="active"':'' !!} href="{{route('featureIndex',app()->getLocale())}}"><i class="material-icons">star_border</i><span data-i18n="Page Blank">{{trans('admin.features')}}</span></a>
+                    </li>
+                    <li {!! str_contains(route('answerIndex',app()->getLocale()),request()->path())?'class="active"':'' !!}><a {!! str_contains(route('answerIndex',app()->getLocale()),request()->path())?'class="active"':'' !!} href="{{route('answerIndex',app()->getLocale())}}"><i class="material-icons">question_answer</i><span data-i18n="Page Blank">{{trans('admin.answers')}}</span></a>
+                    </li>
+                    <li {!! str_contains(route('saleIndex',app()->getLocale()),request()->path())?'class="active"':'' !!}><a {!! str_contains(route('saleIndex',app()->getLocale()),request()->path())?'class="active"':'' !!} href="{{route('saleIndex',app()->getLocale())}}"><i class="material-icons">money</i><span data-i18n="Page Blank">{{trans('admin.sales')}}</span></a>
+                    </li>
+                </ul>
+            </div>
         </li>
 
-        <li class="bold"><a
-                class="waves-effect waves-cyan {{str_contains(route('categoryIndex',app()->getLocale()),request()->path())?"active":""}}"
-             href="{{route('categoryIndex',app()->getLocale())}}"><i class="material-icons dp48">format_list_bulleted</i><span
-                class="menu-title" data-i18n="Mail">{{trans('admin.categories')}}</span></a>
+
+
+        <li class="{{str_contains(route('userIndex',app()->getLocale()),request()->path()) || str_contains(route('subscriberIndex',app()->getLocale()),request()->path()) ?'active':''}} bold"><a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">person</i><span class="menu-title" data-i18n="Pages">{{trans('admin.customers')}}</span></a>
+            <div class="collapsible-body">
+                <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                    <li {!! str_contains(route('userIndex',app()->getLocale()),request()->path())?'class="active"':'' !!}><a {!! str_contains(route('userIndex',app()->getLocale()),request()->path())?'class="active"':'' !!} href="{{route('userIndex',app()->getLocale())}}"><i class="material-icons">face</i><span data-i18n="Page Blank">{{trans('admin.users')}}</span></a>
+                    </li>
+                    <li {!! str_contains(route('subscriberIndex',app()->getLocale()),request()->path())?'class="active"':'' !!}><a {!! str_contains(route('subscriberIndex',app()->getLocale()),request()->path())?'class="active"':'' !!} href="{{route('subscriberIndex',app()->getLocale())}}"><i class="material-icons">mail</i><span data-i18n="Page Blank">{{trans('admin.subscribers')}}</span></a>
+                    </li>
+                </ul>
+            </div>
         </li>
 
-        <li class="bold"><a class="waves-effect waves-cyan        {{str_contains(route('productIndex',app()->getLocale()),request()->path())?"active":""}}"
-                      href="{{route('productIndex',app()->getLocale())}}"><i
-                    class="material-icons">import_contacts</i><span class="menu-title" data-i18n="Mail">{{trans('admin.products')}}</span></a>
-        </li>
-        <li class="bold"><a
-                class="waves-effect waves-cyan {{str_contains(route('featureIndex',app()->getLocale()),request()->path())?"active":""}}"
-                href="{{route('featureIndex',app()->getLocale())}}"><i class="material-icons dp48">star_border</i><span>{{trans('admin.features')}}</span></a>
-
-        <li class="bold"><a
-                class="waves-effect waves-cyan {{str_contains(route('answerIndex',app()->getLocale()),request()->path())?"active":""}}"
-                href="{{route('answerIndex',app()->getLocale())}}"><i class="material-icons dp48">question_answer</i><span>{{trans('admin.answers')}}</span></a></li>
-
-        <li class="bold"><a
-                class="waves-effect waves-cyan {{str_contains(route('settingIndex',app()->getLocale()),request()->path())?"active":""}}"
-                href="{{route('settingIndex',app()->getLocale())}}"><i class="material-icons dp48">settings</i><span>{{trans('admin.settings')}}</span></a>
+        <li class="{{str_contains(route('pageIndex',app()->getLocale()),request()->path()) || str_contains(route('sliderIndex',app()->getLocale()),request()->path()) || str_contains(route('settingIndex',app()->getLocale()),request()->path()) ?'active':''}} bold"><a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">settings</i><span class="menu-title" data-i18n="Pages">{{trans('admin.web_settings')}}</span></a>
+            <div class="collapsible-body">
+                <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                    <li {!! str_contains(route('pageIndex',app()->getLocale()),request()->path())?'class="active"':'' !!}><a {!! str_contains(route('pageIndex',app()->getLocale()),request()->path())?'class="active"':'' !!} href="{{route('pageIndex',app()->getLocale())}}"><i class="material-icons">dashboard</i><span data-i18n="Page Blank">{{trans('admin.pages')}}</span></a>
+                    </li>
+                    <li {!! str_contains(route('sliderIndex',app()->getLocale()),request()->path())?'class="active"':'' !!}><a {!! str_contains(route('sliderIndex',app()->getLocale()),request()->path())?'class="active"':'' !!} href="{{route('sliderIndex',app()->getLocale())}}"><i class="material-icons">slideshow</i><span data-i18n="Page Blank">{{trans('admin.sliders')}}</span></a>
+                    </li>
+                    <li {!! str_contains(route('settingIndex',app()->getLocale()),request()->path())?'class="active"':'' !!}><a {!! str_contains(route('settingIndex',app()->getLocale()),request()->path())?'class="active"':'' !!} href="{{route('settingIndex',app()->getLocale())}}"><i class="material-icons">settings</i><span data-i18n="Page Blank">{{trans('admin.settings')}}</span></a>
+                    </li>
+                </ul>
+            </div>
         </li>
 
-        <li class="bold"><a
-                class="waves-effect waves-cyan {{str_contains(route('pageIndex',app()->getLocale()),request()->path())?"active":""}}"
-                href="{{route('pageIndex',app()->getLocale())}}"><i class="material-icons dp48">dashboard</i><span>{{trans('admin.pages')}}</span></a>
+
+
+
+        <li class="{{str_contains(route('hTagIndex',app()->getLocale()),request()->path()) ?'active':''}} bold"><a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">filter_tilt_shift</i><span class="menu-title" data-i18n="Pages">{{trans('admin.seo')}}</span></a>
+            <div class="collapsible-body">
+                <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                    <li {!! str_contains(route('hTagIndex',app()->getLocale()),request()->path())?'class="active"':'' !!}><a {!! str_contains(route('hTagIndex',app()->getLocale()),request()->path())?'class="active"':'' !!} href="{{route('hTagIndex',app()->getLocale())}}"><i class="material-icons">check</i><span data-i18n="Page Blank">{{trans('admin.h_tags')}}</span></a>
+                    </li>
+                </ul>
+            </div>
         </li>
 
-        <li class="bold"><a
-                class="waves-effect waves-cyan {{str_contains(route('saleIndex',app()->getLocale()),request()->path())?"active":""}}"
-                href="{{route('saleIndex',app()->getLocale())}}"><i class="material-icons dp48">dashboard</i><span>{{trans('admin.sales')}}</span></a>
-        </li>
 
-        <li class="bold"><a
-                class="waves-effect waves-cyan {{str_contains(route('sliderIndex',app()->getLocale()),request()->path())?"active":""}}"
-                href="{{route('sliderIndex',app()->getLocale())}}"><i class="material-icons dp48">slideshow</i><span>{{trans('admin.sliders')}}</span></a>
-        </li>
 
-        <li class="bold"><a
-                class="waves-effect waves-cyan {{str_contains(route('userIndex',app()->getLocale()),request()->path())?"active":""}}"
-                href="{{route('userIndex',app()->getLocale())}}"><i class="material-icons dp48">person</i><span>{{trans('admin.users')}}</span></a>
-        </li>
         <li class="bold"><a
                 class="waves-effect waves-cyan {{str_contains(route('orderIndex',app()->getLocale()),request()->path())?"active":""}}"
                 href="{{route('orderIndex',app()->getLocale())}}"><i class="material-icons dp48">add_shopping_cart</i><span>{{trans('admin.orders')}}</span></a>
         </li>
-        <li class="bold"><a
-                class="waves-effect waves-cyan {{str_contains(route('subscriberIndex',app()->getLocale()),request()->path())?"active":""}}"
-                href="{{route('subscriberIndex',app()->getLocale())}}"><i class="material-icons dp48">add_shopping_cart</i><span>{{trans('admin.subscribers')}}</span></a>
-        </li>
+
         <li class="bold"><a
                 class="waves-effect waves-cyan {{str_contains(route('blogIndex',app()->getLocale()),request()->path())?"active":""}}"
-                href="{{route('blogIndex',app()->getLocale())}}"><i class="material-icons dp48">blog</i><span>{{trans('admin.blog')}}</span></a>
+                href="{{route('blogIndex',app()->getLocale())}}"><i class="material-icons dp48">chrome_reader_mode</i><span>{{trans('admin.blog')}}</span></a>
         </li>
-        <li class="bold"><a
-                class="waves-effect waves-cyan {{str_contains(route('hTagIndex',app()->getLocale()),request()->path())?"active":""}}"
-                href="{{route('hTagIndex',app()->getLocale())}}"><i class="material-icons dp48">blog</i><span>{{trans('admin.h_tags')}}</span></a>
-        </li>
+
     </ul>
     <div class="navigation-background"></div>
     <a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only"
