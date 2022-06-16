@@ -11,7 +11,7 @@
     <section class="blogs_page single_blog wrapper">
         <div style="background-image: url('{{asset($blog->firstImage ? ('storage/blog/' . $blog->firstImage->fileable_id .'/'. $blog->firstImage->name) : null)}}');" class="showcase flex center">
             <div class="showcase_innerbox flex center">
-                <div class="bold">{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->title : ''}}</div>
+                <{{isset($htags['blog']->slider) ? $htags['blog']->details : 'div'}} class="bold">{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->title : ''}}</{{isset($htags['blog']->slider) ? $htags['blog']->details : 'div'}}>
                 <p>{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->title_2 : ''}}</p>
             </div>
         </div>

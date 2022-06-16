@@ -28,7 +28,7 @@
                 </div>
                 <div class="flex">
                     <div>
-                        <div class="head">{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->title : ''}}</div>
+                        <{{isset($htags['blog']->slider) ? $htags['blog']->slider : 'div'}} class="head">{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->title : ''}}</{{isset($htags['blog']->slider) ? $htags['blog']->slider : 'div'}}>
                         <div class="date shallow">{{$blog->created_at}}</div>
                     </div>
                     <div>
