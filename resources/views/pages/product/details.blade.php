@@ -135,7 +135,7 @@
             @if($productAnswer->feature->type === 'select')
                         <div class="options">
                             <div  class="title select">{{(count($productAnswer->feature->availableLanguage) > 0) ?  $productAnswer->feature->availableLanguage[0]->title : ''}}</div>
-                            <select data-feature="{{$productAnswer->feature->id}}" name="popup-feature[{{$productAnswer->feature->id}}][]" id="details-{{$productAnswer->id}}" >
+                            <select data-feature="{{$productAnswer->feature->id}}" name="popup-feature[{{$productAnswer->feature->id}}][]" id="details-{{$productAnswer->feature->id}}" >
                                         <option value=""></option>
                                 @foreach($productAnswer->feature->answer as $answer)
                                     @if($answer->status && (in_array($answer->id,$productAnswers)))
