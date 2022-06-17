@@ -131,11 +131,11 @@
                             </a>
                             <div class="detail flex">
                                 <div>
-                                    <div
+                                    <{{isset($htags['product']->slider_2) ? $htags['product']->slider_2 : 'div'}}
                                         class="title"><span style="overflow-wrap: break-word">
                                     {{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}
                                     </span>
-                                    </div>
+                                    </{{isset($htags['product']->slider_2) ? $htags['product']->slider_2 : 'div'}}>
                                     <div
                                         class="sub roboto">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->short_description:""}}</div>
                                 </div>
@@ -247,8 +247,8 @@
                     </a>
                     <div class="detail flex">
                         <div>
-                            <div
-                                class="title">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}</div>
+                            <{{isset($htags['product']->slider_3) ? $htags['product']->slider_3 : 'div'}}
+                                class="title">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->title:""}}</{{isset($htags['product']->slider_3) ? $htags['product']->slider_3 : 'div'}}>
                             <div
                                 class="sub roboto">{{count($product->availableLanguage)>0?$product->availableLanguage[0]->short_description:""}}</div>
                         </div>

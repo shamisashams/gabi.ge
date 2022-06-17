@@ -37,7 +37,7 @@
                                                                     <option {{isset($setting->value->details) && $setting->value->details == $htag ? 'selected':''}}>{{$htag}}</option>
                                                                 @endforeach
                                                             </select>
-                                                            <label for="username"
+                                                            <label for="username1"
                                                                    class="active">{{trans('admin.details_value')}}</label>
 
                                                         </div>
@@ -54,8 +54,42 @@
                                                                     <option {{isset($setting->value->slider) && $setting->value->slider == $htag ? 'selected':''}}>{{$htag}}</option>
                                                                 @endforeach
                                                             </select>
-                                                            <label for="username"
+                                                            <label for="username8"
                                                                    class="active">{{trans('admin.slider_value')}}</label>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col s12 m6">
+                                                    <div class="row">
+                                                        <div class="col s12 input-field">
+                                                            <select name="value[slider_2]">
+                                                                <option value=""></option>
+                                                                @foreach($htags as $htag)
+                                                                    <option {{isset($setting->value->slider_2) && $setting->value->slider_2 == $htag ? 'selected':''}}>{{$htag}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <label for="ht"
+                                                                   class="active">{{trans('admin.slider2_value')}}</label>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col s12 m6">
+                                                    <div class="row">
+                                                        <div class="col s12 input-field">
+                                                            <select name="value[slider_3]">
+                                                                <option value=""></option>
+                                                                @foreach($htags as $htag)
+                                                                    <option {{isset($setting->value->slider_3) && $setting->value->slider_3 == $htag ? 'selected':''}}>{{$htag}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <label for="username4"
+                                                                   class="active">{{trans('admin.slider3_value')}}</label>
 
                                                         </div>
                                                     </div>
