@@ -270,7 +270,7 @@ menuBtn.addEventListener("click", () => {
     document.querySelector(".header_content").style.top = "0";
 });
 closeMenu.addEventListener("click", () => {
-    document.querySelector(".header_content").style.top = "-100%";
+    document.querySelector(".header_content").style.top = "-150%";
 });
 $(document).ready(function () {
     getCartCount();
@@ -293,19 +293,16 @@ function addToCart(el, $id) {
 
         let sel_pass = true;
 
-
-
         selects.forEach((item) => {
             if (item.getAttribute("data-feature")) {
                 object[item.getAttribute("data-feature")] = item.value;
             }
-            if($(item).val() === ''){
+            if ($(item).val() === "") {
                 sel_pass = false;
             }
-
         });
 
-        if ((allOptions.length === options.length) && sel_pass) {
+        if (allOptions.length === options.length && sel_pass) {
             addToCartAjax($id, object, quantity);
         }
     }
@@ -329,20 +326,16 @@ function addToCartProductDetails(el, $id) {
 
         let sel_pass = true;
 
-
-
         selects.forEach((item) => {
             if (item.getAttribute("data-feature")) {
                 object[item.getAttribute("data-feature")] = item.value;
             }
-            if($(item).val() === ''){
+            if ($(item).val() === "") {
                 sel_pass = false;
             }
-
         });
 
-
-        if ((allOptions.length === options.length) && sel_pass) {
+        if (allOptions.length === options.length && sel_pass) {
             addToCartAjax($id, object, quantity);
             document.querySelector(".product_added").classList.add("show");
             setTimeout(() => {
@@ -429,7 +422,7 @@ function getCartCount() {
                 });
                 let checkout = `
                                     <div class="checkout" id="checkout-total">
-                        <div class="total">${__('client.total')}</div>
+                        <div class="total">${__("client.total")}</div>
                         <div class="price">₾ ${
                             Math.round(data.total * 100) / 100
                         }</div>
@@ -440,7 +433,7 @@ function getCartCount() {
                         </a>//-->
                         <a href="/${locale}/cart">
                             <button class="go">
-                                <div>${__('client.checkout')}</div>
+                                <div>${__("client.checkout")}</div>
                                 <img src="/img/icons/header/right.png" alt=""/>
                             </button>
                         </a>
@@ -653,22 +646,17 @@ function checkSelection_alert() {
         });
 
         selects.forEach((item) => {
-            if($(item).val() !== ''){
+            if ($(item).val() !== "") {
                 $(item)
                     .parents(".options")
                     .find(".select")
                     .css("color", "black");
             } else {
-                $(item)
-                    .parents(".options")
-                    .find(".select")
-                    .css("color", "red");
+                $(item).parents(".options").find(".select").css("color", "red");
             }
             item.onchange = function () {
-
-
-                    console.log($(item).val())
-                if($(item).val() !== ''){
+                console.log($(item).val());
+                if ($(item).val() !== "") {
                     $(item)
                         .parents(".options")
                         .find(".select")
@@ -679,8 +667,6 @@ function checkSelection_alert() {
                         .find(".select")
                         .css("color", "red");
                 }
-
-
             };
         });
         if (
@@ -706,9 +692,6 @@ function checkSelection_alert() {
 
             return false;
         }
-
-
-
     }
 }
 
@@ -739,22 +722,17 @@ function checkSelection_alert_p() {
         });
 
         selects.forEach((item) => {
-            if($(item).val() !== ''){
+            if ($(item).val() !== "") {
                 $(item)
                     .parents(".options")
                     .find(".select")
                     .css("color", "black");
             } else {
-                $(item)
-                    .parents(".options")
-                    .find(".select")
-                    .css("color", "red");
+                $(item).parents(".options").find(".select").css("color", "red");
             }
             item.onchange = function () {
-
-
-                console.log($(item).val())
-                if($(item).val() !== ''){
+                console.log($(item).val());
+                if ($(item).val() !== "") {
                     $(item)
                         .parents(".options")
                         .find(".select")
@@ -765,8 +743,6 @@ function checkSelection_alert_p() {
                         .find(".select")
                         .css("color", "red");
                 }
-
-
             };
         });
 
@@ -871,7 +847,7 @@ function addToModal(product) {
                 }
                 productAnswer.feature.answer.forEach((answer) => {
                     if (answer.status && productAnswers.includes(answer.id)) {
-                        if (productAnswer.feature.type === "select"){
+                        if (productAnswer.feature.type === "select") {
                             sel_opt = sel_opt.concat(`
                             <option value="${answer.id}">${
                                 answer.available_language.length > 0
@@ -883,41 +859,38 @@ function addToModal(product) {
                             options = options.concat(`
                             <div class="box">
                                 <input type="radio" name="feature[${
-                                productAnswer.feature.id
-                            }][]"
+                                    productAnswer.feature.id
+                                }][]"
                                        data-feature="${
-                                productAnswer.feature.id
-                            }" id="${answer.id}"
+                                           productAnswer.feature.id
+                                       }" id="${answer.id}"
                                            value="${answer.id}"
                                  />
                                 <label for="${answer.id}" class="box">
                                 ${
-                                answer.available_language.length > 0
-                                    ? answer.available_language[0].title
-                                    : ""
-                            }
+                                    answer.available_language.length > 0
+                                        ? answer.available_language[0].title
+                                        : ""
+                                }
                               </label>
                             </div>
                          `);
                         }
-
                     }
                 });
 
-                if (productAnswer.feature.type === "select"){
+                if (productAnswer.feature.type === "select") {
                     features = features.concat(`
                    <div class="options">
                         <div class="title select">${
-                        productAnswer.feature.available_language.length > 0
-                            ? productAnswer.feature.available_language[0]
-                                .title
-                            : ""
-                    }</div>
+                            productAnswer.feature.available_language.length > 0
+                                ? productAnswer.feature.available_language[0]
+                                      .title
+                                : ""
+                        }</div>
                         <select name="feature[${
-                        productAnswer.feature.id
-                    }][]" data-feature="${
-                        productAnswer.feature.id
-                    }">
+                            productAnswer.feature.id
+                        }][]" data-feature="${productAnswer.feature.id}">
                         <option value=""></option>
                         ${sel_opt}
                         </select>
@@ -928,19 +901,17 @@ function addToModal(product) {
                     features = features.concat(`
                    <div class="options">
                         <div class="title radio">${
-                        productAnswer.feature.available_language.length > 0
-                            ? productAnswer.feature.available_language[0]
-                                .title
-                            : ""
-                    }</div>
+                            productAnswer.feature.available_language.length > 0
+                                ? productAnswer.feature.available_language[0]
+                                      .title
+                                : ""
+                        }</div>
                         <div class="box_grid">
                         ${options}
                         </div>
                     </div>
     `);
                 }
-
-
             }
         }
 
@@ -1000,7 +971,7 @@ function addToModal(product) {
                 <a href="/${locale}/${
             product.category.available_language[0].slug
         }/${product.available_language[0].slug}">
-                    <button class="details">${__('client.details')}</button>
+                    <button class="details">${__("client.details")}</button>
                 </a>
 
                     <button id="add_to_cart" ${
@@ -1009,14 +980,14 @@ function addToModal(product) {
             product.id
         })" class="add_to_cart flex center popup_add_to_cart">
                         <img src="/img/icons/details/cart.png" alt="" />
-                        <div>${__('client.add_to_cart')}</div>
+                        <div>${__("client.add_to_cart")}</div>
                     </button>
             </div>
 
             <div class="success flex center popup_success">
 
                 <img src="/img/icons/popup/success.png" alt="">
-                <div>${__('client.cart_add_success')}</div>
+                <div>${__("client.cart_add_success")}</div>
 
 
             </div>
