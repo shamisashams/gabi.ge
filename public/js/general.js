@@ -270,7 +270,7 @@ menuBtn.addEventListener("click", () => {
     document.querySelector(".header_content").style.top = "0";
 });
 closeMenu.addEventListener("click", () => {
-    document.querySelector(".header_content").style.top = "-150%";
+    document.querySelector(".header_content").style.top = "-220%";
 });
 $(document).ready(function () {
     getCartCount();
