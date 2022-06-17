@@ -3186,7 +3186,8 @@ img {
     .header .menu_btn {
         display: inline-block;
         text-align: right;
-
+        font-size: 18px;
+        color: #000;
         position: relative;
     }
     .header .menu_btn .span:nth-child(2) {
