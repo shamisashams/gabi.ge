@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bb2020c517a6ceae2edccf8f342c4bc5",
+    "content-hash": "9db6422b2fcd0b5e04ac2c2745c85d14",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5593,6 +5593,61 @@
             "time": "2020-07-13T06:12:54+00:00"
         },
         {
+            "name": "torann/json-ld",
+            "version": "0.0.19",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Torann/json-ld.git",
+                "reference": "45738178c8eeea28a30925826537e87c3020de5a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Torann/json-ld/zipball/45738178c8eeea28a30925826537e87c3020de5a",
+                "reference": "45738178c8eeea28a30925826537e87c3020de5a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JsonLd\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Stainback",
+                    "email": "torann@gmail.com"
+                }
+            ],
+            "description": "Extremely simple JSON-LD markup generator.",
+            "keywords": [
+                "JSON-LD",
+                "generator",
+                "schema",
+                "structured-data"
+            ],
+            "support": {
+                "issues": "https://github.com/Torann/json-ld/issues",
+                "source": "https://github.com/Torann/json-ld/tree/0.0.19"
+            },
+            "time": "2020-03-10T17:25:19+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.3.0",
             "source": {
@@ -5803,6 +5858,66 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.10.0"
             },
             "time": "2021-03-09T10:59:23+00:00"
+        },
+        {
+            "name": "webnuvola/laravel-json-ld",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Webnuvola/laravel-json-ld.git",
+                "reference": "de12e385e6baf93a9e12bef9bc1337abd5e9013e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Webnuvola/laravel-json-ld/zipball/de12e385e6baf93a9e12bef9bc1337abd5e9013e",
+                "reference": "de12e385e6baf93a9e12bef9bc1337abd5e9013e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^8.0",
+                "php": "^7.4|^8.0",
+                "torann/json-ld": "~0.0.19"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Webnuvola\\Laravel\\JsonLd\\JsonLdServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Webnuvola\\Laravel\\JsonLd\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabio Cagliero",
+                    "email": "caglierofabio@gmail.com"
+                }
+            ],
+            "description": "Laravel wrapper for torann/json-ld",
+            "keywords": [
+                "JSON-LD",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/Webnuvola/laravel-json-ld/issues",
+                "source": "https://github.com/Webnuvola/laravel-json-ld/tree/v1.3.0"
+            },
+            "time": "2021-02-24T22:35:10+00:00"
         }
     ],
     "packages-dev": [

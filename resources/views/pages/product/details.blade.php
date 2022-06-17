@@ -6,6 +6,13 @@
     <title>{{count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_title:""}}</title>
     <meta name="description" content="{{count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_description:""}}">
     <meta name="keywords" content="{{count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_keyword:""}}">
+    {!! jsonld('product',[
+            '@context'    => 'https://schema.org/',
+            '@type'       => 'Product',
+            'name'        => (count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->title : '',
+            'description' => (count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->description : '',
+            'url'         => route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug:null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null]),
+        ])  !!}
 @endsection
 
 
