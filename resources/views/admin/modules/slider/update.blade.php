@@ -15,10 +15,34 @@
                                               action="{{route('sliderUpdate',[app()->getLocale(),$slider->id])}}" method="POST"
                                               enctype="multipart/form-data">
                                             @csrf
+
+                                            <?php
+                                            $htags = [
+                                                'h1',
+                                                'h2',
+                                                'h3',
+                                                'h4',
+                                                'h5',
+                                                'h6'
+                                            ];
+                                            ?>
+
                                             {{method_field('PUT')}}
                                             <div class="row">
                                                 <div class="col s12 m6">
                                                     <div class="row">
+
+                                                        <div class="col s12 input-field">
+                                                            <select name="h_tag[home]">
+                                                                @foreach($htags as $htag)
+                                                                    <option {{$slider->h_tag && $slider->h_tag->home == $htag ? 'selected':''}}>{{$htag}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <label
+                                                                class="active">{{trans('admin.title_htag_home')}}</label>
+
+                                                        </div>
+
                                                         <div class="col s12 input-field">
                                                             <input id="abbreviation" name="title" type="text"
                                                                    class="validate {{ $errors->has('title') ? 'invalid' : 'valid' }}"

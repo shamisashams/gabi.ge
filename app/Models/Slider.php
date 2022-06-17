@@ -19,7 +19,8 @@ class Slider extends Model
         'position',
         'status',
         'redirect_url',
-        'type'
+        'type',
+        'h_tag'
     ];
 
 
@@ -70,5 +71,19 @@ class Slider extends Model
                 'scopeMethod' => 'status'
             ],
         ];
+    }
+
+    public function setHTagAttribute($value)
+    {
+
+
+        $this->attributes['h_tag'] = json_encode($value);
+    }
+
+    public function getHTagAttribute($value)
+    {
+
+
+        return json_decode($value);
     }
 }

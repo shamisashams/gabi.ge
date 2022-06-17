@@ -17,10 +17,11 @@
                     @else
                         <img src="noimage.png"/>
                     @endif
+
                     <div class="overlay">
                         <div class="hero_box">
-                            <{{isset($htags['slider']->details) ? $htags['slider']->details : 'div'}}
-                                class="new">{{count($slider->availableLanguage)>0?$slider->availableLanguage[0]->title:""}}</{{isset($htags['slider']->details) ? $htags['slider']->details : 'div'}}>
+                            <{{isset($slider->h_tag->home) ? $slider->h_tag->home : 'div'}}
+                                class="new">{{count($slider->availableLanguage)>0?$slider->availableLanguage[0]->title:""}}</{{isset($slider->h_tag->home) ? $slider->h_tag->home : 'div'}}>
                             <div class="title">
                             <span>
                             {!! count($slider->availableLanguage)>0?$slider->availableLanguage[0]->description:"" !!}

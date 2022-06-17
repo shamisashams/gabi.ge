@@ -47,7 +47,8 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
                 'status' => $request['status'],
                 'position' => $request['position'],
                 'redirect_url' => $request['redirect_url'],
-                'type' => $request['type']
+                'type' => $request['type'],
+                'h_tag' => $request['h_tag'],
             ]);
 
             $this->model->save();
@@ -111,7 +112,8 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
                 'position' => $request['position'],
                 'status' => $request['status'],
                 'redirect_url' => $request['redirect_url'],
-                'type' => $request['type']
+                'type' => $request['type'],
+                'h_tag' => $request['h_tag'],
             ]);
 
             $localizationID = Language::getIdByName($locale);
