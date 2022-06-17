@@ -171,7 +171,7 @@
                 </div>
                 <div class="flex">
                     <div>
-                        <div class="head">{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->title : ''}}</div>
+                        <{{isset($htags['blog']->slider) ? $htags['blog']->slider : 'div'}} class="head">{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->title : ''}}</{{isset($htags['blog']->slider) ? $htags['blog']->slider : 'div'}}>
                         <div class="date shallow">{{$blog->created_at}}</div>
                     </div>
                     <div>
@@ -191,7 +191,7 @@
             </div>
             <div class="btn">
 
-                <a href="{{route('viewPage',[app()->getLocale(),isset($page_slugs['blogs']['slug']) ? $page_slugs['blogs']['slug'] : null])}}" class="view_all">@lang('client.view_all')</a>
+                <a href="{{route('proxy',[app()->getLocale(),isset($page_slugs['blogs']['slug']) ? $page_slugs['blogs']['slug'] : null])}}" class="view_all">@lang('client.view_all')</a>
             </div>
         </div>
 
