@@ -231,8 +231,6 @@
     </div>
 
     <button class="menu_btn">
-        <div class="span"></div>
-        <div class="span"></div>
-        <div class="span"></div>
+    {{__('client.menu_responsive_text')}}
     </button>
 </header>
