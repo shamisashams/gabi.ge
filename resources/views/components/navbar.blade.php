@@ -231,6 +231,6 @@
     </div>
 
     <button class="menu_btn">
-    ('client.menu')}}
+    {{__('client.menu_responsive_text')}}
     </button>
 </header>
