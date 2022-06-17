@@ -10,7 +10,7 @@
     <section class="path">
         <div class="path_content wrapper">
             <div class="path_took"><a href="{{route('welcome')}}">{{__('client.home')}}</a></div>
-            <div class="current">@lang('client.helps')</div>
+            <{{isset($page->h_tag->home) ? $page->h_tag->home : 'div'}} class="current">@lang('client.helps')</{{isset($page->h_tag->home) ? $page->h_tag->home : 'div'}}>
         </div>
     </section>
 

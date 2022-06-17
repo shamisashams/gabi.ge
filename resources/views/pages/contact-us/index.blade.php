@@ -17,7 +17,7 @@
 
     <section class="contact_section wrapper flex">
         <div class="contact_info">
-            <div class="title">{{count($page->availableLanguage)>0?$page->availableLanguage[0]->title:""}}</div>
+            <{{isset($page->h_tag->home) ? $page->h_tag->home : 'div'}} class="title">{{count($page->availableLanguage)>0?$page->availableLanguage[0]->title:""}}</{{isset($page->h_tag->home) ? $page->h_tag->home : 'div'}}>
             <p>
                 {{count($page->availableLanguage)>0?$page->availableLanguage[0]->description:""}}
             </p>

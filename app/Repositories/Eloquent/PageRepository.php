@@ -30,7 +30,8 @@ class PageRepository extends BaseRepository implements PageRepositoryInterface
         try {
             DB::beginTransaction();
             $data->update([
-                'status' => $request['status']
+                'status' => $request['status'],
+                'h_tag' => $request['h_tag'],
             ]);
 
             $localizationID = Language::getIdByName($locale);

@@ -11,7 +11,7 @@
         <div class="path_content wrapper">
             <div class="path_took"><a href="{{route('welcome')}}">{{__('client.home')}}</a>
             </div>
-            <div class="current">{{__('client.about_us')}}</div>
+            <{{isset($page->h_tag->home) ? $page->h_tag->home : 'div'}} class="current">{{__('client.about_us')}}</{{isset($page->h_tag->home) ? $page->h_tag->home : 'div'}}>
         </div>
     </section>
 

@@ -19,9 +19,32 @@
                                               method="POST" enctype="multipart/form-data">
                                             {{ method_field('PUT') }}
                                             @csrf
+
+                                            <?php
+                                            $htags = [
+                                                'h1',
+                                                'h2',
+                                                'h3',
+                                                'h4',
+                                                'h5',
+                                                'h6'
+                                            ];
+                                            ?>
                                             <div class="row">
                                                 <div class="col s12 m6">
                                                     <div class="row">
+                                                        <div class="col s12 input-field">
+                                                            <select name="h_tag[home]">
+                                                                <option value=""></option>
+                                                                @foreach($htags as $htag)
+                                                                    <option {{$page->h_tag && $page->h_tag->home == $htag ? 'selected':''}}>{{$htag}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <label
+                                                                class="active">{{trans('admin.title_htag')}}</label>
+
+                                                        </div>
+
                                                         <div class="col s12 input-field">
                                                             <input id="title" name="title" type="text"
                                                                    class="validate {{ $errors->has('title') ? 'invalid' : 'valid' }}"

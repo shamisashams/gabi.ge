@@ -11,7 +11,7 @@
     <section class="blogs_page wrapper">
         <div class="showcase flex center">
             <div class="showcase_innerbox flex center">
-                <div class="bold">@lang('client.page_blog_header')</div>
+                <{{isset($page->h_tag->home) ? $page->h_tag->home : 'div'}} class="bold">@lang('client.page_blog_header')</{{isset($page->h_tag->home) ? $page->h_tag->home : 'div'}}>
                 <p>@lang('client.page_blog_subtitle')</p>
             </div>
         </div>

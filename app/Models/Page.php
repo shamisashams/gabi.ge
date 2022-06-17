@@ -22,7 +22,8 @@ class Page extends Model
     use HasFactory, Notifiable, ScopePageFilter, HasRolesAndPermissions, SoftDeletes;
 
     protected $fillable = [
-        'status'
+        'status',
+        'h_tag'
     ];
 
 
@@ -61,5 +62,19 @@ class Page extends Model
                 'scopeMethod' => 'status'
             ],
         ];
+    }
+
+    public function setHTagAttribute($value)
+    {
+
+        //dd($value);
+        $this->attributes['h_tag'] = json_encode($value);
+    }
+
+    public function getHTagAttribute($value)
+    {
+
+
+        return json_decode($value);
     }
 }
