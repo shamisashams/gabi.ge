@@ -15,7 +15,7 @@
             <div class="path_took">
                 <a href="{{route('welcome')}}">@lang('client.home')</a> / <a href="{{route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:""])}}">{{count($category->availableLanguage)>0?$category->availableLanguage[0]->title:""}}</a>
             </div>
-            <{{isset($htags['product']->details) ? $htags['product']->details : 'div'}} class="current">{{(count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->title : ''}}</{{isset($htags['product']->details) ? $htags['product']->details : 'div'}}>
+            <div class="current">{{(count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->title : ''}}</div>
         </div>
     </section>
 
