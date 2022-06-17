@@ -13,6 +13,8 @@
             'description' => (count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->description : '',
             'url'         => route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug:null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null]),
         ])  !!}
+
+    <link rel="canonical" href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug:null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null])}}" />
 @endsection
 
 
