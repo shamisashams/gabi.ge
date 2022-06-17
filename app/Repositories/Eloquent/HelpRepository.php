@@ -49,6 +49,7 @@ class HelpRepository extends BaseRepository
 
             $help = $this->model->create([
                 'type' => $request['type'],
+                'h_tag' => $request['h_tag'],
             ]);
 
             /// Save with correct language
@@ -83,6 +84,7 @@ class HelpRepository extends BaseRepository
 
             $help->update([
                 'type' => $request['type'],
+                'h_tag' => $request['h_tag'],
             ]);
 
             $categoryId = $help->id;

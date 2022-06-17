@@ -47,7 +47,7 @@ class FaqRepository extends BaseRepository
         try {
             DB::beginTransaction();
 
-            $help = $this->model->create([]);
+            $help = $this->model->create(['h_tag' => $request['h_tag']]);
 
             /// Save with correct language
             $languageId = Language::getIdByName($lang);
@@ -78,10 +78,11 @@ class FaqRepository extends BaseRepository
 
             $help = $this->find($id);
 
+            //dd($request->all());
 
-            /*$help->update([
-                'type' => $request['type'],
-            ]);*/
+            $help->update([
+                'h_tag' => $request['h_tag'],
+            ]);
 
             $categoryId = $help->id;
 

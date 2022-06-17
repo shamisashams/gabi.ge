@@ -17,6 +17,7 @@ class Help extends Model
 
     protected $fillable = [
         'type',
+        'h_tag'
     ];
 
     public function language()
@@ -62,5 +63,19 @@ class Help extends Model
                 'scopeMethod' => 'feature'
             ],
         ];
+    }
+
+    public function setHTagAttribute($value)
+    {
+
+
+        $this->attributes['h_tag'] = json_encode($value);
+    }
+
+    public function getHTagAttribute($value)
+    {
+
+
+        return json_decode($value);
     }
 }

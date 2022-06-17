@@ -18,13 +18,13 @@
         <div class="list">
             <div class="help_category clicked">@lang('client.faq_title')</div>
             @foreach($helps as $help)
-            <div class="help_category">{{count($help->availableLanguage)>0?$help->availableLanguage[0]->title:""}}</div>
+            <div class="help_category">{!! isset($help->h_tag->home) ? '<' .$help->h_tag->home . '>' : '' !!}{{count($help->availableLanguage)>0?$help->availableLanguage[0]->title:""}}{!! isset($help->h_tag->home) ? '</' . $help->h_tag->home . '>' : '' !!}</div>
             @endforeach
         </div>
         <div class="help_content clicked">
             @foreach($faqs as $faq)
             <div class="q_and_a {{$loop->iteration == 1 ? 'open':''}}">
-                <div class="q">{{count($faq->availableLanguage)>0?$faq->availableLanguage[0]->question:""}}</div>
+                <div class="q">{!! isset($faq->h_tag->home) ? '<' .$faq->h_tag->home . '>' : '' !!}{{count($faq->availableLanguage)>0?$faq->availableLanguage[0]->question:""}}{!! isset($faq->h_tag->home) ? '</' .$faq->h_tag->home . '>' : '' !!}</div>
                 <div class="a">
                     {!! count($faq->availableLanguage)>0?$faq->availableLanguage[0]->answer:"" !!}
                 </div>

@@ -9,6 +9,30 @@
                         <div class="row">
                             {!! Form::model($help,['url' => $action, 'method' => $method]) !!}
                                 @csrf
+
+                            <?php
+                            $htags = [
+                                'h1',
+                                'h2',
+                                'h3',
+                                'h4',
+                                'h5',
+                                'h6'
+                            ];
+                            ?>
+
+                            <div class="col s12 input-field">
+                                <select name="h_tag[home]">
+                                    <option value=""></option>
+                                    @foreach($htags as $htag)
+                                        <option {{$help->h_tag && $help->h_tag->home == $htag ? 'selected':''}}>{{$htag}}</option>
+                                    @endforeach
+                                </select>
+                                <label
+                                    class="active">{{trans('admin.title_htag')}}</label>
+
+                            </div>
+
                                 <div class="col s12 input-field">
                                     <input type="text" name="title" value="{{(count($help->availableLanguage) > 0) ?  $help->availableLanguage[0]->title : ''}}">
                                     <label

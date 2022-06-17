@@ -16,7 +16,11 @@ class Faq extends Model
 
     protected $guarded = [
         'created_at',
-        'updated_at'
+        'updated_at',
+    ];
+
+    protected $fillable = [
+        'h_tag'
     ];
 
     public function language()
@@ -62,5 +66,19 @@ class Faq extends Model
                 'scopeMethod' => 'feature'
             ],
         ];
+    }
+
+    public function setHTagAttribute($value)
+    {
+
+        //dd($value);
+        $this->attributes['h_tag'] = json_encode($value);
+    }
+
+    public function getHTagAttribute($value)
+    {
+
+
+        return json_decode($value);
     }
 }
