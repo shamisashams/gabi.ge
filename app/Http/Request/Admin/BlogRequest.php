@@ -35,7 +35,7 @@ class BlogRequest extends FormRequest
 
         $rules = [
             'title' => 'required|string|max:255',
-            'title_2' => 'required|string|max:255',
+            'title_2' => 'nullable|string|max:255',
 
             'text' => 'required|string',
             //'sale_price' => 'nullable|numeric',
