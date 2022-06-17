@@ -267,10 +267,12 @@ profileTabName.forEach((el, i) => {
 // mobile menu
 
 menuBtn.addEventListener("click", () => {
-    document.querySelector(".header_content").style.top = "0";
+    // document.querySelector(".header_content").style.top = "0";
+    document.querySelector(".header_content").classList.add("open");
 });
 closeMenu.addEventListener("click", () => {
-    document.querySelector(".header_content").style.top = "-220%";
+    // document.querySelector(".header_content").style.top = "-220%";
+    document.querySelector(".header_content").classList.remove("open");
 });
 $(document).ready(function () {
     getCartCount();
