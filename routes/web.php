@@ -268,6 +268,8 @@ Route::prefix('{locale?}')
                     'facebook_refresh_token' => $facebookUser->refreshToken,
                 ]);
 
+                dd($user);
+
                 Auth::login($user);
 
                 return redirect(route('profile'));
