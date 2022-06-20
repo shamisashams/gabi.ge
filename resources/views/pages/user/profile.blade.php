@@ -20,7 +20,7 @@
                     <span class="bold roboto">{{$user->name}}</span>
                 </div>
                 <div class="icn">
-                    <img src="img/icons/profile/user.png" alt=""/>
+                    <img src="{{$user->facebook_avatar}}" alt=""/>
                 </div>
             </div>
             <div class="row middle">
