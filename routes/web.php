@@ -292,7 +292,7 @@ Route::prefix('{locale?}')
                     'google_id' => $googleUser->id,
                     'google_token' => $googleUser->token,
                     'google_refresh_token' => $googleUser->refreshToken,
-                    'google_avatar' => $googleUser->avatar,
+                    'facebook_avatar' => $googleUser->avatar,
                 ]);
 
                 //dd($user);
