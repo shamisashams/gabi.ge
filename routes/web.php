@@ -15,10 +15,14 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\UserController;
+use App\Models\Language;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 
@@ -269,6 +273,25 @@ Route::prefix('{locale?}')
                     'facebook_avatar' => $facebookUser->avatar,
                 ]);
 
+                $localization = Language::where('abbreviation', app()->getLocale())->first();
+                if (!$localization) {
+                    throw new Exception('Localization not exist.');
+                }
+
+                $user->profile()->create([
+                    'language_id' => $localization->id,
+                    'first_name' => '',
+                    'last_name' => '',
+                    'country' => ''
+                ]);
+
+                $token = Str::random(40);
+                $user->roles()->attach('2');
+                $user->tokens()->create([
+                    'token' => Hash::make($token),
+                    'validate_till' => Carbon::now()->addDays(1)
+                ]);
+
                 //dd($user);
 
                 Auth::login($user);
@@ -293,6 +316,25 @@ Route::prefix('{locale?}')
                     'google_token' => $googleUser->token,
                     'google_refresh_token' => $googleUser->refreshToken,
                     'facebook_avatar' => $googleUser->avatar,
+                ]);
+
+                $localization = Language::where('abbreviation', app()->getLocale())->first();
+                if (!$localization) {
+                    throw new Exception('Localization not exist.');
+                }
+
+                $user->profile()->create([
+                    'language_id' => $localization->id,
+                    'first_name' => '',
+                    'last_name' => '',
+                    'country' => ''
+                ]);
+
+                $token = Str::random(40);
+                $user->roles()->attach('2');
+                $user->tokens()->create([
+                    'token' => Hash::make($token),
+                    'validate_till' => Carbon::now()->addDays(1)
                 ]);
 
                 //dd($user);
