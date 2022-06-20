@@ -33,7 +33,7 @@ return [
     'facebook' => [
         'client_id' => '435281924804350',
         'client_secret' => '36660df29fab684e74352e54de4c83bb',
-        'redirect' => '/auth/facebook/callback',
+        'redirect' => 'https/gabi.ge/ge/auth/facebook/callback',
     ],
     'google' => [
         'client_id' => env('GITHUB_CLIENT_ID'),
