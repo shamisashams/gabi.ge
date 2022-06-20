@@ -17,6 +17,9 @@ class UpdateUsersTableAddFacebook extends Migration
         Schema::table('users', function (Blueprint $table) {
 
             $table->bigInteger('facebook_id')->nullable();
+            $table->string('facebook_token',300)->nullable();
+            $table->string('facebook_refresh_token',300)->nullable();
+            $table->string('facebook_avatar')->nullable();
 
         });
     }
@@ -29,10 +32,13 @@ class UpdateUsersTableAddFacebook extends Migration
     public function down()
     {
         //
-        Schema::table('pages', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
 
-            $table->dropColumn('h_tag');
+            $table->dropColumn('facebook_id');
+            $table->dropColumn('facebook_token');
+            $table->dropColumn('facebook_refresh_token');
+            $table->dropColumn('facebook_avatar');
 
         });
     }

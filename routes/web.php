@@ -257,14 +257,14 @@ Route::prefix('{locale?}')
                 //dd('jdfhgjdhjf urkl');
                 $facebookUser = Socialite::driver('facebook')->stateless()->user();
 
-                dd($facebookUser);
+                //dd($facebookUser);
                 $user = User::updateOrCreate([
                     'facebook_id' => $facebookUser->id,
                 ], [
                     'name' => $facebookUser->name,
                     'email' => $facebookUser->email,
-                    //'facebook_token' => $facebookUser->token,
-                    //'facebook_refresh_token' => $facebookUser->refreshToken,
+                    'facebook_token' => $facebookUser->token,
+                    'facebook_refresh_token' => $facebookUser->refreshToken,
                 ]);
 
                 Auth::login($user);
