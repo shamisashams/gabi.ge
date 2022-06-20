@@ -260,6 +260,7 @@ Route::prefix('{locale?}')
                 //dd($facebookUser);
                 $user = User::updateOrCreate([
                     'facebook_id' => $facebookUser->id,
+                    'email' => $facebookUser->email,
                 ], [
                     'name' => $facebookUser->name,
                     'email' => $facebookUser->email,
