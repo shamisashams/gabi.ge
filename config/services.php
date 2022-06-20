@@ -36,9 +36,9 @@ return [
         'redirect' => 'https://gabi.ge/ge/auth/facebook/callback',
     ],
     'google' => [
-        'client_id' => env('GITHUB_CLIENT_ID'),
-        'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => '/auth/google/callback',
+        'client_id' => '194477847906-5oba7obd2csbm6bn3a6u2jb22usln98o.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'https://gabi.ge/ge/auth/google/callback',
     ],
 
 ];

@@ -281,7 +281,25 @@ Route::prefix('{locale?}')
             })->name('google-redirect');
 
             Route::get('/auth/google/callback',function (){
-                $user = Socialite::driver('google')->user();
+                $googleUser = Socialite::driver('google')->user();
+
+                dd($googleUser);
+                $user = User::updateOrCreate([
+                    //'facebook_id' => $facebookUser->id,
+                    'email' => $googleUser->email,
+                ], [
+                    'name' => $googleUser->name,
+                    'facebook_id' => $googleUser->id,
+                    'facebook_token' => $googleUser->token,
+                    'facebook_refresh_token' => $googleUser->refreshToken,
+                    'facebook_avatar' => $googleUser->avatar,
+                ]);
+
+                //dd($user);
+
+                Auth::login($user);
+
+                return redirect(route('profile'));
             })->name('google-callback');
             //--------------------------------------------------------------------------
 
