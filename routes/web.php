@@ -253,7 +253,20 @@ Route::prefix('{locale?}')
             })->name('fb-redirect');
 
             Route::get('/auth/facebook/callback',function (){
-                $user = Socialite::driver('facebook')->user();
+                $facebookUser = Socialite::driver('facebook')->user();
+
+                $user = User::updateOrCreate([
+                    'facebook_id' => $facebookUser->id,
+                ], [
+                    'name' => $facebookUser->name,
+                    'email' => $facebookUser->email,
+                    'facebook_token' => $facebookUser->token,
+                    'facebook_refresh_token' => $facebookUser->refreshToken,
+                ]);
+
+                Auth::login($user);
+
+                return redirect(route('profile'));
             })->name('fb-callback');
 
             Route::get('/auth/google/redirect', function (){
