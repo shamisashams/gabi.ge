@@ -254,10 +254,10 @@ Route::prefix('{locale?}')
             })->name('fb-redirect');
 
             Route::get('/auth/facebook/callback',function (){
-                //dd('jdfhgjdhjf urkl');
+                dd('jdfhgjdhjf urkl');
                 $facebookUser = Socialite::driver('facebook')->user();
 
-                dd($facebookUser);
+                //dd($facebookUser);
                 $user = User::updateOrCreate([
                     'facebook_id' => $facebookUser->id,
                 ], [
