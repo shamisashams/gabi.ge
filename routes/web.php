@@ -278,19 +278,24 @@ Route::prefix('{locale?}')
                     throw new Exception('Localization not exist.');
                 }
 
-                $user->profile()->create([
-                    'language_id' => $localization->id,
-                    'first_name' => '',
-                    'last_name' => '',
-                    'country' => ''
-                ]);
+                if(!$user->profile){
+                    $user->profile()->create([
+                        'language_id' => $localization->id,
+                        'first_name' => '',
+                        'last_name' => '',
+                        'country' => ''
+                    ]);
 
-                $token = Str::random(40);
-                $user->roles()->attach('2');
-                $user->tokens()->create([
-                    'token' => Hash::make($token),
-                    'validate_till' => Carbon::now()->addDays(1)
-                ]);
+                    $token = Str::random(40);
+                    $user->roles()->attach('2');
+                    $user->tokens()->create([
+                        'token' => Hash::make($token),
+                        'validate_till' => Carbon::now()->addDays(1)
+                    ]);
+                }
+
+
+
 
                 //dd($user);
 
@@ -323,19 +328,23 @@ Route::prefix('{locale?}')
                     throw new Exception('Localization not exist.');
                 }
 
-                $user->profile()->create([
-                    'language_id' => $localization->id,
-                    'first_name' => '',
-                    'last_name' => '',
-                    'country' => ''
-                ]);
+                if(!$user->profile){
+                    $user->profile()->create([
+                        'language_id' => $localization->id,
+                        'first_name' => '',
+                        'last_name' => '',
+                        'country' => ''
+                    ]);
 
-                $token = Str::random(40);
-                $user->roles()->attach('2');
-                $user->tokens()->create([
-                    'token' => Hash::make($token),
-                    'validate_till' => Carbon::now()->addDays(1)
-                ]);
+                    $token = Str::random(40);
+                    $user->roles()->attach('2');
+                    $user->tokens()->create([
+                        'token' => Hash::make($token),
+                        'validate_till' => Carbon::now()->addDays(1)
+                    ]);
+                }
+
+
 
                 //dd($user);
 
