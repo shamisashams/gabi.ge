@@ -255,7 +255,7 @@ Route::prefix('{locale?}')
 
             Route::get('/auth/facebook/callback',function (){
                 //dd('jdfhgjdhjf urkl');
-                $facebookUser = Socialite::driver('facebook')->stateless()->user();
+                $facebookUser = Socialite::driver('facebook')->user();
 
                 //dd($facebookUser);
                 $user = User::updateOrCreate([
