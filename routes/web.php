@@ -250,12 +250,12 @@ Route::prefix('{locale?}')
 
             //Social-------------------------------------------------------
             Route::get('/auth/facebook/redirect', function (){
-                return Socialite::driver('facebook')->redirect();
+                return Socialite::driver('facebook')->stateless()->redirect();
             })->name('fb-redirect');
 
             Route::get('/auth/facebook/callback',function (){
                 //dd('jdfhgjdhjf urkl');
-                $facebookUser = Socialite::driver('facebook')->user();
+                $facebookUser = Socialite::driver('facebook')->stateless()->user();
 
                 //dd($facebookUser);
                 $user = User::updateOrCreate([
