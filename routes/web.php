@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 
 /*
    |--------------------------------------------------------------------------
@@ -255,6 +256,7 @@ Route::prefix('{locale?}')
             Route::get('/auth/facebook/callback',function (){
                 $facebookUser = Socialite::driver('facebook')->user();
 
+                dd($facebookUser);
                 $user = User::updateOrCreate([
                     'facebook_id' => $facebookUser->id,
                 ], [
