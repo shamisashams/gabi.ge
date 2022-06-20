@@ -283,16 +283,16 @@ Route::prefix('{locale?}')
             Route::get('/auth/google/callback',function (){
                 $googleUser = Socialite::driver('google')->user();
 
-                dd($googleUser);
+                //dd($googleUser);
                 $user = User::updateOrCreate([
                     //'facebook_id' => $facebookUser->id,
                     'email' => $googleUser->email,
                 ], [
                     'name' => $googleUser->name,
-                    'facebook_id' => $googleUser->id,
-                    'facebook_token' => $googleUser->token,
-                    'facebook_refresh_token' => $googleUser->refreshToken,
-                    'facebook_avatar' => $googleUser->avatar,
+                    'google_id' => $googleUser->id,
+                    'google_token' => $googleUser->token,
+                    'google_refresh_token' => $googleUser->refreshToken,
+                    'google_avatar' => $googleUser->avatar,
                 ]);
 
                 //dd($user);
