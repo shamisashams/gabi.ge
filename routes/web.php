@@ -271,7 +271,7 @@ Route::prefix('{locale?}')
 
                 //dd($user);
 
-                Auth::loginUsingId($user->id);
+                dd(Auth::login($user));
 
                 return redirect(route('profile'));
             })->name('fb-callback');
