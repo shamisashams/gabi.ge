@@ -260,8 +260,8 @@ Route::prefix('{locale?}')
                 ], [
                     'name' => $facebookUser->name,
                     'email' => $facebookUser->email,
-                    'facebook_token' => $facebookUser->token,
-                    'facebook_refresh_token' => $facebookUser->refreshToken,
+                    //'facebook_token' => $facebookUser->token,
+                    //'facebook_refresh_token' => $facebookUser->refreshToken,
                 ]);
 
                 Auth::login($user);
