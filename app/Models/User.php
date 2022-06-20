@@ -26,7 +26,11 @@ class User extends Authenticatable
         'facebook_id',
         'facebook_token',
         'facebook_refresh_token',
-        'facebook_avatar'
+        'facebook_avatar',
+        'google_id',
+        'google_token',
+        'google_refresh_token',
+        'google_avatar'
     ];
 
     /**
