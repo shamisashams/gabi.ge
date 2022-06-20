@@ -266,9 +266,10 @@ Route::prefix('{locale?}')
                     'facebook_id' => $facebookUser->id,
                     'facebook_token' => $facebookUser->token,
                     'facebook_refresh_token' => $facebookUser->refreshToken,
+                    'facebook_avatar' => $facebookUser->avatar,
                 ]);
 
-                dd($user);
+                //dd($user);
 
                 Auth::login($user);
 
