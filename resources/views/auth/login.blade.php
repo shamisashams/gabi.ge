@@ -97,6 +97,20 @@
                     @endif
 
                     <button class="lisu_btn">{{__('client.register_account')}}</button>
+
+                    <div class="sign_with">
+                        <div class="title">{{__('client.or_sign_in_with')}}</div>
+                        <div class="">
+                            <a href="{{route('google-redirect')}}" class="accs">
+                                <img src="/img/icons/login/1.png" alt="" />
+                                <p>{{__('client.login_with_google')}}</p>
+                            </a>
+                            <a href="{{route('fb-redirect')}}" class="accs">
+                                <img src="/img/icons/login/2.png" alt="" />
+                                <p>{{__('client.login_with_facebook')}}</p>
+                            </a>
+                        </div>
+                    </div>
                 </form>
 {{--                <div class="sign_with">--}}
 {{--                    <div class="title">{{__('client.or_sign_in_with')}}</div>--}}
