@@ -67,9 +67,9 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
                 foreach ($request->file('images') as $key => $file) {
 
                     $image = new ImageResize($file);
-                    $image->resizeToHeight(800);
+                    $image->resizeToHeight(1080);
 
-                    $image->crop(1920, 800, true, ImageResize::CROPCENTER);
+                    $image->crop(1920, 1080, true, ImageResize::CROPCENTER);
                     //$image->save(date('Ymhs') . $file->getClientOriginalName());
                     $img = $image->getImageAsString();
 
@@ -162,9 +162,9 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $key => $file) {
                     $image = new ImageResize($file);
-                    $image->resizeToHeight(800);
+                    $image->resizeToHeight(1080);
 
-                    $image->crop(1920, 800, true, ImageResize::CROPCENTER);
+                    $image->crop(1920, 1080, true, ImageResize::CROPCENTER);
                     //$image->save(date('Ymhs') . $file->getClientOriginalName());
                     $img = $image->getImageAsString();
 

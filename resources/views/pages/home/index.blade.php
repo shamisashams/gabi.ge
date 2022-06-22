@@ -4,6 +4,11 @@
     <meta name="description" content="{{count($page->availableLanguage)>0?$page->availableLanguage[0]->meta_description:""}}">
     <meta name="keywords" content="{{count($page->availableLanguage)>0?$page->availableLanguage[0]->meta_keyword:""}}">
     <link rel="canonical" href="{{route('welcome')}}" />
+    {!! jsonld('organization',[
+            '@context'    => 'https://schema.org/',
+            '@type'       => 'Organization',
+            'url'         => route('welcome'),
+        ])  !!}
 @endsection
 
 
