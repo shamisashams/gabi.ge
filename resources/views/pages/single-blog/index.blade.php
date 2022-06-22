@@ -5,6 +5,24 @@
     <meta name="keywords" content="{{count($blog->availableLanguage)>0?$blog->availableLanguage[0]->meta_keywords:""}}">
     <link rel="canonical" href="{{route('viewBlog',[app()->getLocale(),count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->slug : ''])}}" />
 
+    {!! jsonld('breadcrumb_list',[
+            '@context'    => 'https://schema.org/',
+            '@type'       => 'BreadcrumbList',
+            'itemListElement'         => [
+                [
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => __('client.home'),
+                    'url' => route('welcome')
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => count($blog->availableLanguage)>0?$blog->availableLanguage[0]->title:"",
+                    'url' => route('viewBlog',[app()->getLocale(),count($blog->availableLanguage)>0?$blog->availableLanguage[0]->slug:""])
+                ]
+            ],
+        ])  !!}
 
     @foreach($globalLanguages['data'] as $lang)
         @if($lang['abbreviation'] == app()->getLocale())
