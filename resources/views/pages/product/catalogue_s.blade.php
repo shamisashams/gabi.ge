@@ -12,13 +12,13 @@
                     '@type' => 'ListItem',
                     'position' => 1,
                     'name' => __('client.home'),
-                    'item' => route('welcome')
+                    'url' => route('welcome')
                 ],
                 [
                     '@type' => 'ListItem',
                     'position' => 2,
                     'name' => $title,
-                    'item' => $route
+                    'url' => $route
                 ],
             ],
         ])  !!}

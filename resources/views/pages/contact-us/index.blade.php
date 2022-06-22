@@ -18,13 +18,13 @@
                     '@type' => 'ListItem',
                     'position' => 1,
                     'name' => __('client.home'),
-                    'item' => route('welcome')
+                    'url' => route('welcome')
                 ],
                 [
                     '@type' => 'ListItem',
                     'position' => 2,
                     'name' => __('client.contact_us'),
-                    'item' => route('proxy',[app()->getLocale(),isset($page_slugs['contact-us']['slug']) ? $page_slugs['contact-us']['slug'] : null])
+                    'url' => route('proxy',[app()->getLocale(),isset($page_slugs['contact-us']['slug']) ? $page_slugs['contact-us']['slug'] : null])
                 ],
             ],
         ])  !!}

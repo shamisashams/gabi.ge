@@ -22,20 +22,20 @@
                     '@type' => 'ListItem',
                     'position' => 1,
                     'name' => __('client.home'),
-                    'item' => route('welcome')
+                    'url' => route('welcome')
                 ],
                 [
                     '@type' => 'ListItem',
                     'position' => 2,
                     'name' => count($category->availableLanguage)>0?$category->availableLanguage[0]->title:"",
-                    'item' => route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:""])
+                    'url' => route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:""])
                 ],
                 [
                     '@type' => 'ListItem',
                     'position' => 3,
                     'name' => (count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->title : '',
                     'name' => count($category->availableLanguage)>0?$category->availableLanguage[0]->title:"",
-                    'item' => route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:""])
+                    'url' => route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:""])
 
                 ],
             ],
