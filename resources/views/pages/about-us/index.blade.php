@@ -23,6 +23,24 @@
                 ],
             ],
         ])  !!}
+
+    @foreach($globalLanguages['data'] as $lang)
+        @if($lang['abbreviation'] == app()->getLocale())
+            @continue
+        @endif
+        <?php
+
+
+        $language_id = App\Models\Language::getIdByName($lang['abbreviation']);
+        $cat = App\Models\PageLanguage::query()->where('page_id',$page->id)->where('language_id',$language_id)->first();
+
+        ?>
+
+        @if($cat)
+            <link rel="alternate" hreflang="{{$lang['locale']}}" href="{{route('proxy',[$lang['abbreviation'],$cat->slug])}}" />
+        @endif
+
+    @endforeach
 @endsection
 
 @section('content')
