@@ -1031,6 +1031,7 @@ img {
     height: 100%;
     top: 0;
     left: 0;
+    object-fit: cover;
 }
 
 .category_slide .frame {
@@ -1073,6 +1074,7 @@ img {
     z-index: 20;
     font-weight: bold;
     transition: 0.2s;
+    white-space: nowrap;
 }
 
 .category_slide .category_name:hover {
@@ -3056,9 +3058,18 @@ img {
     margin-bottom: 85px;
 }
 .single_blog .showcase {
-    height: 640px;
     margin-bottom: 35px;
-    background-repeat: no-repeat;
+    text-align: center;
+    height: auto !important;
+}
+.single_blog .showcase img {
+    margin-bottom: 20px;
+}
+.single_blog .showcase_innerbox {
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    backdrop-filter: none;
 }
 .single_blog .showcase_innerbox .bold {
     line-height: 100%;
@@ -3180,9 +3191,6 @@ img {
     .result_container {
         width: 100%;
     }
-    .single_blog .showcase {
-        height: 356px;
-    }
     .header .menu_btn {
         display: inline-block;
         text-align: right;
@@ -3205,15 +3213,16 @@ img {
         margin-right: 0;
         width: 22px;
         transition: 0.2s;
+        margin-bottom: 10px;
     }
-    .header .menu_btn .span:last-child {
+    /* .header .menu_btn .span:last-child {
         background-color: #000;
         height: 2px;
         width: 12px;
         transition: 0.2s;
         margin: auto;
         margin-right: 0;
-    }
+    } */
 
     .header .menu_btn:hover .span:first-child {
         width: 13px;
@@ -3450,7 +3459,6 @@ img {
     .blogs_page .showcase_innerbox {
         width: auto;
         height: auto;
-        padding: 38px 51px;
     }
     .single_blog .container {
         width: 100%;
@@ -3617,6 +3625,9 @@ img {
 }
 
 @media screen and (max-width: 500px) {
+    .category_slide .category_name {
+        font-size: 14px;
+    }
     .product_grid {
         grid-template-columns: 1fr;
     }

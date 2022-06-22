@@ -3,8 +3,11 @@
         <div class="title">{{__('client.best-sellers')}}</div>
         <a href="{{route('bestSellers')}}" class="see_more">{{__('client.see_more')}}</a>
     </div>
-    <div class="arrows">
-        <button id="next_bs">
+    <div class="arrows flex">
+        <button id="prev_bs">
+            <img style="transform: rotate(180deg)" src="/img/icons/slider/next.png" alt=""/>
+        </button>
+        <button style="margin-left: 2px"  id="next_bs">
             <img src="/img/icons/slider/next.png" alt=""/>
         </button>
     </div>
