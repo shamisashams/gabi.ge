@@ -18,7 +18,7 @@
                 [
                     '@type' => 'ListItem',
                     'position' => 2,
-                    'name' => __('client.about_us'),
+                    'name' => __('client.blogs'),
                     'item' => route('proxy',[app()->getLocale(),isset($page_slugs['blogs']['slug']) ? $page_slugs['blogs']['slug'] : null])
                 ],
             ],
