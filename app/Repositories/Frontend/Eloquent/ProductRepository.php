@@ -18,9 +18,9 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         parent::__construct($model);
     }
 
-    public function getBestSeller()
+    public function getBestSeller($id = null)
     {
-        return $this->model::inRandomOrder()
+         $q = $this->model::inRandomOrder()
             ->with(['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files','category.availableLanguage','category.availableLanguageS'])
             ->whereHas('language',function ($query){
                 $query->where('slug','!=',null);
@@ -28,9 +28,12 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             ->whereHas('category.language',function ($query){
                 $query->where('slug','!=',null);
             })
-            ->where('best_seller',1)
-            ->take(10)
-            ->get();
+            ->where('best_seller',1);
+
+         if($id !== null){
+            $q->where('id','!=',$id);
+         }
+        return $q->take(10)->get();
     }
 
 

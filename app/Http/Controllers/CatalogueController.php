@@ -136,7 +136,7 @@ class CatalogueController extends Controller
             'category' => $category,
             'productFeatures' => $this->productRepository->getSingleProductFeatures($product->id)['productFeatures'],
             'productAnswers' => $this->productRepository->getSingleProductFeatures($product->id)['productAnswers'],
-            'bestSellerProducts' => $this->productRepository->getNewProducts(),
+            'bestSellerProducts' => $this->productRepository->getBestSeller($product->id),
         ]);
     }
 
