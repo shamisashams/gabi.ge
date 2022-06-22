@@ -8,6 +8,14 @@
             '@context'    => 'https://schema.org/',
             '@type'       => 'Organization',
             'url'         => route('welcome'),
+            'name' => 'Gabi',
+            'address' => [
+                'streetAddress' => $address
+            ],
+            'contactPoint' => [
+                'telephone' => $phone,
+                'email' => $contact_email
+            ]
         ])  !!}
 @endsection
 
