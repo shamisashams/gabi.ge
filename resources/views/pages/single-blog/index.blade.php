@@ -4,6 +4,28 @@
     <meta name="description" content="{{count($blog->availableLanguage)>0?$blog->availableLanguage[0]->meta_description:""}}">
     <meta name="keywords" content="{{count($blog->availableLanguage)>0?$blog->availableLanguage[0]->meta_keywords:""}}">
     <link rel="canonical" href="{{route('viewBlog',[app()->getLocale(),count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->slug : ''])}}" />
+
+
+    @foreach($globalLanguages['data'] as $lang)
+        @if($lang['abbreviation'] == app()->getLocale())
+            @continue
+        @endif
+        <?php
+
+
+        $language_id = App\Models\Language::getIdByName($lang['abbreviation']);
+
+        $blo = App\Models\BlogLanguage::query()->where('blog_id',$blog->id)->where('language_id',$language_id)->first();
+
+
+        ?>
+
+
+        @if($blo)
+            <link rel="alternate" hreflang="{{$lang['locale']}}" href="{{route('viewBlog',[$lang['abbreviation'],$blo->slug])}}" />
+        @endif
+
+    @endforeach
 @endsection
 
 @section('content')

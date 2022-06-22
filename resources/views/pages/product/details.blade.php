@@ -45,6 +45,25 @@
         <meta property="og:image" content="{{request()->getHttpHost()}}/storage/product/{{$product->files[0]->fileable_id}}/thumb/{{$product->files[0]->name}}" />
     @endif
 
+    @foreach($globalLanguages['data'] as $lang)
+        @if($lang['abbreviation'] == app()->getLocale())
+            @continue
+        @endif
+        <?php
+
+
+        $language_id = App\Models\Language::getIdByName($lang['abbreviation']);
+        $prod = App\Models\ProductLanguage::query()->where('product_id',$product->id)->where('language_id',$language_id)->first();
+        $cat = App\Models\CategoryLanguage::query()->where('category_id',$category->id)->where('language_id',$language_id)->first();
+        ?>
+        {{--@dd($cat,$prod)--}}
+
+        @if($cat && $prod)
+            <link rel="alternate" hreflang="{{$lang['locale']}}" href="{{route('productDetailsSeo',['locale' => $lang['abbreviation'],'category' => $cat->slug, 'product' => $prod->slug])}}" />
+        @endif
+
+    @endforeach
+
 
 
     <link rel="canonical" href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug:null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null])}}" />
