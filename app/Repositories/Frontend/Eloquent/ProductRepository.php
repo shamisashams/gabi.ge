@@ -28,6 +28,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             ->whereHas('category.language',function ($query){
                 $query->where('slug','!=',null);
             })
+            ->where('best_seller',1)
             ->take(10)
             ->get();
     }

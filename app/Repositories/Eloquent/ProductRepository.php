@@ -35,6 +35,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
 
         $request['status'] = isset($request['status']) ? 1 : 0;
+        $request['best_seller'] = isset($request['best_seller']) ? 1 : 0;
         try {
             DB::beginTransaction();
 
@@ -44,7 +45,8 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                 'status' => $request['status'],
                 'category_id' => $request['category_id'],
                 'price' => $request['price'],
-                'weight' => $request['weight']
+                'weight' => $request['weight'],
+                'best_seller' => $request['best_seller']
             ]);
 
             $languageId = Language::getIdByName($lang);
@@ -96,7 +98,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     {
         $request['status'] = isset($request['status']) ? 1 : 0;
         // Create new item
-
+        $request['best_seller'] = isset($request['best_seller']) ? 1 : 0;
 
         try {
             DB::beginTransaction();
@@ -105,7 +107,8 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                 'status' => $request['status'],
                 'category_id' => $request['category_id'],
                 'price' => $request['price'],
-                'weight' => $request['weight']
+                'weight' => $request['weight'],
+                'best_seller' => $request['best_seller']
             ]);
 
             /// Save with correct language

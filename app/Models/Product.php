@@ -26,7 +26,8 @@ class Product extends Model
         'sale',
         'sale_price',
         'view',
-        'weight'
+        'weight',
+        'best_seller'
     ];
 
     public function files()

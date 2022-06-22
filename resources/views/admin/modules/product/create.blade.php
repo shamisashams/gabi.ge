@@ -273,6 +273,16 @@
 
                                                 </div>
 
+                                                <div class="col s12">
+
+                                                    <label>
+                                                        <input type="checkbox" name="best_seller">
+                                                        <span>{{trans('admin.best_seller')}}</span>
+                                                    </label>
+
+
+                                                </div>
+
                                                 <div class="col s12 m6" style="margin-top:20px">
                                                     <div class="input-images"></div>
                                                     @if ($errors->has('images'))
