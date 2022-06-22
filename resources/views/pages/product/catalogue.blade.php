@@ -11,7 +11,7 @@
                 [
                     '@type' => 'ListItem',
                     'position' => 1,
-                    'name' => __('home'),
+                    'name' => __('client.home'),
                     'item' => route('welcome')
                 ],
                 [
