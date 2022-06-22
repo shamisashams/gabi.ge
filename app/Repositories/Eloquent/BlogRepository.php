@@ -76,9 +76,9 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $key => $file) {
                     $image = new ImageResize($file);
-                    $image->resizeToHeight(600);
+                    $image->resizeToHeight(1080);
 
-                    $image->crop(1650, 600, true, ImageResize::CROPCENTER);
+                    $image->crop(1920, 1080, true, ImageResize::CROPCENTER);
                     //$image->save(date('Ymhs') . $file->getClientOriginalName());
                     $img = $image->getImageAsString();
 
@@ -197,9 +197,9 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $key => $file) {
                     $image = new ImageResize($file);
-                    $image->resizeToHeight(600);
+                    $image->resizeToHeight(1080);
 
-                    $image->crop(1650, 600, true, ImageResize::CROPCENTER);
+                    $image->crop(1920, 1080, true, ImageResize::CROPCENTER);
                     //$image->save(date('Ymhs') . $file->getClientOriginalName());
                     $img = $image->getImageAsString();
 

@@ -115,9 +115,9 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $key => $file) {
                     $image = new ImageResize($file);
-                    $image->resizeToHeight(480);
+                    $image->resizeToHeight(720);
 
-                    $image->crop(720, 480, true, ImageResize::CROPCENTER);
+                    $image->crop(1280, 720, true, ImageResize::CROPCENTER);
                     //$image->save(date('Ymhs') . $file->getClientOriginalName());
                     $img = $image->getImageAsString();
 
@@ -210,9 +210,9 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $key => $file) {
                 $image = new ImageResize($file);
-                $image->resizeToHeight(480);
+                $image->resizeToHeight(720);
 
-                $image->crop(720, 480, true, ImageResize::CROPCENTER);
+                $image->crop(1280, 720, true, ImageResize::CROPCENTER);
                 //$image->save(date('Ymhs') . $file->getClientOriginalName());
                 $img = $image->getImageAsString();
 

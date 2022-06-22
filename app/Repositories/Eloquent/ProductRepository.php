@@ -134,9 +134,9 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                 foreach ($request->file('images') as $key => $file) {
 
                     $image = new ImageResize($file);
-                    $image->resizeToHeight(360);
+                    $image->resizeToHeight(720);
 
-                    $image->crop(360, 360, true, ImageResize::CROPCENTER);
+                    $image->crop(720, 720, true, ImageResize::CROPCENTER);
                     //$image->save(date('Ymhs') . $file->getClientOriginalName());
                     $img = $image->getImageAsString();
 
@@ -331,9 +331,9 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $key => $file) {
                 $image = new ImageResize($file);
-                $image->resizeToHeight(360);
+                $image->resizeToHeight(720);
 
-                $image->crop(360, 360, true, ImageResize::CROPCENTER);
+                $image->crop(720, 720, true, ImageResize::CROPCENTER);
                 //$image->save(date('Ymhs') . $file->getClientOriginalName());
                 $img = $image->getImageAsString();
 
