@@ -209,8 +209,11 @@
             <div class="title">{{__('client.new_products')}}</div>
             <a href="{{route('new')}}" class="see_more">{{__('client.see_more')}}</a>
         </div>
-        <div class="arrows">
-            <button id="next_np">
+        <div class="arrows flex">
+            <button id="prev_np">
+                <img style="transform: rotate(180deg)" src="img/icons/slider/next.png" alt=""/>
+            </button>
+            <button style="margin-left: 2px" id="next_np">
                 <img src="img/icons/slider/next.png" alt=""/>
             </button>
         </div>
