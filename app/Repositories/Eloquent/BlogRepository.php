@@ -82,7 +82,7 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
                     //$image->save(date('Ymhs') . $file->getClientOriginalName());
                     $img = $image->getImageAsString();
 
-                    $imagename = date('Ymhs') . $file->getClientOriginalName();
+                    $imagename = str_replace(' ','_',$file->getClientOriginalName());
                     $destination = base_path() . '/storage/app/public/blog/' . $this->model->id;
                     $request->file('images')[$key]->move($destination, $imagename);
                     $model->files()->create([
@@ -203,7 +203,7 @@ class BlogRepository extends BaseRepository implements BlogRepositoryInterface
                     //$image->save(date('Ymhs') . $file->getClientOriginalName());
                     $img = $image->getImageAsString();
 
-                    $imagename = date('Ymhs') . $file->getClientOriginalName();
+                    $imagename = str_replace(' ','_',$file->getClientOriginalName());
                     $destination = base_path() . '/storage/app/public/blog/' . $data->id;
                     $thumb = 'public/blog/' . $data->id .'/thumb/'.$imagename;
                     $request->file('images')[$key]->move($destination, $imagename);

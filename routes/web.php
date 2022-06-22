@@ -15,11 +15,16 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\UserController;
+use App\Models\Language;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 
 /*
    |--------------------------------------------------------------------------
@@ -253,7 +258,50 @@ Route::prefix('{locale?}')
             })->name('fb-redirect');
 
             Route::get('/auth/facebook/callback',function (){
-                $user = Socialite::driver('facebook')->user();
+                //dd('jdfhgjdhjf urkl');
+                $facebookUser = Socialite::driver('facebook')->stateless()->user();
+
+                //dd($facebookUser);
+                $user = User::updateOrCreate([
+                    //'facebook_id' => $facebookUser->id,
+                    'email' => $facebookUser->email,
+                ], [
+                    'name' => $facebookUser->name,
+                    'facebook_id' => $facebookUser->id,
+                    'facebook_token' => $facebookUser->token,
+                    'facebook_refresh_token' => $facebookUser->refreshToken,
+                    'facebook_avatar' => $facebookUser->avatar,
+                ]);
+
+                $localization = Language::where('abbreviation', app()->getLocale())->first();
+                if (!$localization) {
+                    throw new Exception('Localization not exist.');
+                }
+
+                if(!$user->profile){
+                    $user->profile()->create([
+                        'language_id' => $localization->id,
+                        'first_name' => '',
+                        'last_name' => '',
+                        'country' => ''
+                    ]);
+
+                    $token = Str::random(40);
+                    $user->roles()->attach('2');
+                    $user->tokens()->create([
+                        'token' => Hash::make($token),
+                        'validate_till' => Carbon::now()->addDays(1)
+                    ]);
+                }
+
+
+
+
+                //dd($user);
+
+                Auth::login($user);
+
+                return redirect(route('profile'));
             })->name('fb-callback');
 
             Route::get('/auth/google/redirect', function (){
@@ -261,7 +309,48 @@ Route::prefix('{locale?}')
             })->name('google-redirect');
 
             Route::get('/auth/google/callback',function (){
-                $user = Socialite::driver('google')->user();
+                $googleUser = Socialite::driver('google')->user();
+
+                //dd($googleUser);
+                $user = User::updateOrCreate([
+                    //'facebook_id' => $facebookUser->id,
+                    'email' => $googleUser->email,
+                ], [
+                    'name' => $googleUser->name,
+                    'google_id' => $googleUser->id,
+                    'google_token' => $googleUser->token,
+                    'google_refresh_token' => $googleUser->refreshToken,
+                    'facebook_avatar' => $googleUser->avatar,
+                ]);
+
+                $localization = Language::where('abbreviation', app()->getLocale())->first();
+                if (!$localization) {
+                    throw new Exception('Localization not exist.');
+                }
+
+                if(!$user->profile){
+                    $user->profile()->create([
+                        'language_id' => $localization->id,
+                        'first_name' => '',
+                        'last_name' => '',
+                        'country' => ''
+                    ]);
+
+                    $token = Str::random(40);
+                    $user->roles()->attach('2');
+                    $user->tokens()->create([
+                        'token' => Hash::make($token),
+                        'validate_till' => Carbon::now()->addDays(1)
+                    ]);
+                }
+
+
+
+                //dd($user);
+
+                Auth::login($user);
+
+                return redirect(route('profile'));
             })->name('google-callback');
             //--------------------------------------------------------------------------
 

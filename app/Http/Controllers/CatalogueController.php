@@ -178,7 +178,8 @@ class CatalogueController extends Controller
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
 //            'staticFilterData' => $staticFilterData,
             'products' => $products->orderBy('created_at', 'DESC')->paginate(16),
-            'category' => null
+            'category' => null,
+            'route' => route('bestSellers')
         ]);
     }
 
@@ -201,7 +202,8 @@ class CatalogueController extends Controller
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
 //            'staticFilterData' => $staticFilterData,
             'products' => $products->orderBy('created_at', 'DESC')->paginate(16),
-            'category' => null
+            'category' => null,
+            'route' => route('discount')
         ]);
     }
 
@@ -224,7 +226,8 @@ class CatalogueController extends Controller
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
 //            'staticFilterData' => $staticFilterData,
             'products' => $products->orderBy('created_at', 'DESC')->paginate(16),
-            'category' => null
+            'category' => null,
+            'route' => route('new')
         ]);
     }
 
