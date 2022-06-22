@@ -41,6 +41,12 @@
             ],
         ])  !!}
 
+    @if(isset($product->files[0]))
+        <meta property="og:image" content="{{request()->getHttpHost()}}/storage/product/{{$product->files[0]->fileable_id}}/thumb/{{$product->files[0]->name}}" />
+    @endif
+
+
+
     <link rel="canonical" href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug:null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null])}}" />
 @endsection
 
