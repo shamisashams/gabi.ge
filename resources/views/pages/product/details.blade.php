@@ -14,6 +14,33 @@
             'url'         => route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug:null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null]),
         ])  !!}
 
+    {!! jsonld('breadcrumb_list',[
+            '@context'    => 'https://schema.org/',
+            '@type'       => 'BreadcrumbList',
+            'itemListElement'         => [
+                [
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => __('home'),
+                    'item' => route('welcome')
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => count($category->availableLanguage)>0?$category->availableLanguage[0]->title:"",
+                    'item' => route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:""])
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 3,
+                    'name' => (count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->title : '',
+                    'name' => count($category->availableLanguage)>0?$category->availableLanguage[0]->title:"",
+                    'item' => route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:""])
+
+                ],
+            ],
+        ])  !!}
+
     <link rel="canonical" href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug:null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null])}}" />
 @endsection
 

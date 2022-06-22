@@ -4,6 +4,24 @@
     <meta name="description" content="{{count($category->availableLanguage)>0?$category->availableLanguage[0]->meta_description:""}}">
     <meta name="keywords" content="{{count($category->availableLanguage)>0?$category->availableLanguage[0]->meta_keyword:""}}">
     <link rel="canonical" href="{{route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:null])}}" />
+    {!! jsonld('breadcrumb_list',[
+            '@context'    => 'https://schema.org/',
+            '@type'       => 'BreadcrumbList',
+            'itemListElement'         => [
+                [
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => __('home'),
+                    'item' => route('welcome')
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => count($category->availableLanguage)>0?$category->availableLanguage[0]->title:"",
+                    'item' => route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:""])
+                ],
+            ],
+        ])  !!}
 @endsection
 
 @section('content')

@@ -9,6 +9,25 @@
             '@type'       => 'Organization',
             'url'         => route('welcome'),
         ])  !!}
+
+    {!! jsonld('breadcrumb_list',[
+            '@context'    => 'https://schema.org/',
+            '@type'       => 'BreadcrumbList',
+            'itemListElement'         => [
+                [
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => __('home'),
+                    'item' => route('welcome')
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => __('client.contact_us'),
+                    'item' => route('proxy',[app()->getLocale(),isset($page_slugs['contact-us']['slug']) ? $page_slugs['contact-us']['slug'] : null])
+                ],
+            ],
+        ])  !!}
 @endsection
 
 @section('content')

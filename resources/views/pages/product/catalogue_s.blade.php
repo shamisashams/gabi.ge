@@ -4,6 +4,24 @@
     <meta name="description" content="{{$description}}">
     <meta name="keywords" content="{{$keyword}}">
     <link rel="canonical" href="{{$route}}" />
+    {!! jsonld('breadcrumb_list',[
+            '@context'    => 'https://schema.org/',
+            '@type'       => 'BreadcrumbList',
+            'itemListElement'         => [
+                [
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => __('home'),
+                    'item' => route('welcome')
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => $title,
+                    'item' => $route
+                ],
+            ],
+        ])  !!}
 @endsection
 
 @section('content')
