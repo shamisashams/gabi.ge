@@ -12,9 +12,9 @@
                 @if (is_array($element))
                     @foreach ($element as $page => $url)
                         @if ($page == $paginator->currentPage())
-                            <button  class="page_number active">{{$page}}</button>
+                            <button type="button"  class="page_number active">{{$page}}</button>
                         @else
-                            <button onclick="location.href = '{{$url}}';" class="page_number">{{$page}}</button>
+                            <button type="button" onclick="location.href = '{{$url}}';" class="page_number">{{$page}}</button>
                         @endif
                     @endforeach
                 @endif
