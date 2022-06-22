@@ -46,7 +46,8 @@ class LanguageComposer
                         'title' => $localization->title,
                         'url' => '',
                         'img' => $localization->abbreviation . '.png',
-                        'abbreviation' => $localization->abbreviation
+                        'abbreviation' => $localization->abbreviation,
+                        'locale' => $localization->locale
                     ];
                 }
                 $languages['abbreviations'][] = $localization->abbreviation;
@@ -54,7 +55,8 @@ class LanguageComposer
                     'title' => $localization->title,
                     'url' => $this->getUrl($localization->abbreviation),
                     'img' => $localization->abbreviation . '.png',
-                    'abbreviation' => $localization->abbreviation
+                    'abbreviation' => $localization->abbreviation,
+                    'locale' => $localization->locale
                 ];
             }
         }
