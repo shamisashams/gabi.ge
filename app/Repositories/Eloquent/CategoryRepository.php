@@ -121,7 +121,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
                     //$image->save(date('Ymhs') . $file->getClientOriginalName());
                     $img = $image->getImageAsString();
 
-                    $imagename = date('Ymhs') . $file->getClientOriginalName();
+                    $imagename = str_replace(' ','_',$file->getClientOriginalName());
                     $destination = base_path() . '/storage/app/public/category/' . $categoryItem->id;
                     $thumb = 'public/category/' . $this->model->id .'/thumb/'.$imagename;
                     $request->file('images')[$key]->move($destination, $imagename);
@@ -216,7 +216,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
                 //$image->save(date('Ymhs') . $file->getClientOriginalName());
                 $img = $image->getImageAsString();
 
-                $imagename = date('Ymhs') . $file->getClientOriginalName();
+                $imagename = str_replace(' ','_',$file->getClientOriginalName());
                 $destination = base_path() . '/storage/app/public/category/' . $model->id;
                 $thumb = 'public/category/' . $model->id .'/thumb/'.$imagename;
                 $request->file('images')[$key]->move($destination, $imagename);

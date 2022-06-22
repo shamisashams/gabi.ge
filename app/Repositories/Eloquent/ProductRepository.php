@@ -140,7 +140,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                     //$image->save(date('Ymhs') . $file->getClientOriginalName());
                     $img = $image->getImageAsString();
 
-                    $imagename = date('Ymhs') . $file->getClientOriginalName();
+                    $imagename = str_replace(' ','_',$file->getClientOriginalName());
                     $destination = base_path() . '/storage/app/public/product/' . $productItem->id;
                     $thumb = 'public/product/' . $productItem->id .'/thumb/'.$imagename;
                     $request->file('images')[$key]->move($destination, $imagename);
@@ -339,7 +339,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
 
 
-                $imagename = date('Ymhs') . $file->getClientOriginalName();
+                $imagename = str_replace(' ','_',$file->getClientOriginalName());
                 $destination = base_path() . '/storage/app/public/product/' . $model->id;
                 $thumb = 'public/product/' . $model->id .'/thumb/'.$imagename;
                 $request->file('images')[$key]->move($destination, $imagename);

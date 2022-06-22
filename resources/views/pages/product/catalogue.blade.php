@@ -3,6 +3,7 @@
     <title>{{count($category->availableLanguage)>0?$category->availableLanguage[0]->meta_title:""}}</title>
     <meta name="description" content="{{count($category->availableLanguage)>0?$category->availableLanguage[0]->meta_description:""}}">
     <meta name="keywords" content="{{count($category->availableLanguage)>0?$category->availableLanguage[0]->meta_keyword:""}}">
+    <link rel="canonical" href="{{route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:null])}}" />
 @endsection
 
 @section('content')

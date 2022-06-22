@@ -3,6 +3,7 @@
     <title>{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->meta_title : null}}</title>
     <meta name="description" content="{{count($blog->availableLanguage)>0?$blog->availableLanguage[0]->meta_description:""}}">
     <meta name="keywords" content="{{count($blog->availableLanguage)>0?$blog->availableLanguage[0]->meta_keywords:""}}">
+    <link rel="canonical" href="{{route('viewBlog',[app()->getLocale(),count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->slug : ''])}}" />
 @endsection
 
 @section('content')

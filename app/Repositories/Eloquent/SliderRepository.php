@@ -73,7 +73,7 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
                     //$image->save(date('Ymhs') . $file->getClientOriginalName());
                     $img = $image->getImageAsString();
 
-                    $imagename = date('Ymhs') . $file->getClientOriginalName();
+                    $imagename = str_replace(' ','_',$file->getClientOriginalName());
                     $destination = base_path() . '/storage/app/public/slider/' . $this->model->id;
                     $thumb = 'public/slider/' . $this->model->id .'/thumb/'.$imagename;
                     $request->file('images')[$key]->move($destination, $imagename);
@@ -168,7 +168,7 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
                     //$image->save(date('Ymhs') . $file->getClientOriginalName());
                     $img = $image->getImageAsString();
 
-                    $imagename = date('Ymhs') . $file->getClientOriginalName();
+                    $imagename = str_replace(' ','_',$file->getClientOriginalName());
                     $destination = base_path() . '/storage/app/public/slider/' . $data->id;
                     $thumb = 'public/slider/' . $data->id .'/thumb/'.$imagename;
                     $request->file('images')[$key]->move($destination, $imagename);
