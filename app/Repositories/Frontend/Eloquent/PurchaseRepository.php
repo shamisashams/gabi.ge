@@ -7,6 +7,7 @@ use App\Models\Bank;
 use App\Models\Order;
 use App\Models\PaymentType;
 use App\Models\Product;
+use App\Models\Shipping;
 use App\Repositories\Frontend\Eloquent\Base\BaseRepository;
 use App\Repositories\Frontend\PurchaseRepositoryInterface;
 use Doctrine\DBAL\Query\QueryException;
@@ -37,9 +38,12 @@ class PurchaseRepository extends BaseRepository implements PurchaseRepositoryInt
                             : $product->price);
                 }
             }
-            if ($request['shipping'] === 'from_office') {
+            $shipping = Shipping::query()->find($request['shipping']);
+            /*if ($request['shipping'] === 'from_office') {
                 $shipmentPrice = 0;
-            }
+            }*/
+            $shipmentPrice = $shipping->price;
+
             $total += $shipmentPrice; // mitana
 
             $paymentType = PaymentType::where(['title' => $request['payment_method']])->first();

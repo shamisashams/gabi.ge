@@ -92,7 +92,7 @@
                     <div class="flex inputs">
                         <div>
                             <input onchange="changeTotalPrice(this)" type="radio" name="shipping" id="ship_{{$item->id}}"
-                                   value="from_office" data-price="{{$item->price / 100}}"/>
+                                   value="{{$item->id}}" data-price="{{$item->price / 100}}"/>
                             <label for="ship_{{$item->id}}">{{$item->language ? $item->language->title : ''}}</label>
                         </div>
                         <div>₾{{number_format($item->price / 100,2)}}</div>
