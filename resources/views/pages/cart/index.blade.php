@@ -88,14 +88,16 @@
                 <div class="row">
                     <div>{{__('client.shipping')}}:</div>
                     <br/>
+                    @foreach($shipping as $item)
                     <div class="flex inputs">
                         <div>
-                            <input onchange="changeTotalPrice(this)" type="radio" name="shipping" id="ship_1"
-                                   value="from_office" data-price="0.00"/>
-                            <label for="ship_1">{{__('client.from_office')}}</label>
+                            <input onchange="changeTotalPrice(this)" type="radio" name="shipping" id="ship_{{$item->id}}"
+                                   value="from_office" data-price="{{$item->price / 100}}"/>
+                            <label for="ship_{{$item->id}}">{{$item->language ? $item->language->title : ''}}</label>
                         </div>
-                        <div>₾00.00</div>
+                        <div>₾{{$item->price / 100}}</div>
                     </div>
+                    @endforeach
                     @if ($errors->has('shipping'))
                         <p class="profile-error-block">{{ $errors->first('shipping') }}</p>
                     @endif
