@@ -87,6 +87,9 @@
                     <p>{{$contact_email}}</p>
                 </a>
             </div>
+            <div class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1488.9922484408887!2d44.76718156962333!3d41.72085338019802!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4044732798a254d7%3A0x24e743dcddcaeeff!2s11b%20Bakhtrioni%20St%2C%20T&#39;bilisi%200194!5e0!3m2!1sen!2sge!4v1655979838976!5m2!1sen!2sge" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
         </div>
         <div class="form">
             <div class="title">{{__('client.got_any_questions')}}</div>

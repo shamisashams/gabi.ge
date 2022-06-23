@@ -84,6 +84,7 @@
             </div>
         </div>
     </div>
+    <div class="subscribe_popup"></div>
 </footer>
 
 @push('script')

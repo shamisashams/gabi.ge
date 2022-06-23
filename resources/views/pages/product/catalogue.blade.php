@@ -125,7 +125,7 @@
         <div id="filter_btn">
             <img src="/img/icons/edit.png" alt=""/>
         </div>
-        <form class="filter_form_mobile" action="{{route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:""])}}" style="display: contents">
+        <form  action="{{route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:""])}}" style="display: contents">
             <div class="sidebar_filters">
                 <div class="section">
                     <div class="titles">{{__('client.price_filter')}}</div>
@@ -161,6 +161,9 @@
                         @endforeach
                     </div>
                 @endforeach
+                <button id="close_filters">
+                    <img src="/img/else/close.svg" alt=""/>
+                </button>
             </div>
             <section class="products_viewport">
                 <div class="product_grid">

@@ -248,13 +248,13 @@
                         <div>{{__('client.add_to_cart')}}</div>
                     </button>
                 </div>
-                <a href="{{route('cart')}}">
+                <!-- <a href="{{route('cart')}}">
                       <button
-                    {{--{{count($productAnswers)>0?"disabled":""}}--}} onclick="addToCartProductDetails(this, '{{$product->id}}')"
-                    class=" buy_now">
-                    <div>{{__('client.buy_now')}}</div>
-                </button> 
-                </a>
+                        {{--{{count($productAnswers)>0?"disabled":""}}--}} onclick="addToCartProductDetails(this, '{{$product->id}}')"
+                        class=" buy_now">
+                        <div>{{__('client.buy_now')}}</div>
+                     </button> 
+                </a> -->
             </div>
          
             <div class="product_added flex"> <span>{{__('client.product_added')}}</span>    <img src="/img/icons/details/added.png" alt=""/></div>

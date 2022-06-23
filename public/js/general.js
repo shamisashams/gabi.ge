@@ -32,6 +32,7 @@ const closePopup = document.querySelector(".close_popup");
 const mainProductView = document.querySelectorAll(".view_popup_product");
 
 const filterButton = document.getElementById("filter_btn");
+const closeFilters = document.getElementById("close_filters");
 const sidebarFilters = document.querySelector(".sidebar_filters");
 
 let timeout;
@@ -1050,4 +1051,7 @@ function closeModal() {
 
 filterButton.addEventListener("click", () => {
     sidebarFilters.classList.toggle("show");
+});
+closeFilters.addEventListener("click", () => {
+    sidebarFilters.classList.remove("show");
 });
