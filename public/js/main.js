@@ -3,7 +3,7 @@ function changeTotalPrice(el) {
     let price =
         parseFloat(total.getAttribute("data-price")) +
         parseFloat(el.getAttribute("data-price"));
-    total.textContent = "₾" + price;
+    total.textContent = "₾" + price.toFixed(2);
 }
 
 function showBank() {

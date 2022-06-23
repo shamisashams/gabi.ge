@@ -95,7 +95,7 @@
                                    value="from_office" data-price="{{$item->price / 100}}"/>
                             <label for="ship_{{$item->id}}">{{$item->language ? $item->language->title : ''}}</label>
                         </div>
-                        <div>₾{{$item->price / 100}}</div>
+                        <div>₾{{number_format($item->price / 100,2)}}</div>
                     </div>
                     @endforeach
                     @if ($errors->has('shipping'))
