@@ -91,9 +91,9 @@
                     @foreach($shipping as $item)
                     <div class="flex inputs">
                         <div>
-                            <input onchange="changeTotalPrice(this)" type="radio" name="shipping" id="ship_1"
+                            <input onchange="changeTotalPrice(this)" type="radio" name="shipping" id="ship_{{$item->id}}"
                                    value="from_office" data-price="{{$item->price / 100}}"/>
-                            <label for="ship_1">{{$item->language ? $item->language->title : ''}}</label>
+                            <label for="ship_{{$item->id}}">{{$item->language ? $item->language->title : ''}}</label>
                         </div>
                         <div>₾{{$item->price / 100}}</div>
                     </div>
