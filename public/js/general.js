@@ -314,7 +314,8 @@ function addToCart(el, $id) {
     }
 }
 
-function addToCartProductDetails(el, $id) {
+function addToCartProductDetails(el, $id, buy_now = false) {
+
     checkSelection_alert();
     let object = {};
     let box = document.querySelector("#customize-details");
@@ -343,12 +344,21 @@ function addToCartProductDetails(el, $id) {
 
         if (allOptions.length === options.length && sel_pass) {
             addToCartAjax($id, object, quantity);
-            document.querySelector(".product_added").classList.add("show");
-            setTimeout(() => {
-                document
-                    .querySelector(".product_added")
-                    .classList.remove("show");
-            }, 5000);
+            if(buy_now){
+                setTimeout(() => {
+                    location.href = '/cart';
+                },500)
+
+            } else {
+                document.querySelector(".product_added").classList.add("show");
+
+                setTimeout(() => {
+                    document
+                        .querySelector(".product_added")
+                        .classList.remove("show");
+                }, 5000);
+            }
+
         }
     }
 }

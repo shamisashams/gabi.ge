@@ -250,7 +250,7 @@
                 </div>
 
                       <button
-                        {{--{{count($productAnswers)>0?"disabled":""}}--}} onclick="addToCartProductDetails(this, '{{$product->id}}')"
+                        {{--{{count($productAnswers)>0?"disabled":""}}--}} onclick="addToCartProductDetails(this, '{{$product->id}}', true)"
                         class=" buy_now">
                         <div>{{__('client.buy_now')}}</div>
                      </button>
