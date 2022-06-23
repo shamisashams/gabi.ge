@@ -240,7 +240,7 @@
                         <input disabled id="product_numb" type="text" class="number" value="1"/>
                         <button class="increase" onclick="increaseValue('details')">+</button>
                     </div>
-    
+
                     <button
                         {{--{{count($productAnswers)>0?"disabled":""}}--}} onclick="addToCartProductDetails(this, '{{$product->id}}')"
                         class="add_to_cart">
@@ -248,15 +248,15 @@
                         <div>{{__('client.add_to_cart')}}</div>
                     </button>
                 </div>
-                <!-- <a href="{{route('cart')}}">
+
                       <button
                         {{--{{count($productAnswers)>0?"disabled":""}}--}} onclick="addToCartProductDetails(this, '{{$product->id}}')"
                         class=" buy_now">
                         <div>{{__('client.buy_now')}}</div>
-                     </button> 
-                </a> -->
+                     </button>
+
             </div>
-         
+
             <div class="product_added flex"> <span>{{__('client.product_added')}}</span>    <img src="/img/icons/details/added.png" alt=""/></div>
         </div>
     </section>

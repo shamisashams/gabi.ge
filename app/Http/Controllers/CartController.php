@@ -9,6 +9,7 @@ use App\Models\Language;
 use App\Models\Localization;
 use App\Models\PaymentType;
 use App\Models\Product;
+use App\Models\Shipping;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -38,7 +39,8 @@ class CartController extends Controller
                         'file' => $product->files[0]->name ?? '',
                         'quantity' => intval($item->quantity),
                         'options' => $answers,
-                        'features' => json_encode($item->options)
+                        'features' => json_encode($item->options),
+
                     ];
                 }
             }
@@ -51,7 +53,8 @@ class CartController extends Controller
         return view('pages.cart.index', [
             'products' => $products,
             'total' => $total,
-            'banks' => Bank::all()
+            'banks' => Bank::all(),
+            'shipping' => Shipping::all()
         ]);
     }
 

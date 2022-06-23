@@ -207,6 +207,10 @@ Route::prefix('{locale?}')
                     ->name('update', 'hTagUpdate')
                     ->name('show', 'hTagShow');
 
+                Route::resource('shipping', \App\Http\Controllers\Admin\ShippingController::class);
+
+                Route::get('shipping/{shipping}/destroy', [\App\Http\Controllers\Admin\ShippingController::class, 'destroy'])->name('shipping.destroy');
+
             });
         });
         Route::middleware(['active'])->group(function () {
