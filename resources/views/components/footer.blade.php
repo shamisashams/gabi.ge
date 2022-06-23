@@ -106,18 +106,24 @@
                 },
             });
             $.ajax({
-                url: `/${locale_f}/subscribe/`,
+                url: `/${locale_f}/subscribe`,
                 method: "post",
                 data: { email: val },
                 success: function (data) {
                     console.log(data)
-                    alert('ok')
+                    $('.subscribe_popup_bg').show();
+                    $('.subscribe_popup').addClass('show');
                 },
                 error: function (data){
                     console.log(data)
                     if(data.hasOwnProperty('responseJSON')) alert(data.responseJSON.message);
                 }
             });
+        });
+
+        $('.close_subscribe').click(function (e){
+            $('.subscribe_popup_bg').hide();
+            $('.subscribe_popup').removeClass('show');
         });
     </script>
 @endpush

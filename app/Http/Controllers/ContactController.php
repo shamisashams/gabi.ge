@@ -56,7 +56,7 @@ class ContactController extends Controller
 
     public function subscribe(Request $request,Subscriber $subscriber){
         $request->validate([
-            'email' => 'required|unique:subscribers'
+            'email' => 'required|email|unique:subscribers'
         ]);
         $subscriber->create(['email'=>$request->post('email')]);
     }
