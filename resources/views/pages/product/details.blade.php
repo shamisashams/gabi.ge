@@ -232,27 +232,30 @@
 
 
             @endforeach
-            <div class="btns flex">
-                <div class="number_input">
-                    <button class="decrease" onclick="decreaseValue('details')">-</button>
-                    <input disabled id="product_numb" type="text" class="number" value="1"/>
-                    <button class="increase" onclick="increaseValue('details')">+</button>
-                </div>
+            <div class="max-width" style="max-width: 360px ">
 
-                <button
+                <div class="btns flex">
+                    <div class="number_input">
+                        <button class="decrease" onclick="decreaseValue('details')">-</button>
+                        <input disabled id="product_numb" type="text" class="number" value="1"/>
+                        <button class="increase" onclick="increaseValue('details')">+</button>
+                    </div>
+    
+                    <button
+                        {{--{{count($productAnswers)>0?"disabled":""}}--}} onclick="addToCartProductDetails(this, '{{$product->id}}')"
+                        class="add_to_cart">
+                        <img src="/img/icons/details/cart.png" alt=""/>
+                        <div>{{__('client.add_to_cart')}}</div>
+                    </button>
+                </div>
+                <a href="{{route('cart')}}">
+                      <button
                     {{--{{count($productAnswers)>0?"disabled":""}}--}} onclick="addToCartProductDetails(this, '{{$product->id}}')"
-                    class="add_to_cart">
-                    <img src="/img/icons/details/cart.png" alt=""/>
-                    <div>{{__('client.add_to_cart')}}</div>
-                </button>
+                    class=" buy_now">
+                    <div>{{__('client.buy_now')}}</div>
+                </button> 
+                </a>
             </div>
-            <a href="{{route('cart')}}">
-                  <button
-                {{--{{count($productAnswers)>0?"disabled":""}}--}} onclick="addToCartProductDetails(this, '{{$product->id}}')"
-                class=" buy_now">
-                <div>{{__('client.buy_now')}}</div>
-            </button> 
-            </a>
          
             <div class="product_added flex"> <span>{{__('client.product_added')}}</span>    <img src="/img/icons/details/added.png" alt=""/></div>
         </div>

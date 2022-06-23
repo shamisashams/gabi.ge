@@ -3189,7 +3189,7 @@ img {
     }
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1120px) {
     .header .links {
         margin-left: 0;
     }
@@ -3251,7 +3251,7 @@ img {
         align-items: flex-start;
         justify-content: center;
         position: fixed;
-        z-index: 100;
+        z-index: 2000;
         width: 100%;
         height: 100vh;
         top: 0;
@@ -3745,7 +3745,7 @@ img {
     .product_content_section .sidebar_filters {
         position: absolute;
         z-index: 1000;
-        top: 0;
+        top: 38px;
         left: -40px;
         background-color: #fff;
         width: auto;
@@ -4005,6 +4005,7 @@ img {
         width: 100%;
         display: flex;
         justify-content: center;
+        margin-top: 11px;
     }
 
     .product_full_view .large_view {
