@@ -31,6 +31,9 @@ const popUpBg = document.querySelector(".popup_bg");
 const closePopup = document.querySelector(".close_popup");
 const mainProductView = document.querySelectorAll(".view_popup_product");
 
+const filterButton = document.getElementById("filter_btn");
+const sidebarFilters = document.querySelector(".sidebar_filters");
+
 let timeout;
 
 const locale = $('meta[name="language"]').attr("content");
@@ -1042,3 +1045,9 @@ function closeModal() {
         });
     });
 }
+
+// filter buttons
+
+filterButton.addEventListener("click", () => {
+    sidebarFilters.classList.toggle("show");
+});

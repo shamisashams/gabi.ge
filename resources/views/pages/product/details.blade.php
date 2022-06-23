@@ -94,12 +94,12 @@
                             </div>
                         @endforeach
                     </div>
-                    <button class="arrow" id="arrow_slide_up">
+                    <!-- <button class="arrow" id="arrow_slide_up">
                         <img src="/img/icons/slider/next.png" alt=""/>
                     </button>
                     <button class="arrow" id="arrow_slide_down">
                         <img src="/img/icons/slider/next.png" alt=""/>
-                    </button>
+                    </button> -->
                 </div>
 
 
@@ -246,6 +246,14 @@
                     <div>{{__('client.add_to_cart')}}</div>
                 </button>
             </div>
+            <a href="{{route('cart')}}">
+                  <button
+                {{--{{count($productAnswers)>0?"disabled":""}}--}} onclick="addToCartProductDetails(this, '{{$product->id}}')"
+                class=" buy_now">
+                <div>{{__('client.buy_now')}}</div>
+            </button> 
+            </a>
+         
             <div class="product_added flex"> <span>{{__('client.product_added')}}</span>    <img src="/img/icons/details/added.png" alt=""/></div>
         </div>
     </section>

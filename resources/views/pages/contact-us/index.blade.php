@@ -74,15 +74,15 @@
             </p>
             <div class="addresses">
                 <div class="title">{{__('client.the_office')}}</div>
-                <a href="#" class="address_link">
+                <a target="_blank" href="http://maps.google.com/?q={{$address}}" class="address_link">
                     <img src="/img/icons/contact/1.png" alt=""/>
                     <p>{{$address}}</p>
                 </a>
-                <a href="#" class="address_link">
+                <a href="tel:{{$phone}}" class="address_link">
                     <img src="/img/icons/contact/2.png" alt=""/>
                     <p>{{$phone}}</p>
                 </a>
-                <a href="#" class="address_link">
+                <a href="mailto:{{$contact_email}}" class="address_link">
                     <img src="/img/icons/contact/3.png" alt=""/>
                     <p>{{$contact_email}}</p>
                 </a>

@@ -122,7 +122,10 @@
         </div>
     </section>
     <section class="product_content_section wrapper flex">
-        <form action="{{route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:""])}}" style="display: contents">
+        <div id="filter_btn">
+            <img src="/img/icons/edit.png" alt=""/>
+        </div>
+        <form class="filter_form_mobile" action="{{route('proxy',[app()->getLocale(),count($category->availableLanguage)>0?$category->availableLanguage[0]->slug:""])}}" style="display: contents">
             <div class="sidebar_filters">
                 <div class="section">
                     <div class="titles">{{__('client.price_filter')}}</div>

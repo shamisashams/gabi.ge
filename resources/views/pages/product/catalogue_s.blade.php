@@ -104,6 +104,7 @@
     </section>
     <section class="product_content_section wrapper flex">
         <form action="" style="display: contents">
+
             <div class="sidebar_filters">
                 <div class="section">
                     <div class="titles">{{__('client.price_filter')}}</div>
