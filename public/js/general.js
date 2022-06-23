@@ -35,6 +35,10 @@ const filterButton = document.getElementById("filter_btn");
 const closeFilters = document.getElementById("close_filters");
 const sidebarFilters = document.querySelector(".sidebar_filters");
 
+const close_subscribe = document.getElementById("close_subscribe");
+const subscribe_popup = document.querySelector(".subscribe_popup");
+const subscribe_popup_bg = document.querySelector(".subscribe_popup_bg");
+
 let timeout;
 
 const locale = $('meta[name="language"]').attr("content");
@@ -1048,10 +1052,26 @@ function closeModal() {
 }
 
 // filter buttons
+if (filterButton) {
+    filterButton.addEventListener("click", () => {
+        sidebarFilters.classList.toggle("show");
+    });
+}
+if (closeFilters) {
+    closeFilters.addEventListener("click", () => {
+        sidebarFilters.classList.remove("show");
+    });
+}
 
-filterButton.addEventListener("click", () => {
-    sidebarFilters.classList.toggle("show");
-});
-closeFilters.addEventListener("click", () => {
-    sidebarFilters.classList.remove("show");
-});
+if (close_subscribe) {
+    close_subscribe.addEventListener("click", () => {
+        subscribe_popup.classList.remove("show");
+        subscribe_popup_bg.style.display = "none";
+    });
+}
+if (subscribe_popup_bg) {
+    subscribe_popup_bg.addEventListener("click", () => {
+        subscribe_popup.classList.remove("show");
+        subscribe_popup_bg.style.display = "none";
+    });
+}

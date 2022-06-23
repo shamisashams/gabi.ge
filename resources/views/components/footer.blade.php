@@ -84,7 +84,14 @@
             </div>
         </div>
     </div>
-    <div class="subscribe_popup"></div>
+    <div class="subscribe_popup_bg"></div>
+    <div class="subscribe_popup ">
+        <div class="flex center">
+            <img src="/img/icons/tick.png" alt="" />
+            <div>Success!</div>
+        </div>
+        <button id="close_subscribe">OK</button>
+    </div>
 </footer>
 
 @push('script')
