@@ -84,13 +84,15 @@
             </div>
         </div>
     </div>
-    <div class="subscribe_popup_bg"></div>
-    <div class="subscribe_popup ">
-        <div class="flex center">
-            <img src="/img/icons/tick.png" alt="" />
-            <div>Success!</div>
+    
+    <div class="commonPopup subscribe_popup ">
+        <div class="commonPopupContainer">
+            <div class="flex center success">
+                <img src="/img/icons/tick.png" alt="" />
+                <div>Success!</div>
+            </div>
+            <button id="close_subscribe" style="margin-top: 20px; padding: 6px 38px ;">OK</button>
         </div>
-        <button id="close_subscribe">OK</button>
     </div>
 </footer>
 
@@ -111,7 +113,6 @@
                 data: { email: val },
                 success: function (data) {
                     console.log(data)
-                    $('.subscribe_popup_bg').show();
                     $('.subscribe_popup').addClass('show');
                 },
                 error: function (data){
@@ -122,7 +123,6 @@
         });
 
         $('.close_subscribe').click(function (e){
-            $('.subscribe_popup_bg').hide();
             $('.subscribe_popup').removeClass('show');
         });
     </script>

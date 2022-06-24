@@ -161,8 +161,10 @@
                         @endforeach
                     </div>
                 @endforeach
-                <button id="close_filters">
-                    <img src="/img/else/close.svg" alt=""/>
+                <button type="button" id="close_filters">
+                    <!-- <img src="/img/else/close.svg" alt=""/> -->
+                    Close
+                    <!-- {{__('client.view')}} -->
                 </button>
             </div>
             <section class="products_viewport">

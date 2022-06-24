@@ -497,7 +497,7 @@ img {
 
 .header .nav_link:hover .category_dropdown {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .header .category_dropdown {
@@ -1197,10 +1197,20 @@ img {
     padding-top: 51px;
     overflow: hidden;
 }
-.footer .subscribe_popup {
+.commonPopup {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #0e064d5e;
+    opacity: 0;
+    visibility: hidden;
+}
+.commonPopupContainer {
     background-color: #fff;
-    width: 350px;
-    padding: 30px;
+    min-width: 350px;
+    padding: 30px 50px;
     text-align: center;
     position: fixed;
     left: 50%;
@@ -1209,28 +1219,39 @@ img {
     border-radius: 20px;
     box-shadow: 0 3px 15px 6px rgb(0 0 0 / 29%);
     z-index: 100001;
-    opacity: 0;
-    visibility: hidden;
+
     transition: 0.3s;
+}
+.commonPopupContainer p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+.commonPopupContainer .success {
     color: #3db39e;
 }
-.footer .subscribe_popup.show {
+.commonPopup.show {
     opacity: 1;
     visibility: visible;
 }
-.footer .subscribe_popup img {
-    margin-right: 10px;
+.commonPopupContainer img {
+    margin-right: 7px;
     transform: scale(0);
+    width: 20px;
     transition: 0.5s;
 }
-.footer .subscribe_popup.show img {
+.commonPopup.show img {
     transform: scale(1);
 }
-.footer .subscribe_popup button {
-    padding: 6px 38px;
+.commonPopupContainer .btnflex {
+    margin-top: 20px;
+}
+.commonPopupContainer button {
+    padding: 6px 23px;
+    margin: 0 3px;
     background-color: #0e064d28;
     border-radius: 3px;
-    margin-top: 20px;
+    margin-bottom: 5px;
+    white-space: nowrap;
 }
 .subscribe_popup_bg {
     width: 100vw;
@@ -2720,10 +2741,23 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile_section .profile_tabs .icn input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
 }
 
 .profile_section .profile_tabs .icn img {
-    width: 40%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .profile_section .profile_tabs .link {
@@ -3411,6 +3445,7 @@ img {
     .header .nav_link:hover .category_dropdown {
         max-height: 300px;
         margin: 20px 0;
+        grid-template-columns: repeat(1, 1fr);
     }
     .header .header_content .columns {
         margin: 0;
@@ -3446,6 +3481,13 @@ img {
     .result_btn {
         font-size: 14px;
         padding: 12px 43px;
+    }
+    .commonPopupContainer {
+        min-width: none;
+        padding: 30px 33px;
+    }
+    .commonPopupContainer .btnflex {
+        flex-direction: column;
     }
 }
 
@@ -3803,8 +3845,14 @@ img {
         cursor: pointer;
         margin: auto;
         margin-right: 0;
-        width: 20px;
         margin-top: 40px;
+        font-size: 14px;
+        background-color: rgba(255, 0, 0, 0.2);
+        border-radius: 3px;
+        padding: 7px 18px;
+    }
+    #close_filters:hover {
+        background-color: rgba(255, 0, 0, 0.4);
     }
     .product_content_section .sidebar_filters {
         position: absolute;
@@ -4026,6 +4074,7 @@ img {
 
     .product_full_view {
         flex-direction: column;
+        overflow-x: hidden;
     }
 
     .customize {

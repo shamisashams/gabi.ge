@@ -20,7 +20,8 @@
                     <span class="bold roboto">{{$user->name}}</span>
                 </div>
                 <div class="icn">
-                    <img src="{{$user->facebook_avatar}}" alt=""/>
+                    <img id="userAvatarImg" src="/img/icons/profile/avatar.png" alt=""/>
+                    <input id="userAvatarInput" type="file" name="" id="">
                 </div>
             </div>
             <div class="row middle">
@@ -194,5 +195,37 @@
             </form>
         </div>
     </section>
+    <div class="commonPopup subscribe_popup "  id="changePasswordPopup">
+        <div class="commonPopupContainer ">
+            <div class="flex center success">
+                <img src="/img/icons/tick.png" alt="" />
+                <div>Success!</div>
+            </div>
+            <p>Your password has been successfully changed.</p>
+            <div class="flex center btnflex">
+                <a href="#">
+                    <button style="background-color:#3db39d41 ;">Go To Dashboard</button>
+                </a>
+                <a href="#">
+                    <button>Back To Home Page</button>
+                </a>
+            </div>
+        </div>
+    </div>
+     <script>
+            
+            const fileIn = document.getElementById("userAvatarInput");
+            const fileOut = document.getElementById("userAvatarImg");
+            const readUrl = (event) => {
+                if (event.files && event.files[0]) {
+                    let reader = new FileReader();
+                    reader.onload = (event) => (fileOut.src = event.target.result);
+                    reader.readAsDataURL(event.files[0]);
+                }
+            };
+            fileIn.onchange = function() {
+                readUrl(this);
+            };
+     </script>
 
 @endsection
