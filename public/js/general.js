@@ -39,6 +39,9 @@ const close_subscribe = document.getElementById("close_subscribe");
 const subscribe_popup = document.querySelector(".subscribe_popup");
 const subscribe_popup_bg = document.querySelector(".subscribe_popup_bg");
 
+const togglePassword = document.querySelectorAll(".togglePassword");
+const passwordInput = document.querySelectorAll(".passwordInput");
+
 let timeout;
 
 const locale = $('meta[name="language"]').attr("content");
@@ -1083,4 +1086,15 @@ if (subscribe_popup_bg) {
     });
 }
 
-// user avatar
+// toggle password
+
+togglePassword.forEach((el, i) => {
+    el.addEventListener("click", () => {
+        const password = passwordInput[i].type == "password";
+        if (password) {
+            passwordInput[i].type = "text";
+        } else {
+            passwordInput[i].type = "password";
+        }
+    });
+});

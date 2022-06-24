@@ -22,6 +22,9 @@
                 <div class="icn">
                     <img id="userAvatarImg" src="/img/icons/profile/avatar.png" alt=""/>
                     <input id="userAvatarInput" type="file" name="" id="">
+                    <div class="add_img flex center">
+                        <img src="/img/icons/profile/upload.png" alt=""/>
+                    </div>
                 </div>
             </div>
             <div class="row middle">
@@ -167,28 +170,37 @@
             <form method="post" action="{{route('changePassword',app()->getLocale())}}">
                 @csrf
                 <div class="input_grid">
-                    <div class="input">
+                    <div class="input ">
+                        <button type="button" class="togglePassword">
+                            <img src="/img/icons/profile/eye.png" alt="">
+                        </button>
                         <label for="">{{__('client.old_password')}}</label>
-                        <input value="{{old('old_password')}}" class="{{$errors->has('old_password')?"invalid":""}}"
-                               name="old_password" type="password" placeholder="•••••••••••••"/>
+                        <input class="passwordInput" value="{{old('old_password')}}" class="{{$errors->has('old_password')?"invalid":""}}"
+                               name="old_password" type="password" placeholder=""/>
                         @if ($errors->has('old_password'))
                             <p class="profile-error-block">{{ $errors->first('old_password') }}</p>
                         @endif
                     </div>
                     <div></div>
-                    <div class="input">
+                    <div class="input ">
+                        <button type="button" class="togglePassword">
+                            <img src="/img/icons/profile/eye.png" alt="">
+                        </button>
                         <label for="">{{__('client.new_password')}}</label>
-                        <input value="{{old('password')}}" class="{{$errors->has('password')?"invalid":""}}"
-                               name="password" type="password" placeholder="•••••••••••••"/>
+                        <input class="passwordInput" value="{{old('password')}}" class="{{$errors->has('password')?"invalid":""}}"
+                               name="password" type="password" placeholder=""/>
                         @if ($errors->has('password'))
                             <p class="profile-error-block">{{ $errors->first('password') }}</p>
                         @endif
                     </div>
-                    <div class="input">
+                    <div class="input ">
+                        <button type="button" class="togglePassword">
+                            <img src="/img/icons/profile/eye.png" alt="">
+                        </button>
                         <label for="">{{__('client.repeat_password')}}</label>
-                        <input value="{{old('password_repeat')}}"
+                        <input class="passwordInput" value="{{old('password_repeat')}}"
                                class="{{$errors->has('password_repeat')?"invalid":""}}" name="password_repeat"
-                               type="password" placeholder="•••••••••••••"/>
+                               type="password" placeholder=""/>
                         @if ($errors->has('password_repeat'))
                             <p class="profile-error-block">{{ $errors->first('password_repeat') }}</p>
                         @endif
