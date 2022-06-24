@@ -137,7 +137,7 @@
     </section>
 
     @if(session('status') == 'success')
-    <div class="commonPopup subscribe_popup " id="registerPopup">
+    <div class="commonPopup subscribe_popup  show" id="registerPopup">
         <div class="commonPopupContainer ">
             <div class="flex center success">
                 <img src="/img/icons/tick.png" alt="" />
