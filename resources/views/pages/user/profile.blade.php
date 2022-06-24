@@ -105,8 +105,11 @@
                         <p class="profile-error-block">{{ $errors->first('address') }}</p>
                     @endif
                 </div>
+
                 <button class="update">{{__('client.update')}}</button>
             </form>
+
+            <a href="{{route('client.add-address')}}">@lang('client.add_address')</a>
 
             <div class="your_address">
                 <div class="title">{{__('client.your_address')}}</div>

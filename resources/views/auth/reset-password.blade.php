@@ -20,6 +20,7 @@
             <div class="lisu_content">
                 <form action="{{route('password.update',app()->getLocale())}}"  class="form lisu_form_alt opened" method="POST">
                     @csrf
+                    <input type="hidden" name="token" value="{{$token}}">
                     <div class="label">{{__('client.email')}}</div>
                     <input value="{{old('loginEmail')}}" name="email" class="roboto {{$errors->has('loginEmail')?'invalid':""}}" type="text" placeholder="example@email.com" />
                     @if ($errors->has('email'))

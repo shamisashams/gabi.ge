@@ -87,5 +87,9 @@ class UserController extends Controller
 
     }
 
+    public function addAddress(){
+        return view('pages.user.address');
+    }
+
 
 }

@@ -420,6 +420,10 @@ Route::prefix('{locale?}')
                 Route::post('save-order', [PurchaseController::class, 'saveOrder'])->name('saveOrder');
                 Route::get('order-details/{id}', [UserController::class, 'orderDetails'])->name('orderDetails');
                 Route::get('download-pdf/{id}', [UserController::class, 'downloadPdf'])->name('downloadPdf');
+                Route::get('add-address',[UserController::class,'addAddress'])->name('client.add-address');
+                Route::post('add-address',[UserController::class,'storeAddress'])->name('client.store-address');
+                Route::put('edit-address',[UserController::class,'updateAddress'])->name('client.update-address');
+                Route::get('address/{address}/destroy',[UserController::class,'deleteAddress'])->name('client.delete-address');
             });
 
             Route::get('privacy-policy', function () {
