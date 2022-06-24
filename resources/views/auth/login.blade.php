@@ -35,7 +35,7 @@
                     @endif
                     <button class="lisu_btn">{{__('client.login')}}</button>
 
-                    <div>
+                    <div class="forgotPasswordLink">
                         <a href="{{route('forgot-pass')}}">@lang('client.forgot_password')</a>
                     </div>
                     <!-- <a href="{{route('fb-redirect')}}">facebook</a>
