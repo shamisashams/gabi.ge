@@ -3,10 +3,10 @@
 
     <section class="path">
         <div class="path_content wrapper">
-            <div class="path_took">Home / Login - Sing Up</div>
+            <div class="path_took"><a href="{{route('welcome')}}">{{__('client.home')}}</a></div>
             <div class="current">
-                <div class="current_lisu on">Login</div>
-                <div class="current_lisu">Sign up</div>
+                <div class="current_lisu on">{{__('client.login')}}</div>
+                <div class="current_lisu">{{__('client.sign_up')}}</div>
             </div>
         </div>
     </section>
@@ -34,6 +34,10 @@
                         <p class="error-block">{{ $errors->first('auth') }}</p>
                     @endif
                     <button class="lisu_btn">{{__('client.login')}}</button>
+
+                    <div>
+                        <a href="{{route('forgot-pass')}}">@lang('client.forgot_password')</a>
+                    </div>
                     <!-- <a href="{{route('fb-redirect')}}">facebook</a>
                     <a href="{{route('google-redirect')}}">google</a> -->
                     <div class="sign_with">
@@ -97,6 +101,8 @@
                     @endif
 
                     <button class="lisu_btn">{{__('client.register_account')}}</button>
+
+
 
                     <div class="sign_with">
                         <div class="title">{{__('client.or_sign_in_with')}}</div>
