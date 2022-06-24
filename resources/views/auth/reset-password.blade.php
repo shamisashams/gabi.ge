@@ -5,7 +5,7 @@
         <div class="path_content wrapper">
             <div class="path_took"><a href="{{route('welcome')}}">{{__('client.home')}}</a></div>
             <div class="current">
-                <div class="current_lisu on">{{__('client.forgot_password_f')}}</div>
+                <div class="current_lisu on">{{__('client.reset_password')}}</div>
                 <div class="current_lisu">Sign up</div>
             </div>
         </div>
@@ -13,7 +13,7 @@
 
     <section class="login_signup_box">
         <div class="head">
-            <button class="lisu_navigation active">{{__('client.forgot_password_f')}}</button>
+            <button class="lisu_navigation active">{{__('client.reset_password_f')}}</button>
 
         </div>
         <div class="content">
