@@ -34,7 +34,7 @@
                         <p class="error-block">{{ $errors->first('auth') }}</p>
                     @endif
                     <button class="lisu_btn">{{__('client.login')}}</button>
- 
+
                     <div class="forgotPasswordLink">
                         <a href="{{route('forgot-pass')}}">@lang('client.forgot_password')</a>
                     </div>
@@ -133,8 +133,10 @@
 {{--                </div>--}}
             </div>
         </div>
-        
+
     </section>
+
+    @if(session('status') == 'success')
     <div class="commonPopup subscribe_popup " id="registerPopup">
         <div class="commonPopupContainer ">
             <div class="flex center success">
@@ -143,14 +145,15 @@
             </div>
             <p>Your account is successfully registered.</p>
             <div class="flex center btnflex">
-                <a href="#">
+                <a href="{{route('profile')}}">
                     <button style="background-color:#3db39d41 ;">Go To Dashboard</button>
                 </a>
-                <a href="#">
+                <a href="{{route('welcome')}}">
                     <button>Back To Home Page</button>
                 </a>
             </div>
         </div>
     </div>
-    
+    @endif
+
 @endsection

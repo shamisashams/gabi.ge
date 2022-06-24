@@ -96,7 +96,7 @@ class AuthFrontendController extends Controller
     public function register($locale, RegisterRequest $request)
     {
         if($this->authRepository->register($locale,$request)) {
-            return redirect(route('welcome', app()->getLocale()));
+            return redirect()->back()->with('status','success');
         }
 
     }

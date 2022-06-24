@@ -34,4 +34,21 @@
             </div>
         </div>
     </section>
+
+    @if(session('status'))
+    <div class="commonPopup subscribe_popup show">
+        <div class="commonPopupContainer ">
+            <div class="flex center success">
+                <img src="/img/icons/tick.png" alt="" />
+                <div>Success!</div>
+            </div>
+            <p>Your password has been successfully reset.</p>
+            <div class="flex center btnflex">
+                <a href="{{route('welcome')}}">
+                    <button>Back To Home Page</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    @endif
 @endsection

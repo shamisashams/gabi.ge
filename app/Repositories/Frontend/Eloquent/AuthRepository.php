@@ -85,6 +85,7 @@ class AuthRepository extends BaseRepository implements AuthRepositoryInterface
                 'password' => Hash::make($request['password']),
                 'status' => 1
             ]);
+            //dd($model);
 
             $localization = $this->getLocalization($lang);
             $model->profile()->create([
@@ -94,15 +95,19 @@ class AuthRepository extends BaseRepository implements AuthRepositoryInterface
                 'country' => $request['country']
             ]);
 
+
             $token = Str::random(40);
             $model->roles()->attach('2');
+
             $model->tokens()->create([
                 'token' => Hash::make($token),
                 'validate_till' => Carbon::now()->addDays(1)
             ]);
             DB::commit();
+            Auth::login($model);
             return true;
         } catch (QueryException $exception) {
+            //dd($exception->getMessage());
             DB::rollBack();
             return false;
         }
