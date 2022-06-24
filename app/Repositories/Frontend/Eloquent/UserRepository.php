@@ -27,16 +27,24 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function update(UserRequest $request)
     {
 
+        //dd($request->all());
         $user = $this->model::find(auth()->user()->id);
 
         $profile = $user->profile()->update([
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
             'phone' => $request['phone'],
-            'city' => $request['city'],
-            'country' => $request['country'],
-            'address' => $request['address'],
         ]);
+
+        $user->addresses()->delete();
+
+        foreach ($request->post('country') as $key => $item){
+            $user->addresses()->create([
+                'country' => $item,
+                'city' => $request->post('city')[$key],
+                'address_1' => $request->post('address')[$key],
+            ]);
+        }
 
         if ($profile) {
             return true;

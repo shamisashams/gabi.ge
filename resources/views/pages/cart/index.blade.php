@@ -106,13 +106,20 @@
                     <div>{{__('client.address')}}:</div>
                     <br/>
                     @if(auth()->user())
-                        <input hidden name="address" value="{{auth()->user()->profile->address}}"/>
-                        <div class="inputs">
-                            {{auth()->user()->profile->address}}
+                        @foreach(auth()->user()->addresses as $address)
+                            <div>
+                                <input id="address_{{$address->id}}" type="radio" name="address" value="{{$address->country}}, {{$address->city}}, {{$address->address_1}}"/>
+                                <label for="address_{{$address->id}}" class="inputs">
+                                    {{$address->country}}, {{$address->city}}<br>
+                                    {{$address->address_1}}
+
+                                </label>
+                            </div>
+
+                        @endforeach
                             @if ($errors->has('address'))
                                 <p class="profile-error-block">{{ __('client.please_set_address') }}</p>
                             @endif
-                        </div>
                         <a href="{{route('profile',app()->getLocale())}}" class="address">
                             {{auth()->user()->profile->address?__('client.change_address'):__('client.set_address')}}
                         </a>

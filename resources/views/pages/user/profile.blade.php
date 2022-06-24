@@ -92,21 +92,22 @@
                 </div>
 
                 <div id="addressFields">
+                    @foreach($user->addresses as $address)
                     <div class="addressFieldsChild">
                         <div class="title flex"><span>Address</span> <button type="button" class="removeField">Remove</button></div>
                         <div class="input_grid">
                                 <div class="input">
                                 <label for="">{{__('client.choose_country')}}</label>
-                                <input value="{{$user->profile->country}}" class="{{$errors->has('country')?'invalid':""}}"
-                                       name="country" type="text" placeholder="Georgia"/>
+                                <input value="{{$address->country}}" class="{{$errors->has('country')?'invalid':""}}"
+                                       name="country[]" type="text" placeholder="Georgia"/>
                                 @if ($errors->has('country'))
                                     <p class="profile-error-block">{{ $errors->first('country') }}</p>
                                 @endif
                             </div>
                             <div class="input">
                                 <label for="">{{__('client.choose_city')}}</label>
-                                <input value="{{$user->profile->city}}" class="{{$errors->has('city')?'invalid':""}}"
-                                       name="city" type="text" placeholder="Tbilisi"/>
+                                <input value="{{$address->city}}" class="{{$errors->has('city')?'invalid':""}}"
+                                       name="city[]" type="text" placeholder="Tbilisi"/>
                                 @if ($errors->has('city'))
                                     <p class="profile-error-block">{{ $errors->first('city') }}</p>
                                 @endif
@@ -116,9 +117,9 @@
                             <label for="">{{__('client.choose_address')}}</label>
                             <input
                                 type="text"
-                                name="address"
+                                name="address[]"
                                 class="{{$errors->has('address')?'invalid':""}}"
-                                value="{{$user->profile->address}}"
+                                value="{{$address->address_1}}"
                                 placeholder="Georgia, Tbilisi - Didi Dighomi III Micro-District"
                             />
                             @if ($errors->has('address'))
@@ -126,15 +127,16 @@
                             @endif
                         </div>
                     </div>
+                    @endforeach
                 </div>
                 <button type="button" id="addAddressField">Additional Address +</button>
 
                 <button class="update">{{__('client.update')}}</button>
             </form>
 
-            <a href="{{route('client.add-address')}}">@lang('client.add_address')</a>
 
-            <div class="your_address">
+
+            {{--<div class="your_address">
                 <div class="title">{{__('client.your_address')}}</div>
                 <div class="address_table">
                     <div class="head flex">
@@ -148,7 +150,7 @@
                         <div>{{$user->profile->address}}</div>
                     </div>
                 </div>
-            </div>
+            </div>--}}
         </div>
         <div id="tabs_content_order" class="profile_tabs_content">
             <div class="title">{{__('client.order_history')}}</div>
