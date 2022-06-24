@@ -1952,6 +1952,15 @@ img {
 .login_signup_box .sign_with .accs img {
     margin-right: 20px;
 }
+.forgotPasswordLink {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    color: #12018f;
+}
+.forgotPasswordLink a:hover {
+    text-decoration: underline;
+}
 
 /******************* Fullview **********************/
 

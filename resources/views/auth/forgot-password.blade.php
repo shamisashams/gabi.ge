@@ -14,7 +14,6 @@
     <section class="login_signup_box">
         <div class="head">
             <button class="lisu_navigation active">{{__('client.forgot_password_f')}}</button>
-
         </div>
         <div class="content">
             <div class="lisu_content">
