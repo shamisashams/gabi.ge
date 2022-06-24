@@ -241,8 +241,8 @@ Route::prefix('{locale?}')
                     : back()->withErrors(['email' => __($status)]);
             })->middleware('guest')->name('password.email');
 
-            Route::get('/reset-password/{token}', function ($token) {
-                return view('auth.reset-password', ['token' => $token]);
+            Route::get('/reset-password', function ($locale) {
+                return view('auth.reset-password', ['token' => \request()->get('token'), 'email' => \request()->get('email')]);
             })->middleware('guest')->name('password.reset');
 
 
@@ -267,7 +267,7 @@ Route::prefix('{locale?}')
                 );
 
                 return $status === Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
+                    ? redirect()->route('loginViewFront')->with('status', __($status))
                     : back()->withErrors(['email' => [__($status)]]);
             })->middleware('guest')->name('password.update');
 
@@ -420,6 +420,10 @@ Route::prefix('{locale?}')
                 Route::post('save-order', [PurchaseController::class, 'saveOrder'])->name('saveOrder');
                 Route::get('order-details/{id}', [UserController::class, 'orderDetails'])->name('orderDetails');
                 Route::get('download-pdf/{id}', [UserController::class, 'downloadPdf'])->name('downloadPdf');
+                Route::get('add-address',[UserController::class,'addAddress'])->name('client.add-address');
+                Route::post('add-address',[UserController::class,'storeAddress'])->name('client.store-address');
+                Route::put('edit-address',[UserController::class,'updateAddress'])->name('client.update-address');
+                Route::get('address/{address}/destroy',[UserController::class,'deleteAddress'])->name('client.delete-address');
             });
 
             Route::get('privacy-policy', function () {
