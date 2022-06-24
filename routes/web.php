@@ -211,6 +211,9 @@ Route::prefix('{locale?}')
 
                 Route::get('shipping/{shipping}/destroy', [\App\Http\Controllers\Admin\ShippingController::class, 'destroy'])->name('shipping.destroy');
 
+                Route::get('password',[\App\Http\Controllers\Admin\PasswordController::class, 'index'])->name('password.index');
+                Route::post('password',[\App\Http\Controllers\Admin\PasswordController::class, 'update'])->name('password.update');
+
             });
         });
         Route::middleware(['active'])->group(function () {
