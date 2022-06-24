@@ -92,42 +92,78 @@
                 </div>
 
                 <div id="addressFields">
-                    @foreach($user->addresses as $address)
-                    <div class="addressFieldsChild">
-                        <div class="title flex"><span>Address</span> <button type="button" class="removeField">Remove</button></div>
-                        <div class="input_grid">
+                    @if(count($user->addresses) > 0)
+                        @foreach($user->addresses as $address)
+                        <div class="addressFieldsChild">
+                            <div class="title flex"><span>Address</span> <button type="button" class="removeField">Remove</button></div>
+                            <div class="input_grid">
+                                    <div class="input">
+                                    <label for="">{{__('client.choose_country')}}</label>
+                                    <input value="{{$address->country}}" class="{{$errors->has('country')?'invalid':""}}"
+                                           name="country[]" type="text" placeholder="Georgia"/>
+                                    @if ($errors->has('country'))
+                                        <p class="profile-error-block">{{ $errors->first('country') }}</p>
+                                    @endif
+                                </div>
                                 <div class="input">
-                                <label for="">{{__('client.choose_country')}}</label>
-                                <input value="{{$address->country}}" class="{{$errors->has('country')?'invalid':""}}"
-                                       name="country[]" type="text" placeholder="Georgia"/>
-                                @if ($errors->has('country'))
-                                    <p class="profile-error-block">{{ $errors->first('country') }}</p>
-                                @endif
+                                    <label for="">{{__('client.choose_city')}}</label>
+                                    <input value="{{$address->city}}" class="{{$errors->has('city')?'invalid':""}}"
+                                           name="city[]" type="text" placeholder="Tbilisi"/>
+                                    @if ($errors->has('city'))
+                                        <p class="profile-error-block">{{ $errors->first('city') }}</p>
+                                    @endif
+                                </div>
                             </div>
-                            <div class="input">
-                                <label for="">{{__('client.choose_city')}}</label>
-                                <input value="{{$address->city}}" class="{{$errors->has('city')?'invalid':""}}"
-                                       name="city[]" type="text" placeholder="Tbilisi"/>
-                                @if ($errors->has('city'))
-                                    <p class="profile-error-block">{{ $errors->first('city') }}</p>
+                            <div class="input address">
+                                <label for="">{{__('client.choose_address')}}</label>
+                                <input
+                                    type="text"
+                                    name="address[]"
+                                    class="{{$errors->has('address')?'invalid':""}}"
+                                    value="{{$address->address_1}}"
+                                    placeholder="Georgia, Tbilisi - Didi Dighomi III Micro-District"
+                                />
+                                @if ($errors->has('address'))
+                                    <p class="profile-error-block">{{ $errors->first('address') }}</p>
                                 @endif
                             </div>
                         </div>
-                        <div class="input address">
-                            <label for="">{{__('client.choose_address')}}</label>
-                            <input
-                                type="text"
-                                name="address[]"
-                                class="{{$errors->has('address')?'invalid':""}}"
-                                value="{{$address->address_1}}"
-                                placeholder="Georgia, Tbilisi - Didi Dighomi III Micro-District"
-                            />
-                            @if ($errors->has('address'))
-                                <p class="profile-error-block">{{ $errors->first('address') }}</p>
-                            @endif
+                        @endforeach
+                    @else
+                        <div class="addressFieldsChild">
+                            <div class="title flex"><span>Address</span> <button type="button" class="removeField">Remove</button></div>
+                            <div class="input_grid">
+                                <div class="input">
+                                    <label for="">{{__('client.choose_country')}}</label>
+                                    <input class="{{$errors->has('country')?'invalid':""}}"
+                                           name="country[]" type="text" placeholder="Georgia"/>
+                                    @if ($errors->has('country'))
+                                        <p class="profile-error-block">{{ $errors->first('country') }}</p>
+                                    @endif
+                                </div>
+                                <div class="input">
+                                    <label for="">{{__('client.choose_city')}}</label>
+                                    <input class="{{$errors->has('city')?'invalid':""}}"
+                                           name="city[]" type="text" placeholder="Tbilisi"/>
+                                    @if ($errors->has('city'))
+                                        <p class="profile-error-block">{{ $errors->first('city') }}</p>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="input address">
+                                <label for="">{{__('client.choose_address')}}</label>
+                                <input
+                                    type="text"
+                                    name="address[]"
+                                    class="{{$errors->has('address')?'invalid':""}}"
+                                    placeholder="Georgia, Tbilisi - Didi Dighomi III Micro-District"
+                                />
+                                @if ($errors->has('address'))
+                                    <p class="profile-error-block">{{ $errors->first('address') }}</p>
+                                @endif
+                            </div>
                         </div>
-                    </div>
-                    @endforeach
+                    @endif
                 </div>
                 <button type="button" id="addAddressField">Additional Address +</button>
 
