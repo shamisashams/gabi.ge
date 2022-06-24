@@ -42,6 +42,11 @@ const subscribe_popup_bg = document.querySelector(".subscribe_popup_bg");
 const togglePassword = document.querySelectorAll(".togglePassword");
 const passwordInput = document.querySelectorAll(".passwordInput");
 
+const addAddressField = document.getElementById("addAddressField");
+const addressFields = document.getElementById("addressFields");
+const addressFieldsChild = document.querySelector(".addressFieldsChild");
+const removeField = document.querySelector(".removeField");
+
 let timeout;
 
 const locale = $('meta[name="language"]').attr("content");
@@ -1097,4 +1102,50 @@ togglePassword.forEach((el, i) => {
             passwordInput[i].type = "password";
         }
     });
+});
+
+// add address field
+
+// addAddressField
+// addressFields
+// addressFieldsChild
+
+/* Variables */
+var row = $(".addressFieldsChild");
+$(".removeField").hide();
+
+function addRow() {
+    row.clone(true, true)
+        .appendTo("#addressFields")
+        .find("input")
+        .val("")
+        .end();
+}
+
+function removeRow(button) {
+    button.closest("div.addressFieldsChild").remove();
+}
+
+$("#attributes .attr:first-child").find(".remove").hide();
+
+/* Doc ready */
+$("#addAddressField").on("click", function () {
+    addRow();
+
+    if ($("#addressFields .addressFieldsChild").length > 1) {
+        //alert("Can't remove row.");
+        $(".removeField").show();
+    }
+});
+$(".removeField").on("click", function () {
+    if ($("#attributes .attr").size() == 1) {
+        //alert("Can't remove row.");
+        $(".removeField").hide();
+    } else {
+        removeRow($(this));
+
+        if ($("#addressFields .addressFieldsChild").size() == 1) {
+            $(".removeField").hide();
+        }
+    }
 });
