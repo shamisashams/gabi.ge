@@ -47,7 +47,7 @@
     </section>
 
     @if(session('status'))
-    <div class="commonPopup subscribe_popup ">
+    <div class="commonPopup subscribe_popup show">
         <div class="commonPopupContainer ">
             <div class="flex center success">
                 <img src="/img/icons/tick.png" alt="" />
