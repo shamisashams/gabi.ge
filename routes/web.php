@@ -424,6 +424,7 @@ Route::prefix('{locale?}')
                 Route::post('add-address',[UserController::class,'storeAddress'])->name('client.store-address');
                 Route::put('edit-address',[UserController::class,'updateAddress'])->name('client.update-address');
                 Route::get('address/{address}/destroy',[UserController::class,'deleteAddress'])->name('client.delete-address');
+                Route::post('avatar',[UserController::class,'updateAvatar'])->name('avatar');
             });
 
             Route::get('privacy-policy', function () {

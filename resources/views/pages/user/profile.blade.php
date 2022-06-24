@@ -19,9 +19,19 @@
                     {{__('client.welcome_to')}} <br/>
                     <span class="bold roboto">{{$user->name}}</span>
                 </div>
+                <?php
+
+                if($user->google_avatar){
+                    $avatar = asset('storage/' . str_replace('public/','',$user->google_avatar));
+                } elseif ($user->facebook_avatar){
+                    $avatar = asset('storage/' . $user->facebook_avatar);
+                } else {
+                    $avatar = asset('/img/icons/profile/avatar.png');
+                }
+                ?>
                 <div class="icn">
-                    <img id="userAvatarImg" src="/img/icons/profile/avatar.png" alt=""/>
-                    <input id="userAvatarInput" type="file" name="" id="">
+                    <img id="userAvatarImg" src="{{$avatar}}" alt=""/>
+                    <input id="userAvatarInput" type="file" name="avatar" id="">
                     <div class="add_img flex center">
                         <img src="/img/icons/profile/upload.png" alt=""/>
                     </div>
@@ -45,7 +55,7 @@
         <div class="profile_tabs_content clicked">
             @include('layouts.alert.alert')
             <div class="title">{{__('client.change_your_profile')}}</div>
-            <form method="post" action="{{route('profileUpdate',app()->getLocale())}}">
+            <form method="post" action="{{route('profileUpdate',app()->getLocale())}}" enctype="multipart/form-data">
                 @csrf
                 <div class="input_grid">
                     <div class="input">
@@ -237,7 +247,7 @@
         </div>
     </div>
      <script>
-            
+
             const fileIn = document.getElementById("userAvatarInput");
             const fileOut = document.getElementById("userAvatarImg");
             const readUrl = (event) => {
@@ -249,6 +259,20 @@
             };
             fileIn.onchange = function() {
                 readUrl(this);
+
+                const formData = new FormData();
+                formData.append('avatar',this.files[0]);
+                formData.append('_token','{{csrf_token()}}');
+                $.ajax({
+                    url: '{{route('avatar',app()->getLocale())}}',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    type: 'POST',
+                    success: function(data){
+                        console.log(data)
+                    }
+                });
             };
      </script>
 

@@ -26,6 +26,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function update(UserRequest $request)
     {
+
         $user = $this->model::find(auth()->user()->id);
 
         $profile = $user->profile()->update([
@@ -41,6 +42,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             return true;
         }
         return false;
+
 
     }
 

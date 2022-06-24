@@ -9,6 +9,7 @@ use App\Models\Answer;
 use App\Models\Feature;
 use App\Models\Language;
 use App\Models\Localization;
+use App\Models\User;
 use App\Repositories\AnswerRepositoryInterface;
 use App\Repositories\Frontend\CategoryRepositoryInterface;
 use App\Repositories\Frontend\ProductRepositoryInterface;
@@ -22,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Storage;
 
 
 class UserController extends Controller
@@ -85,6 +87,17 @@ class UserController extends Controller
             return $pdf->download('Order Products.pdf');
         }
 
+    }
+
+    public function updateAvatar(Request $request){
+       if($request->has('avatar')){
+           $user = User::query()->find(auth()->id());
+           Storage::delete($user->google_avatar);
+           $path = $request->file('avatar')->store('public/avatars');
+
+           $user
+           ->update(['google_avatar' => $path]);
+       }
     }
 
     public function addAddress(){
