@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\ResetPassword;
 use App\Traits\HasRolesAndPermissions;
 use App\Traits\ScopeUserFilter;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -103,6 +104,13 @@ class User extends Authenticatable
     public function addresses() : HasMany
     {
         return $this->hasMany(Address::class);
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $url = 'https://gabi.ge/reset-password?token='.$token.'&email='.$this->email;
+
+        $this->notify(new ResetPassword($url));
     }
 
 }
