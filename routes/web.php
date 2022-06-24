@@ -267,7 +267,7 @@ Route::prefix('{locale?}')
                 );
 
                 return $status === Password::PASSWORD_RESET
-                    ? redirect()->route('loginViewFront')->with('status', 'success')
+                    ? redirect()->back()->with('status', 'success')
                     : back()->withErrors(['password' => [__($status)]]);
             })->middleware('guest')->name('password.update');
 
