@@ -107,14 +107,17 @@
                     <br/>
                     @if(auth()->user())
                         @foreach(auth()->user()->addresses as $address)
-                            <div>
-                                <input id="address_{{$address->id}}" type="radio" name="address" value="{{$address->country}}, {{$address->city}}, {{$address->address_1}}"/>
-                                <label for="address_{{$address->id}}" class="inputs">
-                                    {{$address->country}}, {{$address->city}}<br>
-                                    {{$address->address_1}}
+                            <div class="flex inputs">
+                                <div>
+                                    <input id="address_{{$address->id}}" type="radio" name="address" value="{{$address->country}}, {{$address->city}}, {{$address->address_1}}"/>
+                                    <label for="address_{{$address->id}}" class="inputs">
+                                        {{$address->country}}, {{$address->city}}<br>
+                                        {{$address->address_1}}
 
-                                </label>
+                                    </label>
+                                </div>
                             </div>
+
 
                         @endforeach
                             @if ($errors->has('address'))
