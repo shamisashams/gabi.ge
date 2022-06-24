@@ -31,7 +31,8 @@ class AuthRepository extends BaseRepository implements AuthRepositoryInterface
     public function view()
     {
         if (Auth::user()) {
-            return redirect()->route('welcome', app()->getLocale());
+            //return redirect()->route('welcome', app()->getLocale());
+            return view('auth.login');
         } else {
             return view('auth.login');
         }
