@@ -108,7 +108,7 @@ class User extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        $url = 'https://gabi.ge/'. app()->getLocale() .'reset-password?token='.$token.'&email='.$this->email;
+        $url = 'https://gabi.ge/'. app()->getLocale() .'/reset-password?token='.$token.'&email='.$this->email;
 
         $this->notify(new ResetPassword($url));
     }
