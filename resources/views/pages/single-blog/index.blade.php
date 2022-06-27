@@ -9,8 +9,8 @@
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->meta_title : null}}" />
     <meta property="og:description"   content="{{count($blog->availableLanguage)>0?$blog->availableLanguage[0]->meta_description:""}}" />
-    @if(isset($product->files[0]))
-        <meta property="og:image" content="{{asset($blog->firstImage ? ('storage/blog/' . $blog->firstImage->fileable_id .'/'. $blog->firstImage->name) : null)}}" />
+    @if($blog->firstImage)
+        <meta property="og:image" content="{{asset('storage/blog/' . $blog->firstImage->fileable_id .'/'. $blog->firstImage->name)}}" />
     @endif
 
     {!! jsonld('breadcrumb_list',[
