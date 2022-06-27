@@ -5,6 +5,14 @@
     <meta name="keywords" content="{{count($blog->availableLanguage)>0?$blog->availableLanguage[0]->meta_keywords:""}}">
     <link rel="canonical" href="{{route('viewBlog',[app()->getLocale(),count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->slug : ''])}}" />
 
+    <meta property="og:url"           content="{{route('viewBlog',[app()->getLocale(),count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->slug : ''])}}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->meta_title : null}}" />
+    <meta property="og:description"   content="{{count($blog->availableLanguage)>0?$blog->availableLanguage[0]->meta_description:""}}" />
+    @if(isset($product->files[0]))
+        <meta property="og:image" content="{{asset($blog->firstImage ? ('storage/blog/' . $blog->firstImage->fileable_id .'/'. $blog->firstImage->name) : null)}}" />
+    @endif
+
     {!! jsonld('breadcrumb_list',[
             '@context'    => 'https://schema.org/',
             '@type'       => 'BreadcrumbList',
@@ -91,6 +99,21 @@
             <div class="flex center " style="color: #000;">
                     <img style="margin-right: 8px" src="/img/icons/blogs/share2.svg" alt=""/>
                     <span >Share</span>
+                <!-- Load Facebook SDK for JavaScript -->
+                <div id="fb-root"></div>
+                <script>(function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));</script>
+
+                <!-- Your share button code -->
+                <div class="fb-share-button"
+                     data-href="{{route('viewBlog',[app()->getLocale(),count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->slug : ''])}}"
+                     data-layout="button_count">
+                </div>
                 </div>
         </div>
      <div style="color: #000;">  You may like</div>
