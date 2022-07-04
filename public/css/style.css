@@ -1,6 +1,6 @@
 @font-face {
-    font-family: "alkrounded";
-    src: url("/fonts/FiraGO-book.ttf");
+    font-family: "firago";
+    src: url("/fonts/FiraGO-Book.ttf");
 }
 *,
 *::after,
@@ -9,7 +9,7 @@
     padding: 0;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    font-family: "alkrounded";
+    font-family: "firago";
     scroll-behavior: smooth;
 }
 
@@ -31,7 +31,7 @@ body {
     background: #fff;
     overflow-x: hidden;
     scroll-behavior: smooth;
-    font-family: "alkrounded";
+    font-family: "firago";
 }
 
 p {
