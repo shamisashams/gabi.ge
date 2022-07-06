@@ -152,7 +152,7 @@
                 class="product_name roboto">{{(count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->title : ''}}</{{isset($htags['product']->details) ? $htags['product']->details : 'div'}}>
             <p><span>ID:</span> {{$product->id}}</p>
             <p>
-                <span>Category:</span> {{(count($category->availableLanguage)> 0) ? $category->availableLanguage[0]->title : ''}}
+                <span>{{__('client.category')}} :</span> {{(count($category->availableLanguage)> 0) ? $category->availableLanguage[0]->title : ''}}
             </p>
             <div class="prices flex">
                 @if($product->saleProduct && $product->saleProduct->sale)
