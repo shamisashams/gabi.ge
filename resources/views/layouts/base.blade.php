@@ -34,6 +34,8 @@
                 return translations[data[1]];
             }
         }
+
+        // alert( __('client.success'));
     </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->

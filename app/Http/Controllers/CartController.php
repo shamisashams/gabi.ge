@@ -48,7 +48,6 @@ class CartController extends Controller
 
                 $total += intval($item->quantity) * intval($item->price) / 100;
             }
-
         }
         return view('pages.cart.index', [
             'products' => $products,
@@ -102,7 +101,6 @@ class CartController extends Controller
             }
         }
         return response()->json(array('status' => true));
-
     }
 
     public function getCartCount()
@@ -138,7 +136,6 @@ class CartController extends Controller
                     $total += intval($item->quantity) * floatval($item->price) / 100;
                 }
             }
-
         }
         return response()->json(array('status' => true, 'count' => count($cart), 'products' => $products, 'total' => $total));
     }
@@ -191,13 +188,11 @@ class CartController extends Controller
                 $bool = false;
                 break;
             }
-
         }
 
         if ($bool) {
             $products[] = (object)['product_id' => $product->id, 'quantity' => 1, 'price' => ($product->sale == 1) ? $product->sale_price : $product->price];
             $request->session()->put('products', $products);
-
         }
         return redirect(route('Cart', $locale));
     }

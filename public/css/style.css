@@ -1654,6 +1654,7 @@ img {
 
 .path .current {
     /* font-family: "roboto"; */
+    font-family: unset;
     font-size: 28px;
     line-height: 37px;
     color: #0e064d;
