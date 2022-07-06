@@ -188,6 +188,7 @@
         </section>
     </section>
 
+    <input type="hidden" name='{{__('client.cart_addsuccess')}}' value="{{__('client.cart_addsuccess')}}">
     <section class="products_viewport blog_section">
         <div class="wrapper">
             <div class="products_head ">

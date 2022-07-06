@@ -991,7 +991,7 @@ function addToModal(product) {
             <div class="success flex center popup_success">
 
                 <img src="/img/icons/popup/success.png" alt="">
-                <div>${__("client.success")}</div>
+                <div>${__("client.cart_addsuccess")}</div>
 
 
             </div>
