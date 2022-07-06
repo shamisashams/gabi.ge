@@ -2,7 +2,6 @@
 @section('head')
         <title>{{__('app.profile')}}</title>
 @endsection
-
 @section('content')
     <section class="path">
         <div class="path_content wrapper">
@@ -95,7 +94,7 @@
                     @if(count($user->addresses) > 0)
                         @foreach($user->addresses as $address)
                         <div class="addressFieldsChild">
-                            <div class="title flex"><span>{{__('client.user_address')}}</span> <button type="button" class="removeField">Remove</button></div>
+                            <div class="title flex"><span>{{__('client.useraddress')}}</span> <button type="button" class="removeField">{{__('client.remove_address')}}</button></div>
                             <div class="input_grid">
                                     <div class="input">
                                     <label for="">{{__('client.choose_country')}}</label>
