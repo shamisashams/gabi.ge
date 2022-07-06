@@ -79,7 +79,7 @@
                     </div>
                     <div class="flex center " style="color: #000;">
                         <img src="/img/icons/blogs/share2.svg" alt=""/>
-                        <span >Share</span>
+                        <span >{{__('client.share')}}</span>
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@
             </div>
             <div class="flex center " style="color: #000;">
                     <img style="margin-right: 8px" src="/img/icons/blogs/share2.svg" alt=""/>
-                    <span >Share</span>
+                    <span >{{__('client.share')}}</span>
                 <!-- Load Facebook SDK for JavaScript -->
                 <div id="fb-root"></div>
                 <script>(function(d, s, id) {
@@ -116,12 +116,12 @@
                 </div>
                 </div>
         </div>
-     <div style="color: #000;">  You may like</div>
+     <div style="color: #000;">  {{__('client.you_may_like')}}</div>
         <div class="blog_grid">
             @foreach($blogs as $blog)
             <a href="{{route('viewBlog',[app()->getLocale(),count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->slug : ''])}}" class="blog_box">
                 <div class="img_frame">
-                    <div class="read_more">Read more</div>
+                    <div class="read_more">{{__('client.readmore')}}</div>
                     <div class="img">
                         <img src="{{asset($blog->firstImage ? ('storage/blog/' . $blog->firstImage->fileable_id .'/'. $blog->firstImage->name) : null)}}" alt=""/>
                     </div>

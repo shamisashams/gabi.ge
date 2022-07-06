@@ -1,6 +1,5 @@
 @extends('layouts.base')
 
-{{--@dd($category)--}}
 
 @section('head')
     <title>{{count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_title:""}}</title>
@@ -252,7 +251,7 @@
                       <button
                         {{--{{count($productAnswers)>0?"disabled":""}}--}} onclick="addToCartProductDetails(this, '{{$product->id}}', true)"
                         class=" buy_now">
-                        <div>{{__('client.buy_now')}}</div>
+                        <div>{{__('client.buynow')}}</div>
                      </button>
 
             </div>
