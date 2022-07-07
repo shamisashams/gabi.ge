@@ -317,7 +317,7 @@ Route::prefix('{locale?}')
                 //dd('jdfhgjdhjf urkl');
                 $facebookUser = Socialite::driver('facebook')->stateless()->user();
 
-                //dd($facebookUser);
+                dd($facebookUser);
                 $user = User::updateOrCreate([
                     //'facebook_id' => $facebookUser->id,
                     'email' => $facebookUser->email,
