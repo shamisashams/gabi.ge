@@ -318,9 +318,11 @@ Route::prefix('{locale?}')
                 $facebookUser = Socialite::driver('facebook')->stateless()->user();
 
                 //dd($facebookUser);
+                $email = uniqid();
+                if($facebookUser->email !== null) $email = $facebookUser->email;
                 $user = User::updateOrCreate([
                     //'facebook_id' => $facebookUser->id,
-                    'email' => $facebookUser->email,
+                    'email' => $email,
                 ], [
                     'name' => $facebookUser->name,
                     'facebook_id' => $facebookUser->id,
