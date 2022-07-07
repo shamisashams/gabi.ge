@@ -1,6 +1,5 @@
 @extends('layouts.base')
 
-{{--@dd($category)--}}
 
 @section('head')
     <title>{{count($product->availableLanguage)>0?$product->availableLanguage[0]->meta_title:""}}</title>
@@ -153,7 +152,7 @@
                 class="product_name roboto">{{(count($product->availableLanguage)> 0) ? $product->availableLanguage[0]->title : ''}}</{{isset($htags['product']->details) ? $htags['product']->details : 'div'}}>
             <p><span>ID:</span> {{$product->id}}</p>
             <p>
-                <span>Category:</span> {{(count($category->availableLanguage)> 0) ? $category->availableLanguage[0]->title : ''}}
+                <span>{{__('client.category')}} :</span> {{(count($category->availableLanguage)> 0) ? $category->availableLanguage[0]->title : ''}}
             </p>
             <div class="prices flex">
                 @if($product->saleProduct && $product->saleProduct->sale)
@@ -252,7 +251,7 @@
                       <button
                         {{--{{count($productAnswers)>0?"disabled":""}}--}} onclick="addToCartProductDetails(this, '{{$product->id}}', true)"
                         class=" buy_now">
-                        <div>{{__('client.buy_now')}}</div>
+                        <div>{{__('client.buynow')}}</div>
                      </button>
 
             </div>

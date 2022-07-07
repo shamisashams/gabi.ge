@@ -132,12 +132,12 @@
                     <div>{{__('client.payment_method')}}:</div>
                     <br/>
                     <div class="flex">
-                        <div>
+                        {{-- <div>
                             <input onchange="hideBank()" type="radio" name="payment_method" value="cash"
                                    id="pmmt_cash"/>
                             <label for="pmmt_cash">{{__('client.cash')}}</label>
 
-                        </div>
+                        </div> --}}
                         <div>
                             <input onchange="showBank()" type="radio" name="payment_method" value="card"
                                    id="pmmt_bank"/>

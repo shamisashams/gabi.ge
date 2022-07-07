@@ -58,7 +58,7 @@
             @foreach($blogs as $blog)
             <a href="{{route('viewBlog',[app()->getLocale(),count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->slug : ''])}}" class="blog_box">
                 <div class="img_frame">
-                    <div class="read_more">Read more</div>
+                    <div class="read_more">{{__('client.read_more')}}</div>
                    {{-- @dump($blog->firstImage)--}}
                     <div class="img">
                         <img src="{{asset($blog->firstImage ? ('storage/blog/' . $blog->firstImage->fileable_id .'/'. $blog->firstImage->name) : null)}}" alt=""/>

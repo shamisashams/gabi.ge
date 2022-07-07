@@ -8,7 +8,7 @@
                     <img src="/img/icons/popup/close.png" alt=""/>
                 </button>
                 <div class="head flex center column">
-                    <div class="title d2">{{('client.final_details_for_order')}} #{{$order->id}}</div>
+                    <div class="title d2">{{('client.finaldetails_fororder')}} #{{$order->id}}</div>
                     <button class="print_this_page flex center column">
                         <img src="/img/icons/profile/print.png" alt=""/>
                         <div class="dc">Print this page</div>

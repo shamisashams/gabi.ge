@@ -417,24 +417,20 @@ function getCartCount() {
                     let element = `
 
                         <div class="item cart_item_header">
-                          <a style="display: contents" href="/${locale}/${
-                        item.cat_slug
-                    }/${item.prod_slug}"">
+                          <a style="display: contents" href="/${locale}/${item.cat_slug
+                        }/${item.prod_slug}"">
                         <div>
                             <div class="title">${item.title}</div>
-                            <div class="number">${item.quantity} x ₾${
-                        item.sale ? item.sale : item.price
-                    }</div>
+                            <div class="number">${item.quantity} x ₾${item.sale ? item.sale : item.price
+                        }</div>
                         </div>
                         <div class="picture">
-                            <img src="/storage/product/${item.id}/thumb/${
-                        item.file
-                    }" alt=""/>
+                            <img src="/storage/product/${item.id}/thumb/${item.file
+                        }" alt=""/>
                         </div>
                           </a>
 
-                        <button type="button" class="remove_item" onclick="removefromcart(this,${
-                            item.id
+                        <button type="button" class="remove_item" onclick="removefromcart(this,${item.id
                         })">
                             <p hidden>${item.options}</p>
                             <img src="/img/icons/header/remove.png" alt=""/>
@@ -448,9 +444,8 @@ function getCartCount() {
                 let checkout = `
                                     <div class="checkout" id="checkout-total">
                         <div class="total">${__("client.total")}</div>
-                        <div class="price">₾ ${
-                            Math.round(data.total * 100) / 100
-                        }</div>
+                        <div class="price">₾ ${Math.round(data.total * 100) / 100
+                    }</div>
                     </div>
                     <div class="checkout">
                         <!--<a href="/${locale}/cart">
@@ -533,8 +528,8 @@ function removefromcart(el = null, id, options = null) {
     let features = el
         ? JSON.parse(el.firstElementChild.textContent)
         : options
-        ? options
-        : "";
+            ? options
+            : "";
 
     if (features) {
         $.ajaxSetup({
@@ -815,11 +810,9 @@ function addToModal(product) {
 
         product.files.forEach((item, i) => {
             mainImages = mainImages.concat(`
-                <img class="main_img_popup ${
-                    i === 0 ? "display" : ""
-                }" src="/storage/product/${item.fileable_id}/${
-                item.name
-            }" alt="" />
+                <img class="main_img_popup ${i === 0 ? "display" : ""
+                }" src="/storage/product/${item.fileable_id}/${item.name
+                }" alt="" />
             `);
         });
     }
@@ -828,25 +821,23 @@ function addToModal(product) {
         let sale = product.sale_product.sale;
         price = `
                <div class="main">
-                 ₾ ${
-                     sale.type == "fixed"
-                         ? (product.prcie / 100 - sale.discount).toFixed(2)
-                         : (
-                               product.price / 100 -
-                               ((product.price / 100) * sale.discount) / 100
-                           ).toFixed(2)
-                 }
+                 ₾ ${sale.type == "fixed"
+                ? (product.prcie / 100 - sale.discount).toFixed(2)
+                : (
+                    product.price / 100 -
+                    ((product.price / 100) * sale.discount) / 100
+                ).toFixed(2)
+            }
                </div>
                <div class="last">₾ ${(product.price / 100).toFixed(2)}</div>
                <div class="off">
-                  -${
-                      sale.type == "percent"
-                          ? sale.discount
-                          : (
-                                (sale.discount * 100) /
-                                (product.price / 100)
-                            ).toFixed(2)
-                  }%
+                  -${sale.type == "percent"
+                ? sale.discount
+                : (
+                    (sale.discount * 100) /
+                    (product.price / 100)
+                ).toFixed(2)
+            }%
                </div>
                `;
     } else {
@@ -865,7 +856,7 @@ function addToModal(product) {
                     productAnswer.feature.type === "input" ||
                     (productAnswer.feature.english_language.length > 0
                         ? productAnswer.feature.english_language[0].title ==
-                          "category"
+                        "category"
                         : "")
                 ) {
                     continue;
@@ -874,28 +865,24 @@ function addToModal(product) {
                     if (answer.status && productAnswers.includes(answer.id)) {
                         if (productAnswer.feature.type === "select") {
                             sel_opt = sel_opt.concat(`
-                            <option value="${answer.id}">${
-                                answer.available_language.length > 0
+                            <option value="${answer.id}">${answer.available_language.length > 0
                                     ? answer.available_language[0].title
                                     : ""
-                            }</option>
+                                }</option>
                          `);
                         } else {
                             options = options.concat(`
                             <div class="box">
-                                <input type="radio" name="feature[${
-                                    productAnswer.feature.id
+                                <input type="radio" name="feature[${productAnswer.feature.id
                                 }][]"
-                                       data-feature="${
-                                           productAnswer.feature.id
-                                       }" id="${answer.id}"
+                                       data-feature="${productAnswer.feature.id
+                                }" id="${answer.id}"
                                            value="${answer.id}"
                                  />
                                 <label for="${answer.id}" class="box">
-                                ${
-                                    answer.available_language.length > 0
-                                        ? answer.available_language[0].title
-                                        : ""
+                                ${answer.available_language.length > 0
+                                    ? answer.available_language[0].title
+                                    : ""
                                 }
                               </label>
                             </div>
@@ -907,14 +894,12 @@ function addToModal(product) {
                 if (productAnswer.feature.type === "select") {
                     features = features.concat(`
                    <div class="options">
-                        <div class="title select">${
-                            productAnswer.feature.available_language.length > 0
-                                ? productAnswer.feature.available_language[0]
-                                      .title
-                                : ""
+                        <div class="title select">${productAnswer.feature.available_language.length > 0
+                            ? productAnswer.feature.available_language[0]
+                                .title
+                            : ""
                         }</div>
-                        <select name="feature[${
-                            productAnswer.feature.id
+                        <select name="feature[${productAnswer.feature.id
                         }][]" data-feature="${productAnswer.feature.id}">
                         <option value=""></option>
                         ${sel_opt}
@@ -925,11 +910,10 @@ function addToModal(product) {
                 } else {
                     features = features.concat(`
                    <div class="options">
-                        <div class="title radio">${
-                            productAnswer.feature.available_language.length > 0
-                                ? productAnswer.feature.available_language[0]
-                                      .title
-                                : ""
+                        <div class="title radio">${productAnswer.feature.available_language.length > 0
+                            ? productAnswer.feature.available_language[0]
+                                .title
+                            : ""
                         }</div>
                         <div class="box_grid">
                         ${options}
@@ -947,11 +931,10 @@ function addToModal(product) {
         <div class="close_popup_bg"></div>
             <div class="product_popup">
             <div class="head flex">
-                <div>${
-                    product.available_language.length > 0
-                        ? product.available_language[0].title
-                        : ""
-                }</div>
+                <div>${product.available_language.length > 0
+                ? product.available_language[0].title
+                : ""
+            }</div>
                 <button onclick="popUpBg.classList.remove('open')" class="close_popup">
                     <img src="/img/icons/popup/close.png" alt="" />
                 </button>
@@ -971,11 +954,10 @@ function addToModal(product) {
                       ${price}
                     </div>
                     <p><span>ID:</span> ${product.id}</p>
-                    <p><span>Category:</span> ${
-                        product.category.available_language.length > 0
-                            ? product.category.available_language[0].title
-                            : ""
-                    }</p>
+                    <p><span>Category:</span> ${product.category.available_language.length > 0
+                ? product.category.available_language[0].title
+                : ""
+            }</p>
                     <div class="btns flex">
                         <div class="number_input">
                             <button class="decrease" onclick="decreaseValue()">-</button>
@@ -993,17 +975,14 @@ function addToModal(product) {
                 </div>
             </div>
             <div class="flex center btm_btns">
-                <a href="/${locale}/${
-            product.category.available_language[0].slug
-        }/${product.available_language[0].slug}">
+                <a href="/${locale}/${product.category.available_language[0].slug
+            }/${product.available_language[0].slug}">
                     <button class="details">${__("client.details")}</button>
                 </a>
 
-                    <button id="add_to_cart" ${
-                        disabled ? "disabled" : ""
-                    } onclick="addToCart(this, ${
-            product.id
-        })" class="add_to_cart flex center popup_add_to_cart">
+                    <button id="add_to_cart" ${disabled ? "disabled" : ""
+            } onclick="addToCart(this, ${product.id
+            })" class="add_to_cart flex center popup_add_to_cart">
                         <img src="/img/icons/details/cart.png" alt="" />
                         <div>${__("client.add_to_cart")}</div>
                     </button>
@@ -1012,7 +991,7 @@ function addToModal(product) {
             <div class="success flex center popup_success">
 
                 <img src="/img/icons/popup/success.png" alt="">
-                <div>${__("client.cart_add_success")}</div>
+                <div>${__("client.cart_addsuccess")}</div>
 
 
             </div>
