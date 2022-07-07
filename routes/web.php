@@ -321,9 +321,10 @@ Route::prefix('{locale?}')
                 $email = uniqid();
                 if($facebookUser->email !== null) $email = $facebookUser->email;
                 $user = User::updateOrCreate([
-                    //'facebook_id' => $facebookUser->id,
-                    'email' => $email,
+                    'facebook_id' => $facebookUser->id,
+
                 ], [
+                    'email' => $email,
                     'name' => $facebookUser->name,
                     'facebook_id' => $facebookUser->id,
                     'facebook_token' => $facebookUser->token,
