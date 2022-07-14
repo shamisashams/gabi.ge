@@ -85,7 +85,7 @@
 @stack('script')
 
 <!-- Load Facebook SDK for JavaScript -->
-<div id="fb-root"></div>
+{{--<div id="fb-root"></div>
 <script>
     window.fbAsyncInit = function() {
         FB.init({
@@ -107,7 +107,7 @@
      attribution="install_email"
      attribution_version="biz_inbox"
      page_id="105344308442775">
-</div>
+</div>--}}
 </body>
 
 </html>
