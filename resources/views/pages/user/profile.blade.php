@@ -155,13 +155,8 @@
                                         <option value=""></option>
 
                                         @foreach($countries as $country)
-                                            <?php
-                                            $selected = '';
-                                            if($address){
-                                                if($address->country_id == $country->id) $selected = 'selected';
-                                            }
-                                            ?>
-                                            <option value="{{$country->id}}" {{$selected}}>{{$country->language ? $country->language->title:''}}</option>
+
+                                            <option value="{{$country->id}}">{{$country->language ? $country->language->title:''}}</option>
                                         @endforeach
                                     </select>
                                     @if ($errors->has('country_id.*'))
