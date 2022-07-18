@@ -21,8 +21,8 @@ class UserRequest extends FormRequest
             'country' => 'required',
             'country_id.*' => 'required',
             'city_id.*' => 'required',
-            'city' => 'required',
-            'address' => 'required',
+            'city' => 'nullable',
+            'address' => 'nullable',
             'phone' => 'required|string|max:100'
         ];
     }
