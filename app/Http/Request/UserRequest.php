@@ -18,11 +18,11 @@ class UserRequest extends FormRequest
         return [
             'first_name' => 'required|string|max:100',
             'last_name' => 'required|string|max:100',
-            'country' => 'required',
+            'country' => 'nullable',
             'country_id.*' => 'required',
             'city_id.*' => 'required',
             'city' => 'nullable',
-            'address' => 'nullable',
+            'address.*' => 'required',
             'phone' => 'required|string|max:100'
         ];
     }

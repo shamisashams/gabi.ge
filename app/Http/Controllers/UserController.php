@@ -62,6 +62,7 @@ class UserController extends Controller
 
     public function update(string $locale, UserRequest $request)
     {
+        //dd($request->all());
         if (!$this->userRepository->update($request)) {
             return redirect(route('profile', $locale))->with('danger', __('client.your_information_not_updated'));
         }

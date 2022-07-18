@@ -38,12 +38,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
         $user->addresses()->delete();
 
-        foreach ($request->post('country') as $key => $item){
+        foreach ($request->post('country_id') as $key => $item){
             $user->addresses()->create([
-                'country_id' => $request->post('country_id')[$key],
+                'country_id' => $item,
                 'city_id' => $request->post('city_id')[$key],
-                'country' => $item,
-                'city' => $request->post('city')[$key],
+                'country' => '',
+                'city' => '',
                 'address_1' => $request->post('address')[$key],
             ]);
         }
