@@ -153,8 +153,15 @@
                                            name="country[]" type="text" placeholder="Georgia"/>--}}
                                     <select class="country_sel" name="country_id[]">
                                         <option value=""></option>
+
                                         @foreach($countries as $country)
-                                            <option value="{{$country->id}}" {{$address ? ($address->country_id == $country->id ? 'selected':''):''}}>{{$country->language ? $country->language->title:''}}</option>
+                                            <?php
+                                            $selected = '';
+                                            if($address){
+                                                if($address->country_id == $country->id) $selected = 'selected';
+                                            }
+                                            ?>
+                                            <option value="{{$country->id}}" {{$selected}}>{{$country->language ? $country->language->title:''}}</option>
                                         @endforeach
                                     </select>
                                     @if ($errors->has('country_id.*'))
