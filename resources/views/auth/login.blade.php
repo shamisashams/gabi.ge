@@ -96,6 +96,11 @@
 
                     <div class="label">{{__('client.choose_country')}}</div>
                     <input value="{{old('country')}}" name="country" type="text" class="{{$errors->has('country')?'invalid':""}}" placeholder="Georgia" />
+                    {{--<select name="country_id">
+                        @foreach($countries as $country)
+                            <option value="{{$country->id}}">{{$country->language ? $country->language->title : ''}}</option>
+                        @endforeach
+                    </select>--}}
                     @if ($errors->has('country'))
                         <p class="error-block">{{ $errors->first('country') }}</p>
                     @endif

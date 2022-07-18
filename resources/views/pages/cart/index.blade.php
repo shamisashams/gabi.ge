@@ -88,16 +88,25 @@
                 <div class="row">
                     <div>{{__('client.shipping')}}:</div>
                     <br/>
-                    @foreach($shipping as $item)
+                    {{--@foreach($shipping as $item)--}}
                     <div class="flex inputs">
                         <div>
-                            <input onchange="changeTotalPrice(this)" type="radio" name="shipping" id="ship_{{$item->id}}"
-                                   value="{{$item->id}}" data-price="{{$item->price / 100}}"/>
-                            <label for="ship_{{$item->id}}">{{$item->language ? $item->language->title : ''}}</label>
+                            <input onchange="changeTotalPrice(this)" type="radio" name="shipping" id="ship_from_office"
+                                   value="from_office" data-price=""/>
+                            <label for="ship_from_office">@lang('client.from_office')</label>
                         </div>
-                        <div>₾{{number_format($item->price / 100,2)}}</div>
+                        <div>₾0.00</div>
                     </div>
-                    @endforeach
+
+                    <div class="flex inputs">
+                        <div>
+                            <input onchange="changeTotalPrice(this)" type="radio" name="shipping" id="ship_to_address"
+                                   value="to_address" data-price=""/>
+                            <label for="ship_to_address">@lang('client.to_address')</label>
+                        </div>
+                        <div id="to_address_price">₾0.00</div>
+                    </div>
+                    {{--@endforeach--}}
                     @if ($errors->has('shipping'))
                         <p class="profile-error-block">{{ $errors->first('shipping') }}</p>
                     @endif
@@ -109,9 +118,9 @@
                         @foreach(auth()->user()->addresses as $address)
                             <div class="flex inputs">
                                 <div>
-                                    <input id="address_{{$address->id}}" type="radio" name="address" value="{{$address->country}}, {{$address->city}}, {{$address->address_1}}"/>
+                                    <input onchange="changeTotalPrice2(this)" data-ship="{{$address->city_r->ship_price / 100}}" id="address_{{$address->id}}" type="radio" name="address" value="{{$address->id}}"/>
                                     <label for="address_{{$address->id}}" class="inputs">
-                                        {{$address->country}}, {{$address->city}}<br>
+                                        {{$address->country_r->language ? $address->country_r->language->title:''}}, {{$address->city_r->language ? $address->city_r->language->title:''}}<br>
                                         {{$address->address_1}}
 
                                     </label>

@@ -6,6 +6,8 @@ use App\Http\Request\Admin\AnswerRequest;
 use App\Http\Request\PasswordChangeRequest;
 use App\Http\Request\UserRequest;
 use App\Models\Answer;
+use App\Models\City;
+use App\Models\Country;
 use App\Models\Feature;
 use App\Models\Language;
 use App\Models\Localization;
@@ -44,9 +46,16 @@ class UserController extends Controller
      */
     public function index($locale)
     {
+        $cities = City::with('language')->get();
 
+        $result = [];
+        foreach ($cities as $city){
+            $result[$city->country_id][] = $city;
+        }
         return view('pages.user.profile', [
             'user' => auth()->user(),
+            'countries' => Country::with(['language','cities','cities.language'])->get(),
+            'cities' => $result,
             'orders' => $this->userRepository->userOrders()
         ]);
     }

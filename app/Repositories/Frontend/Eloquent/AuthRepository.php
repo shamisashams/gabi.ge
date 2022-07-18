@@ -6,6 +6,7 @@ use App\Http\Request\LoginFrontRequest;
 use App\Http\Request\LoginRequest;
 use App\Http\Request\RegisterRequest;
 use App\Models\Category;
+use App\Models\Country;
 use App\Models\Language;
 use App\Models\User;
 use App\Repositories\Frontend\AuthRepositoryInterface;
@@ -30,11 +31,12 @@ class AuthRepository extends BaseRepository implements AuthRepositoryInterface
 
     public function view()
     {
+        $countries = Country::all();
         if (Auth::user()) {
             //return redirect()->route('welcome', app()->getLocale());
-            return view('auth.login');
+            return view('auth.login',compact('countries'));
         } else {
-            return view('auth.login');
+            return view('auth.login',compact('countries'));
         }
 
     }

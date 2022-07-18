@@ -40,6 +40,8 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
         foreach ($request->post('country') as $key => $item){
             $user->addresses()->create([
+                'country_id' => $request->post('country_id')[$key],
+                'city_id' => $request->post('city_id')[$key],
                 'country' => $item,
                 'city' => $request->post('city')[$key],
                 'address_1' => $request->post('address')[$key],

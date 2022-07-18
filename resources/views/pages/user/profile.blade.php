@@ -90,6 +90,7 @@
                     </div>
                 </div>
 
+               {{-- @dd($countries,$cities)--}}
                 <div id="addressFields">
                     @if(count($user->addresses) > 0)
                         @foreach($user->addresses as $address)
@@ -98,18 +99,32 @@
                             <div class="input_grid">
                                     <div class="input">
                                     <label for="">{{__('client.choose_country')}}</label>
-                                    <input value="{{$address->country}}" class="{{$errors->has('country')?'invalid':""}}"
-                                           name="country[]" type="text" placeholder="Georgia"/>
-                                    @if ($errors->has('country'))
+                                    {{--<input value="{{$address->country}}" class="{{$errors->has('country')?'invalid':""}}"
+                                           name="country[]" type="text" placeholder="Georgia"/>--}}
+                                        <select class="country_sel" name="country_id[]">
+                                            <option value=""></option>
+                                            @foreach($countries as $country)
+                                                <option value="{{$country->id}}" {{$address->country_id == $country->id ? 'selected':''}}>{{$country->language ? $country->language->title:''}}</option>
+                                            @endforeach
+                                        </select>
+                                    @if ($errors->has('country_id.*'))
                                         <p class="profile-error-block">{{ $errors->first('country') }}</p>
                                     @endif
                                 </div>
                                 <div class="input">
                                     <label for="">{{__('client.choose_city')}}</label>
-                                    <input value="{{$address->city}}" class="{{$errors->has('city')?'invalid':""}}"
-                                           name="city[]" type="text" placeholder="Tbilisi"/>
-                                    @if ($errors->has('city'))
-                                        <p class="profile-error-block">{{ $errors->first('city') }}</p>
+                                    {{--<input value="{{$address->city}}" class="{{$errors->has('city')?'invalid':""}}"
+                                           name="city[]" type="text" placeholder="Tbilisi"/>--}}
+                                    <select name="city_id[]">
+                                        <option value=""></option>
+                                        @if(isset($cities[$address->country_id]))
+                                            @foreach($cities[$address->country_id] as $city)
+                                                <option value="{{$city->id}}" {{$address->city_id == $city->id ? 'selected':''}}>{{$city->language ? $city->language->title:''}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    @if ($errors->has('city_id.*'))
+                                        <p class="profile-error-block">{{ $errors->first('city.*') }}</p>
                                     @endif
                                 </div>
                             </div>
@@ -134,18 +149,32 @@
                             <div class="input_grid">
                                 <div class="input">
                                     <label for="">{{__('client.choose_country')}}</label>
-                                    <input class="{{$errors->has('country')?'invalid':""}}"
-                                           name="country[]" type="text" placeholder="Georgia"/>
-                                    @if ($errors->has('country'))
-                                        <p class="profile-error-block">{{ $errors->first('country') }}</p>
+                                   {{-- <input class="{{$errors->has('country')?'invalid':""}}"
+                                           name="country[]" type="text" placeholder="Georgia"/>--}}
+                                    <select class="country_sel" name="country_id[]">
+                                        <option value=""></option>
+                                        @foreach($countries as $country)
+                                            <option value="{{$country->id}}" {{$address->country_id == $country->id ? 'selected':''}}>{{$country->language ? $country->language->title:''}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('country_id.*'))
+                                        <p class="profile-error-block">{{ $errors->first('country_id.*') }}</p>
                                     @endif
                                 </div>
                                 <div class="input">
                                     <label for="">{{__('client.choose_city')}}</label>
-                                    <input class="{{$errors->has('city')?'invalid':""}}"
-                                           name="city[]" type="text" placeholder="Tbilisi"/>
-                                    @if ($errors->has('city'))
-                                        <p class="profile-error-block">{{ $errors->first('city') }}</p>
+                                    {{--<input class="{{$errors->has('city')?'invalid':""}}"
+                                           name="city[]" type="text" placeholder="Tbilisi"/>--}}
+                                    <select name="city_id[]">
+                                        <option value=""></option>
+                                        @if(isset($cities[$address->country_id]))
+                                            @foreach($cities[$address->country_id] as $city)
+                                                <option value="{{$city->id}}" {{$address->city_id == $city->id ? 'selected':''}}>{{$city->language ? $city->language->title:''}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    @if ($errors->has('city_id.*'))
+                                        <p class="profile-error-block">{{ $errors->first('city.*') }}</p>
                                     @endif
                                 </div>
                             </div>
@@ -311,6 +340,25 @@
                     }
                 });
             };
+
+
+
      </script>
 
 @endsection
+
+@push('script')
+    <script>
+        let cities = @json($cities);
+        console.log(cities);
+        $(document).on('change','[name="country_id[]"]',function (e){
+            let $this = $(this);
+            let id = $this.val();
+            $this.parents('.addressFieldsChild').find('[name="city_id[]"]').html('');
+            $this.parents('.addressFieldsChild').find('[name="city_id[]"]').append('<option value=""></option>');
+            cities[id].forEach(function (el){
+                $this.parents('.addressFieldsChild').find('[name="city_id[]"]').append('<option value="' + el.id + '">' + el.language.title + '</option>');
+            });
+        });
+    </script>
+@endpush

@@ -99,6 +99,11 @@
                 href="{{route('password.index',app()->getLocale())}}"><i class="material-icons dp48">chrome_reader_mode</i><span>{{trans('admin.password')}}</span></a>
         </li>
 
+        <li class="bold"><a
+                class="waves-effect waves-cyan {{str_contains(route('country.index',app()->getLocale()),request()->path())?"active":""}}"
+                href="{{route('country.index',app()->getLocale())}}"><i class="material-icons dp48">chrome_reader_mode</i><span>{{trans('admin.country')}}</span></a>
+        </li>
+
     </ul>
     <div class="navigation-background"></div>
     <a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only"

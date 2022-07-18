@@ -19,6 +19,8 @@ class UserRequest extends FormRequest
             'first_name' => 'required|string|max:100',
             'last_name' => 'required|string|max:100',
             'country' => 'required',
+            'country_id.*' => 'required',
+            'city_id.*' => 'required',
             'city' => 'required',
             'address' => 'required',
             'phone' => 'required|string|max:100'

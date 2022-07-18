@@ -217,6 +217,9 @@ Route::prefix('{locale?}')
                 Route::get('password',[\App\Http\Controllers\Admin\PasswordController::class, 'index'])->name('password.index');
                 Route::post('password',[\App\Http\Controllers\Admin\PasswordController::class, 'update'])->name('password.update');
 
+                Route::resource('country', \App\Http\Controllers\Admin\CountryController::class);
+
+                Route::get('country/{country}/destroy', [\App\Http\Controllers\Admin\CountryController::class, 'destroy'])->name('country.destroy');
             });
         });
         Route::middleware(['active'])->group(function () {

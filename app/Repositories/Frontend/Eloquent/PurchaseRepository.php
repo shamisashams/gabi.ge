@@ -38,16 +38,21 @@ class PurchaseRepository extends BaseRepository implements PurchaseRepositoryInt
                             : $product->price);
                 }
             }
-            $shipping = Shipping::query()->find($request['shipping']);
-            /*if ($request['shipping'] === 'from_office') {
+            //$shipping = Shipping::query()->find($request['shipping']);
+            $address = auth()->user()->addresses()->find($request->post('address'));
+
+            $shipmentPrice = $address->city_r->ship_price;
+
+            if ($request['shipping'] === 'from_office') {
                 $shipmentPrice = 0;
-            }*/
-            $shipmentPrice = $shipping->price;
+            }
+
 
             $total += $shipmentPrice; // mitana
 
             $paymentType = PaymentType::where(['title' => $request['payment_method']])->first();
 
+            //dd($address->country_r->language,$total);
 
             //$bank = $request->post('bank');
             //$paymentType = $request->post('payment_method');
@@ -69,9 +74,9 @@ class PurchaseRepository extends BaseRepository implements PurchaseRepositoryInt
                     'last_name' => auth()->user()->profile->last_name,
                     'email' => auth()->user()->email,
                     'phone' => auth()->user()->profile->phone,
-                    'address' => auth()->user()->profile->address,
-                    'city' => auth()->user()->profile->city,
-                    'country' => auth()->user()->profile->country
+                    'address' => $address->address_1,
+                    'city' => $address->city_r->language ? $address->city_r->language->title : '',
+                    'country' =>  $address->city_r->language ? $address->country_r->language->title : '',
                 ]);
 
                 $products = array();
