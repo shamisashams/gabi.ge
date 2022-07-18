@@ -1,6 +1,10 @@
 function changeTotalPrice(el) {
     let total = document.querySelector("#total-price");
-    let ship = parseFloat($("input[type='radio'][name='address']:checked").data('ship')) | 0;
+    let ship = 0;
+    if($("input[type='radio'][name='address']:checked").data('ship') !== undefined){
+        ship = $("input[type='radio'][name='address']:checked").data('ship');
+    }
+
     if(el.value == 'from_office'){
         ship = 0;
     }
