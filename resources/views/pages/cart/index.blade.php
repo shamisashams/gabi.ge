@@ -115,7 +115,8 @@
                     <div>{{__('client.address')}}:</div>
                     <br/>
                     @if(auth()->user())
-                        @foreach(auth()->user()->addresses as $address)
+
+                        @foreach(auth()->user()->addresses()->has('city_r')->get() as $address)
                             <div class="flex inputs">
                                 <div>
                                     <input onchange="changeTotalPrice2(this)" data-ship="{{$address->city_r->ship_price / 100}}" id="address_{{$address->id}}" type="radio" name="address" value="{{$address->id}}"/>
