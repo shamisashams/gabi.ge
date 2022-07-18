@@ -169,11 +169,6 @@
                                            name="city[]" type="text" placeholder="Tbilisi"/>--}}
                                     <select name="city_id[]">
                                         <option value=""></option>
-                                        @if(isset($cities[$address->country_id]))
-                                            @foreach($cities[$address->country_id] as $city)
-                                                <option value="{{$city->id}}" {{$address->city_id == $city->id ? 'selected':''}}>{{$city->language ? $city->language->title:''}}</option>
-                                            @endforeach
-                                        @endif
                                     </select>
                                     @if ($errors->has('city_id.*'))
                                         <p class="profile-error-block">{{ $errors->first('city.*') }}</p>
