@@ -154,7 +154,7 @@
                                     <select class="country_sel" name="country_id[]">
                                         <option value=""></option>
                                         @foreach($countries as $country)
-                                            <option value="{{$country->id}}" {{$address->country_id == $country->id ? 'selected':''}}>{{$country->language ? $country->language->title:''}}</option>
+                                            <option value="{{$country->id}}" {{$address ? ($address->country_id == $country->id ? 'selected':''):''}}>{{$country->language ? $country->language->title:''}}</option>
                                         @endforeach
                                     </select>
                                     @if ($errors->has('country_id.*'))
