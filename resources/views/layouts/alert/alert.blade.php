@@ -1,7 +1,7 @@
 @if(session('success'))
     <div class="alert" style="background-color:#04AA6D">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>Success!</strong> {{session('success')}}
+        <strong>@lang('client.success')!</strong> {{session('success')}}
     </div>
 @endif
 

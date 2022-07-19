@@ -71,10 +71,10 @@
                         </button>
                     </div>
                 @endforeach
-                <div class="flex coupon">
+                {{--<div class="flex coupon">
                     <input type="text" placeholder="{{__('client.coupon_code')}}"/>
                     <button class="ok">{{__('client.ok')}}</button>
-                </div>
+                </div>--}}
             </div>
         </div>
         <div class="cart_total_fee">

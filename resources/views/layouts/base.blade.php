@@ -42,7 +42,7 @@
 
     <script>
 
-        function __ (key){
+        function __(key){
             let data = key.split('.');
             let translations = @json($client_translation);
 
