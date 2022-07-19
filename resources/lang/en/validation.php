@@ -98,7 +98,7 @@ return [
     'password' => 'The password is incorrect.',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => 'The :attribute field is required.',
+    'required' => ':attribute '.__('client.field_required'),
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',
@@ -118,7 +118,7 @@ return [
     'starts_with' => 'The :attribute must start with one of the following: :values.',
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid zone.',
-    'unique' => 'The :attribute has already been taken.',
+    'unique' => ':attribute' . __('client.validation_unique'),
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
@@ -152,16 +152,16 @@ return [
     */
 
     'attributes' => [
-        'first_name'=>'first name',
-        'last_name'=>'last_name',
-        'email'=>'email',
-        'phone'=>'phone',
-        'country'=>'country',
-        'city'=>'city',
-        'address'=>'address',
-        'old_password'=>'old password',
-        'password'=>'password',
-        'password_repeat'=>'password repeat'
+        'first_name'=>__('client.first_name'),
+        'last_name'=>__('client.last_name'),
+        'email'=>__('client.email'),
+        'phone'=>__('client.phone'),
+        'country'=>__('client.country'),
+        'city'=>__('client.city'),
+        'address'=>__('client.address'),
+        'old_password'=>__('client.old_password'),
+        'password'=>__('client.password'),
+        'password_repeat'=>__('client.password_repeat'),
     ],
 
 ];
