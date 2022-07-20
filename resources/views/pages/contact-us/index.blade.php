@@ -66,9 +66,12 @@
         </div>
     </section>
 
-    <section class="contact_section wrapper flex">
+    <section class="contact_section wrapper ">
+        <{{isset($page->h_tag->home) ? $page->h_tag->home : 'div'}} class="title">{{count($page->availableLanguage)>0?$page->availableLanguage[0]->title:""}}</{{isset($page->h_tag->home) ? $page->h_tag->home : 'div'}}>
+        <div class="flex" style="align-items:flex-start">
+
+      
         <div class="contact_info">
-            <{{isset($page->h_tag->home) ? $page->h_tag->home : 'div'}} class="title">{{count($page->availableLanguage)>0?$page->availableLanguage[0]->title:""}}</{{isset($page->h_tag->home) ? $page->h_tag->home : 'div'}}>
             <p>
                 {{count($page->availableLanguage)>0?$page->availableLanguage[0]->description:""}}
             </p>
@@ -159,6 +162,7 @@
 
                 <button type="submit" class="send">{{__('client.send_message')}}</button>
             </form>
+        </div>  
         </div>
     </section>
 

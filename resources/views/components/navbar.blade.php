@@ -66,155 +66,26 @@
         <div class="flex columns">
             <div class="links" id="cart_header">
                 <a class="abs_link" href="{{route('cart',app()->getLocale())}}">|0 / $0.00|</a>
-                <svg
-                    id="shopping-cart"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                >
-                    <rect
-                        id="Rectangle_5"
-                        data-name="Rectangle 5"
-                        width="24"
-                        height="24"
-                        opacity="0"
-                    />
-                    <path
-                        id="Path_3"
-                        data-name="Path 3"
-                        d="M21.08,7a2,2,0,0,0-1.7-1H6.58L6,3.74A1,1,0,0,0,5,3H3A1,1,0,0,0,3,5H4.24L7,15.26A1,1,0,0,0,8,16h9a1,1,0,0,0,.89-.55l3.28-6.56A2,2,0,0,0,21.08,7Zm-4.7,7H8.76L7.13,8H19.38Z"
-                    />
-                    <circle
-                        id="Ellipse_1"
-                        data-name="Ellipse 1"
-                        cx="1.5"
-                        cy="1.5"
-                        r="1.5"
-                        transform="translate(6 18)"
-                    />
-                    <circle
-                        id="Ellipse_2"
-                        data-name="Ellipse 2"
-                        cx="1.5"
-                        cy="1.5"
-                        r="1.5"
-                        transform="translate(16 18)"
-                    />
-                </svg>
+                <img width="18px"  src="/img/icons/header/cart.png" alt="">
                 <div id="cart-count">0 / $0.00</div>
                 <div class="cart_dropdown">
 
                 </div>
             </div>
             @guest
-                <a href="{{route('loginViewFront')}}" class="links">
-                    <svg
-                        id="person"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                    >
-                        <rect
-                            id="Rectangle_74"
-                            data-name="Rectangle 74"
-                            width="24"
-                            height="24"
-                            opacity="0"
-                        />
-                        <path
-                            id="Path_15"
-                            data-name="Path 15"
-                            d="M12,11A4,4,0,1,0,8,7,4,4,0,0,0,12,11Zm0-6a2,2,0,1,1-2,2A2,2,0,0,1,12,5Z"
-                        />
-                        <path
-                            id="Path_16"
-                            data-name="Path 16"
-                            d="M12,13a7,7,0,0,0-7,7,1,1,0,0,0,2,0,5,5,0,0,1,10,0,1,1,0,0,0,2,0,7,7,0,0,0-7-7Z"
-                        />
-                    </svg>
-
-                    <a href="{{route('loginViewFront')}}">
+                <a href="{{route('loginViewFront')}}" class="links account">
+                    <img src="/img/icons/header/person.png" alt="">
                         <div>{{__('client.login')}} / {{__('client.sign_up')}}</div>
-                    </a>
                 </a>
             @else
-                <a href="{{route('profile',app()->getLocale())}}" class="links" style="margin-right: -10px;">
-                    <svg
-                        id="person"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                    >
-                        <rect
-                            id="Rectangle_74"
-                            data-name="Rectangle 74"
-                            width="24"
-                            height="24"
-                            opacity="0"
-                        />
-                        <path
-                            id="Path_15"
-                            data-name="Path 15"
-                            d="M12,11A4,4,0,1,0,8,7,4,4,0,0,0,12,11Zm0-6a2,2,0,1,1-2,2A2,2,0,0,1,12,5Z"
-                        />
-                        <path
-                            id="Path_16"
-                            data-name="Path 16"
-                            d="M12,13a7,7,0,0,0-7,7,1,1,0,0,0,2,0,5,5,0,0,1,10,0,1,1,0,0,0,2,0,7,7,0,0,0-7-7Z"
-                        />
-                    </svg>
+                <a href="{{route('profile',app()->getLocale())}}" class="links account" >
+                    <img src="/img/icons/header/person.png" alt="">
                     {{auth()->user()->name}}
                 </a>
-                <a href="{{route('logoutFront',app()->getLocale())}}" class="links">{{__('client.log_out')}}</a>
+                <a href="{{route('logoutFront',app()->getLocale())}}" class="links" style="margin-right: 2px;">{{__('client.log_out')}}</a>
             @endguest
             <div class="links languages">
-                <svg
-                    id="shopping-cart"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                >
-                    <defs>
-                        <clipPath id="clip-path">
-                            <rect
-                                id="Rectangle_5"
-                                data-name="Rectangle 5"
-                                width="24"
-                                height="24"
-                                opacity="0"
-                            />
-                        </clipPath>
-                    </defs>
-                    <g
-                        id="Mask_Group_2"
-                        data-name="Mask Group 2"
-                        clip-path="url(#clip-path)"
-                    >
-                        <g id="Layer_2" data-name="Layer 2">
-                            <g id="globe">
-                                <rect
-                                    id="Rectangle_150"
-                                    data-name="Rectangle 150"
-                                    width="24"
-                                    height="24"
-                                    transform="translate(24 24) rotate(180)"
-                                    opacity="0"
-                                />
-                                <path
-                                    id="Path_19"
-                                    data-name="Path 19"
-                                    d="M22,12A10,10,0,1,0,12,22,10,10,0,0,0,22,12Zm-2.07-1H17a12.91,12.91,0,0,0-2.33-6.54A8,8,0,0,1,19.93,11ZM9.08,13H15a11.44,11.44,0,0,1-3,6.61A11,11,0,0,1,9.08,13Zm0-2A11.4,11.4,0,0,1,12,4.4,11.19,11.19,0,0,1,15,11Zm.36-6.57A13.18,13.18,0,0,0,7.07,11h-3A8,8,0,0,1,9.44,4.43ZM4.07,13h3a12.86,12.86,0,0,0,2.35,6.56A8,8,0,0,1,4.07,13Zm10.55,6.55A13.14,13.14,0,0,0,17,13h2.95A8,8,0,0,1,14.62,19.55Z"
-                                />
-                            </g>
-                        </g>
-                    </g>
-                </svg>
-
+                <img width="18px"  src="/img/icons/header/globe.png" alt="">
                 <div>{{$globalLanguages['current']['title']}}</div>
                 <div class="dropdown">
                     @foreach($globalLanguages['data'] as $language)
@@ -231,6 +102,7 @@
     </div>
 
     <button class="menu_btn">
-    {{__('client.menu_responsive_text')}}
+    <!-- {{__('client.menu_responsive_text')}} -->
+    <img width="24px"  src="/img/icons/header/menu.png" alt="">
     </button>
 </header>

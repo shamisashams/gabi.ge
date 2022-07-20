@@ -148,13 +148,13 @@
                                     <div class="on_hover_btns">
                                         <a class="view_popup_product">
                                             <button onclick="addToModal({{$product}})" class="add_to_cart view">
-                                                <img src="img/icons/profile/view.svg" alt="" />
+                                                <img src="img/icons/profile/eye.png" alt="" />
                                                 <div class="roboto">{{__('client.view')}}</div>
                                             </button>
                                         </a>
                                         <a href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug:null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null])}}">
                                             <button class="add_to_cart details">
-                                                <img src="/img/icons/profile/magnifying-glass.svg" alt="" />
+                                                <img src="/img/icons/profile/magnifying-glass.png" alt="" />
                                                 <div class="roboto">{{__('client.details')}}</div>
                                             </button>
                                         </a>
@@ -203,9 +203,9 @@
                         <img src="{{asset($blog->firstImage ? ('storage/blog/' . $blog->firstImage->fileable_id .'/'. $blog->firstImage->name) : null)}}" alt=""/>
                     </div>
                 </div>
+                <{{isset($htags['blog']->slider) ? $htags['blog']->slider : 'div'}} class="head">{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->title : ''}}</{{isset($htags['blog']->slider) ? $htags['blog']->slider : 'div'}}>
                 <div class="flex">
                     <div>
-                        <{{isset($htags['blog']->slider) ? $htags['blog']->slider : 'div'}} class="head">{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->title : ''}}</{{isset($htags['blog']->slider) ? $htags['blog']->slider : 'div'}}>
                         <div class="date shallow">{{$blog->created_at}}</div>
                     </div>
                     <div>
@@ -268,13 +268,13 @@
                             <div class="on_hover_btns">
                                 <a class="view_popup_product">
                                     <button onclick="addToModal({{$product}})" class="add_to_cart view">
-                                        <img src="/img/icons/profile/view.svg" alt="" />
+                                        <img src="/img/icons/profile/eye.png" alt="" />
                                         <div class="roboto">{{__('client.view')}}</div>
                                     </button>
                                 </a>
                                 <a href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug:null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null])}}">
                                     <button class="add_to_cart details">
-                                        <img src="/img/icons/profile/magnifying-glass.svg" alt="" />
+                                        <img src="/img/icons/profile/magnifying-glass.png" alt="" />
                                         <div class="roboto">{{__('client.details')}}</div>
                                     </button>
                                 </a>

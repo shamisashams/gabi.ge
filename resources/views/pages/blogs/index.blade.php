@@ -64,9 +64,9 @@
                         <img src="{{asset($blog->firstImage ? ('storage/blog/' . $blog->firstImage->fileable_id .'/'. $blog->firstImage->name) : null)}}" alt=""/>
                     </div>
                 </div>
+                <{{isset($htags['blog']->slider) ? $htags['blog']->slider : 'div'}} class="head">{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->title : ''}}</{{isset($htags['blog']->slider) ? $htags['blog']->slider : 'div'}}>
                 <div class="flex">
                     <div>
-                        <{{isset($htags['blog']->slider) ? $htags['blog']->slider : 'div'}} class="head">{{count($blog->availableLanguage) > 0 ? $blog->availableLanguage[0]->title : ''}}</{{isset($htags['blog']->slider) ? $htags['blog']->slider : 'div'}}>
                         <div class="date shallow">{{$blog->created_at}}</div>
                     </div>
                     <div>
