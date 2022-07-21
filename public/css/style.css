@@ -1540,10 +1540,10 @@ img {
 .popup_bg .product_popup .head {
     width: 100%;
     border-bottom: 1px solid #dcdcdc;
-    padding: 28px;
-    padding-left: 50px;
+    padding: 14px;
+    padding-left: 25px;
     color: #2d2d2d;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 500;
     align-items: center;
 }
@@ -1555,8 +1555,8 @@ img {
 }
 
 .popup_bg .product_popup .content {
-    padding: 35px 50px;
-    padding-bottom: 20px;
+    padding: 20px 25px;
+    padding-bottom: 30px;
     justify-content: flex-start;
     align-items: flex-start;
 }
@@ -1568,11 +1568,12 @@ img {
 
 .popup_bg .product_popup .customize .btns .number_input {
     height: 35px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    border-radius: 5px;
 }
 
 .popup_bg .product_popup .imges {
-    margin-right: 40px;
+    margin-right: 23px;
 }
 
 .popup_bg .product_popup .imges .main {
@@ -1581,6 +1582,7 @@ img {
     border: 1px solid #dcdcdc;
     margin-bottom: 6px;
     overflow: hidden;
+    border-radius: 8px;
 }
 
 .popup_bg .product_popup .imges .main .main_img_popup {
@@ -1596,14 +1598,15 @@ img {
 }
 
 .popup_bg .product_popup .imges .small0nes {
-    margin: 0 -5px;
+    justify-content: center;
 }
 
 .popup_bg .product_popup .imges .small_img_popup {
     border: 1px solid #dcdcdc;
     width: 61px;
     height: 61px;
-    margin: 0 5px;
+    margin: 0 3px;
+    border-radius: 5px;
 }
 
 .popup_bg .product_popup .imges .small_img_popup img {
@@ -1622,20 +1625,22 @@ img {
 }
 
 .popup_bg .product_popup .btm_btns .details {
-    width: 130px;
+    padding: 0px 13px;
     background-color: transparent;
     border: 1px solid #dcdcdc;
-    margin-right: 20px;
+    margin-right: 7px;
+    border-radius: 5px;
 }
 
 .popup_bg .product_popup .btm_btns .add_to_cart {
     background-color: #d6a550;
     color: #fff;
-    width: 234px;
+    padding: 0px 13px;
+    border-radius: 5px;
 }
 
 .popup_bg .product_popup .btm_btns .add_to_cart img {
-    margin-right: 15px;
+    margin-right: 5px;
 }
 
 .popup_bg .product_popup .success {
@@ -2234,9 +2239,9 @@ img {
 }
 
 .product_full_view .product_name {
-    font-size: 28px;
+    font-size: 25px;
     color: #000000;
-    margin-bottom: 21px;
+    margin-bottom: 14px;
     font-weight: 200;
 }
 
@@ -2285,12 +2290,12 @@ img {
 
 .customize .prices {
     justify-content: flex-start;
-    margin-top: 40px;
-    margin-bottom: 34px;
+    margin-top: 17px;
+    margin-bottom: 13px;
 }
 
 .customize .prices .main {
-    font-size: 26px;
+    font-size: 22px;
     margin-right: 24px;
     font-weight: bold;
     color: #000000;
@@ -2310,9 +2315,9 @@ img {
 }
 
 .customize .title {
-    font-size: 15px;
+    font-size: 13px;
     color: #2d2d2d;
-    margin-bottom: 10px;
+    margin-bottom: 1px;
     font-weight: 500;
 }
 
@@ -2351,7 +2356,7 @@ img {
 }
 
 .customize .options {
-    margin-bottom: 20px;
+    margin-bottom: 6px;
 }
 
 .customize .options .box_grid .box,
@@ -2368,6 +2373,7 @@ img {
     position: relative;
     text-align: center;
     outline: none;
+    border-radius: 5px;
 }
 
 .customize .options .box_grid label.box {
@@ -2406,6 +2412,7 @@ img {
     background-color: #0e064d;
     font-size: 18px;
     margin-top: 8px;
+    border-radius: 5px;
 }
 
 .customize .btns .number_input {
@@ -2416,6 +2423,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 5px;
 }
 
 .customize .btns .number_input button {
@@ -2437,10 +2445,11 @@ img {
     height: 48px;
     padding: 0 32px;
     white-space: nowrap;
+    border-radius: 5px;
 }
 
 .customize .btns .add_to_cart img {
-    margin-right: 15px;
+    margin-right: 5px;
 }
 
 .information_section {
@@ -4398,10 +4407,6 @@ img {
         flex-direction: column;
         overflow-x: hidden;
     }
-
-    .customize {
-        margin-top: 60px;
-    }
 }
 
 @media screen and (max-width: 950px) {
@@ -4712,15 +4717,6 @@ img {
 @media screen and (max-width: 450px) {
     .popup_bg .product_popup .content {
         padding: 20px;
-    }
-
-    .popup_bg .product_popup .btm_btns .add_to_cart {
-        width: 180px;
-    }
-
-    .popup_bg .product_popup .btm_btns .details {
-        margin-right: 14px;
-        width: 111px;
     }
 }
 
