@@ -67,8 +67,16 @@
                                             <td>
                                                 <a href="{{route('country.edit',[app()->getLocale(),$item->id])}}"><i
                                                         class="material-icons">edit</i></a>
-                                                <a href="{{route('country.destroy',[app()->getLocale(),$item->id])}}"><i
-                                                        class="material-icons">remove_red_eye</i></a>
+                                                {{-- <a href="{{route('country.destroy',[app()->getLocale(),$item->id])}}"><i
+                                                        class="material-icons">remove_red_eye</i></a> --}}
+
+
+                                                        {!! Form::open(['url' => route('country.destroy',[app()->getLocale(),$item->id]),'style'=>'display:inline-block']) !!}
+                                                <a onclick="deleteAlert(this,'Are you sure, you want to delete this item?!');"
+                                                   type="submit">
+                                                    <i class="material-icons dp48">delete</i>
+                                                </a>
+                                                {!! Form::close() !!}
                                             </td>
                                         </tr>
                                     @endforeach

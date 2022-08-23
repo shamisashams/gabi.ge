@@ -130,17 +130,17 @@ Route::prefix('{locale?}')
                     ->name('update', 'settingUpdate')
                     ->name('show', 'settingShow');
 
-                Route::get('pages/add_help', [PageController::class,'addHelp'])->name('addHelp');
-                Route::post('pages/add_help', [PageController::class,'addHelpStore'])->name('addHelpStore');
-                Route::get('pages/edit_help/{help}/add', [PageController::class,'editHelp'])->name('editHelp');
-                Route::put('pages/edit_help/{help}/update', [PageController::class,'updateHelp'])->name('helpUpdate');
-                Route::get('pages/edit_help/{help}/destroy', [PageController::class,'deleteHelp'])->name('deleteHelp');
+                Route::get('pages/add_help', [PageController::class, 'addHelp'])->name('addHelp');
+                Route::post('pages/add_help', [PageController::class, 'addHelpStore'])->name('addHelpStore');
+                Route::get('pages/edit_help/{help}/add', [PageController::class, 'editHelp'])->name('editHelp');
+                Route::put('pages/edit_help/{help}/update', [PageController::class, 'updateHelp'])->name('helpUpdate');
+                Route::get('pages/edit_help/{help}/destroy', [PageController::class, 'deleteHelp'])->name('deleteHelp');
 
-                Route::get('pages/add_faq', [PageController::class,'addFaq'])->name('addFaq');
-                Route::post('pages/add_faq', [PageController::class,'faqStore'])->name('faqStore');
-                Route::get('pages/faq/{faq}/edit', [PageController::class,'editFaq'])->name('editFaq');
-                Route::put('pages/faq/{faq}/update', [PageController::class,'updateFaq'])->name('faqUpdate');
-                Route::get('pages/faq/{faq}/destroy', [PageController::class,'deleteFaq'])->name('deleteFaq');
+                Route::get('pages/add_faq', [PageController::class, 'addFaq'])->name('addFaq');
+                Route::post('pages/add_faq', [PageController::class, 'faqStore'])->name('faqStore');
+                Route::get('pages/faq/{faq}/edit', [PageController::class, 'editFaq'])->name('editFaq');
+                Route::put('pages/faq/{faq}/update', [PageController::class, 'updateFaq'])->name('faqUpdate');
+                Route::get('pages/faq/{faq}/destroy', [PageController::class, 'deleteFaq'])->name('deleteFaq');
 
                 Route::resource('pages', PageController::class)->except('destroy')
                     ->name('index', 'pageIndex')
@@ -214,12 +214,12 @@ Route::prefix('{locale?}')
 
                 Route::post('shipping/{shipping}/destroy', [\App\Http\Controllers\Admin\ShippingController::class, 'destroy'])->name('shipping.destroy');
 
-                Route::get('password',[\App\Http\Controllers\Admin\PasswordController::class, 'index'])->name('password.index');
-                Route::post('password',[\App\Http\Controllers\Admin\PasswordController::class, 'update'])->name('password.update');
+                Route::get('password', [\App\Http\Controllers\Admin\PasswordController::class, 'index'])->name('password.index');
+                Route::post('password', [\App\Http\Controllers\Admin\PasswordController::class, 'update'])->name('password.update');
 
                 Route::resource('country', \App\Http\Controllers\Admin\CountryController::class);
 
-                Route::get('country/{country}/destroy', [\App\Http\Controllers\Admin\CountryController::class, 'destroy'])->name('country.destroy');
+                Route::post('country/{country}/destroy', [\App\Http\Controllers\Admin\CountryController::class, 'destroy'])->name('country.destroy');
             });
         });
         Route::middleware(['active'])->group(function () {
@@ -228,8 +228,8 @@ Route::prefix('{locale?}')
             //Route::get('/catalogue/{category}', [CatalogueController::class, 'catalogue'])->name('catalogue');
             //Route::get('/catalogue/{category}/details/{product}', [CatalogueController::class, 'show'])->name('productDetails');
 
-            Route::get('forgot-password',function (){
-               return view('auth.forgot-password');
+            Route::get('forgot-password', function () {
+                return view('auth.forgot-password');
             })->name('forgot-pass');
 
             Route::post('/forgot-password', function (Request $request) {
@@ -275,7 +275,7 @@ Route::prefix('{locale?}')
             })->middleware('guest')->name('password.update');
 
 
-            Route::get('/blog/{blog}',[\App\Http\Controllers\BlogController::class,'viewBlog'])->name('viewBlog');
+            Route::get('/blog/{blog}', [\App\Http\Controllers\BlogController::class, 'viewBlog'])->name('viewBlog');
 
 
             Route::get('/addcartcount/{id}/{type}', [CartController::class, 'addCartCount'])->name('addCartCount');
@@ -312,17 +312,17 @@ Route::prefix('{locale?}')
             Route::get('/facebook-auth', [AuthController::class, 'facebookAuth'])->name('facebookAuth');
 
             //Social-------------------------------------------------------
-            Route::get('/auth/facebook/redirect', function (){
+            Route::get('/auth/facebook/redirect', function () {
                 return Socialite::driver('facebook')->redirect();
             })->name('fb-redirect');
 
-            Route::get('/auth/facebook/callback',function (){
+            Route::get('/auth/facebook/callback', function () {
                 //dd('jdfhgjdhjf urkl');
                 $facebookUser = Socialite::driver('facebook')->stateless()->user();
 
                 //dd($facebookUser);
                 $email = uniqid();
-                if($facebookUser->email !== null) $email = $facebookUser->email;
+                if ($facebookUser->email !== null) $email = $facebookUser->email;
                 $user = User::updateOrCreate([
                     'facebook_id' => $facebookUser->id,
 
@@ -340,7 +340,7 @@ Route::prefix('{locale?}')
                     throw new Exception('Localization not exist.');
                 }
 
-                if(!$user->profile){
+                if (!$user->profile) {
                     $user->profile()->create([
                         'language_id' => $localization->id,
                         'first_name' => '',
@@ -366,11 +366,11 @@ Route::prefix('{locale?}')
                 return redirect(route('profile'));
             })->name('fb-callback');
 
-            Route::get('/auth/google/redirect', function (){
+            Route::get('/auth/google/redirect', function () {
                 return Socialite::driver('google')->redirect();
             })->name('google-redirect');
 
-            Route::get('/auth/google/callback',function (){
+            Route::get('/auth/google/callback', function () {
                 $googleUser = Socialite::driver('google')->user();
 
                 //dd($googleUser);
@@ -390,7 +390,7 @@ Route::prefix('{locale?}')
                     throw new Exception('Localization not exist.');
                 }
 
-                if(!$user->profile){
+                if (!$user->profile) {
                     $user->profile()->create([
                         'language_id' => $localization->id,
                         'first_name' => '',
@@ -416,7 +416,7 @@ Route::prefix('{locale?}')
             })->name('google-callback');
             //--------------------------------------------------------------------------
 
-//            Route::get('/faceook-callback', [AuthController::class],);
+            //            Route::get('/faceook-callback', [AuthController::class],);
 
             Route::middleware(['authFront'])->group(function () {
                 Route::get('logout', [\App\Http\Controllers\Auth\AuthFrontendController::class, 'logout'])->name('logoutFront');
@@ -426,11 +426,11 @@ Route::prefix('{locale?}')
                 Route::post('save-order', [PurchaseController::class, 'saveOrder'])->name('saveOrder');
                 Route::get('order-details/{id}', [UserController::class, 'orderDetails'])->name('orderDetails');
                 Route::get('download-pdf/{id}', [UserController::class, 'downloadPdf'])->name('downloadPdf');
-                Route::get('add-address',[UserController::class,'addAddress'])->name('client.add-address');
-                Route::post('add-address',[UserController::class,'storeAddress'])->name('client.store-address');
-                Route::put('edit-address',[UserController::class,'updateAddress'])->name('client.update-address');
-                Route::get('address/{address}/destroy',[UserController::class,'deleteAddress'])->name('client.delete-address');
-                Route::post('avatar',[UserController::class,'updateAvatar'])->name('avatar');
+                Route::get('add-address', [UserController::class, 'addAddress'])->name('client.add-address');
+                Route::post('add-address', [UserController::class, 'storeAddress'])->name('client.store-address');
+                Route::put('edit-address', [UserController::class, 'updateAddress'])->name('client.update-address');
+                Route::get('address/{address}/destroy', [UserController::class, 'deleteAddress'])->name('client.delete-address');
+                Route::post('avatar', [UserController::class, 'updateAvatar'])->name('avatar');
             });
 
             Route::get('privacy-policy', function () {
@@ -439,13 +439,13 @@ Route::prefix('{locale?}')
 
             Route::get('deletion-callback', [AuthController::class, 'facebookDataDeletionCallback'])->name('deletionCallback');
 
-            Route::post('subscribe',[ContactController::class, 'subscribe'])->name('subscribe');
+            Route::post('subscribe', [ContactController::class, 'subscribe'])->name('subscribe');
 
-            Route::get('best-sellers',[CatalogueController::class, 'bestSellers'])->name('bestSellers');
-            Route::get('summer-discount',[CatalogueController::class, 'discount'])->name('discount');
-            Route::get('new',[CatalogueController::class, 'new'])->name('new');
+            Route::get('best-sellers', [CatalogueController::class, 'bestSellers'])->name('bestSellers');
+            Route::get('summer-discount', [CatalogueController::class, 'discount'])->name('discount');
+            Route::get('new', [CatalogueController::class, 'new'])->name('new');
 
-            Route::get('/page/{slug?}',[\App\Http\Controllers\PageController::class, 'viewPage'])->name('viewPage');
+            Route::get('/page/{slug?}', [\App\Http\Controllers\PageController::class, 'viewPage'])->name('viewPage');
 
             Route::get('category/{category?}', [CatalogueController::class, 'catalogueSeo'])->name('catalogueSeo');
             Route::get('{category}/{product}', [CatalogueController::class, 'showSeo'])->name('productDetailsSeo');
@@ -453,17 +453,10 @@ Route::prefix('{locale?}')
 
 
 
-            Route::any('payments/bog/status',[PurchaseController::class, 'bogResponse'])->name('bogResponse');
+            Route::any('payments/bog/status', [PurchaseController::class, 'bogResponse'])->name('bogResponse');
 
-            Route::fallback(\App\Http\Controllers\ProxyController::class.'@proxy')->name('proxy');
-
-
-
+            Route::fallback(\App\Http\Controllers\ProxyController::class . '@proxy')->name('proxy');
         });
         Route::any('bog/callback/status', [\App\BogPay\BogCallbackController::class, 'status'])->withoutMiddleware('web')->name('bogCallbackStatus');
-        Route::any('bog/callback/refund',[\App\BogPay\BogCallbackController::class, 'refund'])->withoutMiddleware('web')->name('bogCallbackRefund');
-
+        Route::any('bog/callback/refund', [\App\BogPay\BogCallbackController::class, 'refund'])->withoutMiddleware('web')->name('bogCallbackRefund');
     });
-
-
-
