@@ -59,10 +59,10 @@ class ShippingController extends AdminController
      */
     public function create(string $locale)
     {
-        return view('admin.modules.shipping.form',[
+        return view('admin.modules.shipping.form', [
             'item' => new Shipping(),
             'method' => 'post',
-            'action' => route('shipping.store',app()->getLocale())
+            'action' => route('shipping.store', app()->getLocale())
         ]);
     }
 
@@ -111,9 +111,8 @@ class ShippingController extends AdminController
         return view('admin.modules.shipping.form', [
             'item' => $item,
             'method' => 'put',
-            'action' => route('shipping.update',[app()->getLocale(),$item])
+            'action' => route('shipping.update', [app()->getLocale(), $item])
         ]);
-
     }
 
     /**
@@ -136,7 +135,6 @@ class ShippingController extends AdminController
         }
 
         return redirect(route('shipping.index', $locale))->with('success', trans('admin.slider_success_update'));
-
     }
 
     /**
@@ -152,6 +150,5 @@ class ShippingController extends AdminController
             return redirect(route('shipping.index', $locale))->with('danger', trans('admin.slider_not_delete'));
         }
         return redirect(route('shipping.index', $locale))->with('success', trans('admin.slider_success_delete'));
-
     }
 }

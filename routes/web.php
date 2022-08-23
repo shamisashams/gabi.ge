@@ -212,7 +212,7 @@ Route::prefix('{locale?}')
 
                 Route::resource('shipping', \App\Http\Controllers\Admin\ShippingController::class);
 
-                Route::get('shipping/{shipping}/destroy', [\App\Http\Controllers\Admin\ShippingController::class, 'destroy'])->name('shipping.destroy');
+                Route::post('shipping/{shipping}/destroy', [\App\Http\Controllers\Admin\ShippingController::class, 'destroy'])->name('shipping.destroy');
 
                 Route::get('password',[\App\Http\Controllers\Admin\PasswordController::class, 'index'])->name('password.index');
                 Route::post('password',[\App\Http\Controllers\Admin\PasswordController::class, 'update'])->name('password.update');
