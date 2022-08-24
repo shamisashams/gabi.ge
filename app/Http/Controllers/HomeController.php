@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Request\Admin\AnswerRequest;
 use App\Mail\ContactEmail;
 use App\Models\Answer;
+use App\Models\Slider;
 use App\Models\Blog;
 use App\Models\Feature;
 use App\Models\Language;
@@ -23,6 +24,8 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Mail;
+// use Jenssegers\Agent\Facades\Agent;
+use Jenssegers\Agent\Agent;
 
 class HomeController extends Controller
 {
@@ -44,15 +47,18 @@ class HomeController extends Controller
      */
     public function index($locale, Request $request)
     {
-        $page = Page::query()->where('type','home')->with('availableLanguage')->firstOrFail();
-
+        $page = Page::query()->where('type', 'home')->with('availableLanguage')->firstOrFail();
+        $agent = new Agent();
         return view('pages.home.index', [
+            'agent' => $agent,
             'bestSellerProducts' => $this->productRepository->getBestSeller(),
             'discountedProducts' => $this->productRepository->getDiscountedProducts(),
             'newProducts' => $this->productRepository->getNewProducts(),
             'blogs' => Blog::with(['availableLanguage', 'firstImage'])->limit(3)->inRandomOrder()->get(),
-        'page' => $page,
-            'sliders' => $this->sliderRepository->getSliders(),
+            'page' => $page,
+            // 'sliders' => $this->sliderRepository->getSliders(),
+            'sliders' => Slider::with('files')->where("is_mobile", false)->get(),
+            'slidersMobile' => Slider::with('files')->where("is_mobile", true)->get(),
             'banner' => $this->sliderRepository->getBanner()
         ]);
     }
@@ -64,5 +70,4 @@ class HomeController extends Controller
         $productAnswers = $this->productRepository->getSingleProductFeatures($id)['productAnswers'];
         return response()->json(['status' => true, 'productFeatures' => $productFeatures, 'productAnswers' => $productAnswers]);
     }
-
 }

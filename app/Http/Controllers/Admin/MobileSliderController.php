@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 
-class SliderController extends AdminController
+class MobileSliderController extends AdminController
 {
     protected $sliderRepository;
 

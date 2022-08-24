@@ -122,6 +122,21 @@
                                                                     class="errorTxt">{{ $errors->first('type') }}</small>
                                                             @endif
                                                         </div>
+
+                                                        <div class="col s12 input-field">
+                                                            <select name="is_mobile">
+                                                                <option value="" disabled
+                                                                        selected>{{trans('admin.choose_type')}}
+                                                                </option>
+                                                                <option value=1>Mobile</option>
+                                                                <option value=0>Web</option>
+                                                            </select>
+                                                            <label for="type" class="">{{trans('admin.mobile')}}</label>
+                                                            @if ($errors->has('is_mobile'))
+                                                                <small
+                                                                    class="errorTxt">{{ $errors->first('is_mobile') }}</small>
+                                                            @endif
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col s12">

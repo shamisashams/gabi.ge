@@ -20,7 +20,8 @@ class Slider extends Model
         'status',
         'redirect_url',
         'type',
-        'h_tag'
+        'h_tag',
+        'is_mobile'
     ];
 
 

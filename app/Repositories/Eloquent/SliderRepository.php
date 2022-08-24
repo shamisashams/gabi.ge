@@ -37,6 +37,7 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
      */
     public function store(string $locale, SliderRequest $request)
     {
+        // dd($request->post());
         $request['status'] = isset($request['status']) ? 1 : 0;
 
         $localizationID = Language::getIdByName($locale);
@@ -49,6 +50,7 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
                 'redirect_url' => $request['redirect_url'],
                 'type' => $request['type'],
                 'h_tag' => $request['h_tag'],
+                'is_mobile' => $request['is_mobile'],
             ]);
 
             $this->model->save();
@@ -73,11 +75,11 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
                     //$image->save(date('Ymhs') . $file->getClientOriginalName());
                     $img = $image->getImageAsString();
 
-                    $imagename = str_replace(' ','_',$file->getClientOriginalName());
+                    $imagename = str_replace(' ', '_', $file->getClientOriginalName());
                     $destination = base_path() . '/storage/app/public/slider/' . $this->model->id;
-                    $thumb = 'public/slider/' . $this->model->id .'/thumb/'.$imagename;
+                    $thumb = 'public/slider/' . $this->model->id . '/thumb/' . $imagename;
                     $request->file('images')[$key]->move($destination, $imagename);
-                    Storage::put($thumb,$img);
+                    Storage::put($thumb, $img);
                     $model->files()->create([
                         'name' => $imagename,
                         'path' => '/storage/app/public/slider/' . $model->id,
@@ -114,6 +116,7 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
                 'redirect_url' => $request['redirect_url'],
                 'type' => $request['type'],
                 'h_tag' => $request['h_tag'],
+                'is_mobile' => $request['is_mobile'],
             ]);
 
             $localizationID = Language::getIdByName($locale);
@@ -154,7 +157,6 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
                             Storage::delete('public/slider/' . $data->id . '/thumb/' . $file->name);
                         }
                         $file->delete();
-
                     }
                 }
             }
@@ -168,11 +170,11 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
                     //$image->save(date('Ymhs') . $file->getClientOriginalName());
                     $img = $image->getImageAsString();
 
-                    $imagename = str_replace(' ','_',$file->getClientOriginalName());
+                    $imagename = str_replace(' ', '_', $file->getClientOriginalName());
                     $destination = base_path() . '/storage/app/public/slider/' . $data->id;
-                    $thumb = 'public/slider/' . $data->id .'/thumb/'.$imagename;
+                    $thumb = 'public/slider/' . $data->id . '/thumb/' . $imagename;
                     $request->file('images')[$key]->move($destination, $imagename);
-                    Storage::put($thumb,$img);
+                    Storage::put($thumb, $img);
                     $data->files()->create([
                         'name' => $imagename,
                         'path' => '/storage/app/public/slider/' . $data->id,
@@ -191,7 +193,7 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
     public function delete(int $id)
     {
         $model = $this->find($id);
-        foreach ($model->files as $file){
+        foreach ($model->files as $file) {
 
             if (Storage::exists('public/slider/' . $model->id . '/' . $file->name)) {
                 Storage::delete('public/slider/' . $model->id . '/' . $file->name);
@@ -203,5 +205,4 @@ class SliderRepository extends BaseRepository implements SliderRepositoryInterfa
         }
         return $model->delete();
     }
-
 }

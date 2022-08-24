@@ -36,12 +36,65 @@
 
     @endforeach
 @endsection
-
+{{-- @dd($agent->isMobile()) --}}
 
 @section('content')
     <section class="hero ">
         <div class="hero_slideshow">
+            @if ($agent->isMobile())
+            @foreach($slidersMobile as $slider)
+            <div class="slide slide1">
+                @if(isset($slider->files[0]))
+                    <img src="/storage/slider/{{$slider->files[0]->fileable_id}}/thumb/{{$slider->files[0]->name}}"
+                         alt=""/>
+                @else
+                    <img src="noimage.png"/>
+                @endif
+
+                <div class="overlay">
+                    <div class="hero_box">
+                        <{{isset($slider->h_tag->home) ? $slider->h_tag->home : 'div'}}
+                            class="new">{{count($slider->availableLanguage)>0?$slider->availableLanguage[0]->title:""}}</{{isset($slider->h_tag->home) ? $slider->h_tag->home : 'div'}}>
+                        <div class="title">
+                        <span>
+                        {!! count($slider->availableLanguage)>0?$slider->availableLanguage[0]->description:"" !!}
+                        </span>
+                        </div>
+                        <a href="{{$slider->redirect_url}}" target="_self">
+                            <button class="hero_btn">{{__('client.see_collection')}}</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+            @else
             @foreach($sliders as $slider)
+            <div class="slide slide1">
+                @if(isset($slider->files[0]))
+                    <img src="/storage/slider/{{$slider->files[0]->fileable_id}}/thumb/{{$slider->files[0]->name}}"
+                         alt=""/>
+                @else
+                    <img src="noimage.png"/>
+                @endif
+
+                <div class="overlay">
+                    <div class="hero_box">
+                        <{{isset($slider->h_tag->home) ? $slider->h_tag->home : 'div'}}
+                            class="new">{{count($slider->availableLanguage)>0?$slider->availableLanguage[0]->title:""}}</{{isset($slider->h_tag->home) ? $slider->h_tag->home : 'div'}}>
+                        <div class="title">
+                        <span>
+                        {!! count($slider->availableLanguage)>0?$slider->availableLanguage[0]->description:"" !!}
+                        </span>
+                        </div>
+                        <a href="{{$slider->redirect_url}}" target="_self">
+                            <button class="hero_btn">{{__('client.see_collection')}}</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+            @endif
+            {{-- @foreach($sliders as $slider)
                 <div class="slide slide1">
                     @if(isset($slider->files[0]))
                         <img src="/storage/slider/{{$slider->files[0]->fileable_id}}/thumb/{{$slider->files[0]->name}}"
@@ -65,7 +118,7 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @endforeach --}}
         </div>
     </section>
 
