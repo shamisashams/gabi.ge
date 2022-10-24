@@ -3768,7 +3768,7 @@ img {
     }
 
     .header .nav_link:hover .category_dropdown {
-        max-height: 300px;
+        max-height: 500px;
         margin: 20px 0;
         grid-template-columns: repeat(1, 1fr);
     }
