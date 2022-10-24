@@ -21,7 +21,7 @@
         type="text/css"
         href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
     />
-    <link href="{{asset('../css/style.css?v=2')}}" rel="stylesheet">
+    <link href="{{asset('../css/style.css?v=3')}}" rel="stylesheet">
     <!-- Meta Pixel Code -->
     <script>
         !function(f,b,e,v,n,t,s)
