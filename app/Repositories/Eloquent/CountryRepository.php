@@ -1,4 +1,5 @@
 <?php
+
 /**
  *  app/Repositories/Eloquent/UserRepository.php
  *
@@ -74,8 +75,8 @@ class CountryRepository extends BaseRepository
                 'title' => $request['title'],
             ]);
 
-            if ($request->has('city_title')){
-                foreach ($request->post('city_title') as $key => $item){
+            if ($request->has('city_title')) {
+                foreach ($request->post('city_title') as $key => $item) {
                     $city = City::create([
                         'country_id' => $newItem->id,
                         'ship_price' => $request['city_price'][$key],
@@ -138,33 +139,33 @@ class CountryRepository extends BaseRepository
                     'title' => $request['title'],
                 ]);
             }
-
-            foreach ($request->post('city_title_u') as $id => $item){
-                $city = City::find($id);
-                $city->update([
-                    'ship_price' => $request['city_price_u'][$id],
-                    'code' => '',
-                ]);
-
-                $language = $city->language()->where('language_id', $languageId)->first();
-
-                if ($language) {
-                    $language->update([
-                        'language_id' => $languageId,
-                        'title' => $item,
+            // dd($request->post());
+            if ($request->post('city_title_u')) {
+                foreach ($request->post('city_title_u') as $id => $item) {
+                    $city = City::find($id);
+                    $city->update([
+                        'ship_price' => $request['city_price_u'][$id],
+                        'code' => '',
                     ]);
-                } else {
-                    CityTranslation::create([
-                        'city_id' => $city->id,
-                        'language_id' => $languageId,
-                        'title' => $item,
-                    ]);
+
+                    $language = $city->language()->where('language_id', $languageId)->first();
+
+                    if ($language) {
+                        $language->update([
+                            'language_id' => $languageId,
+                            'title' => $item,
+                        ]);
+                    } else {
+                        CityTranslation::create([
+                            'city_id' => $city->id,
+                            'language_id' => $languageId,
+                            'title' => $item,
+                        ]);
+                    }
                 }
-
-
             }
-            if ($request->has('city_title')){
-                foreach ($request->post('city_title') as $key => $item){
+            if ($request->has('city_title')) {
+                foreach ($request->post('city_title') as $key => $item) {
                     $city = City::create([
                         'country_id' => $productItem->id,
                         'ship_price' => $request['city_price'][$key],
@@ -181,16 +182,15 @@ class CountryRepository extends BaseRepository
 
 
 
-            if ($request->has('del_city')){
-                foreach ($request->post('del_city') as $id){
-                    City::query()->where('id',$id)->delete();
+            if ($request->has('del_city')) {
+                foreach ($request->post('del_city') as $id) {
+                    City::query()->where('id', $id)->delete();
                 }
             }
 
 
             DB::commit();
             return true;
-
         } catch (\Exception $queryException) {
             DB::rollBack();
             dd($queryException->getMessage());
@@ -221,6 +221,4 @@ class CountryRepository extends BaseRepository
 
         return $data->delete();
     }
-
-
 }
