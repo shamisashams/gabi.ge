@@ -253,8 +253,27 @@
                         class=" buy_now">
                         <div>{{__('client.buynow')}}</div>
                      </button>
+                     <button data-modal-target="#modal">{{__('client.size_guide')}}</button>
+                     <div class="size-guide modal" id="modal">
+                        <div class="modal-content">
+                        <div class="sizemodal-header">
+                            <div class="title">{{__('client.size_guide_title')}}</div>
+                            <button data-close-button class="close-button">&times;</button>
+                        </div>
+                        <div class="brand-size flex">
+                            <div class="sex">
+                            <div class="sex-title">
+                                {{__('client.size_choose_sex')}}
+                            </div>
+                            <button class="sex-select"> <img src="/img/icons/modal/female.png" alt="boy"> Boy</button>
+                            <button class="sex-select"> <img src="/img/icons/modal/male.png" alt="girl"> Girl</button>
+                            </div>
+                        </div>
+                     </div>
+                     </div>
 
             </div>
+            <div id="modal-overlay"></div>
 
             <div class="product_added flex"> <span>{{__('client.product_added')}}</span>    <img src="/img/icons/details/added.png" alt=""/></div>
         </div>
