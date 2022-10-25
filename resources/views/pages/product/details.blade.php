@@ -254,6 +254,8 @@
                         <div>{{__('client.buynow')}}</div>
                      </button>
                      <button data-modal-target="#modal">{{__('client.size_guide')}}</button>
+
+                     
                      <div class="size-guide modal" id="modal">
                         <div class="modal-content">
                         <div class="sizemodal-header">
@@ -265,9 +267,364 @@
                             <div class="sex-title">
                                 {{__('client.size_choose_sex')}}
                             </div>
-                            <button class="sex-select"> <img src="/img/icons/modal/female.png" alt="boy"> Boy</button>
-                            <button class="sex-select"> <img src="/img/icons/modal/male.png" alt="girl"> Girl</button>
+                            <div class="sexBtns">
+                            <button class="sex-select active" > 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17.534" height="17.534" viewBox="0 0 17.534 17.534">
+                            <path id="Icon_ionic-md-male" data-name="Icon ionic-md-male" d="M18.885,3.375H13.491V5.4h3.966l-4.5,4.493a6.068,6.068,0,1,0,1.433,1.433l4.493-4.5v3.966h2.023V3.375ZM9.444,18.885a4.046,4.046,0,1,1,4.046-4.046A4.053,4.053,0,0,1,9.444,18.885Z" transform="translate(-3.375 -3.375)" />
+                            </svg>
+    
+                            {{__('client.button_boy')}}</button>
+                            <button  class="sex-select" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="11.272" height="17.534" viewBox="0 0 11.272 17.534">
+                            <path id="Icon_ionic-md-female" data-name="Icon ionic-md-female" d="M19.147,7.886a5.636,5.636,0,1,0-6.575,5.558V15.4H9.754v1.879h2.818v2.5H14.45v-2.5h2.818V15.4H14.45V13.443A5.635,5.635,0,0,0,19.147,7.886Zm-9.393,0a3.757,3.757,0,1,1,3.757,3.757A3.763,3.763,0,0,1,9.754,7.886Z" transform="translate(-7.875 -2.25)" />
+                            </svg>
+   
+                            {{__('client.button_girl')}}</button>
                             </div>
+
+                            <img src="/img/icons/modal/body.png" alt="">
+                        </div>
+                        <div  class="gendertabs show">
+                            <div class="table">
+                        <table id="size-table">
+                                <tr>
+                                    <td>ბავშის ასაკი</td>
+                                    <td>გულმკერდი</td>
+                                    <td>წელი</td>
+                                    <td>თეძო</td>
+                                    <td>ზურგის სიმაღლე</td>
+                                    <td>მკლავის სიგრძე</td>
+                                    <td>შარვლის სიგრძე</td>
+                                    <td>მხრის სიგანე</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+                                <tr>
+                                  <td>12-15 თვის</td>
+                                  <td>123</td>
+                                  <td>5</td>
+                                  <td>5</td>
+                                  <td>6</td>
+                                  <td>7</td>
+                                  <td>99</td>
+                                  <td>090</td>
+                                </tr>
+
+                            </table>
+                            </div>
+                          
+                        </div>
+                        <div  class="gendertabs">
+                            <h3>text 2</h3>
+                        </div>
                         </div>
                      </div>
                      </div>
