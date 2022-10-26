@@ -21,32 +21,32 @@ class PageSeeder extends Seeder
                 'status' => true,
                 'title' => 'Home',
                 'slug' => 'home',
-                'meta_title'=>'home'
+                'meta_title' => 'home'
             ],
             [
                 'status' => true,
                 'title' => 'Warranty',
                 'slug' => 'warranty',
-                'meta_title'=>'warranty'
+                'meta_title' => 'warranty'
             ],
             [
                 'status' => true,
                 'title' => 'Contact-us',
                 'slug' => 'contact-us',
-                'meta_title'=>'contact'
+                'meta_title' => 'contact'
             ],
             [
                 'status' => true,
                 'title' => 'About Us',
                 'slug' => 'about-us',
-                'meta_title'=>'about'
+                'meta_title' => 'about'
             ],
 
             [
                 'status' => true,
                 'title' => 'Privacy Policy',
                 'slug' => 'privacy-policy',
-                'meta_title'=>'Privacy'
+                'meta_title' => 'Privacy'
             ],
 
         ];
@@ -60,7 +60,7 @@ class PageSeeder extends Seeder
                 'language_id' => '2',
                 'title' => $page['title'],
                 'slug' => $page['slug'],
-                'meta_title'=>$page['meta_title']
+                'meta_title' => $page['meta_title']
             ]);
         }
     }

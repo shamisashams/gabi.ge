@@ -95,6 +95,11 @@
         </li>
 
         <li class="bold"><a
+                class="waves-effect waves-cyan {{str_contains(route('sizeguideIndex',app()->getLocale()),request()->path())?"active":""}}"
+                href="{{route('sizeguideIndex',app()->getLocale())}}"><i class="material-icons dp48">chrome_reader_mode</i><span>{{trans('admin.sizeguide')}}</span></a>
+        </li>
+
+        <li class="bold"><a
                 class="waves-effect waves-cyan {{str_contains(route('password.index',app()->getLocale()),request()->path())?"active":""}}"
                 href="{{route('password.index',app()->getLocale())}}"><i class="material-icons dp48">chrome_reader_mode</i><span>{{trans('admin.password')}}</span></a>
         </li>

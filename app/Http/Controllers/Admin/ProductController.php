@@ -92,26 +92,25 @@ class ProductController extends AdminController
     public function getFeatureAnswers(string $locale, int $id)
     {
         $feature = Feature::with(['answer.availableLanguage', 'availableLanguage'])->find($id);
-//
-//         if (is_null($feature)) {
-//             return response()->json([]);
-//         }
-//
-//         $answerStack = [];
-//
-//         foreach ($feature->answers as $answerItem) {
-//             $answerData = $answerItem->answer->availableLanguage;
-//
-//             if (!count($answerData)) {
-//                 continue;
-//             }
-//
-//             $answerStack[] = [
-//                 'answer_id' => $answerData[0]->id,
-//                 'answer_title' => $answerData[0]->title
-//             ];
-//         }
+        //
+        //         if (is_null($feature)) {
+        //             return response()->json([]);
+        //         }
+        //
+        //         $answerStack = [];
+        //
+        //         foreach ($feature->answers as $answerItem) {
+        //             $answerData = $answerItem->answer->availableLanguage;
+        //
+        //             if (!count($answerData)) {
+        //                 continue;
+        //             }
+        //
+        //             $answerStack[] = [
+        //                 'answer_id' => $answerData[0]->id,
+        //                 'answer_title' => $answerData[0]->title
+        //             ];
+        //         }
         return response()->json($feature);
     }
-
 }

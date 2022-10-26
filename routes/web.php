@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TranslationController;
+use App\Http\Controllers\Admin\SizeguideController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatalogueController;
@@ -121,6 +122,17 @@ Route::prefix('{locale?}')
                     ->name('update', 'answerUpdate')
                     ->name('destroy', 'answerDestroy');
 
+                // sizeguid
+                Route::resource('sizeguide', SizeguideController::class)
+                    ->name('index', 'sizeguideIndex')
+                    ->name('store', 'sizeguideStore')
+                    ->name('show', 'sizeguideShow')
+                    ->name('create', 'sizeguideCreate')
+                    ->name('edit', 'sizeguideEdit')
+                    ->name('update', 'sizeguideUpdate')
+                    ->name('destroy', 'sizeguideDestroy');
+
+                Route::post('Sizeguide/{Sizeguide}/destroy', [\App\Http\Controllers\Admin\SizeguideController::class, 'destroy'])->name('sizeguide.destroy');
                 // Settings
                 Route::resource('settings', SettingController::class)->except('destroy')
                     ->name('index', 'settingIndex')
