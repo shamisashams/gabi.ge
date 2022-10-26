@@ -278,11 +278,19 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="11.272" height="17.534" viewBox="0 0 11.272 17.534">
                             <path id="Icon_ionic-md-female" data-name="Icon ionic-md-female" d="M19.147,7.886a5.636,5.636,0,1,0-6.575,5.558V15.4H9.754v1.879h2.818v2.5H14.45v-2.5h2.818V15.4H14.45V13.443A5.635,5.635,0,0,0,19.147,7.886Zm-9.393,0a3.757,3.757,0,1,1,3.757,3.757A3.763,3.763,0,0,1,9.754,7.886Z" transform="translate(-7.875 -2.25)" />
                             </svg>
-                            {{-- @dd(/app/models/Page::where(['status' => true, 'type' => 'products'])->with('availableLanguage')->first()) --}}
-
+                            @php
+                                $page = App\Models\Page::where(['status' => true, 'type' => 'products'])->with('availableLanguage')->first()
+                            @endphp
+                           {{-- @dd($page->files[0]) --}}
                             {{__('client.button_girl')}}</button>
                             </div>
+
+                            @if (isset($page->files[0]))
+                            <img src={{asset('storage/page/'.$page->files[0]->fileable_id. "/". $page->files[0]->name)}} alt="">
+                          @else
                             <img src="/img/icons/modal/body.png" alt="">
+                          @endif
+
                         </div>
                         <div  class="gendertabs show">
                             <div class="table">
