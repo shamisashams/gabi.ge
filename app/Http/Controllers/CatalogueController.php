@@ -41,13 +41,13 @@ class CatalogueController extends Controller
         ]);
 
         $products = $this->productRepository->getData($request, ['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files', 'category.availableLanguageS'], false);
-//        $staticFilterData = ['category'];
+        //        $staticFilterData = ['category'];
         //dd($products->get());
 
         return view('pages.product.catalogue', [
             'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
-//            'staticFilterData' => $staticFilterData,
+            //            'staticFilterData' => $staticFilterData,
             'products' => $products->orderBy('created_at', 'DESC')->paginate(16),
             'category' => $category
         ]);
@@ -55,15 +55,15 @@ class CatalogueController extends Controller
 
     public function catalogueSeo(string $lang, Request $request, $category_slug)
     {
-        $category = Category::query()->whereHas('language',function ($query) use ($category_slug){
+        $category = Category::query()->whereHas('language', function ($query) use ($category_slug) {
             $query->where('slug', $category_slug)->where('language_id', '=', Language::getIdByName(app()->getLocale()));
         })->first();
 
-        $cat_redirect = Setting::query()->where('key','category_not_found_redirect')->first();
+        $cat_redirect = Setting::query()->where('key', 'category_not_found_redirect')->first();
         $val = count($cat_redirect->availableLanguage) > 0 ? $cat_redirect->availableLanguage[0]->value : false;
-        if((!$category) && $val){
-            return redirect($val,301);
-        } elseif (!$category){
+        if ((!$category) && $val) {
+            return redirect($val, 301);
+        } elseif (!$category) {
             return abort(404);
         }
 
@@ -73,13 +73,13 @@ class CatalogueController extends Controller
         ]);
 
         $products = $this->productRepository->getData($request, ['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files', 'category.availableLanguageS', 'category.availableLanguage'], false);
-//        $staticFilterData = ['category'];
+        //        $staticFilterData = ['category'];
         //dd($products->get());
 
         return view('pages.product.catalogue', [
             'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
-//            'staticFilterData' => $staticFilterData,
+            //            'staticFilterData' => $staticFilterData,
             'products' => $products->orderBy('created_at', 'DESC')->paginate(16),
             'category' => $category
         ]);
@@ -108,23 +108,23 @@ class CatalogueController extends Controller
     public function showSeo(string $locale, $category_slug = null, $product_slug = null)
     {
         $product = $this->productRepository->getProductByslug($product_slug);
-        $prod_redirect = Setting::query()->where('key','product_not_found_redirect')->first();
+        $prod_redirect = Setting::query()->where('key', 'product_not_found_redirect')->first();
         $val = count($prod_redirect->availableLanguage) > 0 ? $prod_redirect->availableLanguage[0]->value : false;
-        if((!$product) && $val){
-            return redirect($val,301);
-        } elseif (!$product){
+        if ((!$product) && $val) {
+            return redirect($val, 301);
+        } elseif (!$product) {
             return abort(404);
         }
 
-        $category = Category::query()->whereHas('language',function ($query) use ($category_slug){
+        $category = Category::query()->whereHas('language', function ($query) use ($category_slug) {
             $query->where('slug', $category_slug)->where('language_id', '=', Language::getIdByName(app()->getLocale()));
         })->first();
 
-        $cat_redirect = Setting::query()->where('key','category_not_found_redirect')->first();
+        $cat_redirect = Setting::query()->where('key', 'category_not_found_redirect')->first();
         $val = count($cat_redirect->availableLanguage) > 0 ? $cat_redirect->availableLanguage[0]->value : false;
-        if((!$category) && $val){
-            return redirect($val,301);
-        } elseif (!$category){
+        if ((!$category) && $val) {
+            return redirect($val, 301);
+        } elseif (!$category) {
             return abort(404);
         }
 
@@ -159,7 +159,8 @@ class CatalogueController extends Controller
         ];
     }
 
-    public function bestSellers($locale, Request $request){
+    public function bestSellers($locale, Request $request)
+    {
 
 
         $request->merge([
@@ -167,7 +168,7 @@ class CatalogueController extends Controller
         ]);
 
         $products = $this->productRepository->getData($request, ['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files', 'category.availableLanguageS', 'category.availableLanguage'], false, true);
-//        $staticFilterData = ['category'];
+        //        $staticFilterData = ['category'];
         //dd($products->get());
 
         return view('pages.product.catalogue_s', [
@@ -176,14 +177,15 @@ class CatalogueController extends Controller
             'keyword' => __('client.best-sellers'),
             'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
-//            'staticFilterData' => $staticFilterData,
+            //            'staticFilterData' => $staticFilterData,
             'products' => $products->orderBy('created_at', 'DESC')->paginate(16),
             'category' => null,
             'route' => route('bestSellers')
         ]);
     }
 
-    public function discount($locale, Request $request){
+    public function discount($locale, Request $request)
+    {
 
 
         $request->merge([
@@ -191,7 +193,7 @@ class CatalogueController extends Controller
         ]);
 
         $products = $this->productRepository->getAll($request, true);
-//        $staticFilterData = ['category'];
+        //        $staticFilterData = ['category'];
         //dd($products->get());
 
         return view('pages.product.catalogue_s', [
@@ -200,14 +202,15 @@ class CatalogueController extends Controller
             'keyword' => __('client.summer-discount'),
             'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
-//            'staticFilterData' => $staticFilterData,
+            //            'staticFilterData' => $staticFilterData,
             'products' => $products->orderBy('created_at', 'DESC')->paginate(16),
             'category' => null,
             'route' => route('discount')
         ]);
     }
 
-    public function new($locale, Request $request){
+    public function new($locale, Request $request)
+    {
 
 
         $request->merge([
@@ -215,7 +218,7 @@ class CatalogueController extends Controller
         ]);
 
         $products = $this->productRepository->getAll($request, false, true);
-//        $staticFilterData = ['category'];
+        //        $staticFilterData = ['category'];
         //dd($products->get());
 
         return view('pages.product.catalogue_s', [
@@ -224,25 +227,26 @@ class CatalogueController extends Controller
             'keyword' => __('client.new_products'),
             'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
-//            'staticFilterData' => $staticFilterData,
+            //            'staticFilterData' => $staticFilterData,
             'products' => $products->orderBy('created_at', 'DESC')->paginate(16),
             'category' => null,
             'route' => route('new')
         ]);
     }
 
-    public function proxy($locale,$slug){
+    public function proxy($locale, $slug)
+    {
         //dd($slug);
 
-        $category = Category::query()->whereHas('language',function ($query) use ($category_slug){
+        $category = Category::query()->whereHas('language', function ($query) use ($category_slug) {
             $query->where('slug', $category_slug)->where('language_id', '=', Language::getIdByName(app()->getLocale()));
         })->first();
 
-        $cat_redirect = Setting::query()->where('key','category_not_found_redirect')->first();
+        $cat_redirect = Setting::query()->where('key', 'category_not_found_redirect')->first();
         $val = count($cat_redirect->availableLanguage) > 0 ? $cat_redirect->availableLanguage[0]->value : false;
-        if((!$category) && $val){
-            return redirect($val,301);
-        } elseif (!$category){
+        if ((!$category) && $val) {
+            return redirect($val, 301);
+        } elseif (!$category) {
             return abort(404);
         }
 
@@ -252,13 +256,13 @@ class CatalogueController extends Controller
         ]);
 
         $products = $this->productRepository->getData($request, ['saleProduct.sale', 'availableLanguage', 'availableLanguageS', 'files', 'category.availableLanguageS', 'category.availableLanguage'], false);
-//        $staticFilterData = ['category'];
+        //        $staticFilterData = ['category'];
         //dd($products->get());
 
         return view('pages.product.catalogue', [
             'productFeatures' => $this->productRepository->getProductFilters($request, $products)['productFeatures'],
             'productAnswers' => $this->productRepository->getProductFilters($request, $products)['productAnswers'],
-//            'staticFilterData' => $staticFilterData,
+            //            'staticFilterData' => $staticFilterData,
             'products' => $products->orderBy('created_at', 'DESC')->paginate(16),
             'category' => $category
         ]);

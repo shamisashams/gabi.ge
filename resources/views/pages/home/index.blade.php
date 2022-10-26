@@ -127,6 +127,7 @@
         <div class="category_slide">
             @foreach($categories as $category)
                 <div class="category">
+
                     @if(isset($category->files[0]))
                         <img class="product"
                              src="/storage/category/{{$category->files[0]->fileable_id}}/thumb/{{$category->files[0]->name}}"
@@ -178,7 +179,10 @@
             <div class="product_grid">
                 @foreach($discountedProducts as $product)
 
-                        <div class="main_product_view">
+                        <div class="main_product_view" style="position: relative">
+                            @if ($product->sold)
+                            <img src="/img/icons/sold.png" style="width:15%; position:absolute; z-index:99; right:15px; top:5px" alt="" />
+                           @endif
                             <a href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug : null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug : null])}}">
                             <div class="pic">
                                 @if($product->saleProduct && $product->saleProduct->sale)
@@ -299,7 +303,10 @@
         </div>
         <div class="flex new_products_slide">
             @foreach($newProducts as $product)
-                <div class="main_product_view">
+                <div class="main_product_view" style="position: relative">
+                    @if ($product->sold)
+                    <img src="/img/icons/sold.png" style="width:20%; position:absolute; z-index:99; right:15px; top:5px" alt="" />
+                   @endif
                     <a href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug : null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug : null])}}">
                     <div class="pic">
                         @if($product->saleProduct && $product->saleProduct->sale)

@@ -33,8 +33,10 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     public function update(string $lang, int $id, ProductRequest $request)
     {
 
+        // dd($request->all());
 
         $request['status'] = isset($request['status']) ? 1 : 0;
+        $request['sold'] = isset($request['sold']) ? 1 : 0;
         $request['best_seller'] = isset($request['best_seller']) ? 1 : 0;
         try {
             DB::beginTransaction();
@@ -43,6 +45,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
             $productItem->update([
                 'status' => $request['status'],
+                "sold" => $request['sold'],
                 'category_id' => $request['category_id'],
                 'price' => $request['price'],
                 'weight' => $request['weight'],
@@ -86,7 +89,6 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
             DB::commit();
             return true;
-
         } catch (\Exception $queryException) {
             DB::rollBack();
             dd($queryException->getMessage());
@@ -143,11 +145,11 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                     //$image->save(date('Ymhs') . $file->getClientOriginalName());
                     $img = $image->getImageAsString();
 
-                    $imagename = str_replace(' ','_',$file->getClientOriginalName());
+                    $imagename = str_replace(' ', '_', $file->getClientOriginalName());
                     $destination = base_path() . '/storage/app/public/product/' . $productItem->id;
-                    $thumb = 'public/product/' . $productItem->id .'/thumb/'.$imagename;
+                    $thumb = 'public/product/' . $productItem->id . '/thumb/' . $imagename;
                     $request->file('images')[$key]->move($destination, $imagename);
-                    Storage::put($thumb,$img);
+                    Storage::put($thumb, $img);
                     $productItem->files()->create([
                         'name' => $imagename,
                         'path' => '/storage/app/public/product/' . $productItem->id,
@@ -203,7 +205,6 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             }
             ProductAnswers::insert($data);
         }
-
     }
 
 
@@ -250,7 +251,6 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                         $answerKey = array_search($answer, $arrayAnswers);
                         array_splice($arrayAnswers, $answerKey, 1);
                     }
-
                 }
             }
 
@@ -307,8 +307,6 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                         Storage::delete('public/product/' . $model->id . '/thumb/' . $file->name);
                     }
                     $file->delete();
-
-
                 }
 
                 $language = $file->languages()->where('language_id', $languageId)->first();
@@ -342,11 +340,11 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
 
 
-                $imagename = str_replace(' ','_',$file->getClientOriginalName());
+                $imagename = str_replace(' ', '_', $file->getClientOriginalName());
                 $destination = base_path() . '/storage/app/public/product/' . $model->id;
-                $thumb = 'public/product/' . $model->id .'/thumb/'.$imagename;
+                $thumb = 'public/product/' . $model->id . '/thumb/' . $imagename;
                 $request->file('images')[$key]->move($destination, $imagename);
-                Storage::put($thumb,$img);
+                Storage::put($thumb, $img);
                 $model->files()->create([
                     'name' => $imagename,
                     'path' => '/storage/app/public/product/' . $model->id,
@@ -354,13 +352,12 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                 ]);
             }
         }
-
     }
 
     public function delete(int $id)
     {
         $model = $this->find($id);
-        foreach ($model->files as $file){
+        foreach ($model->files as $file) {
 
             if (Storage::exists('public/product/' . $model->id . '/' . $file->name)) {
                 Storage::delete('public/product/' . $model->id . '/' . $file->name);
@@ -372,30 +369,30 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         }
         return $model->delete();
     }
-//
-//     protected function setOldImagesOfProduct(ProductRequest $request, Product $product)
-//     {
-//         if (!count($product->files)) {
-//             return $this;
-//         }
-//
-//         foreach ($product->files as $productFileItem) {
-//
-//             if (is_null($request['old_images'])) {
-//                 $this->removeProductImage($productFileItem);
-//                 continue;
-//             }
-//
-//             if (in_array($productFileItem->id, $request['old_images'])) {
-//                 continue;
-//             }
-//
-//             $this->removeProductImage($productFileItem);
-//         }
-//
-//         return $this;
-//     }
-//
+    //
+    //     protected function setOldImagesOfProduct(ProductRequest $request, Product $product)
+    //     {
+    //         if (!count($product->files)) {
+    //             return $this;
+    //         }
+    //
+    //         foreach ($product->files as $productFileItem) {
+    //
+    //             if (is_null($request['old_images'])) {
+    //                 $this->removeProductImage($productFileItem);
+    //                 continue;
+    //             }
+    //
+    //             if (in_array($productFileItem->id, $request['old_images'])) {
+    //                 continue;
+    //             }
+    //
+    //             $this->removeProductImage($productFileItem);
+    //         }
+    //
+    //         return $this;
+    //     }
+    //
 
 
 }

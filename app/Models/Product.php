@@ -20,6 +20,7 @@ class Product extends Model
         'category_id',
         'position',
         'status',
+        'sold',
         'slug',
         'price',
         'vip',

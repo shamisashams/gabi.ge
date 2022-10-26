@@ -14,7 +14,13 @@
     <div class="flex best_seller_slide">
 
         @foreach($bestSellerProducts as $product)
-            <div class="main_product_view">
+
+
+
+            <div class="main_product_view" style="position: relative;">
+                @if ($product->sold)
+                 <img src="/img/icons/sold.png" style="width:20%; position:absolute; z-index:9999999999; right:15px; top:5px" alt="" />
+                @endif
                 <a href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug:null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null])}}">
                 <div class="pic">
                     @if($product->saleProduct && $product->saleProduct->sale)

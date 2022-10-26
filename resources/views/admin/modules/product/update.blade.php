@@ -83,6 +83,8 @@
                                                         </div>
 
 
+
+
                                                         {{--                                                        <div class="col s12 input-field">--}}
                                                         {{--                                                            <input id="slug" name="slug" type="text"--}}
                                                         {{--                                                                   class="validate {{ $errors->has('slug') ? 'invalid' : 'valid' }}"--}}
@@ -292,6 +294,15 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="col s12">
+
+                                                    <label>
+                                                        <input type="checkbox"{{$product->sold?"checked":""}} name="sold">
+                                                        <span>{{trans('admin.sold')}}</span>
+                                                    </label>
+
+
+                                                </div>
                                                 <div class="col s12">
 
                                                     <label>
