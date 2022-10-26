@@ -41,10 +41,12 @@
                     @endif
                         <div class="on_hover_btns">
                             <a class="view_popup_product">
+                                @if (!$product->sold)
                                 <button onclick="addToModal({{$product}})" class="add_to_cart view">
                                     <img src="/img/icons/profile/eye.png" alt="" />
                                     <div class="roboto">{{__('client.view')}}</div>
                                 </button>
+                                @endif
                             </a>
                             <a href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug:null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null])}}">
                                 <button class="add_to_cart details">

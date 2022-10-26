@@ -86,7 +86,7 @@
                 <div class="slider">
                     <div class="vertical_slider_view">
                         @foreach($product->files as $file)
-                            <div class="fullview_slider_item active">
+                            <div class="fullview_slider_item active" style="position: relative">
                                 <img
                                     src="/storage/product/{{$file->fileable_id}}/thumb/{{$file->name}}"
                                     alt="{{count($file->availableLanguage)>0?$file->availableLanguage[0]->title:""}}"/>
@@ -104,7 +104,10 @@
 
                 <div class="large_view">
                     @foreach($product->files as $key=>$file)
-                    <div class="magnified_img {{$key==0?"display":""}}">
+                    <div class="magnified_img {{$key==0?"display":""}}" style="position: relative;">
+                        @if ($product->sold)
+                        <img src="/img/icons/sold.png" style="width:15%; position:absolute; z-index:99; right:15px; top:5px" alt="" />
+                       @endif
                          <img
                             class="large_image_view "
                             src="/storage/product/{{$file->fileable_id}}/{{$file->name}}"
@@ -241,7 +244,13 @@
                     </div>
 
                     <button
-                        {{--{{count($productAnswers)>0?"disabled":""}}--}} onclick="addToCartProductDetails(this, '{{$product->id}}')"
+                        {{--{{count($productAnswers)>0?"disabled":""}}--}}
+                        @if (!$product->sold)
+                        onclick="addToCartProductDetails(this, '{{$product->id}}')"
+                        @else
+                        onclick=""
+                        @endif
+
                         class="add_to_cart">
                         <img src="/img/icons/details/cart.png" alt=""/>
                         <div>{{__('client.add_to_cart')}}</div>
@@ -249,7 +258,13 @@
                 </div>
 
                       <button
-                        {{--{{count($productAnswers)>0?"disabled":""}}--}} onclick="addToCartProductDetails(this, '{{$product->id}}', true)"
+                        {{--{{count($productAnswers)>0?"disabled":""}}--}}
+                        @if (!$product->sold)
+                        onclick="addToCartProductDetails(this, '{{$product->id}}', true)"
+                        @else
+                        onclick=""
+                        @endif
+
                         class=" buy_now">
                         <div>{{__('client.buynow')}}</div>
                      </button>
