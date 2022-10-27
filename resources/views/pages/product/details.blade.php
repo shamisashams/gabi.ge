@@ -106,7 +106,7 @@
                     @foreach($product->files as $key=>$file)
                     <div class="magnified_img {{$key==0?"display":""}}" style="position: relative;">
                         @if ($product->sold)
-                        <img src="/img/icons/sold.png" style="width:15%; position:absolute; z-index:99; right:15px; top:5px" alt="" />
+                        <img src="/img/icons/sold.png" style="width:15%; position:absolute; z-index:1; right:15px; top:5px" alt="" />
                        @endif
                          <img
                             class="large_image_view "
@@ -272,7 +272,7 @@
 
 
                      <div class="size-guide modal" id="modal">
-                        <div class="modal-content">
+                        <div class="modal-content" style="">
                         <div class="sizemodal-header">
                             <div class="title">{{__('client.size_guide_title')}}</div>
                             <button data-close-button class="close-button">&times;</button>
@@ -320,12 +320,23 @@
                                     <td>შარვლის სიგრძე</td>
                                     <td>მხრის სიგანე</td>
                                 </tr>
-{{-- @php
-    $gender = App\Models\SizeGuide::where('gender', 0)->get();
-    $gender1 = App\Models\SizeGuide::where('gender', 1)->get();
-@endphp
                                 {{-- {{App\Models\SizeGuide::where('gender', 1)->get()}} --}}
 
+                                @if(isset($gender))
+                                @foreach ($gender as $val)
+                                {{-- @dd($val) --}}
+                                  <tr>
+                                    <td>{{$val->language[0]->age}}</td>
+                                    <td>{{$val->chest}}</td>
+                                    <td>{{$val->wheist}}</td>
+                                    <td>{{$val->hips}}</td>
+                                    <td>{{$val->back}}</td>
+                                    <td>{{$val->arm}}</td>
+                                    <td>{{$val->leg}}</td>
+                                    <td>{{$val->shoulder}}</td>
+                                  </tr>
+                                @endforeach
+                                @endif
 
 
                             </table>
@@ -347,6 +358,21 @@
 
                                 {{-- {{App\Models\SizeGuide::where('gender', 1)->get()}} --}}
 
+                                @if (isset($gender1))
+                                @foreach ($gender1 as $val)
+                                {{-- @dd($val) --}}
+                                  <tr>
+                                    <td>{{$val->language[0]->age}}</td>
+                                    <td>{{$val->chest}}</td>
+                                    <td>{{$val->wheist}}</td>
+                                    <td>{{$val->hips}}</td>
+                                    <td>{{$val->back}}</td>
+                                    <td>{{$val->arm}}</td>
+                                    <td>{{$val->leg}}</td>
+                                    <td>{{$val->shoulder}}</td>
+                                  </tr>
+                                @endforeach
+                                @endif
 
 
                             </table>
