@@ -98,8 +98,6 @@ class CatalogueController extends Controller
     public function show(string $locale, Category $category, int $id)
     {
         return view('pages.product.details', [
-            'gender' => SizeGuide::where('gender', 0)->get(),
-            'gender1' => SizeGuide::where('gender', 1)->get(),
             'product' => $this->productRepository->getProductById($id),
             'category' => $category,
             'productFeatures' => $this->productRepository->getSingleProductFeatures($id)['productFeatures'],
@@ -135,8 +133,8 @@ class CatalogueController extends Controller
 
         //dd($category);
         return view('pages.product.details', [
-            'gender' => SizeGuide::where('gender', 0)->get(),
-            'gender1' => SizeGuide::where('gender', 1)->get(),
+            // 'gender' => SizeGuide::where('gender', 0)->get(),
+            // 'gender1' => SizeGuide::where('gender', 1)->get(),
             'product' => $product,
             'category' => $category,
             'productFeatures' => $this->productRepository->getSingleProductFeatures($product->id)['productFeatures'],
