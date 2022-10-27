@@ -15,7 +15,7 @@ use App\Models\Answer;
 use App\Models\Feature;
 use App\Models\Language;
 use App\Models\Shipping;
-use App\Models\Sizeguide;
+use App\Models\SizeGuide;
 use App\Models\ShippingTranslation;
 use App\Models\SizeguideLanguage;
 use App\Models\User;
@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Storage;
 class SizeguideRepository extends BaseRepository
 {
 
-    public function __construct(Sizeguide $model)
+    public function __construct(SizeGuide $model)
     {
         parent::__construct($model);
     }

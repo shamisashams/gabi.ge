@@ -8,7 +8,7 @@ use App\Http\Request\Admin\SliderRequest;
 use App\Models\Category;
 use App\Models\Localization;
 use App\Models\Shipping;
-use App\Models\Sizeguide;
+use App\Models\SizeGuide;
 use App\Repositories\Eloquent\SizeguideRepository;
 use App\Repositories\SliderRepositoryInterface;
 use App\Services\CategoryService;
@@ -60,7 +60,7 @@ class SizeguideController extends AdminController
     public function create(string $locale)
     {
         return view('admin.modules.Sizeguide.form', [
-            'item' => new Sizeguide(),
+            'item' => new SizeGuide(),
             'method' => 'post',
             'action' => route('sizeguideStore', app()->getLocale())
         ]);
