@@ -78,6 +78,7 @@ class SizeguideController extends AdminController
         //     'title' => 'required',
         //     'price' => 'required'
         // ]);
+
         if (!$this->sizeguideRepository->store($locale, $request)) {
             return redirect(route('shipping.create', $locale))->with('danger', trans('admin.slider_not_create'));
         }

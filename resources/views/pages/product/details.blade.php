@@ -345,20 +345,35 @@
 
                         </div>
                         <div  class="gendertabs">
-                            {{-- <h3>text 2</h3> --}}
-                            @foreach ($gender1 as $val)
-                            {{-- @dd($val) --}}
-                              <tr>
-                                <td>{{$val->language[0]->age}}</td>
-                                <td>{{$val->chest}}</td>
-                                <td>{{$val->wheist}}</td>
-                                <td>{{$val->hips}}</td>
-                                <td>{{$val->back}}</td>
-                                <td>{{$val->arm}}</td>
-                                <td>{{$val->leg}}</td>
-                                <td>{{$val->shoulder}}</td>
-                              </tr>
-                            @endforeach
+                            <table id="size-table">
+                                <tr>
+                                    <td>ბავშის ასაკი</td>
+                                    <td>გულმკერდი</td>
+                                    <td>წელი</td>
+                                    <td>თეძო</td>
+                                    <td>ზურგის სიმაღლე</td>
+                                    <td>მკლავის სიგრძე</td>
+                                    <td>შარვლის სიგრძე</td>
+                                    <td>მხრის სიგანე</td>
+                                </tr>
+
+                                {{-- {{App\Models\SizeGuide::where('gender', 1)->get()}} --}}
+
+                                @foreach ($gender1 as $val)
+                                {{-- @dd($val) --}}
+                                  <tr>
+                                    <td>{{$val->language[0]->age}}</td>
+                                    <td>{{$val->chest}}</td>
+                                    <td>{{$val->wheist}}</td>
+                                    <td>{{$val->hips}}</td>
+                                    <td>{{$val->back}}</td>
+                                    <td>{{$val->arm}}</td>
+                                    <td>{{$val->leg}}</td>
+                                    <td>{{$val->shoulder}}</td>
+                                  </tr>
+                                @endforeach
+
+                            </table>
                         </div>
                         </div>
                      </div>

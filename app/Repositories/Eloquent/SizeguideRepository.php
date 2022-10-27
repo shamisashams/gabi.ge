@@ -54,6 +54,12 @@ class SizeguideRepository extends BaseRepository
         // dd($request->all());
         $savedata = $request->except(["_token", "age"]);
 
+        if ($savedata['gender'] == "true") {
+            $savedata['gender'] = 1;
+        } else {
+            $savedata['gender'] = 0;
+        }
+        // dd($savedata, $savedata['gender']);
         try {
             DB::beginTransaction();
 
@@ -89,7 +95,14 @@ class SizeguideRepository extends BaseRepository
     public function update(string $lang, int $id, $request)
     {
         //$request['status'] = isset($request['status']) ? 1 : 0;
-        $savedata = $request->except(["_token"]);
+
+        $savedata = $request->except(["_token", 'age']);
+        if ($savedata['gender'] == "true") {
+            $savedata['gender'] = 1;
+        } else {
+            $savedata['gender'] = 0;
+        }
+        // dd($savedata);
         try {
             DB::beginTransaction();
 
@@ -100,8 +113,7 @@ class SizeguideRepository extends BaseRepository
             // $productItem->update([
             //     'price' => $request['price'],
             // ]);
-            $productItem->update($savedata);
-
+            $updt = $productItem->update($savedata);
             $languageId = Language::getIdByName($lang);
             // dd($languageId->language());
             $language = $productItem->language()->where('language_id', $languageId)->first();

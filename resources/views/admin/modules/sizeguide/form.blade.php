@@ -20,12 +20,16 @@
 
 
                                                         <div class="col s12 input-field">
-
+                                                            @php
+                                                                 $gend = old('gender');
+                                                                 $gend1 = $item['gender'];
+                                                            @endphp
+ {{-- @dd($gend, $gend1) --}}
                                                             <select name="gender" class="select2 browser-default">
                                                                 <option value="" disabled selected>gender</option>
                                                                 {{-- {{old('gender') ==  0   ?   "selected":""}} value="{{$sale->id}}">{{(count($sale->availableLanguage) > 0) ?  $sale->availableLanguage[0]->title : ''}}</option> --}}
-                                                                <option {{old('gender') ==  0   ?   "selected":""}} value=false>boy</option>
-                                                                <option {{old('gender') ==  1   ?   "selected":""}} value=true>girl</option>
+                                                                <option {{$gend1 ?"":"selected"}} value=false>boy</option>
+                                                                <option {{$gend1 ?"selected":""}} value=true>girl</option>
                                                             </select>
                                                             <label for="gender" class="">{{trans('admin.gender')}}</label>
                                                             @if ($errors->has('gender'))
