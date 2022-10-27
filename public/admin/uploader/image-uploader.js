@@ -7,8 +7,8 @@
             imagesInputName: "images",
             preloadedInputName: "preloaded",
             label: "Drag & Drop files here or click to browse",
-            extensions: [".jpg", ".jpeg", ".png", ".gif", ".svg"],
-            mimes: ["image/jpeg", "image/png", "image/gif", "image/svg+xml"],
+            extensions: [".jpg", ".jpeg", ".png", ".gif", ".svg",".webp"],
+            mimes: ["image/jpeg", "image/png", "image/gif", "image/svg+xml","image/webp"],
             maxSize: void 0,
             maxFiles: void 0
         }, a = this, s = new DataTransfer;

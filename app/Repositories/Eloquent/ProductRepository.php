@@ -286,7 +286,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     public function updateImages($request, $model, $lang)
     {
         $languageId = Language::getIdByName($lang);
-        //dd($request->all());
+       // dd($languageId);
         if (count($model->files) > 0) {
             foreach ($model->files as $file) {
                 if ($request['old_images'] == null) {
@@ -310,14 +310,15 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                 }
 
                 $language = $file->languages()->where('language_id', $languageId)->first();
-                //dd($language);
+
+                //dd($languageId);
                 if ($language) {
                     $language->update([
                         'language_id' => $languageId,
                         'title' => $request['alt'][$file->id],
                     ]);
                 } else {
-                    //dd($file->id);
+                    //dd($request->all());
                     FileLanguage::create([
                         'file_id' => $file->id,
                         'language_id' => $languageId,

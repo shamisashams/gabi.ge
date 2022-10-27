@@ -1896,7 +1896,7 @@ $(document).ready(function () {
     });
     $('.input-images').imageUploader({
       extensions: ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp'],
-      mimes: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
+      mimes: ['image/jpeg', 'image/png', 'image/gif', 'image/svg', 'image/webp'],
       preloaded: imagedata,
       imagesInputName: 'images',
       preloadedInputName: 'old_images'
