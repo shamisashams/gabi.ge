@@ -15,6 +15,7 @@ use Illuminate\Notifications\Notifiable;
 class SizeGuide extends Model
 {
     use HasFactory, ScopeSettingFilter;
+    protected $table = 'sizeguides';
     protected $fillable = [
         // 'age',
         'gender',
