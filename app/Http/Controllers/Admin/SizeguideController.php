@@ -46,7 +46,7 @@ class SizeguideController extends AdminController
             'status' => 'boolean|nullable',
         ]);
 
-        return view('admin.modules.Sizeguide.index', [
+        return view('admin.modules.sizeguide.index', [
             'data' => $this->sizeguideRepository->getData($request),
         ]);
     }
@@ -59,7 +59,7 @@ class SizeguideController extends AdminController
      */
     public function create(string $locale)
     {
-        return view('admin.modules.Sizeguide.form', [
+        return view('admin.modules.sizeguide.form', [
             'item' => new SizeGuide(),
             'method' => 'post',
             'action' => route('sizeguideStore', app()->getLocale())
@@ -109,7 +109,7 @@ class SizeguideController extends AdminController
     public function edit(string $locale, int $id)
     {
         $item = $this->sizeguideRepository->find($id);
-        return view('admin.modules.Sizeguide.form', [
+        return view('admin.modules.sizeguide.form', [
             'item' => $item,
             'method' => 'put',
             'action' => route('sizeguideUpdate', [app()->getLocale(), $item])
