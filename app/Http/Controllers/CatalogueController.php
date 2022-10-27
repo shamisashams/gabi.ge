@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\SizeGuide;
 use App\Models\ProductAnswers;
 use App\Models\Setting;
+use App\Models\SizeguideLanguage;
 use App\Repositories\Frontend\ProductRepositoryInterface;
 use App\Services\ProductService;
 use Illuminate\Contracts\Console\Application;
@@ -133,8 +134,8 @@ class CatalogueController extends Controller
 
         //dd($category);
         return view('pages.product.details', [
-             'gender' => SizeGuide::where('gender', 0)->get(),
-             'gender1' => SizeGuide::where('gender', 1)->get(),
+             'gender' => SizeguideLanguage::all(),
+             //'gender1' => SizeGuide::where('gender', 1)->get(),
             'product' => $product,
             'category' => $category,
             'productFeatures' => $this->productRepository->getSingleProductFeatures($product->id)['productFeatures'],
