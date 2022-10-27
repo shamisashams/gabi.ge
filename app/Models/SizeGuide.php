@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class Sizeguide extends Model
+class SizeGuide extends Model
 {
     use HasFactory, ScopeSettingFilter;
     protected $fillable = [
