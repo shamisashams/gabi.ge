@@ -54,7 +54,7 @@ class HomeController extends Controller
             'bestSellerProducts' => $this->productRepository->getBestSeller(),
             'discountedProducts' => $this->productRepository->getDiscountedProducts(),
             'newProducts' => $this->productRepository->getNewProducts(),
-            'blogs' => Blog::with(['availableLanguage', 'firstImage'])->limit(3)->inRandomOrder()->get(),
+            'blogs' => Blog::orderBy('id', 'desc')->with(['availableLanguage', 'firstImage'])->limit(3)->get(),
             'page' => $page,
             // 'sliders' => $this->sliderRepository->getSliders(),
             'sliders' => Slider::with('files')->where("is_mobile", false)->get(),
