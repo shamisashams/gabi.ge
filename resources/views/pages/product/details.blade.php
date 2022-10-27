@@ -320,25 +320,13 @@
                                     <td>შარვლის სიგრძე</td>
                                     <td>მხრის სიგანე</td>
                                 </tr>
-@php
+{{-- @php
     $gender = App\Models\SizeGuide::where('gender', 0)->get();
     $gender1 = App\Models\SizeGuide::where('gender', 1)->get();
 @endphp
                                 {{-- {{App\Models\SizeGuide::where('gender', 1)->get()}} --}}
 
-                                @foreach ($gender as $val)
-                                {{-- @dd($val) --}}
-                                  <tr>
-                                    <td>{{$val->language[0]->age}}</td>
-                                    <td>{{$val->chest}}</td>
-                                    <td>{{$val->wheist}}</td>
-                                    <td>{{$val->hips}}</td>
-                                    <td>{{$val->back}}</td>
-                                    <td>{{$val->arm}}</td>
-                                    <td>{{$val->leg}}</td>
-                                    <td>{{$val->shoulder}}</td>
-                                  </tr>
-                                @endforeach
+
 
                             </table>
                             </div>
@@ -359,19 +347,7 @@
 
                                 {{-- {{App\Models\SizeGuide::where('gender', 1)->get()}} --}}
 
-                                @foreach ($gender1 as $val)
-                                {{-- @dd($val) --}}
-                                  <tr>
-                                    <td>{{$val->language[0]->age}}</td>
-                                    <td>{{$val->chest}}</td>
-                                    <td>{{$val->wheist}}</td>
-                                    <td>{{$val->hips}}</td>
-                                    <td>{{$val->back}}</td>
-                                    <td>{{$val->arm}}</td>
-                                    <td>{{$val->leg}}</td>
-                                    <td>{{$val->shoulder}}</td>
-                                  </tr>
-                                @endforeach
+
 
                             </table>
                         </div>
