@@ -134,7 +134,7 @@ class CatalogueController extends Controller
 
         //dd($category);
         return view('pages.product.details', [
-             'gender' => SizeguideLanguage::where('id', 0)->get(),
+             'gender' => SizeGuide::where('id', 0)->get(),
              //'gender1' => SizeGuide::where('gender', 1)->get(),
             'product' => $product,
             'category' => $category,
