@@ -268,7 +268,7 @@
                         class=" buy_now">
                         <div>{{__('client.buynow')}}</div>
                      </button>
-                     <button data-modal-target="#modal">{{__('client.size_guide')}}</button>
+                     <button class="size-guide-modal-press" data-modal-target="#modal">{{__('client.size_guide')}}</button>
 
 
                      <div class="size-guide modal" id="modal">
@@ -311,14 +311,14 @@
                             <div class="table">
                         <table id="size-table">
                                 <tr>
-                                    <td>ბავშის ასაკი</td>
-                                    <td>გულმკერდი</td>
-                                    <td>წელი</td>
-                                    <td>თეძო</td>
-                                    <td>ზურგის სიმაღლე</td>
-                                    <td>მკლავის სიგრძე</td>
-                                    <td>შარვლის სიგრძე</td>
-                                    <td>მხრის სიგანე</td>
+                                    <td>{{__('client.table_age')}}</td>
+                                    <td>{{__('client.table_chest')}}</td>
+                                    <td>{{__('client.table_waste')}}</td>
+                                    <td>{{__('client.table_thigh')}}</td>
+                                    <td>{{__('client.table_back')}}</td>
+                                    <td>{{__('client.table_hand_legth')}}</td>
+                                    <td>{{__('client.table_pants_length')}}</td>
+                                    <td>{{__('client.table_sholder_length')}}</td>
                                 </tr>
                                 {{-- {{App\Models\SizeGuide::where('gender', 1)->get()}} --}}
 
