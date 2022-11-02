@@ -175,6 +175,10 @@
                         <div class="main_product_view">
                             <a href="{{route('productDetailsSeo',[app()->getLocale(),isset($product->category->availableLanguageS->slug) ? $product->category->availableLanguageS->slug : null,isset($product->availableLanguageS->slug) ? $product->availableLanguageS->slug:null])}}">
                                 <div class="pic">
+                                @if ($product->sold)
+                                <img src="/img/icons/sold.png" style="width:15%; position:absolute; z-index:1; right:15px; top:5px" alt="" />
+                                @endif
+
                                     @if($product->saleProduct && $product->saleProduct->sale)
                                         <div class="label off">
                                             @if($product->saleProduct->sale->type=="percent")
