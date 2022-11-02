@@ -105,14 +105,16 @@
                 <div class="large_view">
                     @foreach($product->files as $key=>$file)
                     <div class="magnified_img {{$key==0?"display":""}}" style="position: relative;">
-                        @if ($product->sold)
-                        <img src="/img/icons/sold.png" style="width:15%; position:absolute; z-index:1; right:15px; top:5px" alt="" />
-                       @endif
+
                          <img
-                            class="large_image_view "
+                           style="z-index:9999"
+                            class="large_image_view"
                             src="/storage/product/{{$file->fileable_id}}/{{$file->name}}"
                             alt="{{count($file->availableLanguage)>0?$file->availableLanguage[0]->title:""}}"
                         />
+                        @if ($product->sold)
+                        <img src="/img/icons/sold.png" style="width:15%; position:absolute; z-index:1; right:15px; top:5px" alt="" />
+                       @endif
                     </div>
 
                     @endforeach
