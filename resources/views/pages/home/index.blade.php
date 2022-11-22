@@ -356,7 +356,7 @@
                         <div>
                             @if($product->saleProduct && $product->saleProduct->sale)
                                 <div class="title price">
-                                    ₾ {{\App\Models\Product::calculatePrice($product->price,$product->saleProduct->sale->discount,$product->saleProduct->sale->type)}}
+                                    ₾{{\App\Models\Product::calculatePrice($product->price,$product->saleProduct->sale->discount,$product->saleProduct->sale->type)}}
                                 </div>
                                 <div class="discount">₾{{round($product->price/100,2)}}</div>
                             @else
