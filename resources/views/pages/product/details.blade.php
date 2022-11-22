@@ -163,7 +163,7 @@
                 @if($product->saleProduct && $product->saleProduct->sale)
                     <div class="main">
                         ₾ {{\App\Models\Product::calculatePrice($product->price,$product->saleProduct->sale->discount,$product->saleProduct->sale->type)}}</div>
-                    <div class="last">$ {{round($product->price/100,2)}}</div>
+                    <div class="last">₾ {{round($product->price/100,2)}}</div>
                     <div class="off">
                         @if($product->saleProduct->sale->type=="percent")
                             -{{$product->saleProduct->sale->discount}}%
